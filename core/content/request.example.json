@@ -1,0 +1,24 @@
+{
+  "_comment": "Copy, edit, and pass with --request. Timing is driven by hand-authored narration: list the audio segments and the Editor cuts the script to fit their measured durations. Omit `audio` (or set it to null) and the Editor falls back to a chars-per-second estimate, which the render stage marks as unmeasured.",
+
+  "language": "ru",
+  "target_seconds": 45,
+  "aspect": "9:16",
+  "fps": 30,
+
+  "audio": {
+    "segments": [
+      { "id": "title",  "file": "assets/audio/greetings1.mp3" },
+      { "id": "method", "file": "assets/audio/greetings2.mp3" },
+      { "id": "example-0", "file": "assets/audio/greetings3.mp3" }
+    ]
+  },
+
+  "sampling_hint": {
+    "min": 10,
+    "max": 9999,
+    "note": "The Generator declares its own spec and filter; this is only a starting range. A presentation filter may constrain rendered width, sign, and zero — nothing else. See pipeline/lib/sampling.mjs."
+  },
+
+  "topic_hint": null
+}

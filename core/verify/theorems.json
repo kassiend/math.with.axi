@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "note": "Whitelist for §3.2 universality claims. An agent may cite a theorem ONLY by an id in this file, and must state how its technique's hypotheses map onto the theorem's. A theorem an agent merely names from memory is an LLM assertion, which §3.2 explicitly does not accept. Adding an entry is a human decision made in a reviewed diff, not something an agent does mid-run.",
+  "theorems": [
+    {
+      "id": "euclid-division",
+      "name": "Division algorithm",
+      "statement": "For integers a and b with b > 0 there exist unique integers q, r such that a = bq + r and 0 <= r < b.",
+      "hypotheses": ["a is an integer", "b is an integer", "b > 0"],
+      "source": "Standard; e.g. Hardy & Wright, An Introduction to the Theory of Numbers, Thm 1."
+    },
+    {
+      "id": "base-b-digit-sum-congruence",
+      "name": "Digit-sum congruence in base b",
+      "statement": "For an integer n with base-b digits d_k...d_0, n is congruent to the sum of its digits modulo (b - 1).",
+      "hypotheses": ["n is a non-negative integer", "b >= 2", "digits taken in base b"],
+      "source": "Immediate from b ≡ 1 (mod b-1). Standard result underlying casting out nines."
+    },
+    {
+      "id": "fermat-little",
+      "name": "Fermat's little theorem",
+      "statement": "If p is prime and p does not divide a, then a^(p-1) ≡ 1 (mod p).",
+      "hypotheses": ["p is prime", "a is an integer", "gcd(a, p) = 1"],
+      "source": "Standard; Hardy & Wright Thm 71."
+    },
+    {
+      "id": "euler-theorem",
+      "name": "Euler's theorem",
+      "statement": "If gcd(a, n) = 1 then a^phi(n) ≡ 1 (mod n).",
+      "hypotheses": ["n is a positive integer", "gcd(a, n) = 1"],
+      "source": "Standard; Hardy & Wright Thm 72."
+    },
+    {
+      "id": "crt",
+      "name": "Chinese remainder theorem",
+      "statement": "If n_1..n_k are pairwise coprime, the system x ≡ a_i (mod n_i) has a unique solution modulo the product of the n_i.",
+      "hypotheses": ["moduli are pairwise coprime", "moduli are positive integers"],
+      "source": "Standard; Hardy & Wright Thm 121."
+    },
+    {
+      "id": "binomial-theorem",
+      "name": "Binomial theorem",
+      "statement": "(x + y)^n = sum over k of C(n,k) x^(n-k) y^k, for non-negative integer n.",
+      "hypotheses": ["n is a non-negative integer", "x, y in a commutative ring"],
+      "source": "Standard."
+    },
+    {
+      "id": "difference-of-squares",
+      "name": "Difference of squares",
+      "statement": "a^2 - b^2 = (a - b)(a + b) in any commutative ring.",
+      "hypotheses": ["a, b in a commutative ring"],
+      "source": "Standard identity."
+    },
+    {
+      "id": "am-gm",
+      "name": "AM–GM inequality",
+      "statement": "For non-negative reals, the arithmetic mean is at least the geometric mean, with equality iff all values are equal.",
+      "hypotheses": ["all values are real", "all values are non-negative"],
+      "source": "Standard; Hardy, Littlewood & Pólya, Inequalities, Thm 9."
+    },
+    {
+      "id": "pythagoras",
+      "name": "Pythagorean theorem",
+      "statement": "In a Euclidean right triangle with legs a, b and hypotenuse c, a^2 + b^2 = c^2.",
+      "hypotheses": ["Euclidean plane", "triangle contains a right angle"],
+      "source": "Euclid, Elements I.47."
+    },
+    {
+      "id": "gauss-pairing-sum",
+      "name": "Sum of an arithmetic progression",
+      "statement": "The sum of n terms of an arithmetic progression with first term a and last term l is n(a + l)/2.",
+      "hypotheses": ["n is a positive integer", "terms form an arithmetic progression"],
+      "source": "Standard."
+    }
+  ]
+}

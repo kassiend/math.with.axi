@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "note": "Topic ledger. Every run appends an entry regardless of outcome. Dedup matches on normalised concept_slug plus tag overlap, never on title string — see pipeline/lib/ledger.mjs. Only status=shipped blocks a future topic; status=failed counts toward MAX_FAILED_ATTEMPTS and closes the slug after three.",
+  "entries": []
+}

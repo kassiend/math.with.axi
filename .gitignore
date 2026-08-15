@@ -1,0 +1,12 @@
+node_modules/
+core/.venv/
+core/web/dist/
+core/out/
+core/video/public/captures/
+core/video/public/audio/
+core/video/public/mascot/
+.DS_Store
+*.log
+
+# Generated from core/agents/ by tools/sync-agents.mjs — edit the source, not the copy.
+.claude/agents/

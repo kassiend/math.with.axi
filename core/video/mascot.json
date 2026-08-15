@@ -1,0 +1,9 @@
+{
+  "_comment": "Mascot layer config, read by pipeline/orchestrate.mjs. `src` is relative to video/public/ and MUST point at an alpha WebM produced by tools/chromakey.mjs — the raw clips in assets/video/ are yuv420p and would composite as an opaque rectangle.",
+  "_status": "mas3 is the best available key and it is NOT clean: holes in the light fur at the ears and muzzle, from a light-grey background too close to cream fur. See docs/mascot-keying.md. Keep `width` small — the artefacts are on the fur edges and mostly disappear under ~520px. Replace with a real alpha export when one exists.",
+  "src": "mascot/mas3.webm",
+  "startFrame": 0,
+  "width": 480,
+  "right": 40,
+  "bottom": 40
+}

@@ -1,0 +1,105 @@
+/* Scaffold styling for the 1080x1920 capture frame.
+   Deliberately plain — the visual identity is a separate job, and the installed design skills
+   (ui-ux-pro-max, design-taste-frontend) are what that job should use.
+
+   Two rules that are NOT cosmetic and must survive any redesign:
+     1. no CSS transitions or animations anywhere — the frame number drives every visual
+     2. no web fonts loaded at runtime beyond what document.fonts.ready covers */
+
+*, *::before, *::after { box-sizing: border-box; transition: none !important; animation: none !important; }
+
+:root {
+  --bg: #0b0d12;
+  --fg: #f4f6fb;
+  --muted: #8b93a7;
+  --accent: #6ee7b7;
+  --warn: #fbbf24;
+  --wrong: #f87171;
+  --pad: 88px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+
+.brand {
+  position: absolute;
+  top: 56px;
+  left: var(--pad);
+  font-size: 30px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: lowercase;
+}
+
+.panel { will-change: transform, opacity; }
+
+.title { font-size: 92px; line-height: 1.06; margin: 0; font-weight: 700; letter-spacing: -0.02em; }
+
+.kicker {
+  font-size: 32px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin: 0 0 28px;
+  font-weight: 600;
+}
+.kicker.warn { color: var(--warn); }
+
+.prose { font-size: 52px; line-height: 1.35; margin: 0; }
+.prose-list { font-size: 46px; line-height: 1.4; padding-left: 1.1em; margin: 0; }
+
+.operands { display: flex; gap: 28px; margin-bottom: 36px; }
+.operand {
+  font-size: 64px;
+  font-variant-numeric: tabular-nums;
+  padding: 10px 26px;
+  border: 3px solid var(--muted);
+  border-radius: 18px;
+}
+
+.steps { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 26px; }
+.step { font-size: 54px; opacity: 0.45; }
+.step.current { opacity: 1; }
+
+.result { margin-top: 44px; font-size: 68px; color: var(--accent); }
+.formal { margin-top: 28px; font-size: 48px; }
+
+.counter-input { font-size: 60px; margin-bottom: 32px; }
+.counter-rows { display: flex; flex-direction: column; gap: 20px; font-size: 50px; }
+.counter-rows .label { color: var(--muted); margin-right: 20px; }
+.wrong { color: var(--wrong); }
+.right { color: var(--accent); }
+
+/* An absent field is marked, never filled. Matches §3.3 at the view layer. */
+.missing { font-size: 40px; color: var(--wrong); font-style: italic; }
+
+/* Reserved region for the mascot, composited by Remotion on top of the capture. */
+.mascot-slot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 520px;
+  height: 620px;
+  pointer-events: none;
+}
+
+.progress { position: absolute; left: 0; bottom: 0; width: 100%; height: 10px; background: #1a1e27; }
+.progress-fill { height: 100%; background: var(--accent); }
+
+.tex { color: inherit; }
+.katex { font-size: 1em; }
