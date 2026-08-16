@@ -14,6 +14,7 @@
     "probe:assets": "node tools/probe-assets.mjs",
     "chromakey": "node tools/chromakey.mjs",
     "sync:agents": "node tools/sync-agents.mjs",
+    "sync:backgrounds": "node tools/sync-backgrounds.mjs",
     "smoke": "node tools/smoke.mjs",
     "typecheck": "tsc --noEmit",
     "verify:env": "node tools/verify-env.mjs"

@@ -2,10 +2,13 @@
 
 ```
 math.push/
-├── assets/                     mascot and audio source material (pre-existing, untouched)
-│   ├── audio/                  hand-authored narration + stings
-│   ├── images/                 mascot stills, RGBA
-│   └── video/                  mascot clips — none carry alpha, see below
+├── assets/                     mascot, background and audio source material (untouched)
+│   ├── audio/start_audio/      openers
+│   ├── audio/mid_audio/        mid-lesson stings
+│   ├── images/bg/              background art, 2048x2048, cropped to 9:16 by the page
+│   ├── images/mascot/          mascot stills, RGBA
+│   ├── video/mas_chromo.mp4    the green-screen mascot render — keys cleanly
+│   └── video/hurry/            reaction clips on black
 ├── .claude/
 │   ├── agents/                 generated from core/agents/ by tools/sync-agents.mjs
 │   └── skills/                 ui-ux-pro-max + design-taste-frontend
@@ -97,17 +100,34 @@ decision changes; today it would add a static-site generator to a project that h
 MathJax is not installed either. If some construct falls outside KaTeX's LaTeX subset, add it as
 an **offline** pre-render step producing static SVG — never as a second runtime typesetter.
 
-## Why the mascot is keyed ahead of time
+## Why the background belongs to the page, not to Remotion
 
-None of the clips in `assets/video/` carry an alpha channel — they are `yuv420p`, including the
-WebMs, where VP9 alpha would appear as `yuva420p`. The brief assumed pre-rendered alpha sources;
-they do not exist yet.
+The background art is loaded by the lesson page and captured with it, rather than composited
+underneath the capture by Remotion. Two reasons:
+
+- **The text is composed against the real background.** If the page rendered on a placeholder and
+  Remotion swapped the background in afterwards, contrast would only be checkable at render time,
+  which is the wrong moment to discover a title is unreadable.
+- **The scrim is a page concern.** These backgrounds are busy white line-art under a light-on-dark
+  palette; `--scrim` in `styles.css` is what makes that legible, and it has to live in the same
+  cascade as the type it protects.
+
+The crop is `object-fit: cover` on the 1080×1920 stage: the 2048×2048 source is scaled to cover
+the frame and trimmed evenly. Letterboxing a 9:16 format is not an option, so a crop it is.
+`tools/sync-backgrounds.mjs` stages the art into `web/public/bg/` because Vite only bundles what
+is under `public/`.
+
+## Why the mascot is keyed ahead of time
 
 `tools/chromakey.mjs` produces alpha WebMs as a build step rather than keying at render time, for
 two reasons: the matte is a file you can look at before it reaches a video, and the render stage
-stays a plain composite with nothing to tune. It samples the key colour from the first frame's
-corner instead of assuming green, because assuming green on a clip that is not green-screened
-produces a confidently wrong matte.
+stays a plain composite with nothing to tune.
+
+It samples the key colour from the first frame's corner instead of assuming green, and picks the
+filter from that colour's saturation — `chromakey` + `despill` for a real green/blue screen,
+`colorkey` for an achromatic one. That choice matters more than the tuning does: `chromakey`
+compares chroma only, so on a white background it erases every desaturated pixel in the frame,
+subject included. See [`mascot-keying.md`](mascot-keying.md).
 
 ## Why there are no new MCP servers
 

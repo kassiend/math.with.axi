@@ -16,6 +16,9 @@
   --warn: #fbbf24;
   --wrong: #f87171;
   --pad: 88px;
+  /* Opacity of the scrim over the background art. Below ~0.75 the white line-art starts
+     competing with the text; above ~0.92 the background may as well not be there. */
+  --scrim: 0.86;
 }
 
 body {
@@ -35,6 +38,15 @@ body {
   justify-content: center;
   gap: 40px;
 }
+
+/* Background art, cropped to the 9:16 frame. object-fit: cover IS the crop — the square source
+   is scaled to cover 1080x1920 and the overflow is trimmed evenly on both sides. */
+.bg-layer { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.bg-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.bg-scrim { position: absolute; inset: 0; background: var(--bg); opacity: var(--scrim); }
+
+/* Everything else sits above the background. */
+.brand, .panel, .mascot-slot, .progress { position: relative; z-index: 1; }
 
 .brand {
   position: absolute;

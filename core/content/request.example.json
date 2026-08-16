@@ -8,11 +8,13 @@
 
   "audio": {
     "segments": [
-      { "id": "title",  "file": "assets/audio/greetings1.mp3" },
-      { "id": "method", "file": "assets/audio/greetings2.mp3" },
-      { "id": "example-0", "file": "assets/audio/greetings3.mp3" }
+      { "id": "title",  "file": "assets/audio/start_audio/axi_greetings1.mp3" },
+      { "id": "method", "file": "assets/audio/mid_audio/hurry1.mp3" },
+      { "id": "example-0", "file": "assets/audio/mid_audio/hurry2.mp3" }
     ]
   },
+
+  "background": "bg2.jpeg",
 
   "sampling_hint": {
     "min": 10,

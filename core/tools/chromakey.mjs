@@ -71,7 +71,10 @@ function saturationOf(hex) {
 }
 
 function keyOne(file) {
-  const name = path.basename(file, path.extname(file));
+  // Keep the subdirectory in the name so assets/video/hurry/papapa.webm becomes
+  // mascot/hurry-papapa.webm rather than colliding with a top-level papapa.
+  const rel = path.relative(SRC_DIR, file);
+  const name = rel.replace(/\.[^.]+$/, '').replace(/[\\/]/g, '-');
   const key = KEY_OVERRIDE ?? sampleKeyColour(file);
   const sat = saturationOf(key);
   const mode = MODE === 'auto' ? (sat < SATURATION_THRESHOLD ? 'color' : 'chroma') : MODE;
@@ -117,10 +120,17 @@ function keyOne(file) {
   };
 }
 
-const files = fs.readdirSync(SRC_DIR)
-  .filter((f) => /\.(mp4|mov|webm|mkv)$/i.test(f))
-  .filter((f) => !ONLY || f === ONLY)
-  .map((f) => path.join(SRC_DIR, f));
+/** Recurse: clips are grouped into subdirectories (hurry/, ...), not flat. */
+function walkVideos(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) return walkVideos(p);
+    return /\.(mp4|mov|webm|mkv)$/i.test(e.name) ? [p] : [];
+  });
+}
+
+const files = walkVideos(SRC_DIR)
+  .filter((f) => !ONLY || path.basename(f) === ONLY || path.relative(SRC_DIR, f) === ONLY);
 
 if (!files.length) {
   console.error(`no source clips in ${SRC_DIR}`);

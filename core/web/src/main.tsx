@@ -27,9 +27,13 @@ if (!lesson) {
   const segmentSeconds = lesson.__segment_seconds ?? undefined;
   const beats = buildTimeline(lesson, segmentSeconds);
 
+  // `background` is a filename inside web/public/bg/, synced by tools/sync-backgrounds.mjs.
+  // Absent means the component's default; explicit null means no background at all.
+  const background = lesson.background === undefined ? undefined : lesson.background;
+
   window.__axiFrameCount = totalFrames(beats);
   window.__axiSeek = (frame: number) => {
-    flushSync(() => root.render(<Lesson beats={beats} frame={frame} />));
+    flushSync(() => root.render(<Lesson beats={beats} frame={frame} background={background} />));
   };
 
   window.__axiSeek(0);

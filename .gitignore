@@ -5,6 +5,9 @@ core/out/
 core/video/public/captures/
 core/video/public/audio/
 core/video/public/mascot/
+
+# Staged from assets/images/bg/ by tools/sync-backgrounds.mjs.
+core/web/public/bg/
 .DS_Store
 *.log
 

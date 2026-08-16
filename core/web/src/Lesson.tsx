@@ -5,18 +5,24 @@
  * skills (ui-ux-pro-max, design-taste-frontend) are the tools for it — see docs/rationale.md.
  * What matters here is the capture contract and the layout skeleton, not the palette.
  */
+import { Background } from './Background';
 import { Tex } from './Math';
 import { Beat, beatAt, progressIn, revealedSteps } from './timeline';
 
-export function Lesson({ beats, frame }: { beats: Beat[]; frame: number }) {
+export function Lesson({ beats, frame, background }: {
+  beats: Beat[];
+  frame: number;
+  background?: string | null;
+}) {
   const beat = beatAt(beats, frame);
-  if (!beat) return <div className="stage" />;
+  if (!beat) return <div className="stage"><Background src={background} /></div>;
 
   const p = progressIn(beat, frame);
   const style = { opacity: p, transform: `translateY(${(1 - p) * 24}px)` };
 
   return (
     <div className="stage">
+      <Background src={background} />
       <div className="brand">math.with.axi</div>
       <div className="panel" style={style}>{renderBeat(beat, frame)}</div>
       <div className="mascot-slot" data-mascot-slot="1" />

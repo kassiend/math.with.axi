@@ -73,10 +73,11 @@ npm exec --yes -- skills add https://github.com/Leonxlnx/taste-skill --skill "de
 ## Running the pipeline
 
 ```bash
-# 1. build the lesson page once (rebuild after any change under web/)
-npm run web:build
+# 1. stage the background art and build the lesson page
+npm run sync:backgrounds        # assets/images/bg/ → web/public/bg/
+npm run web:build               # rebuild after any change under web/
 
-# 2. key the mascot clips — the source clips have no alpha channel
+# 2. key the mascot clips into alpha WebMs
 npm run chromakey
 open out/logs/chromakey-previews/     # look at these before trusting a matte
 #    then set "src" in video/mascot.json to the keyed .webm you picked
@@ -184,12 +185,9 @@ domain of elementary mathematics.
 
 - **Lesson schema is undefined.** Deliberately out of scope for the bootstrap session. Placeholder
   and the decisions it will need: [`schema/lesson.schema.TODO.md`](schema/lesson.schema.TODO.md).
-- **No mascot with a real alpha channel.** Every clip in `assets/video/` is `yuv420p`. Keying is
-  the interim path and it is not clean — the light fur sits too close to the light background, so
-  the usable window is between "holes in the ears" and "white halo". Full findings and the fix:
-  [`docs/mascot-keying.md`](docs/mascot-keying.md).
-- **Mascot source resolution and frame rate.** 512×512 and 1280×720 at 24 fps, against a
-  1080×1920 / 30 fps timeline. A 24→30 pulldown on a looping idle tends to judder.
+- **Mascot frame rate and length.** `mas_chromo.mp4` keys cleanly (real green screen) but is
+  24 fps against a 30 fps timeline and only 5.06 s long — it needs looping, and a 24→30 pulldown
+  can judder. Details: [`docs/mascot-keying.md`](docs/mascot-keying.md).
 - **Visual design is scaffold-grade.** `web/src/styles.css` is a placeholder. The installed design
   skills are the tools for the real thing.
 - **No publishing stage.** The pipeline produces a file. Getting it onto Instagram is manual.

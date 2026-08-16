@@ -73,7 +73,10 @@ async function main() {
     return close(run, 'blocked', 'editor blocked', [{ reason: result.reason }], payload);
   }
 
-  const lesson = result.lesson;
+  // The background is a run-level presentation choice, not lesson content — the Generator has no
+  // business picking one and the Editor must not touch it. Applied here, after the frozen-element
+  // check, so it cannot affect the hash.
+  const lesson = { ...result.lesson, background: result.lesson?.background ?? run.request.background };
 
   if (has('dry-run')) {
     log(run, 'dry-run', { note: 'gate passed; capture and render skipped' });
@@ -120,6 +123,7 @@ function startRun(requestPath) {
     aspect: '9:16',
     fps: 30,
     audio: null,
+    background: 'bg2.jpeg',   // filename inside web/public/bg/; null for no background
     sampling_hint: { min: 10, max: 9999 },
   };
   const request = requestPath
