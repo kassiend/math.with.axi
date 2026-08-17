@@ -1,0 +1,61 @@
+{
+  "lesson_id": "divisibility-by-11-alternating-sum",
+  "counter": 3,
+  "voice_model": "eleven_v3",
+  "intro": {
+    "narration": "[excited] Heey — how do you spot a multiple of eleven? [pause] No dividing needed.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.92
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "narration": "[curious] Three thousand nine hundred fifty-eight. [pause] Does eleven go in?",
+      "instruction": "Test any number for 11",
+      "working": "3958 ÷ 11 — whole or not?",
+      "audio": "audio/s1.mp3",
+      "seconds": 5.76
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "narration": "[confident] From the right, alternate plus and minus. [pause] Eight minus five plus nine minus three.",
+      "instruction": "Alternate + and − from the right",
+      "working": "3958 → 8 − 5 + 9 − 3",
+      "audio": "audio/s2.mp3",
+      "seconds": 10.56
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "narration": "[confident] Add it up. [pause] That's nine.",
+      "instruction": "Add it up",
+      "working": "8 − 5 + 9 − 3 = 9",
+      "audio": "audio/s3.mp3",
+      "seconds": 3.44
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "narration": "[thoughtful] Nine isn't a multiple of eleven. [pause] So no — and nine is the remainder.",
+      "instruction": "Not a multiple of 11",
+      "working": "3958 = 11 × 359 + 9",
+      "audio": "audio/s4.mp3",
+      "seconds": 6.56
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "narration": "[warm] One catch — zero isn't the only pass. [pause] Two thousand nine hundred fifteen gives eleven, which passes too.",
+      "instruction": "0 is not the only pass",
+      "working": "2915 → 5 − 1 + 9 − 2 = 11 ✓",
+      "audio": "audio/s5.mp3",
+      "seconds": 9.6
+    }
+  ],
+  "total_seconds": 41.84,
+  "timeline_estimate_seconds": 44.7,
+  "timeline_estimate_note": "Phase A max(152 frames, intro 5.92 s) = 5.92 + B 24 f (0.80) + C 14 f (0.47) + D Σ step clips 35.92 + 4 × 8-frame cross-fades (1.07 worst case, additive) + E 15 f (0.50). Under the 1800-frame ceiling with ~15 s of headroom; no Editor cut required.",
+  "nulls": []
+}

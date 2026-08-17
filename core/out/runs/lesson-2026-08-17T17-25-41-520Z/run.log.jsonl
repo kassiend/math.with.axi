@@ -1,0 +1,12 @@
+{"t":"2026-08-17T17:35:26.986Z","event":"run.start","lesson_id":"remainder-mod-9-digit-sum","counter":3,"seed":-1383991676}
+{"t":"2026-08-17T17:35:28.602Z","event":"crosscheck","agreed":true,"generator":"5","verifier":"5"}
+{"t":"2026-08-17T17:35:28.602Z","event":"timeline","total_frames":1234,"total_seconds":41.133,"steps":["s1:7.36s","s2:5.84s","s3:6.16s","s4:4.96s","s5:8.4s"]}
+{"t":"2026-08-17T17:35:28.603Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-08-17T17:41:58.585Z","event":"capture.done","frames":1234}
+{"t":"2026-08-17T17:46:50.382Z","event":"done","video":"output\\posts\\lessons\\remainder-mod-9-digit-sum.mp4","seconds":41.133}
+{"t":"2026-08-17T17:58:55.507Z","event":"run.start","lesson_id":"remainder-mod-9-digit-sum","counter":3,"seed":-1383991676}
+{"t":"2026-08-17T17:58:57.078Z","event":"crosscheck","agreed":true,"generator":"5","verifier":"5"}
+{"t":"2026-08-17T17:58:57.079Z","event":"timeline","total_frames":1234,"total_seconds":41.133,"steps":["s1:7.36s","s2:5.84s","s3:6.16s","s4:4.96s","s5:8.4s"]}
+{"t":"2026-08-17T17:58:57.080Z","event":"picks","background":"bg3.jpeg"}
+{"t":"2026-08-17T18:04:19.825Z","event":"capture.done","frames":1234}
+{"t":"2026-08-17T18:08:27.990Z","event":"done","video":"output\\posts\\lessons\\remainder-mod-9-digit-sum.mp4","seconds":41.133}

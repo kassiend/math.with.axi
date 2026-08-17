@@ -1,0 +1,114 @@
+{
+  "lesson_id": "divisibility-by-11-alternating-sum",
+  "counter": 3,
+  "area": "divisibility-rules",
+  "concept_slug": "divisibility-by-11-alternating-sum",
+  "tags": ["divisibility", "mental-arithmetic", "number-theory", "shortcut"],
+  "method_name": "Test any number for 11",
+  "applicability": "Any positive integer n, of any length. Write its decimal digits from the RIGHT as d0 (units), d1 (tens), d2 (hundreds), ...; form the alternating sum A(n) = d0 - d1 + d2 - d3 + ... Then n ≡ A(n) (mod 11), so n is divisible by 11 EXACTLY WHEN A(n) is a multiple of 11 — where 0, +11, -11, +22, ... all count as multiples. Direction matters for the value of A(n) (it must start at the units digit and alternate leftwards), but not for the yes/no verdict, since running it from the left only ever flips the sign of A(n). The 'exactly when' is asserted here only over the exhaustively checked finite domain 1 ≤ n ≤ 999999; see nulls[].",
+  "carry_case": "2915. The alternating sum is 5 - 1 + 9 - 2 = 11, which is NOT 0, yet 2915 = 11 × 265 is divisible by 11. So the tempting simplified form of the rule — 'the plus/minus digits must cancel to zero' — gives a false negative. The pass condition is 'A(n) is a multiple of 11', not 'A(n) = 0'. The same break appears with a negative total: 90728 gives 8 - 2 + 7 - 0 + 9 = 22, and 209 gives 9 - 0 + 2 = 11; both are divisible by 11 while failing the 'must be zero' form.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Test any number for 11",
+      "working": "3958 ÷ 11 — whole or not?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Alternate + and − from the right",
+      "working": "3958 → 8 − 5 + 9 − 3"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Add it up",
+      "working": "8 − 5 + 9 − 3 = 9"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Not a multiple of 11",
+      "working": "3958 = 11 × 359 + 9"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "0 is not the only pass",
+      "working": "2915 → 5 − 1 + 9 − 2 = 11 ✓"
+    }
+  ],
+  "worked_example": {
+    "operands": [3958, 11],
+    "result": "not divisible — 3958 = 11 × 359 + 9"
+  },
+  "operand_draw": {
+    "seed": 280674670,
+    "spec": {
+      "min": 1000,
+      "max": 9999,
+      "filter": {
+        "min_digits": 4,
+        "max_digits": 4,
+        "positive_only": true
+      }
+    },
+    "n": 1,
+    "draws": [3958],
+    "attempts": 1,
+    "rejections": [],
+    "rejection_rate": 0,
+    "rejection_rate_alarm": false,
+    "construction": "test_subject = drawn_value = 3958; divisor = 11 (fixed by the method being taught).",
+    "construction_note": "One integer drawn uniformly from [1000, 9999]. The range is a presentation choice declared before the draw: four digits is wide enough that trial division is genuinely annoying and narrow enough to fit the 500 px working line. The min_digits/max_digits/positive_only filter is redundant against that range (it rejected nothing, rate 0) and is purely rendering-driven — no filter here can express, and none was used to express, anything about divisibility. The draw produced 3958, which is NOT divisible by 11 (A = 9, and 3958 = 11 × 359 + 9). Per §3.4 the draw stands: a divisibility TEST has to answer 'no' as often as 'yes', so a negative verdict suits the method exactly. The alternating sum landing on 9 also lands the remainder for free, which is the strongest version of the payoff available from this draw.",
+    "carry_case_note": "The carry case (2915) is deliberately constructed, not drawn: §3.4 governs the worked example's operands, while the caveat by definition must be a specific input that breaks the simplified rule. It is stated so the Verifier can test it directly."
+  },
+  "dedup_check": {
+    "tool": "node core/pipeline/lib/ledger.mjs candidates — invoked through the module API (findCandidates), because the file's CLI guard compares import.meta.url to a Windows argv path and never fires on this host",
+    "chosen": {
+      "concept_slug": "divisibility-by-11-alternating-sum",
+      "tags_probed": ["divisibility", "mental-arithmetic", "number-theory", "shortcut"],
+      "blocked": [],
+      "candidates": [
+        {
+          "id": "lesson-multiply-by-11-two-digit",
+          "concept_slug": "multiply-by-11-two-digit",
+          "status": "shipped",
+          "shared_tags": ["mental-arithmetic", "shortcut"],
+          "verdict": "different mechanism, same numeral. That lesson COMPUTES a product (split the digits, drop their sum between them, carry). This one TESTS an unknown number for a factor via an alternating digit sum, and returns a remainder. Neither procedure is derivable from the other by a viewer, and the inputs differ in kind (a chosen two-digit multiplicand vs any integer of any length). Not a paraphrase."
+        },
+        {
+          "id": "lesson-square-two-digit-ending-in-5",
+          "concept_slug": "square-two-digit-ending-in-5",
+          "status": "shipped",
+          "shared_tags": ["mental-arithmetic", "shortcut"],
+          "verdict": "unrelated — squaring shortcut, no divisibility content."
+        },
+        {
+          "id": "lesson-divisibility-by-7-double-last-digit",
+          "concept_slug": "divisibility-by-7-double-last-digit",
+          "status": "failed",
+          "shared_tags": ["divisibility", "mental-arithmetic", "number-theory", "shortcut"],
+          "verdict": "same area, different divisor and different mechanism (truncate-and-double-subtract, iterated, vs a single alternating digit sum). Status is failed with one attempt, so it neither blocks nor closes anything; avoided as a mechanism regardless."
+        }
+      ]
+    },
+    "also_probed": [
+      {
+        "concept_slug": "divisibility-by-4-last-two-digits",
+        "verdict": "clear of the ledger but rejected on merit — the caveat is thin and the rule has almost no working to show on a card."
+      },
+      {
+        "concept_slug": "divisibility-by-8-halving-test",
+        "verdict": "clear of the ledger but rejected on merit — needs two halvings plus a last-three-digits step, too many moves for one card set."
+      }
+    ]
+  },
+  "nulls": [
+    {
+      "field": "applicability.universality_beyond_checked_domain",
+      "reason": "The rule is claimed as an 'exactly when' for all positive integers, but core/verify/theorems.json whitelists no theorem about alternating digit sums modulo 11 (base-b-digit-sum-congruence covers digit sums mod b-1 = 9, not mod b+1 = 11). Per §3.2 an unproven universality claim is not accepted on assertion, so the claim is stated only over the exhaustive finite domain 1 ≤ n ≤ 999999, which the generator check enumerates in full. No claim is made outside that domain."
+    }
+  ]
+}

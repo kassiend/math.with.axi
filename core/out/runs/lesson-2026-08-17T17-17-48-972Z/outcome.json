@@ -1,0 +1,12 @@
+{
+  "status": "failed",
+  "stage": "verification",
+  "problems": [
+    {
+      "side": "cross",
+      "error": "the two independent scripts computed different values",
+      "generator_computed": "3958 = 11*359 + 9; A(3958)=9; A(2915)=11 (2915 = 11*265); domain 1..999999 exhaustive iff+congruence pass=True; false negatives of the 'A=0' form below 100000 = 4251",
+      "verifier_computed": "not divisible - 3958 = 11 x 359 + 9 (alternating sum 9)"
+    }
+  ]
+}

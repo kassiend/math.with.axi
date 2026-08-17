@@ -1,0 +1,119 @@
+{
+  "lesson_id": "remainder-mod-9-digit-sum",
+  "counter": 3,
+  "area": "divisibility-rules",
+  "concept_slug": "remainder-mod-9-digit-sum",
+  "tags": ["divisibility", "mental-arithmetic", "number-theory", "remainder"],
+  "method_name": "Remainder after ÷ 9",
+  "applicability": "Any non-negative integer n written in base 10, of any length. Add its decimal digits; if the total still has two or more digits, add again, and keep going. Each round leaves the value unchanged modulo 9 — n ≡ digit-sum(n) (mod 9) is the whitelisted theorem base-b-digit-sum-congruence at b = 10, where b − 1 = 9 — and each round strictly shrinks any number of two or more digits, so the process always halts on a single digit 0–9. That final digit IS the remainder n ÷ 9 in every case EXCEPT when it comes out as 9: a positive multiple of 9 has final digit 9 while its true remainder is 0. Equivalently, for n ≥ 1 the final digit equals 1 + ((n − 1) mod 9). Divisibility by 9 is the special case remainder = 0, so the same rule doubles as the divisibility-by-9 test. Claimed for base 10 and n ≥ 0 only; negative n is excluded and stated in nulls[].",
+  "carry_case": "999. The digits add to 9 + 9 + 9 = 27, and 2 + 7 = 9, so the simple form of the rule — 'the single digit you land on is the remainder' — reports remainder 9. The true remainder is 0, because 999 = 9 × 111 exactly. Every positive multiple of 9 breaks the simple form the same way (18, 5661, 123456789 all land on 9 and all have remainder 0), and it is the worst case to get wrong because it is precisely the 'divisible' answer. A remainder of 9 is impossible by the division algorithm: dividing by 9 leaves 0–8. Landing on 9 must be read as 0.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Remainder after ÷ 9",
+      "working": "6656 ÷ 9 → remainder ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Add up the digits",
+      "working": "6 + 6 + 5 + 6 = 23"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Still two digits? Again",
+      "working": "2 + 3 = 5"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "That is the remainder",
+      "working": "6656 = 9 × 739 + 5"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Land on 9, read it as 0",
+      "working": "999 → 27 → 9, rem 0"
+    }
+  ],
+  "worked_example": {
+    "operands": [6656, 9],
+    "result": "5"
+  },
+  "operand_draw": {
+    "seed": 281147218,
+    "spec": {
+      "min": 1000,
+      "max": 9999,
+      "filter": {
+        "min_digits": 4,
+        "max_digits": 4,
+        "positive_only": true
+      }
+    },
+    "n": 1,
+    "draws": [6656],
+    "attempts": 1,
+    "rejections": [],
+    "rejection_rate": 0,
+    "rejection_rate_alarm": false,
+    "construction": "test_subject = drawn_value = 6656; divisor = 9, fixed by the method being taught, not drawn. result = 6656 mod 9 = 5, reported as a bare integer. One integer drawn uniformly from [1000, 9999]; the range was declared before the draw was seen. Four digits is a presentation choice: wide enough that dividing by 9 in your head is genuinely annoying, narrow enough to fit the 500 px working line, and long enough that the digit sum can exceed 9 and force the second round the rule needs. The min_digits/max_digits/positive_only filter is redundant against that range — it rejected nothing, rejection_rate 0 — and is rendering-driven only; the allowed-filter API cannot express a divisibility property and none was used to smuggle one in. The draw produced 6656, whose digits sum to 23 and then to 5, matching 6656 = 9 × 739 + 5. Per §3.4 the draw stands as dealt: it happens to exercise the two-round case and to land a non-zero remainder, so it neither hides the iteration nor collides with the carry case, but it was accepted because it was drawn, not because it was convenient. The carry case 999 is deliberately constructed rather than drawn, because a caveat is by definition the specific input that breaks the simplified rule; §3.4 governs the worked example's operands, not the counterexample."
+  },
+  "dedup_check": {
+    "tool": "core/pipeline/lib/ledger.mjs findCandidates, invoked through the module API — the file's CLI guard compares import.meta.url against a Windows argv path and never fires on this host, so the documented `node ledger.mjs candidates` form exits silently with no output. Same for sampling.mjs draw, which was run through draw() and confirmed with verifyDraw() (ok: true).",
+    "chosen": {
+      "concept_slug": "remainder-mod-9-digit-sum",
+      "tags_probed": ["divisibility", "mental-arithmetic", "number-theory", "remainder"],
+      "blocked": [],
+      "candidates": [
+        {
+          "id": "lesson-divisibility-by-7-double-last-digit",
+          "concept_slug": "divisibility-by-7-double-last-digit",
+          "status": "failed",
+          "verdict": "different mechanism and different divisor — truncate the units digit, double it, subtract, iterate. Never shipped, so no viewer has seen it; one failure, so the slug is neither blocking nor closed. Avoided as a mechanism regardless."
+        },
+        {
+          "id": "lesson-divisibility-by-11-alternating-sum",
+          "concept_slug": "divisibility-by-11-alternating-sum",
+          "status": "failed",
+          "verdict": "closest neighbour: also a digit-based congruence. Distinct mechanism (alternating +/− sum mod 11 vs plain iterated digit sum mod 9), distinct divisor, and distinct output — that lesson returns a yes/no verdict, this one returns the actual remainder as a number. Never shipped. Not a paraphrase."
+        },
+        {
+          "id": "lesson-multiply-by-11-two-digit",
+          "concept_slug": "multiply-by-11-two-digit",
+          "status": "shipped",
+          "verdict": "shipped, but computes a product; no divisibility or remainder content. Unrelated."
+        },
+        {
+          "id": "lesson-square-two-digit-ending-in-5",
+          "concept_slug": "square-two-digit-ending-in-5",
+          "status": "shipped",
+          "verdict": "shipped squaring shortcut. Unrelated."
+        }
+      ]
+    },
+    "also_probed": [
+      {
+        "concept_slug": "divisibility-by-9-digit-sum",
+        "verdict": "clear of the ledger, and it is the weaker sibling of the chosen slug — it answers yes/no where this answers with the remainder. Folded in rather than run separately: the chosen lesson contains it as the remainder-0 case, so shipping both would be the same trick twice."
+      },
+      {
+        "concept_slug": "divisibility-by-composite-coprime-split",
+        "verdict": "clear of the ledger and a strong future lesson (test 12 via 3 and 4, with the 2-and-6 trap as its caveat). Not used here: its payoff is a yes/no verdict rather than a number, and it needs two sub-tests on one card."
+      }
+    ]
+  },
+  "nulls": [
+    {
+      "field": "applicability.negative_integers",
+      "reason": "The method is claimed only for n ≥ 0. For negative n the phrase 'the remainder' is not single-valued across conventions — truncated division gives a remainder in (−9, 0], floored division gives one in [0, 9) — and the digit sum of |n| does not select between them. No condition is asserted rather than guessing one, per §3.3."
+    },
+    {
+      "field": "applicability.other_bases",
+      "reason": "Claimed for base 10 only. The whitelisted theorem base-b-digit-sum-congruence gives the congruence modulo b − 1, so in base b the same procedure yields the remainder mod (b − 1), not mod 9. That generalisation is true but is a different lesson and is not asserted here."
+    }
+  ]
+}

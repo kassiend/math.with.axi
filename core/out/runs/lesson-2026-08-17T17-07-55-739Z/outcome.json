@@ -1,0 +1,12 @@
+{
+  "status": "failed",
+  "stage": "verification",
+  "problems": [
+    {
+      "side": "cross",
+      "error": "the two independent scripts computed different values",
+      "generator_computed": "838 = 7*119 + 5; one step -> 67",
+      "verifier_computed": "838 -> a=83, b=8 -> 83-2*8 = 67; 67 mod 7 = 4 != 0 => 838 NOT divisible by 7 (838 = 7*119 + 5)"
+    }
+  ]
+}

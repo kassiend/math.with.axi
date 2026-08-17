@@ -1,0 +1,3 @@
+{"t":"2026-08-17T17:17:48.436Z","event":"run.start","lesson_id":"divisibility-by-7-double-last-digit","counter":3,"seed":-998698342}
+{"t":"2026-08-17T17:17:48.953Z","event":"crosscheck","agreed":false,"generator":"838 = 7*119 + 5; one step -> 67","verifier":"838 -> a=83, b=8 -> 83-2*8 = 67; 67 mod 7 = 4 != 0 => 838 NOT divisible by 7 (838 = 7*119 + 5)"}
+{"t":"2026-08-17T17:17:48.954Z","event":"gate.closed","status":"failed","stage":"verification","problems":[{"side":"cross","error":"the two independent scripts computed different values","generator_computed":"838 = 7*119 + 5; one step -> 67","verifier_computed":"838 -> a=83, b=8 -> 83-2*8 = 67; 67 mod 7 = 4 != 0 => 838 NOT divisible by 7 (838 = 7*119 + 5)"}]}

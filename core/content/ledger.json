@@ -33,6 +33,52 @@
       "seconds": 36.867,
       "video": "output/posts/lessons/multiply-by-11-two-digit.mp4",
       "run_dir": "out/runs/lesson-2026-08-17T13-07-51-142Z"
+    },
+    {
+      "id": "lesson-divisibility-by-7-double-last-digit",
+      "concept_slug": "divisibility-by-7-double-last-digit",
+      "title": "Test any number for 7",
+      "tags": [
+        "divisibility",
+        "mental-arithmetic",
+        "number-theory",
+        "shortcut"
+      ],
+      "status": "failed",
+      "created_at": "2026-08-17T17:17:48.436Z",
+      "failed_at": "verification"
+    },
+    {
+      "id": "lesson-divisibility-by-11-alternating-sum",
+      "concept_slug": "divisibility-by-11-alternating-sum",
+      "title": "Test any number for 11",
+      "tags": [
+        "divisibility",
+        "mental-arithmetic",
+        "number-theory",
+        "shortcut"
+      ],
+      "status": "failed",
+      "created_at": "2026-08-17T17:25:40.583Z",
+      "failed_at": "verification"
+    },
+    {
+      "id": "lesson-remainder-mod-9-digit-sum",
+      "concept_slug": "remainder-mod-9-digit-sum",
+      "title": "Remainder after ÷ 9",
+      "area": "divisibility-rules",
+      "tags": [
+        "divisibility",
+        "mental-arithmetic",
+        "number-theory",
+        "remainder"
+      ],
+      "counter": 3,
+      "status": "shipped",
+      "created_at": "2026-08-17T17:58:55.507Z",
+      "seconds": 41.133,
+      "video": "output\\posts\\lessons\\remainder-mod-9-digit-sum.mp4",
+      "run_dir": "out\\runs\\lesson-2026-08-17T17-25-41-520Z"
     }
   ]
 }

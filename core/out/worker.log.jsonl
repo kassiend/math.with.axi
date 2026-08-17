@@ -10,3 +10,30 @@
 {"t":"2026-08-17T13:30:46.700Z","event":"post.start","kind":"task40","attempt":1}
 {"t":"2026-08-17T13:40:17.409Z","event":"post.delivered","kind":"task40","id":"cube-power-sum-x-plus-inv-4","file":"output/posts/tasks/40s/cube-power-sum-x-plus-inv-4.mp4"}
 {"t":"2026-08-17T13:40:17.532Z","event":"batch.done","ok":2,"failed":1}
+{"t":"2026-08-17T16:37:30.665Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-17T16:37:30.695Z","event":"post.error","kind":"lesson","attempt":1,"error":"axi-lesson-planner exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.698Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-17T16:37:30.710Z","event":"post.error","kind":"lesson","attempt":2,"error":"axi-lesson-planner exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.711Z","event":"post.start","kind":"lesson","attempt":3}
+{"t":"2026-08-17T16:37:30.724Z","event":"post.error","kind":"lesson","attempt":3,"error":"axi-lesson-planner exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.725Z","event":"post.start","kind":"task20","attempt":1}
+{"t":"2026-08-17T16:37:30.741Z","event":"post.error","kind":"task20","attempt":1,"error":"axi-task-generator exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.742Z","event":"post.start","kind":"task20","attempt":2}
+{"t":"2026-08-17T16:37:30.754Z","event":"post.error","kind":"task20","attempt":2,"error":"axi-task-generator exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.754Z","event":"post.start","kind":"task20","attempt":3}
+{"t":"2026-08-17T16:37:30.768Z","event":"post.error","kind":"task20","attempt":3,"error":"axi-task-generator exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.768Z","event":"post.start","kind":"task40","attempt":1}
+{"t":"2026-08-17T16:37:30.780Z","event":"post.error","kind":"task40","attempt":1,"error":"axi-task-generator exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.781Z","event":"post.start","kind":"task40","attempt":2}
+{"t":"2026-08-17T16:37:30.793Z","event":"post.error","kind":"task40","attempt":2,"error":"axi-task-generator exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.793Z","event":"post.start","kind":"task40","attempt":3}
+{"t":"2026-08-17T16:37:30.806Z","event":"post.error","kind":"task40","attempt":3,"error":"axi-task-generator exited 1: \"claude.cmd\" �� ���� ����७��� ��� ���譥�\r\n��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.\r\n"}
+{"t":"2026-08-17T16:37:30.936Z","event":"batch.done","ok":0,"failed":3}
+{"t":"2026-08-17T17:06:24.380Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-17T17:07:55.727Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-17T17:17:48.970Z","event":"post.gate-closed","kind":"lesson","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-17T17:17:48.971Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-17T17:25:41.519Z","event":"post.gate-closed","kind":"lesson","attempt":2,"stage":"orchestrator"}
+{"t":"2026-08-17T17:25:41.520Z","event":"post.start","kind":"lesson","attempt":3}
+{"t":"2026-08-17T17:46:52.888Z","event":"post.delivered","kind":"lesson","id":"remainder-mod-9-digit-sum","file":"output\\posts\\lessons\\remainder-mod-9-digit-sum.mp4"}
+{"t":"2026-08-17T17:46:52.889Z","event":"post.start","kind":"task20","attempt":1}

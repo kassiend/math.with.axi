@@ -1,0 +1,76 @@
+{
+  "lesson_id": "divisibility-by-11-alternating-sum",
+  "counter": 3,
+  "concept_slug": "divisibility-by-11-alternating-sum",
+  "tags": [
+    "divisibility",
+    "mental-arithmetic",
+    "number-theory",
+    "shortcut"
+  ],
+  "method_name": "Test any number for 11",
+  "applicability": "Any positive integer n, of any length. Write its decimal digits from the RIGHT as d0 (units), d1 (tens), d2 (hundreds), ...; form the alternating sum A(n) = d0 - d1 + d2 - d3 + ... Then n ≡ A(n) (mod 11), so n is divisible by 11 EXACTLY WHEN A(n) is a multiple of 11 — where 0, +11, -11, +22, ... all count as multiples. Direction matters for the value of A(n) (it must start at the units digit and alternate leftwards), but not for the yes/no verdict, since running it from the left only ever flips the sign of A(n). The 'exactly when' is asserted here only over the exhaustively checked finite domain 1 ≤ n ≤ 999999; see nulls[].",
+  "carry_case": "2915. The alternating sum is 5 - 1 + 9 - 2 = 11, which is NOT 0, yet 2915 = 11 × 265 is divisible by 11. So the tempting simplified form of the rule — 'the plus/minus digits must cancel to zero' — gives a false negative. The pass condition is 'A(n) is a multiple of 11', not 'A(n) = 0'. The same break appears with a negative total: 90728 gives 8 - 2 + 7 - 0 + 9 = 22, and 209 gives 9 - 0 + 2 = 11; both are divisible by 11 while failing the 'must be zero' form.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Test any number for 11",
+      "working": "3958 ÷ 11 — whole or not?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Alternate + and − from the right",
+      "working": "3958 → 8 − 5 + 9 − 3"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Add it up",
+      "working": "8 − 5 + 9 − 3 = 9"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Not a multiple of 11",
+      "working": "3958 = 11 × 359 + 9"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "0 is not the only pass",
+      "working": "2915 → 5 − 1 + 9 − 2 = 11 ✓"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      3958,
+      11
+    ],
+    "result": "not divisible — 3958 = 11 × 359 + 9"
+  },
+  "nulls": [
+    {
+      "field": "applicability.universality_beyond_checked_domain",
+      "reason": "The rule is claimed as an 'exactly when' for all positive integers, but core/verify/theorems.json whitelists no theorem about alternating digit sums modulo 11 (base-b-digit-sum-congruence covers digit sums mod b-1 = 9, not mod b+1 = 11). Per §3.2 an unproven universality claim is not accepted on assertion, so the claim is stated only over the exhaustive finite domain 1 ≤ n ≤ 999999, which the generator check enumerates in full. No claim is made outside that domain."
+    }
+  ],
+  "operand_draw": {
+    "seed": 280674670,
+    "spec": {
+      "min": 1000,
+      "max": 9999,
+      "filter": {
+        "min_digits": 4,
+        "max_digits": 4,
+        "positive_only": true
+      }
+    },
+    "draws": [
+      3958
+    ],
+    "rejection_rate": 0,
+    "construction": "test_subject = drawn_value = 3958; divisor = 11 (fixed by the method being taught)."
+  }
+}

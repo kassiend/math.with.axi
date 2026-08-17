@@ -1,0 +1,53 @@
+{
+  "lesson_id": "divisibility-by-7-double-last-digit",
+  "counter": 3,
+  "intro": {
+    "narration": "[excited] Heey — is eight hundred thirty-eight divisible by seven? [pause] One step tells you.",
+    "audio": "audio/intro.mp3",
+    "seconds": 7.04
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Any number works. [pause] Take eight hundred thirty-eight.",
+      "instruction": "Test any number for 7",
+      "working": "838 ÷ 7 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 5.2
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] The rule: cut off the last digit, double it, and subtract it from what's left.",
+      "instruction": "Cut the last digit, double it, subtract",
+      "working": "10a + b → a − 2b",
+      "audio": "audio/s2.mp3",
+      "seconds": 4.88
+    },
+    {
+      "step_id": "s3",
+      "narration": "[confident] Eight is the last digit. [pause] Eighty-three minus sixteen is sixty-seven.",
+      "instruction": "Run it on 838",
+      "working": "83 − 2×8 = 67",
+      "audio": "audio/s3.mp3",
+      "seconds": 6.96
+    },
+    {
+      "step_id": "s4",
+      "narration": "[thoughtful] Sixty-seven is not a multiple of seven. [pause] So neither is our number.",
+      "instruction": "Judge what's left",
+      "working": "67 = 7×9 + 4 → 838 not ÷ 7",
+      "audio": "audio/s4.mp3",
+      "seconds": 6.16
+    },
+    {
+      "step_id": "s5",
+      "narration": "[warm] Careful — it answers yes or no, never the remainder. [pause] Sixty-seven leaves four, but eight hundred thirty-eight leaves five.",
+      "instruction": "Divisibility only, not the remainder",
+      "working": "67 leaves 4, 838 leaves 5",
+      "audio": "audio/s5.mp3",
+      "seconds": 10.88
+    }
+  ],
+  "total_seconds": 41.12,
+  "nulls": []
+}
