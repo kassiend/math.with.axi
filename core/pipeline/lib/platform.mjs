@@ -95,18 +95,38 @@ export function resolveBin(name, { localBinDir } = {}) {
 }
 
 /**
+ * Quote a token for cmd.exe.
+ *
+ * Node builds the shell command line by joining file and args with spaces and quoting nothing, so
+ * a resolved path like C:\Program Files\nodejs\npm.cmd arrives at cmd.exe as two tokens and fails
+ * with `'C:\Program' is not recognized`. findExecutable returns absolute paths, which makes this
+ * the normal case on Windows rather than an edge one.
+ */
+function shellQuote(token) {
+  const s = String(token);
+  if (!/\s/.test(s) || /^".*"$/.test(s)) return s;
+  return `"${s}"`;
+}
+
+/**
  * execFileSync that works with Windows shims.
  *
  * `shell: true` is required for .cmd files, and it is why every argument here must come from the
  * program rather than from model output — under a shell, an argument containing `&` or `|` is
- * interpreted rather than passed along.
+ * interpreted rather than passed along. Quoting covers spaces, not metacharacters.
  */
-export function runTool(cmd, args, opts = {}) {
-  return execFileSync(cmd, args, { shell: isWindows, ...opts });
+export function runTool(cmd, args = [], opts = {}) {
+  const shell = opts.shell ?? isWindows;
+  return shell
+    ? execFileSync(shellQuote(cmd), args.map(shellQuote), { ...opts, shell: true })
+    : execFileSync(cmd, args, { ...opts, shell: false });
 }
 
-export function spawnTool(cmd, args, opts = {}) {
-  return spawn(cmd, args, { shell: isWindows, ...opts });
+export function spawnTool(cmd, args = [], opts = {}) {
+  const shell = opts.shell ?? isWindows;
+  return shell
+    ? spawn(shellQuote(cmd), args.map(shellQuote), { ...opts, shell: true })
+    : spawn(cmd, args, { ...opts, shell: false });
 }
 
 /** Is a binary callable at all? Used for a clear up-front error instead of a mid-run ENOENT. */
