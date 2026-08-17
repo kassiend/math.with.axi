@@ -1,0 +1,13 @@
+{
+  "name": "math-with-axi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Repository-root shortcuts. The real package is core/ — these just delegate there so a command run from the repository root does not fail with ENOENT package.json.",
+  "scripts": {
+    "worker": "npm --prefix core run worker --",
+    "pipeline": "npm --prefix core run pipeline --",
+    "status": "npm --prefix core run worker -- status",
+    "verify:env": "npm --prefix core run verify:env",
+    "setup": "npm --prefix core install"
+  }
+}

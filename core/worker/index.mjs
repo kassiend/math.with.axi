@@ -42,6 +42,24 @@ const CAPTIONS = {
   task40: (m) => `Daily task · 40s\n${m.statement}`,
 };
 
+/**
+ * The answer, sent as its own message after the video.
+ *
+ * Separate rather than in the caption on purpose: the caption travels with the file if it is
+ * forwarded or re-uploaded, and a task post that carries its own answer is spoiled. Lessons do
+ * not get one — the answer is the whole point of the video.
+ */
+const ANSWERS = {
+  task20: answerNote,
+  task40: answerNote,
+};
+
+function answerNote(m) {
+  const lines = [`Answer · ${m.durationS}s task`, '', m.statement, `= ${m.answer}`];
+  if (m.solution) lines.push('', m.solution);
+  return lines.join('\n');
+}
+
 // ---------------------------------------------------------------------------
 
 /**
@@ -133,6 +151,18 @@ async function runBatch(cfg) {
         await tg.sendDocument(cfg.token, cfg.chatId, post.video, {
           caption: CAPTIONS[kind]?.(post.meta) ?? path.basename(post.video),
         });
+
+        // The answer follows the video as its own message. If it fails, the post has still been
+        // delivered — do not retry the whole generation over a missing follow-up.
+        const note = ANSWERS[kind]?.(post.meta);
+        if (note) {
+          try {
+            await tg.sendMessage(cfg.token, cfg.chatId, note, { disable_notification: true });
+          } catch (err) {
+            log('answer.failed', { kind, error: String(err.message).slice(0, 200) });
+          }
+        }
+
         log('post.delivered', { kind, id: post.meta.id, file: path.relative(ROOT, post.video) });
         results.push({ kind, ok: true, id: post.meta.id });
         delivered = true;

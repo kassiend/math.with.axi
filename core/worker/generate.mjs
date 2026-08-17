@@ -154,7 +154,16 @@ export async function generateTask(durationS, { log = console.log } = {}) {
 
   return {
     kind: `task${durationS}`, video, runDir: dir,
-    meta: { id: task.task_id, statement: task.statement, answer: task.answer, structure: task.structure_id },
+    meta: {
+      id: task.task_id,
+      statement: task.statement,
+      answer: task.answer,
+      structure: task.structure_id,
+      // Carried so the answer message can explain the trick — you need it to write the comment,
+      // and digging it out of the run directory afterwards is friction you would feel daily.
+      solution: task.solution_sketch ?? null,
+      durationS,
+    },
   };
 }
 

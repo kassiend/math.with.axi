@@ -67,7 +67,15 @@ export async function sendDocument(token, chatId, filePath, { caption, disableNo
   form.append('chat_id', String(chatId));
   if (caption) form.append('caption', caption);
   if (disableNotification) form.append('disable_notification', 'true');
-  form.append('document', new Blob([bytes], { type: 'video/mp4' }), path.basename(abs));
+
+  // Two things are needed to actually get a document, and neither is optional.
+  //
+  // Telegram sniffs the upload and silently promotes a recognised media type: sendDocument with
+  // an mp4 declared as video/mp4 comes back as a `video`, re-encoded and compressed. Declaring
+  // octet-stream stops the sniffing, and disable_content_type_detection stops it server-side too.
+  // Without both, the bytes the viewer gets are not the bytes that were rendered.
+  form.append('disable_content_type_detection', 'true');
+  form.append('document', new Blob([bytes], { type: 'application/octet-stream' }), path.basename(abs));
 
   const res = await fetch(`${API}/bot${token}/sendDocument`, { method: 'POST', body: form });
   const body = await res.json().catch(() => ({}));
@@ -75,6 +83,16 @@ export async function sendDocument(token, chatId, filePath, { caption, disableNo
     throw new TelegramError(`Telegram sendDocument failed: ${body.description ?? res.status}`, {
       method: 'sendDocument', description: body.description, code: body.error_code ?? res.status,
     });
+  }
+
+  // Telegram reports what it decided to make of the upload. If it came back as anything other
+  // than a document it re-encoded the file, and the caller should know rather than assume.
+  if (!body.result?.document) {
+    const got = Object.keys(body.result ?? {}).find((k) => ['video', 'animation', 'audio'].includes(k));
+    throw new TelegramError(
+      `Telegram delivered the file as "${got ?? 'something unexpected'}" instead of a document, ` +
+      'which means it re-encoded it'
+    );
   }
   return body.result;
 }

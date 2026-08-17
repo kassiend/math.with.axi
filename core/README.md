@@ -209,6 +209,13 @@ npm run worker -- now        # one batch immediately, then exit
 npm run worker               # run forever, firing daily at WORKER_DAILY_AT
 ```
 
+Run it from the repository root or from `core/` — the root `package.json` just delegates.
+
+Each task video is followed by a **separate message with the answer** and the trick behind it.
+Separate rather than in the caption: a caption travels with the file if it is forwarded, and a
+task post that carries its own answer is spoiled. Lessons get no answer note — the answer is the
+whole point of the video.
+
 Configuration lives in `.env` at the repository root — see `.env.example`. Nothing is passed on
 the command line, so no secret ends up in shell history or in `ps`.
 
