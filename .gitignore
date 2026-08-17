@@ -1,3 +1,8 @@
+# Secrets. .env.example is the tracked template; .env itself never is.
+.env
+.env.*
+!.env.example
+
 node_modules/
 core/.venv/
 core/web/dist/
