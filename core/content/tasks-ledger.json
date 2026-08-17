@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "note": "Daily-task ledger. Separate from ledger.json: a lesson is deduplicated by mathematical concept, a task by puzzle shape. Rules live in pipeline/lib/tasks-ledger.mjs — exact statement collision blocks outright; structure_id repeated within the last 10 shipped tasks of that duration (or reused across durations) blocks; primary category repeated within the last 3 blocks. structure_id is the load-bearing field: changing operands is not a new task.",
+  "entries": []
+}

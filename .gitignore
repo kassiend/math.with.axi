@@ -11,5 +11,8 @@ core/web/public/bg/
 .DS_Store
 *.log
 
+# Rendered posts. The directory structure is tracked via .gitkeep; the videos are build output.
+output/**/*.mp4
+
 # Generated from core/agents/ by tools/sync-agents.mjs — edit the source, not the copy.
 .claude/agents/

@@ -20,6 +20,7 @@
     "verify:env": "node tools/verify-env.mjs"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.3.0",
     "@remotion/cli": "^4.0.512",
     "@remotion/media-utils": "^4.0.512",
     "@remotion/player": "^4.0.512",
