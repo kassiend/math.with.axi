@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "sqrt-12-times-27",
+      "script": "verifier.checks/sqrt-12-times-27.py",
+      "computed": "18",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "unambiguous": true,
+    "unambiguous_reason": "The radical sign denotes the principal (non-negative) square root; 12 · 27 = 324 is a single well-defined integer, so √(12·27) has one value.",
+    "exact": true,
+    "exact_reason": "324 = 18^2, so √324 = 18 is an exact integer, not a rounded approximation."
+  }
+}

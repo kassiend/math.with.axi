@@ -1,0 +1,18 @@
+{
+  "task_id": "denest-9-plus-4-sqrt-5",
+  "duration_s": 40,
+  "structure_id": "nested-radical-denest-quadratic-surd",
+  "categories": ["nested-radical"],
+  "description": null,
+  "statement": "√(9 + 4√5) = ?",
+  "statement_latex": "\\sqrt{9 + 4\\sqrt{5}} = \\;?",
+  "answer": "2 + √5",
+  "answer_latex": "2 + \\sqrt{5}",
+  "solution_sketch": "Look for a denesting of the form (a + b√5)^2 = a^2 + 5b^2 + 2ab√5. Matching the rational and surd parts gives a^2 + 5b^2 = 9 and 2ab = 4, so ab = 2. The pair a = 2, b = 1 fits (4 + 5 = 9), so 9 + 4√5 = (2 + √5)^2 and the root is 2 + √5.",
+  "difficulty_rationale": "The naive route — approximate 4√5 ≈ 8.944, add 9, take √17.944 ≈ 4.236 — leaves the solver with a decimal and no clean answer to state, so it does not finish the task. The insight is that 9 + 4√5 is a perfect square (a + b√5)^2. After that there are two real steps: match parts to get a^2 + 5b^2 = 9 and ab = 2, then find the integer pair (a, b) = (2, 1). Twenty seconds is not enough to search for the split; a solver who spots the shape instantly still spends ~15 s confirming the pair.",
+  "steps_expected": 2,
+  "check_script": "generator.checks/denest-9-plus-4-sqrt-5.py",
+  "nulls": [
+    { "field": "description", "reason": "statement is self-contained inside the ring; card renders the default 'Answer in the comments' title" }
+  ]
+}

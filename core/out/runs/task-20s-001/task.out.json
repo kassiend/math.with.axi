@@ -1,0 +1,17 @@
+{
+  "task_id": "sqrt-12-times-27",
+  "duration_s": 20,
+  "structure_id": "radical-of-product-perfect-square",
+  "categories": ["powers-roots", "arithmetic-shortcut"],
+  "description": null,
+  "statement": "√(12 · 27) = ?",
+  "statement_latex": "\\sqrt{12 \\cdot 27} = \\;?",
+  "answer": "18",
+  "answer_latex": "18",
+  "solution_sketch": "Do not multiply first. Split 12 into 4 x 3, so 12 x 27 = 4 x (3 x 27) = 4 x 81. Both factors are perfect squares, so the root is 2 x 9 = 18.",
+  "difficulty_rationale": "The naive route is 12 x 27 = 324 followed by recognising 324 as a square, which is slow and most people stall on the second half. The insight is to factor before rooting: 12 x 27 = 4 x 81, and both are squares. Reachable cold because 27 = 3^3 and 12 = 4 x 3 are familiar splits, and it collapses to 2 x 9 with no written work.",
+  "check_script": "generator.checks/sqrt-12-times-27.py",
+  "nulls": [
+    { "field": "description", "reason": "the statement is self-explanatory; the card renders the specified fallback 'Answer in the comments'" }
+  ]
+}

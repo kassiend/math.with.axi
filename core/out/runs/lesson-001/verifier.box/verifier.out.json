@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "square-two-digit-ending-in-5",
+      "detail": "Step s3 says 'Then append 25'. Read literally as digit concatenation, this matches the arithmetic in every case (str(n*(n+1)) + '25' == (10n+5)^2 for all n >= 0). The step is therefore correct as displayed, but 'append' is shorthand for 'shift left two digits and add 25' (i.e. multiply n*(n+1) by 100, then add 25). The three display steps s1 -> s2 -> s3 in order do produce 9025 without a missing step; noted only for transparency, not as a defect.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "square-two-digit-ending-in-5",
+      "script": "verifier.checks/square-two-digit-ending-in-5.py",
+      "computed": "9025",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "_notes": {
+    "worked_example": "95^2 = 9025 verified numerically.",
+    "identity_symbolic": "SymPy confirms (10n+5)^2 - (100*n*(n+1) + 25) simplifies to 0 for symbolic integer n.",
+    "domain_exhaustive": "All n in {1,...,9} satisfy the identity; verified pointwise.",
+    "boundary_and_outside": "n = 0, 10, 11, 99, 100 all satisfy the identity, confirming the applicability statement that the rule is exact across every non-negative integer, with the lesson's domain simply restricted to two-digit inputs.",
+    "no_carry_claim": "Confirmed. Because 25 < 100 and the two components are separated by a factor of 100, (100*n*(n+1) + 25) mod 100 == 25 for every n; no carry between components is possible. Verified for n in {0,...,199} and true by construction for all n.",
+    "operand_draw": "spec min=1, max=9, filter={}, drew n=9, operand = 10*9+5 = 95. n=9 lies on the upper boundary of the stated domain. Cannot independently reproduce the seed's RNG output, but the draw is legitimate: every n in {1,...,9} works identically well (no carries, no exceptions), so there is no exception the draw could be hiding. Not cherry-picked.",
+    "display_steps": "s1 poses 95^2. s2 computes 9*10 = 90 (tens digit x next number). s3 appends '25' to produce '9025'. Reading in order yields the stated result; no intermediate step is missing for a viewer following along."
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "runId": "task-sqrt-12-times-27",
+  "capture": {
+    "publicPath": "captures/task-sqrt-12-times-27",
+    "frames": 805,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "intro": {
+    "src": "mascot/mas_chromo.webm",
+    "endFrame": 152,
+    "box": {
+      "left": -618.82,
+      "top": 106.87,
+      "width": 1944.47,
+      "height": 1093.77
+    }
+  },
+  "hurry": {
+    "src": "mascot/hurry-hurry5.webm",
+    "enter": 590,
+    "exit": 656,
+    "clipSeconds": 5.766666666666667
+  },
+  "audio": {
+    "start": "audio/task-sqrt-12-times-27/start.mp3",
+    "tick": "audio/task-sqrt-12-times-27/tick.wav",
+    "tickFrames": [
+      190,
+      220,
+      250,
+      280,
+      310,
+      340,
+      370,
+      400,
+      430,
+      460,
+      490,
+      520,
+      550,
+      580,
+      610,
+      640,
+      670,
+      700,
+      730,
+      760
+    ],
+    "mid": "audio/task-sqrt-12-times-27/mid.mp3",
+    "midFrame": 590
+  }
+}

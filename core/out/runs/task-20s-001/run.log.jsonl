@@ -1,0 +1,21 @@
+{"t":"2026-08-17T09:51:17.985Z","event":"run.start","task_id":"sqrt-12-times-27","duration_s":20,"seed":409436602}
+{"t":"2026-08-17T09:51:18.382Z","event":"crosscheck","agreed":true,"generator":"18","verifier":"18"}
+{"t":"2026-08-17T09:51:18.441Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-witchcat.webm","hurry_audio_s":2.19425,"total_frames":805,"hurry_enter":590}
+{"t":"2026-08-17T09:51:18.441Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-17T09:52:03.907Z","event":"run.start","task_id":"sqrt-12-times-27","duration_s":20,"seed":409436602}
+{"t":"2026-08-17T09:52:04.316Z","event":"crosscheck","agreed":true,"generator":"18","verifier":"18"}
+{"t":"2026-08-17T09:52:04.374Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-witchcat.webm","hurry_audio_s":2.19425,"total_frames":805,"hurry_enter":590}
+{"t":"2026-08-17T09:55:00.205Z","event":"capture.done","frames":805,"font_size":46}
+{"t":"2026-08-17T09:56:31.417Z","event":"done","video":"output/posts/tasks/20s/sqrt-12-times-27.mp4"}
+{"t":"2026-08-17T10:29:25.700Z","event":"run.start","task_id":"sqrt-12-times-27","duration_s":20,"seed":409436602}
+{"t":"2026-08-17T10:29:25.701Z","event":"dedup.skipped","reason":"rerender of an existing post"}
+{"t":"2026-08-17T10:29:26.145Z","event":"crosscheck","agreed":true,"generator":"18","verifier":"18"}
+{"t":"2026-08-17T10:29:26.204Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-hurry5.webm","hurry_audio_s":2.19425,"total_frames":805,"hurry_enter":590}
+{"t":"2026-08-17T10:32:23.722Z","event":"capture.done","frames":805,"font_size":46}
+{"t":"2026-08-17T10:33:52.353Z","event":"done","video":"output/posts/tasks/20s/sqrt-12-times-27.mp4"}
+{"t":"2026-08-17T10:36:36.349Z","event":"run.start","task_id":"sqrt-12-times-27","duration_s":20,"seed":409436602}
+{"t":"2026-08-17T10:36:36.351Z","event":"dedup.skipped","reason":"rerender of an existing post"}
+{"t":"2026-08-17T10:36:36.771Z","event":"crosscheck","agreed":true,"generator":"18","verifier":"18"}
+{"t":"2026-08-17T10:36:36.828Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-hurry5.webm","hurry_audio_s":2.19425,"total_frames":805,"hurry_enter":590}
+{"t":"2026-08-17T10:39:32.987Z","event":"capture.done","frames":805,"font_size":46}
+{"t":"2026-08-17T10:41:03.050Z","event":"done","video":"output/posts/tasks/20s/sqrt-12-times-27.mp4"}

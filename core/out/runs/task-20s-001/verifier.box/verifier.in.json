@@ -1,0 +1,20 @@
+{
+  "task_id": "sqrt-12-times-27",
+  "duration_s": 20,
+  "structure_id": "radical-of-product-perfect-square",
+  "categories": [
+    "powers-roots",
+    "arithmetic-shortcut"
+  ],
+  "description": null,
+  "statement": "√(12 · 27) = ?",
+  "statement_latex": "\\sqrt{12 \\cdot 27} = \\;?",
+  "answer": "18",
+  "answer_latex": "18",
+  "nulls": [
+    {
+      "field": "description",
+      "reason": "the statement is self-explanatory; the card renders the specified fallback 'Answer in the comments'"
+    }
+  ]
+}

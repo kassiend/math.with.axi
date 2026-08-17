@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "denest-9-plus-4-sqrt-5",
+      "detail": "Sign/branch check: (2 + √5)^2 = 4 + 4√5 + 5 = 9 + 4√5, and 2 + √5 ≈ 4.236 > 0, so 2 + √5 is the principal (non-negative) square root. Correct branch chosen; the alternative -(2+√5) is rejected because the principal root is non-negative.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "denest-9-plus-4-sqrt-5",
+      "detail": "Exactness: answer '2 + √5' is exact symbolic, not a rounded decimal.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "denest-9-plus-4-sqrt-5",
+      "detail": "Simplest form: 2 + √5 is fully denested (no nested radical remains) and of the form a + b√c with c = 5 squarefree; no further simplification exists.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "denest-9-plus-4-sqrt-5",
+      "detail": "steps_expected: 2 is honest. Natural presentation: (1) observe (2+√5)^2 = 4 + 4√5 + 5 = 9 + 4√5; (2) take principal square root to conclude √(9+4√5) = 2 + √5. Two steps is a fair, non-inflated count for this puzzle.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "denest-9-plus-4-sqrt-5",
+      "script": "verifier.checks/denest-9-plus-4-sqrt-5.py",
+      "computed": "2 + sqrt(5)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

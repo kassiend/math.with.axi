@@ -1,0 +1,72 @@
+{
+  "lesson_id": "square-two-digit-ending-in-5",
+  "counter": 1,
+  "concept_slug": "square-two-digit-ending-in-5",
+  "tags": ["mental-arithmetic", "squaring", "shortcut"],
+  "method_name": "Square a number ending in 5",
+  "applicability": "any positive integer whose last digit is 5. The identity (10n + 5)^2 = 100 * n * (n + 1) + 25 holds for every non-negative integer n, so the rule is exact across the entire domain; for this lesson the domain is bounded to two-digit inputs (n in {1,...,9}), which the Verifier can confirm exhaustively.",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Square a number ending in 5",
+      "working": "95² = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Tens digit × next number",
+      "working": "9 × 10 = 90"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "result",
+      "instruction": "Then append 25",
+      "working": "95² = 9025"
+    }
+  ],
+  "worked_example": {
+    "operands": [95],
+    "result": "9025"
+  },
+  "operand_draw": {
+    "seed": 20260817,
+    "spec": {
+      "min": 1,
+      "max": 9,
+      "filter": {}
+    },
+    "n": 1,
+    "draws": [9],
+    "attempts": 1,
+    "rejections": [],
+    "rejection_rate": 0,
+    "rejection_rate_alarm": false,
+    "construction": "operand = 10 * drawn_n + 5 = 95",
+    "construction_note": "The sampler draws the tens digit n; the two-digit operand is then constructed as 10n + 5. 'Ends in 5' is the method's applicability, not a rendering property, and encoding it as a sampler filter is forbidden by ALLOWED_FILTERS. Parameterising the draw over the applicable domain (n in [1,9]) is the honest alternative and remains fully reproducible from the declared seed and spec."
+  },
+  "dedup_check": {
+    "chosen": {
+      "concept_slug": "square-two-digit-ending-in-5",
+      "tags_probed": ["mental-arithmetic", "squaring", "shortcut"],
+      "blocked": [],
+      "candidates": []
+    },
+    "also_probed": [
+      {
+        "concept_slug": "multiply-by-11-two-digit",
+        "tags_probed": ["mental-arithmetic", "multiplication", "shortcut"],
+        "blocked": [],
+        "candidates": [],
+        "abandoned_reason": "Not a dedup rejection. The ledger is empty. This concept was the initial candidate, but the seeded draw over the natural range [10,99] produced 96 (digit sum 15), which is a carry case. Per section 3.4 the resolution is to change the range, never the draw; narrowing the range to something like [10,18] would have been a mathematical filter dressed as a rendering range. Switched to a method whose applicability matches an honest rendering-parameter range."
+      }
+    ]
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "There is no carry case for this technique. The algebraic identity (10n + 5)^2 = 100 * n * (n + 1) + 25 is exact for every non-negative integer n, and the two components n*(n+1) and 25 occupy disjoint decimal places (they are separated by a factor of 100), so no carry between them is possible. For the two-digit domain used in this lesson (n in {1,...,9}) the Verifier can confirm the claim exhaustively by comparing (10n + 5)^2 with 100 * n * (n + 1) + 25 for all nine values of n."
+    }
+  ]
+}

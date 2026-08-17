@@ -1,0 +1,19 @@
+{
+  "runId": "smoke",
+  "capture": {
+    "publicPath": "captures/smoke",
+    "frames": 30,
+    "fps": 30
+  },
+  "audio": [],
+  "mascot": {
+    "_comment": "Mascot layer config, read by pipeline/orchestrate.mjs. `src` is relative to video/public/ and must point at an alpha WebM produced by tools/chromakey.mjs.",
+    "_status": "mas_chromo is a real green screen (key 0x1b9e35, saturation 0.83) and keys cleanly with chromakey + despill — no fur holes, no halo. It supersedes the white-background clips, which key badly; see docs/mascot-keying.md. Source is 1920x1080 24fps, so it upscales well but will judder if a 24->30 pulldown is visible.",
+    "src": "mascot/mas_chromo.webm",
+    "startFrame": 0,
+    "width": 720,
+    "right": 0,
+    "bottom": 0
+  },
+  "durationInFrames": 30
+}

@@ -1,0 +1,58 @@
+{
+  "lesson_id": "square-two-digit-ending-in-5",
+  "counter": 1,
+  "concept_slug": "square-two-digit-ending-in-5",
+  "tags": [
+    "mental-arithmetic",
+    "squaring",
+    "shortcut"
+  ],
+  "method_name": "Square a number ending in 5",
+  "applicability": "any positive integer whose last digit is 5. The identity (10n + 5)^2 = 100 * n * (n + 1) + 25 holds for every non-negative integer n, so the rule is exact across the entire domain; for this lesson the domain is bounded to two-digit inputs (n in {1,...,9}), which the Verifier can confirm exhaustively.",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Square a number ending in 5",
+      "working": "95² = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Tens digit × next number",
+      "working": "9 × 10 = 90"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "result",
+      "instruction": "Then append 25",
+      "working": "95² = 9025"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      95
+    ],
+    "result": "9025"
+  },
+  "operand_draw": {
+    "seed": 20260817,
+    "spec": {
+      "min": 1,
+      "max": 9,
+      "filter": {}
+    },
+    "draws": [
+      9
+    ],
+    "rejection_rate": 0,
+    "construction": "operand = 10 * drawn_n + 5 = 95"
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "There is no carry case for this technique. The algebraic identity (10n + 5)^2 = 100 * n * (n + 1) + 25 is exact for every non-negative integer n, and the two components n*(n+1) and 25 occupy disjoint decimal places (they are separated by a factor of 100), so no carry between them is possible. For the two-digit domain used in this lesson (n in {1,...,9}) the Verifier can confirm the claim exhaustively by comparing (10n + 5)^2 with 100 * n * (n + 1) + 25 for all nine values of n."
+    }
+  ]
+}

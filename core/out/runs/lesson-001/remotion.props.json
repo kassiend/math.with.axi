@@ -1,0 +1,48 @@
+{
+  "runId": "lesson-square-two-digit-ending-in-5",
+  "capture": {
+    "publicPath": "captures/lesson-square-two-digit-ending-in-5",
+    "frames": 920,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "intro": {
+    "src": "mascot/mas_chromo.webm",
+    "clipFrames": 152,
+    "box": {
+      "left": -618.82,
+      "top": 106.87,
+      "width": 1944.47,
+      "height": 1093.77
+    }
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "intro",
+        "src": "audio/lesson-square-two-digit-ending-in-5/intro.mp3",
+        "from": 0,
+        "durationInFrames": 156
+      },
+      {
+        "id": "s1",
+        "src": "audio/lesson-square-two-digit-ending-in-5/s1.mp3",
+        "from": 194,
+        "durationInFrames": 190
+      },
+      {
+        "id": "s2",
+        "src": "audio/lesson-square-two-digit-ending-in-5/s2.mp3",
+        "from": 384,
+        "durationInFrames": 211
+      },
+      {
+        "id": "s3",
+        "src": "audio/lesson-square-two-digit-ending-in-5/s3.mp3",
+        "from": 595,
+        "durationInFrames": 310
+      }
+    ]
+  }
+}

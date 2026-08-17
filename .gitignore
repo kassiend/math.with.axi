@@ -3,21 +3,35 @@
 .env.*
 !.env.example
 
+# Dependencies — restored by `npm install` and `python3 -m venv core/.venv`.
 node_modules/
 core/.venv/
-core/web/dist/
-core/out/
+
+# ---------------------------------------------------------------------------
+# Generated. Everything below is reproducible from what IS tracked, and each
+# entry is here because of its size, not because it is unimportant.
+# ---------------------------------------------------------------------------
+
+# 2 GB of PNG sequences — one file per frame, per run. Rebuilt by the capture
+# stage. Committing these would make the repository unusable.
 core/video/public/captures/
+
+# Staged copies of files that are already tracked elsewhere:
+#   audio/   <- assets/audio/, copied per run by the orchestrators
+#   mascot/  <- assets/video/, rebuilt by `npm run chromakey`
+#   bg/      <- assets/images/bg/, rebuilt by `npm run sync:backgrounds`
 core/video/public/audio/
 core/video/public/mascot/
-
-# Staged from assets/images/bg/ by tools/sync-backgrounds.mjs.
 core/web/public/bg/
+
+# Build output.
+core/web/dist/
+
+# out/renders duplicates output/posts/; out/logs holds debug stills and
+# chroma-key previews; tts-cache is re-synthesised on demand.
+core/out/renders/
+core/out/logs/
+core/out/tts-cache/
+
 .DS_Store
 *.log
-
-# Rendered posts. The directory structure is tracked via .gitkeep; the videos are build output.
-output/**/*.mp4
-
-# Generated from core/agents/ by tools/sync-agents.mjs — edit the source, not the copy.
-.claude/agents/
