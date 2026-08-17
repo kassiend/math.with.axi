@@ -1,6 +1,7 @@
 import { Composition } from 'remotion';
 import { LessonVideo, lessonSchemaProps, type LessonProps } from './LessonVideo';
 import { TaskVideo, taskVideoDefaults, type TaskVideoProps } from './TaskVideo';
+import { LessonPostVideo, lessonPostDefaults, type LessonPostProps } from './LessonPostVideo';
 
 const FPS = 30;
 const WIDTH = 1080;
@@ -35,6 +36,20 @@ export const RemotionRoot: React.FC = () => (
       height={HEIGHT}
       defaultProps={taskVideoDefaults}
       calculateMetadata={({ props }: { props: TaskVideoProps }) => ({
+        durationInFrames: Math.max(1, props.capture?.frames ?? 1),
+        fps: props.capture?.fps ?? FPS,
+      })}
+    />
+
+    <Composition
+      id="LessonPost"
+      component={LessonPostVideo}
+      durationInFrames={1}
+      fps={FPS}
+      width={WIDTH}
+      height={HEIGHT}
+      defaultProps={lessonPostDefaults}
+      calculateMetadata={({ props }: { props: LessonPostProps }) => ({
         durationInFrames: Math.max(1, props.capture?.frames ?? 1),
         fps: props.capture?.fps ?? FPS,
       })}

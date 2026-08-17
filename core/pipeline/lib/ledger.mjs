@@ -92,6 +92,20 @@ export function findCandidates(conceptSlug, tags, ledger = load()) {
 }
 
 /**
+ * The `Math tricks #N` counter: one more than the highest already shipped.
+ *
+ * Derived from the ledger rather than stored in a separate file, so it cannot drift from what
+ * actually went out. It identifies a post in a series the audience follows, so it never restarts
+ * and never skips — a failed lesson does not consume a number.
+ */
+export function nextCounter(ledger = load()) {
+  const used = ledger.entries
+    .filter((e) => e.status === 'shipped' && Number.isFinite(e.counter))
+    .map((e) => e.counter);
+  return used.length ? Math.max(...used) + 1 : 1;
+}
+
+/**
  * Append a run outcome. Every outcome is recorded — including failures, which do not block a
  * retry but do count toward MAX_FAILED_ATTEMPTS. Only `shipped` blocks a future topic.
  */

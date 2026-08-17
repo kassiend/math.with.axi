@@ -19,6 +19,7 @@ export default defineConfig({
       input: {
         index: path.resolve(__dirname, 'index.html'),
         task: path.resolve(__dirname, 'task.html'),
+        lesson: path.resolve(__dirname, 'lesson.html'),
       },
       output: {
         // Deterministic names — each capture loads exactly one script.
