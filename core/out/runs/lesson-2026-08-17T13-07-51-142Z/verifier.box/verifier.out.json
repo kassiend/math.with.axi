@@ -1,0 +1,28 @@
+{
+  "status": "failed",
+  "findings": [
+    {
+      "severity": "fatal",
+      "kind": "false-generalisation",
+      "claim_id": "multiply-by-11-two-digit",
+      "detail": "The applicability text asserts that for every carry case (a+b >= 10) the product is 'a four-digit number where the 1 carries into the hundreds'. Exhaustive check over the 45 carry cases shows only 9 of them (n in {91..99}) actually produce a four-digit result; the other 36 produce three-digit numbers. The carry rule (a+1, a+b-10, b) is arithmetically correct, but the accompanying 'four-digit number' characterisation is false for 80% of the carry set (36/45). A student who reads the applicability line and computes 19*11 will get 209, not the promised four-digit answer.",
+      "witness": "n=19: digit sum 1+9=10 (carry case), 19*11 = 209 (three digits, not four)."
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "multiply-by-11-two-digit",
+      "detail": "Step s3 renders the carry as '9+1 | 1 | 2' and s4 states the result '1012'. The intermediate reasoning a viewer must perform — evaluate 9+1 = 10, place it in the hundreds column, observe that the 10 itself overflows so 1 spills into the thousands, yielding 1|0|1|2 — is not made explicit anywhere in the step sequence. The steps read in order do not literally produce '1012' without the reader silently filling in place-value overflow.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "multiply-by-11-two-digit",
+      "script": "verifier.checks/multiply-by-11-two-digit.py",
+      "computed": "1012",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "last-digit-3-pow-2026",
+      "script": "verifier.checks/last-digit-3-pow-2026.py",
+      "computed": "9",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Statement 'Last digit of 3^2026' is unambiguous: 3^2026 is a positive integer, base 10 is conventional for 'last digit', and the value is uniquely determined. No sign or branch concerns. Answer '9' is exact (a single digit, not a rounding) and in simplest form. Independent computation pow(3, 2026, 10) = 9 confirms."
+}

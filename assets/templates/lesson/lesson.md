@@ -66,7 +66,27 @@ lesson; a genuinely different *mechanism* is.
 
 After five rejected candidates, emit `{"status": "no_topic", "tried": [...]}` and stop.
 
-### 2.2 What makes a good lesson topic
+### 2.2 The subject area is ASSIGNED, not chosen
+
+**The run tells you which branch of technique to teach.** Echo it back in the plan as `area`.
+
+This is assigned because free choice does not produce a curriculum. An agent asked to pick a
+"maths trick" picks multiplication shortcuts and square roots, every time — and a channel that
+only ever shows those reads as a party trick rather than as teaching. The area comes from
+whichever pool position has gone longest without use, in `core/pipeline/lib/rotation.mjs`:
+
+`divisibility-rules`, `algebraic-identity`, `percentage-and-discount`, `estimation-and-bounding`,
+`modular-arithmetic`, `fraction-manipulation`, `logarithm-and-exponent`, `sequence-and-series`,
+`equation-solving-strategy`, `geometry-shortcut`, `combinatorial-counting`,
+`probability-intuition`, `number-base-and-digits`, `inequality-technique`,
+`trigonometry-shortcut`, `division-shortcut`, `multiplication-shortcut`, `squaring-and-roots`.
+
+You still choose the method, the framing and the numbers. You do not choose the branch.
+
+Fall back only if the assigned area genuinely cannot carry a 30–60 second method lesson, and say
+which you used instead and why.
+
+### 2.3 What makes a good lesson topic
 
 The goal is **transferable method**. A viewer should leave able to do a whole class of
 calculations faster, not able to recite one answer.

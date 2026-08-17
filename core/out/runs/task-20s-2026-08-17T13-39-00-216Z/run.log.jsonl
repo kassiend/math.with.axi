@@ -1,0 +1,13 @@
+{"t":"2026-08-17T13:40:55.211Z","event":"run.start","task_id":"last-digit-3-pow-2026","duration_s":20,"seed":-1174754027}
+{"t":"2026-08-17T13:40:55.261Z","event":"crosscheck","agreed":false,"generator":null,"verifier":"9"}
+{"t":"2026-08-17T13:40:55.261Z","event":"gate.closed","status":"failed","stage":"verification","problems":[{"side":"generator","error":"check script not found: /Users/kassiend_/Desktop/math.push/core/out/runs/task-20s-2026-08-17T13-39-00-216Z/core/out/runs/task-20s-2026-08-17T13-39-00-216Z/generator.checks/last-digit-3-pow-2026.py"}]}
+{"t":"2026-08-17T13:43:20.720Z","event":"run.start","task_id":"last-digit-3-pow-2026","duration_s":20,"seed":-1174754027}
+{"t":"2026-08-17T13:47:42.118Z","event":"run.start","task_id":"last-digit-3-pow-2026","duration_s":20,"seed":-1174754027}
+{"t":"2026-08-17T13:47:42.511Z","event":"crosscheck","agreed":true,"generator":"9","verifier":"9"}
+{"t":"2026-08-17T13:47:42.570Z","event":"picks","background":"bg.jpeg","start_audio":"axi_greetings2.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-hurry5.webm","hurry_audio_s":2.115875,"total_frames":698,"hurry_enter":494}
+{"t":"2026-08-17T13:47:42.571Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-17T13:58:02.642Z","event":"run.start","task_id":"last-digit-3-pow-2026","duration_s":20,"seed":-1174754027}
+{"t":"2026-08-17T13:58:03.040Z","event":"crosscheck","agreed":true,"generator":"9","verifier":"9"}
+{"t":"2026-08-17T13:58:03.101Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_greetings2.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-hurry5.webm","hurry_audio_s":2.115875,"total_frames":698,"hurry_enter":494}
+{"t":"2026-08-17T14:00:19.111Z","event":"capture.done","frames":698,"font_size":34}
+{"t":"2026-08-17T14:01:30.411Z","event":"done","video":"output/posts/tasks/20s/last-digit-3-pow-2026.mp4"}

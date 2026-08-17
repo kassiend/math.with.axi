@@ -34,6 +34,95 @@
       "video": "output/posts/tasks/40s/denest-9-plus-4-sqrt-5.mp4",
       "run_dir": "out/runs/task-40s-001",
       "statement_norm": "√(9+4√5)=?"
+    },
+    {
+      "task_id": "sum-first-20-odd-numbers",
+      "duration_s": 20,
+      "structure_id": "sum-first-n-odd-numbers-square",
+      "categories": [
+        "sequence",
+        "arithmetic-shortcut"
+      ],
+      "statement": "1 + 3 + 5 + … + 39 = ?",
+      "answer": "400",
+      "status": "failed",
+      "created_at": "2026-08-17T13:26:11.306Z",
+      "failed_at": "verification",
+      "statement_norm": "1+3+5+…+39=?"
+    },
+    {
+      "task_id": "clock-angle-3-30",
+      "duration_s": 20,
+      "structure_id": "clock-angle-half-hour",
+      "categories": [
+        "clock-calendar"
+      ],
+      "statement": "3:30",
+      "answer": "75°",
+      "status": "failed",
+      "created_at": "2026-08-17T13:28:30.575Z",
+      "failed_at": "verification",
+      "statement_norm": "3:30"
+    },
+    {
+      "task_id": "product-37-43",
+      "duration_s": 20,
+      "structure_id": "product-symmetric-difference-of-squares",
+      "categories": [
+        "arithmetic-shortcut"
+      ],
+      "statement": "37 × 43 = ?",
+      "answer": "1591",
+      "status": "failed",
+      "created_at": "2026-08-17T13:30:46.388Z",
+      "failed_at": "verification",
+      "statement_norm": "37*43=?"
+    },
+    {
+      "task_id": "cube-power-sum-x-plus-inv-4",
+      "duration_s": 40,
+      "structure_id": "cube-power-sum-from-linear-reciprocal",
+      "categories": [
+        "system-of-equations"
+      ],
+      "statement": "x + 1/x = 4",
+      "answer": "52",
+      "status": "shipped",
+      "created_at": "2026-08-17T13:33:05.185Z",
+      "seed": -1698965954,
+      "video": "output/posts/tasks/40s/cube-power-sum-x-plus-inv-4.mp4",
+      "run_dir": "out/runs/task-40s-2026-08-17T13-30-46-700Z",
+      "statement_norm": "x+1/x=4"
+    },
+    {
+      "task_id": "last-digit-3-pow-2026",
+      "duration_s": 20,
+      "structure_id": "remainder-cycle-power",
+      "categories": [
+        "divisibility-remainder"
+      ],
+      "statement": "Last digit of 3^2026",
+      "answer": "9",
+      "status": "failed",
+      "created_at": "2026-08-17T13:40:55.211Z",
+      "failed_at": "verification",
+      "statement_norm": "lastdigitof3^2026"
+    },
+    {
+      "task_id": "last-digit-3-pow-2026",
+      "duration_s": 20,
+      "structure_id": "remainder-cycle-power",
+      "categories": [
+        "divisibility-remainder"
+      ],
+      "statement": "Last digit of 3^2026",
+      "answer": "9",
+      "status": "shipped",
+      "created_at": "2026-08-17T13:58:02.642Z",
+      "seed": -1174754027,
+      "video": "output/posts/tasks/20s/last-digit-3-pow-2026.mp4",
+      "run_dir": "out/runs/task-20s-2026-08-17T13-39-00-216Z",
+      "statement_norm": "lastdigitof3^2026"
     }
   ]
 }

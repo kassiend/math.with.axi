@@ -1,0 +1,14 @@
+{
+  "task_id": "clock-angle-3-30",
+  "duration_s": 20,
+  "structure_id": "clock-angle-half-hour",
+  "categories": [
+    "clock-calendar"
+  ],
+  "description": "Angle between the clock hands",
+  "statement": "3:30",
+  "statement_latex": null,
+  "answer": "75°",
+  "answer_latex": "75^\\circ",
+  "nulls": []
+}

@@ -27,6 +27,8 @@ export type TaskVideoProps = {
   intro: {
     src: string;
     endFrame: number;
+    /** Retimes the greeting to ~1.5s; see shared/task-timeline.ts. */
+    playbackRate?: number;
     /** Absolute CSS box, in design units, from tools/extract-mascot-still.mjs. */
     box: { left: number; top: number; width: number; height: number };
   };
@@ -44,7 +46,7 @@ export type TaskVideoProps = {
 export const taskVideoDefaults: TaskVideoProps = {
   runId: 'preview',
   capture: { publicPath: '', frames: 1, fps: 30, width: 1080, height: 1920 },
-  intro: { src: '', endFrame: 0, box: { left: 0, top: 0, width: 0, height: 0 } },
+  intro: { src: '', endFrame: 0, playbackRate: 1, box: { left: 0, top: 0, width: 0, height: 0 } },
   hurry: null,
   audio: { start: null, tick: null, tickFrames: [], mid: null, midFrame: null },
 };
@@ -68,6 +70,7 @@ export const TaskVideo: React.FC<TaskVideoProps> = ({ capture, intro, hurry, aud
                 src={staticFile(intro.src)}
                 transparent
                 muted
+                playbackRate={intro.playbackRate ?? 1}
                 style={{ position: 'absolute', ...intro.box, objectFit: 'fill' }}
               />
             </AbsoluteFill>

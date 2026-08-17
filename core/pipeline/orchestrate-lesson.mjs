@@ -22,9 +22,10 @@ import path from 'node:path';
 import { captureLesson, DisplayTextDoesNotFit } from './stages/capture-lesson.mjs';
 import { crossCheck } from './lib/sympy.mjs';
 import * as ledger from './lib/ledger.mjs';
+import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
 import { resolveBin, runTool, isWindows } from './lib/platform.mjs';
-import { buildLessonTimeline, MAX_FRAMES, FPS } from '../shared/lesson-timeline.ts';
+import { buildLessonTimeline, INTRO_PLAYBACK_RATE, FPS } from '../shared/lesson-timeline.ts';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -85,7 +86,7 @@ async function main() {
     }]);
   }
 
-  const picks = pickAssets(seed);
+  const picks = pickAssets();
   const still = readJson(path.join(CORE, 'web', 'public', 'mascot', 'axi-still.json'), 'axi-still.json');
   log(run, 'picks', { background: path.basename(picks.background) });
 
@@ -136,9 +137,10 @@ async function main() {
     },
     intro: {
       src: 'mascot/mas_chromo.webm',
-      // The mascot clip is fixed-length; if the narration runs longer the clip stops and the page
-      // is already showing its last frame underneath, so nothing pops.
-      clipFrames: Math.min(152, timeline.intro.end),
+      // The clip is retimed to 1.5 s and usually finishes before the narration does. When it
+      // stops, the page is already holding its last frame in the same place, so nothing pops.
+      clipFrames: timeline.introClipEnd,
+      playbackRate: INTRO_PLAYBACK_RATE,
       box: {
         left: still.intro_video.left, top: still.intro_video.top,
         width: still.intro_video.width, height: still.intro_video.height,
@@ -157,7 +159,11 @@ async function main() {
   // where the installed CLI is remotion.cmd and execFile cannot run a .cmd without a shell.
   runTool(resolveBin('remotion', { localBinDir: NODE_BIN }), [
     'render', path.join(CORE, 'video', 'index.ts'), 'LessonPost', outFile,
-    '--props', propsFile, '--public-dir', PUBLIC, '--concurrency', '1', '--log', 'info',
+    '--props', propsFile, '--public-dir', PUBLIC, '--log', 'info',
+    // Remotion's default concurrency (half the cores). It was pinned to 1 out of caution about
+    // frame order, but each frame renders independently from the same props — the output is
+    // identical and the wall clock is several times shorter.
+    ...(process.env.AXI_RENDER_CONCURRENCY ? ['--concurrency', process.env.AXI_RENDER_CONCURRENCY] : []),
   ], { cwd: CORE, stdio: ['ignore', 'inherit', 'inherit'], maxBuffer: 1 << 24 });
 
   if (!fs.existsSync(outFile)) throw new Error(`remotion reported success but ${outFile} is missing`);
@@ -176,6 +182,8 @@ async function main() {
     id: run.id,
     concept_slug: plan.concept_slug,
     title: plan.method_name,
+    // Recorded so rotation.mjs can steer the next lesson away from this branch of technique.
+    area: plan.area ?? null,
     tags: plan.tags ?? [],
     counter,
     status: 'shipped',
@@ -197,11 +205,12 @@ function readJson(file, label) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-function pickAssets(seed) {
-  const pick = (list, salt) => list[Math.abs(hashSeed(`${seed}:${salt}`)) % list.length];
+function pickAssets() {
   const bgs = fs.readdirSync(path.join(ASSETS, 'images', 'bg'))
     .filter((f) => /\.(jpe?g|png)$/i.test(f)).sort();
-  return { background: path.join(ASSETS, 'images', 'bg', pick(bgs, 'bg')) };
+  // Rotated over how many posts have shipped, not hashed. A hash over four files repeats the
+  // previous pick a quarter of the time and looked, in practice, like the background was fixed.
+  return { background: path.join(ASSETS, 'images', 'bg', nextBackground(bgs, shippedCount())) };
 }
 
 /**

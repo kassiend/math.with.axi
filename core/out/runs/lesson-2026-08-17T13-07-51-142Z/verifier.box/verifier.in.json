@@ -1,0 +1,63 @@
+{
+  "lesson_id": "multiply-by-11-two-digit",
+  "counter": 2,
+  "concept_slug": "multiply-by-11-two-digit",
+  "tags": [
+    "mental-arithmetic",
+    "multiplication",
+    "shortcut"
+  ],
+  "method_name": "Multiply by 11",
+  "applicability": "any two-digit integer n in [10, 99]. Write n = 10a + b with a in {1,...,9} and b in {0,...,9}. Then n * 11 = 100*a + 10*(a + b) + b. When a + b < 10 the decimal digits of the answer are simply a, a+b, b (the 'drop the digit sum between the digits' shortcut). When a + b >= 10 a carry is required: the answer's digits are (a + 1), (a + b - 10), b, a four-digit number where the '1' carries into the hundreds. The full rule (with carry) is exact for every n in [10, 99] and the Verifier can confirm it exhaustively over the 90-value domain.",
+  "carry_case": "any two-digit n whose digits sum to 10 or more — e.g. 92 (9 + 2 = 11). The simplified 'drop the sum between the digits' form would write 9 (11) 2, which is not a decimal number; you must carry the 1 into the hundreds place, giving 9+1 | 1 | 2 = 1012. The full carry set is exactly the 45 numbers whose digit sum is >= 10, i.e. {19, 28, 29, 37, 38, 39, 46, 47, 48, 49, 55, 56, 57, 58, 59, 64, 65, 66, 67, 68, 69, 73, 74, 75, 76, 77, 78, 79, 82, 83, 84, 85, 86, 87, 88, 89, 91, 92, 93, 94, 95, 96, 97, 98, 99}.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Multiply by 11",
+      "working": "92 × 11 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Split the digits, add them",
+      "working": "9 _ 2  →  9 + 2 = 11"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "caveat",
+      "instruction": "Sum ≥ 10, so carry the 1",
+      "working": "9+1 | 1 | 2"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Read the answer",
+      "working": "92 × 11 = 1012"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      92,
+      11
+    ],
+    "result": "1012"
+  },
+  "nulls": [],
+  "operand_draw": {
+    "seed": 265676839,
+    "spec": {
+      "min": 10,
+      "max": 99,
+      "filter": {
+        "min_digits": 2,
+        "max_digits": 2
+      }
+    },
+    "draws": [
+      92
+    ],
+    "rejection_rate": 0,
+    "construction": "operand_a = drawn_value = 92; operand_b = 11 (fixed by the method being taught)."
+  }
+}

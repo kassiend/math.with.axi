@@ -99,20 +99,40 @@ and why 20 seconds is not enough.
 
 ---
 
-## 4. Categories — rotate, never repeat the shape
+## 4. Categories — the area is ASSIGNED, not chosen
 
-Pick 1–2. This pool is deliberately different from the 20-second pool.
+**The run tells you which area to use.** Your first category must be that one.
 
-1. `system-of-equations` — two unknowns, symmetric functions, elimination
-2. `nested-radical` — surds that collapse, denesting, rationalising
-3. `logarithm-exponent` — index and log laws, change of base, comparing sizes
-4. `modular-arithmetic` — remainder cycles, last digit of a power, divisibility proofs
-5. `telescoping` — sums and products that cancel
-6. `work-rate` — combined rates, pipes and tanks, meeting problems
-7. `geometry-mental` — area or perimeter from a relation, similar triangles, no construction
-8. `weighted-average` — mixtures, alligation, average speed (the harmonic-mean trap)
-9. `digit-puzzle` — reconstruct digits from constraints
-10. `functional-pattern` — `f(f(x))`, recursive definitions with a short cycle
+Assigned rather than chosen because free choice does not produce variety: an agent picks the most
+prototypical example of "hard maths puzzle" every time, and a recency rule over the last three is
+too weak to stop it. The area comes from whichever pool position has gone longest without use,
+computed in `core/pipeline/lib/rotation.mjs`.
+
+You still choose the idea, the numbers and the framing — just not the subject.
+
+The 40-second pool, deliberately disjoint from the 20-second one:
+
+| | area | what lives there |
+|---|---|---|
+| 1 | `logarithm-exponent` | index and log laws, change of base, comparing sizes |
+| 2 | `modular-arithmetic` | remainder cycles, last digit of a power, divisibility proofs |
+| 3 | `telescoping` | sums and products that cancel |
+| 4 | `work-rate` | combined rates, pipes and tanks, meeting problems |
+| 5 | `weighted-average` | mixtures, alligation, average speed (the harmonic-mean trap) |
+| 6 | `trigonometric-identity` | exact values, angle-sum identities, no calculator |
+| 7 | `inequality` | AM–GM, bounding, which of two expressions is larger |
+| 8 | `series-sum` | finite sums with a closed form, geometric series |
+| 9 | `digit-puzzle` | reconstruct digits from constraints |
+| 10 | `number-base` | binary/other bases, base conversion tricks |
+| 11 | `combinatorics` | arrangements, selections, complementary counting |
+| 12 | `geometry-mental` | area or perimeter from a relation, similar triangles, no construction |
+| 13 | `functional-pattern` | `f(f(x))`, recursive definitions with a short cycle |
+| 14 | `system-of-equations` | two unknowns, symmetric functions, elimination |
+| 15 | `quadratic-structure` | Vieta, completing the square, disguised quadratics |
+| 16 | `nested-radical` | surds that collapse, denesting, rationalising |
+
+Fall back to another area only if the assigned one genuinely cannot carry a puzzle at this
+difficulty — and say so in your report, naming what you used instead and why.
 
 **Structural variety beats category variety.** Two `modular-arithmetic` puzzles with genuinely
 different mechanisms beat a `modular-arithmetic` and a `telescoping` that both reduce to "spot

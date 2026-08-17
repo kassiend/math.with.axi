@@ -65,7 +65,10 @@ function Background({ frame, timeline, src }: {
 function MascotStill({ frame, timeline, still }: {
   frame: number; timeline: LessonTimeline; still: StillGeometry;
 }) {
-  if (frame < timeline.handoff.start) return null;
+  // Visible from the moment the clip stops, not from the hand-off. The greeting is retimed to
+  // 1.5 s while the intro narration usually runs longer, so without this the mascot would vanish
+  // for the remainder of the intro and reappear when the hand-off began.
+  if (frame < timeline.introClipEnd) return null;
 
   const from = still.frame_rect;
   const to = FOOTER.mascot;

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "task_id": "clock-angle-3-30",
+      "script": "verifier.checks/clock-angle-3-30.py",
+      "computed": "75°",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": "At 3:30 the minute hand is at 180° and the hour hand at 3·30°+30·0.5° = 105°; |180−105| = 75°, and 360−75 = 285°, so the non-reflex angle is unambiguously 75°. The value is exact (integer degrees) and in simplest form. 'Angle between the clock hands' conventionally denotes the smaller (non-reflex) angle, so the branch choice is standard and unambiguous."
+}

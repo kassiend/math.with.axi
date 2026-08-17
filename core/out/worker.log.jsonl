@@ -1,0 +1,12 @@
+{"t":"2026-08-17T13:03:43.838Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-17T13:07:51.127Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-17T13:23:53.218Z","event":"post.delivered","kind":"lesson","id":"multiply-by-11-two-digit","file":"output/posts/lessons/multiply-by-11-two-digit.mp4"}
+{"t":"2026-08-17T13:23:53.220Z","event":"post.start","kind":"task20","attempt":1}
+{"t":"2026-08-17T13:26:11.627Z","event":"post.gate-closed","kind":"task20","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-17T13:26:11.628Z","event":"post.start","kind":"task20","attempt":2}
+{"t":"2026-08-17T13:28:30.949Z","event":"post.gate-closed","kind":"task20","attempt":2,"stage":"orchestrator"}
+{"t":"2026-08-17T13:28:30.950Z","event":"post.start","kind":"task20","attempt":3}
+{"t":"2026-08-17T13:30:46.700Z","event":"post.gate-closed","kind":"task20","attempt":3,"stage":"orchestrator"}
+{"t":"2026-08-17T13:30:46.700Z","event":"post.start","kind":"task40","attempt":1}
+{"t":"2026-08-17T13:40:17.409Z","event":"post.delivered","kind":"task40","id":"cube-power-sum-x-plus-inv-4","file":"output/posts/tasks/40s/cube-power-sum-x-plus-inv-4.mp4"}
+{"t":"2026-08-17T13:40:17.532Z","event":"batch.done","ok":2,"failed":1}

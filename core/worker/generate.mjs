@@ -13,6 +13,7 @@ import path from 'node:path';
 import { CORE, ROOT, runDir as runDirFor } from '../pipeline/lib/paths.mjs';
 import { resolveBin, spawnTool } from '../pipeline/lib/platform.mjs';
 import { projectTask, projectLesson, writeVerifierBox, withheldFrom } from '../pipeline/lib/projection.mjs';
+import { nextTaskArea, nextLessonArea } from '../pipeline/lib/rotation.mjs';
 
 const CLAUDE = () => resolveBin('claude');
 const AGENT_TIMEOUT_MS = 25 * 60 * 1000;
@@ -83,7 +84,9 @@ function freshRunDir(prefix) {
 export async function generateTask(durationS, { log = console.log } = {}) {
   const brief = `assets/templates/tasks/task-${durationS}s.md`;
   const dir = freshRunDir(`task-${durationS}s`);
+  const area = nextTaskArea(durationS);
   log(`  run dir: ${path.relative(ROOT, dir)}`);
+  log(`  area assigned: ${area.assigned}  (${area.used} of ${area.poolSize} used)`);
 
   await runAgent({
     agent: 'axi-task-generator',
@@ -97,8 +100,21 @@ export async function generateTask(durationS, { log = console.log } = {}) {
       ``,
       `Produce ONE puzzle with a ${durationS}-second timer.`,
       ``,
-      `Deduplicate FIRST against core/content/tasks-ledger.json using the CLI in your brief.`,
+      `SUBJECT AREA — ASSIGNED, NOT YOURS TO CHOOSE: ${area.assigned}`,
+      ``,
+      `Your first category MUST be "${area.assigned}". This is the area that has gone longest`,
+      `without use, and it is assigned rather than chosen because a free choice converges on the`,
+      `same two or three prototypical topics every time.`,
+      ``,
+      `Only if this area genuinely cannot carry a puzzle at this difficulty, fall back to the`,
+      `first workable one of: ${area.alternatives.join(', ')} — and say in your report which you`,
+      `used and why the assigned one failed.`,
+      ``,
+      `Deduplicate against core/content/tasks-ledger.json using the CLI in your brief.`,
       `Shapes already shipped are blocked, including across the other duration.`,
+      ``,
+      `IMPORTANT — check_script must be relative to the run directory, i.e. exactly`,
+      `"generator.checks/<task_id>.py", not a path from the repository root.`,
       ``,
       `The statement renders inside the countdown ring: safe box ~249x249 design px, auto-fit`,
       `floor 28px. Keep it short. If it needs two givens, put the question in "description" and`,
@@ -175,7 +191,9 @@ export async function generateLesson({ log = console.log } = {}) {
   const dir = freshRunDir('lesson');
   const rel = path.relative(ROOT, dir);
   fs.mkdirSync(path.join(dir, 'audio'), { recursive: true });
+  const area = nextLessonArea();
   log(`  run dir: ${rel}`);
+  log(`  area assigned: ${area.assigned}  (${area.used} of ${area.poolSize} used)`);
 
   const seed = Number(BigInt(Date.now()) % 2147483647n);
 
@@ -189,7 +207,17 @@ export async function generateLesson({ log = console.log } = {}) {
       ``,
       `Run directory: ${rel}`,
       ``,
-      `Deduplicate against core/content/ledger.json FIRST. Anything already shipped is blocked,`,
+      `SUBJECT AREA — ASSIGNED, NOT YOURS TO CHOOSE: ${area.assigned}`,
+      ``,
+      `Teach a method from this area, and echo it back in the plan as an "area" field. It is`,
+      `assigned rather than chosen because a free choice converges on multiplication shortcuts and`,
+      `square roots every time, and a channel that only shows those reads as a party trick rather`,
+      `than as teaching. This is the area that has gone longest without use.`,
+      ``,
+      `Only if this area genuinely cannot carry a 30-60 second method lesson, fall back to the`,
+      `first workable one of: ${area.alternatives.join(', ')} — and say which you used and why.`,
+      ``,
+      `Deduplicate against core/content/ledger.json. Anything already shipped is blocked,`,
       `and so is a paraphrase of it — match on concept, not wording.`,
       ``,
       `Read the counter from the ledger: one more than the highest already shipped.`,

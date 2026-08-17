@@ -1,0 +1,19 @@
+{
+  "task_id": "product-37-43",
+  "duration_s": 20,
+  "structure_id": "product-symmetric-difference-of-squares",
+  "categories": [
+    "arithmetic-shortcut"
+  ],
+  "description": null,
+  "statement": "37 × 43 = ?",
+  "statement_latex": "37 \\times 43 = \\;?",
+  "answer": "1591",
+  "answer_latex": "1591",
+  "nulls": [
+    {
+      "field": "description",
+      "reason": "single-line statement carries the whole puzzle; card falls back to the standard \"Answer in the comments\" title"
+    }
+  ]
+}

@@ -95,20 +95,40 @@ insight is reachable cold in a few seconds.
 
 ---
 
-## 4. Categories — rotate, never repeat the shape
+## 4. Categories — the area is ASSIGNED, not chosen
 
-Pick 1–2. The ledger blocks recent repeats, but variety is your job before it is the ledger's.
+**The run tells you which area to use.** Your first category must be that one.
 
-1. `arithmetic-shortcut` — difference of squares, complements to 10/100, doubling-halving
-2. `percentage` — reversal (`a% of b = b% of a`), successive discounts
-3. `ratio-proportion` — scaling, sharing, unit rates
-4. `linear-equation` — one unknown, a twist in the setup
-5. `powers-roots` — index laws, nested surds that simplify, `x^0`, negative indices
-6. `divisibility-remainder` — digit rules, remainder cycles of powers
-7. `sequence` — next term, where the rule is structural rather than arithmetic
-8. `counting` — small combinatorics, handshakes, pairs
-9. `fractions` — unit fractions, telescoping pairs
-10. `clock-calendar` — angles between hands, weekday arithmetic
+This is assigned rather than chosen because free choice does not produce variety. An agent asked
+to pick a category picks the most prototypical example of "maths trick" — multiplication
+shortcuts and square roots — every single time, and a recency rule over the last three is far too
+weak to stop it oscillating between two favourites forever. The area comes from whichever pool
+position has gone longest without use, computed in `core/pipeline/lib/rotation.mjs`.
+
+You still choose the idea, the numbers and the framing. You do not choose the subject, because
+that is the one decision this pipeline has watched an agent get reliably wrong.
+
+The 20-second pool:
+
+| | area | what lives there |
+|---|---|---|
+| 1 | `percentage` | reversal (`a% of b = b% of a`), successive discounts |
+| 2 | `divisibility-remainder` | digit rules, remainder cycles of powers |
+| 3 | `logarithm` | `log` of a product, change of base, comparing two logs |
+| 4 | `sequence` | next term, where the rule is structural rather than arithmetic |
+| 5 | `fractions` | unit fractions, telescoping pairs |
+| 6 | `clock-calendar` | angles between hands, weekday arithmetic |
+| 7 | `counting` | small combinatorics, handshakes, pairs |
+| 8 | `parity-argument` | odd/even reasoning that settles a question instantly |
+| 9 | `ratio-proportion` | scaling, sharing, unit rates |
+| 10 | `absolute-value` | `\|x − a\| = b`, distance-on-a-line reasoning |
+| 11 | `linear-equation` | one unknown, a twist in the setup |
+| 12 | `unit-conversion` | rates, speeds, compound units |
+| 13 | `arithmetic-shortcut` | difference of squares, complements, doubling-halving |
+| 14 | `powers-roots` | index laws, surds that simplify, negative indices |
+
+Fall back to another area only if the assigned one genuinely cannot carry a puzzle at this
+difficulty — and say so in your report, naming what you used instead and why.
 
 **Structural variety matters more than category variety.** Two `arithmetic-shortcut` puzzles with
 genuinely different mechanisms are better than an `arithmetic-shortcut` and a `percentage` that

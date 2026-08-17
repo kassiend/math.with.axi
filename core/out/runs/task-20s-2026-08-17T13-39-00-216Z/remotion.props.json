@@ -1,0 +1,55 @@
+{
+  "runId": "task-last-digit-3-pow-2026",
+  "capture": {
+    "publicPath": "captures/task-last-digit-3-pow-2026",
+    "frames": 698,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "intro": {
+    "src": "mascot/mas_chromo.webm",
+    "endFrame": 45,
+    "playbackRate": 3.361111111111111,
+    "box": {
+      "left": -618.82,
+      "top": 106.87,
+      "width": 1944.47,
+      "height": 1093.77
+    }
+  },
+  "hurry": {
+    "src": "mascot/hurry-hurry5.webm",
+    "enter": 494,
+    "exit": 557,
+    "clipSeconds": 5.766666666666667
+  },
+  "audio": {
+    "start": "audio/task-last-digit-3-pow-2026/start.mp3",
+    "tick": "audio/task-last-digit-3-pow-2026/tick.wav",
+    "tickFrames": [
+      83,
+      113,
+      143,
+      173,
+      203,
+      233,
+      263,
+      293,
+      323,
+      353,
+      383,
+      413,
+      443,
+      473,
+      503,
+      533,
+      563,
+      593,
+      623,
+      653
+    ],
+    "mid": "audio/task-last-digit-3-pow-2026/mid.mp3",
+    "midFrame": 494
+  }
+}

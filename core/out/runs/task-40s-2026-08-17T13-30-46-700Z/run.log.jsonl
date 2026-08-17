@@ -1,0 +1,5 @@
+{"t":"2026-08-17T13:33:05.186Z","event":"run.start","task_id":"cube-power-sum-x-plus-inv-4","duration_s":40,"seed":-1698965954}
+{"t":"2026-08-17T13:33:05.653Z","event":"crosscheck","agreed":true,"generator":"52","verifier":"52"}
+{"t":"2026-08-17T13:33:05.714Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry3.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":1.645688,"total_frames":1405,"hurry_enter":1069}
+{"t":"2026-08-17T13:37:51.553Z","event":"capture.done","frames":1405,"font_size":56}
+{"t":"2026-08-17T13:40:14.627Z","event":"done","video":"output/posts/tasks/40s/cube-power-sum-x-plus-inv-4.mp4"}

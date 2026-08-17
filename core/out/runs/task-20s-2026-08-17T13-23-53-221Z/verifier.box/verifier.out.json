@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "sum-first-20-odd-numbers",
+      "script": "verifier.checks/sum-first-20-odd-numbers.py",
+      "computed": "400",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

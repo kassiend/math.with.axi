@@ -1,0 +1,15 @@
+{
+  "task_id": "clock-angle-3-30",
+  "duration_s": 20,
+  "structure_id": "clock-angle-half-hour",
+  "categories": ["clock-calendar"],
+  "description": "Angle between the clock hands",
+  "statement": "3:30",
+  "statement_latex": null,
+  "answer": "75°",
+  "answer_latex": "75^\\circ",
+  "solution_sketch": "At 3:30 the minute hand is at 180° (pointing at 6). The hour hand has drifted half an hour past 3, so it sits at 3.5 × 30° = 105°. The gap is 180° − 105° = 75°.",
+  "difficulty_rationale": "Naive route: read 3:30 as 'minute at 6, hour at 3' and answer 90° from the arc 3→6. That is the wrong-but-tempting number this puzzle is built around. Insight: the hour hand moves continuously at 0.5°/min, so by :30 it has slid to 105°. One subtraction gives 75°. The move (hour hand isn't stationary) is common knowledge, not memorised trivia, so it's findable cold in a few seconds — but the trap answer 90° is what most people say first.",
+  "check_script": "core/out/runs/task-20s-2026-08-17T13-26-11-628Z/generator.checks/clock-angle-3-30.py",
+  "nulls": []
+}

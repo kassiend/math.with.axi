@@ -12,8 +12,19 @@ export const FPS = 30;
 export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
-/** mas_chromo is 121 frames at 24 fps = 5.0417 s, which is 151.25 frames at 30 fps. */
-export const INTRO_FRAMES = 152;
+/**
+ * The greeting.
+ *
+ * mas_chromo is 121 frames at 24 fps = 5.0417 s of real time. Played at speed that is far too
+ * long for the front of a short-form post — five seconds before the puzzle appears is five
+ * seconds of people scrolling past. It is retimed instead of trimmed, so the whole wave still
+ * reads, just briskly.
+ */
+export const INTRO_SOURCE_SECONDS = 121 / 24;
+export const INTRO_SECONDS = 1.5;
+export const INTRO_FRAMES = Math.round(INTRO_SECONDS * FPS);           // 45
+export const INTRO_PLAYBACK_RATE = INTRO_SOURCE_SECONDS / INTRO_SECONDS; // ~3.36x
+
 export const HANDOFF_FRAMES = 24;
 export const CARD_IN_FRAMES = 14;
 export const HOLD_FRAMES = 15;

@@ -23,6 +23,8 @@ export type LessonPostProps = {
     src: string;
     /** Frame the mascot clip stops on. The clip is shorter than the intro when narration runs long. */
     clipFrames: number;
+    /** Retimes the greeting to ~1.5s; see shared/lesson-timeline.ts. */
+    playbackRate?: number;
     box: { left: number; top: number; width: number; height: number };
   };
   audio: {
@@ -34,7 +36,7 @@ export type LessonPostProps = {
 export const lessonPostDefaults: LessonPostProps = {
   runId: 'preview',
   capture: { publicPath: '', frames: 1, fps: 30, width: 1080, height: 1920 },
-  intro: { src: '', clipFrames: 0, box: { left: 0, top: 0, width: 0, height: 0 } },
+  intro: { src: '', clipFrames: 0, playbackRate: 1, box: { left: 0, top: 0, width: 0, height: 0 } },
   audio: { clips: [] },
 };
 
@@ -59,6 +61,7 @@ export const LessonPostVideo: React.FC<LessonPostProps> = ({ capture, intro, aud
                 src={staticFile(intro.src)}
                 transparent
                 muted
+                playbackRate={intro.playbackRate ?? 1}
                 style={{ position: 'absolute', ...intro.box, objectFit: 'fill' }}
               />
             </AbsoluteFill>

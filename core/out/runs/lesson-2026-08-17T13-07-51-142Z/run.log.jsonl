@@ -1,0 +1,6 @@
+{"t":"2026-08-17T13:17:51.354Z","event":"run.start","lesson_id":"multiply-by-11-two-digit","counter":2,"seed":182295015}
+{"t":"2026-08-17T13:17:51.773Z","event":"crosscheck","agreed":true,"generator":"1012","verifier":"1012"}
+{"t":"2026-08-17T13:17:51.773Z","event":"timeline","total_frames":1106,"total_seconds":36.867,"steps":["s1:6.24s","s2:7.84s","s3:7.44s","s4:7.6s"]}
+{"t":"2026-08-17T13:17:51.774Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-08-17T13:21:53.205Z","event":"capture.done","frames":1106}
+{"t":"2026-08-17T13:23:50.494Z","event":"done","video":"output/posts/lessons/multiply-by-11-two-digit.mp4","seconds":36.867}

@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "stage": "verification",
+  "problems": [
+    {
+      "side": "generator",
+      "error": "check script not found: /Users/kassiend_/Desktop/math.push/core/out/runs/task-20s-2026-08-17T13-28-30-950Z/core/out/runs/task-20s-2026-08-17T13-28-30-950Z/generator.checks/product-37-43.py"
+    }
+  ]
+}

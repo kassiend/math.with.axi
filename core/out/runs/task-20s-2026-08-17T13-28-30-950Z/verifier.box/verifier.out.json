@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "product-37-43",
+      "script": "verifier.checks/product-37-43.py",
+      "computed": "1591",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Statement '37 × 43 = ?' unambiguously specifies a product of two positive integers. Computed 37 * 43 = 1591 via SymPy Integer arithmetic, matching the stated answer exactly. The result is an exact integer in simplest form; sign is positive as expected; no branch ambiguity applies."
+}

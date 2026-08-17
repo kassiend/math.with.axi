@@ -1,0 +1,23 @@
+{
+  "task_id": "last-digit-3-pow-2026",
+  "duration_s": 20,
+  "structure_id": "remainder-cycle-power",
+  "categories": [
+    "divisibility-remainder"
+  ],
+  "description": null,
+  "statement": "Last digit of 3^2026",
+  "statement_latex": "\\text{Last digit of } 3^{2026}",
+  "answer": "9",
+  "answer_latex": null,
+  "nulls": [
+    {
+      "field": "description",
+      "reason": "single-line puzzle; the card falls back to 'Answer in the comments' as specified in §5.3"
+    },
+    {
+      "field": "answer_latex",
+      "reason": "answer '9' is a single digit; plain text suffices"
+    }
+  ]
+}

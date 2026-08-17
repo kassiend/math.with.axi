@@ -1,0 +1,17 @@
+{
+  "task_id": "product-37-43",
+  "duration_s": 20,
+  "structure_id": "product-symmetric-difference-of-squares",
+  "categories": ["arithmetic-shortcut"],
+  "description": null,
+  "statement": "37 × 43 = ?",
+  "statement_latex": "37 \\times 43 = \\;?",
+  "answer": "1591",
+  "answer_latex": "1591",
+  "solution_sketch": "37 and 43 are symmetric around 40: 37 = 40−3, 43 = 40+3. So 37×43 = (40−3)(40+3) = 40² − 3² = 1600 − 9 = 1591.",
+  "difficulty_rationale": "Naive route is 37×43 as two-digit long multiplication (37×40 + 37×3 = 1480 + 111), which is doable but usually blows past 20 s for an average adult without paper. The insight — spotting that both operands are 3 away from 40 — turns it into (40−3)(40+3) = 1600 − 9, one subtraction after one recognition step. The difference-of-squares identity is standard school algebra, so the insight is findable in the moment rather than recalled from a table.",
+  "check_script": "core/out/runs/task-20s-2026-08-17T13-28-30-950Z/generator.checks/product-37-43.py",
+  "nulls": [
+    {"field": "description", "reason": "single-line statement carries the whole puzzle; card falls back to the standard \"Answer in the comments\" title"}
+  ]
+}

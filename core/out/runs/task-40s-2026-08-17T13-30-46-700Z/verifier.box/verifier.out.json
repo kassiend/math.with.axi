@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "cube-power-sum-x-plus-inv-4",
+      "script": "verifier.checks/cube-power-sum-x-plus-inv-4.py",
+      "computed": "52",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

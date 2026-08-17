@@ -17,6 +17,22 @@
       "seconds": 30.667,
       "video": "output/posts/lessons/square-two-digit-ending-in-5.mp4",
       "run_dir": "out/runs/lesson-001"
+    },
+    {
+      "id": "lesson-multiply-by-11-two-digit",
+      "concept_slug": "multiply-by-11-two-digit",
+      "title": "Multiply by 11",
+      "tags": [
+        "mental-arithmetic",
+        "multiplication",
+        "shortcut"
+      ],
+      "counter": 2,
+      "status": "shipped",
+      "created_at": "2026-08-17T13:17:51.354Z",
+      "seconds": 36.867,
+      "video": "output/posts/lessons/multiply-by-11-two-digit.mp4",
+      "run_dir": "out/runs/lesson-2026-08-17T13-07-51-142Z"
     }
   ]
 }

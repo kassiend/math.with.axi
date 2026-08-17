@@ -1,0 +1,3 @@
+{"t":"2026-08-17T13:30:46.388Z","event":"run.start","task_id":"product-37-43","duration_s":20,"seed":1072973870}
+{"t":"2026-08-17T13:30:46.692Z","event":"crosscheck","agreed":false,"generator":null,"verifier":"1591"}
+{"t":"2026-08-17T13:30:46.692Z","event":"gate.closed","status":"failed","stage":"verification","problems":[{"side":"generator","error":"check script not found: /Users/kassiend_/Desktop/math.push/core/out/runs/task-20s-2026-08-17T13-28-30-950Z/core/out/runs/task-20s-2026-08-17T13-28-30-950Z/generator.checks/product-37-43.py"}]}

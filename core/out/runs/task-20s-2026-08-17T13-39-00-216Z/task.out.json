@@ -1,0 +1,18 @@
+{
+  "task_id": "last-digit-3-pow-2026",
+  "duration_s": 20,
+  "structure_id": "remainder-cycle-power",
+  "categories": ["divisibility-remainder"],
+  "description": null,
+  "statement": "Last digit of 3^2026",
+  "statement_latex": "\\text{Last digit of } 3^{2026}",
+  "answer": "9",
+  "answer_latex": null,
+  "solution_sketch": "Last digits of 3^n cycle as 3, 9, 7, 1 with period 4 (from 3^1=3, 3^2=9, 3^3=27, 3^4=81). Since 2026 = 4·506 + 2, the last digit is the second entry in the cycle, which is 9.",
+  "difficulty_rationale": "Naive route asks you to compute 3^2026, which is impossible mentally. The insight is that last digits of powers depend only on the exponent mod 4 — and the cycle 3, 9, 7, 1 falls out of writing 3, 9, 27, 81 in your head. 2026 mod 4 = 2 → second in the cycle → 9. The insight is reachable cold because everyone knows small powers of 3, and the cycle length is short enough to spot before the 20 seconds run out.",
+  "check_script": "core/out/runs/task-20s-2026-08-17T13-39-00-216Z/generator.checks/last-digit-3-pow-2026.py",
+  "nulls": [
+    {"field": "description", "reason": "single-line puzzle; the card falls back to 'Answer in the comments' as specified in §5.3"},
+    {"field": "answer_latex", "reason": "answer '9' is a single digit; plain text suffices"}
+  ]
+}

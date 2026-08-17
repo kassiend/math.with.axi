@@ -22,9 +22,10 @@ import path from 'node:path';
 import { captureTask, StatementDoesNotFit } from './stages/capture-task.mjs';
 import { crossCheck } from './lib/sympy.mjs';
 import * as tasksLedger from './lib/tasks-ledger.mjs';
+import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
 import { resolveBin, runTool, isWindows } from './lib/platform.mjs';
-import { buildTaskTimeline } from '../shared/task-timeline.ts';
+import { buildTaskTimeline, INTRO_PLAYBACK_RATE } from '../shared/task-timeline.ts';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -70,7 +71,7 @@ async function main() {
   }
 
   // ---- 2. Independent verification ---------------------------------------
-  const generatorScript = path.join(runDir, task.check_script);
+  const generatorScript = resolveRunPath(runDir, task.check_script, task.task_id);
   const verifierScript = path.join(runDir, 'verifier.box', 'verifier.checks', `${task.task_id}.py`);
   const cross = await crossCheck(task.task_id, generatorScript, verifierScript);
   log(run, 'crosscheck', { agreed: cross.agreed, generator: cross.generator.computed, verifier: cross.verifier.computed });
@@ -126,6 +127,7 @@ async function main() {
     intro: {
       src: 'mascot/mas_chromo.webm',
       endFrame: timeline.intro.end,
+      playbackRate: INTRO_PLAYBACK_RATE,
       box: { left: still.intro_video.left, top: still.intro_video.top,
              width: still.intro_video.width, height: still.intro_video.height },
     },
@@ -148,7 +150,11 @@ async function main() {
   // where the installed CLI is remotion.cmd and execFile cannot run a .cmd without a shell.
   runTool(resolveBin('remotion', { localBinDir: NODE_BIN }), [
     'render', path.join(CORE, 'video', 'index.ts'), 'Task', outFile,
-    '--props', propsFile, '--public-dir', PUBLIC, '--concurrency', '1', '--log', 'info',
+    '--props', propsFile, '--public-dir', PUBLIC, '--log', 'info',
+    // Remotion's default concurrency (half the cores). It was pinned to 1 out of caution about
+    // frame order, but each frame renders independently from the same props — the output is
+    // identical and the wall clock is several times shorter.
+    ...(process.env.AXI_RENDER_CONCURRENCY ? ['--concurrency', process.env.AXI_RENDER_CONCURRENCY] : []),
   ], { cwd: CORE, stdio: ['ignore', 'inherit', 'inherit'], maxBuffer: 1 << 24 });
 
   if (!fs.existsSync(outFile)) throw new Error(`remotion reported success but ${outFile} is missing`);
@@ -189,7 +195,10 @@ function pickAssets(seed) {
   const hurries = HURRY_POOL.filter((f) => fs.existsSync(path.join(PUBLIC, 'mascot', f)));
 
   return {
-    background: path.join(ASSETS, 'images', 'bg', pick(bgs, 'bg')),
+    // Rotated, not hashed. A hash over four files repeats the previous pick a quarter of the
+    // time and in practice looked like the background never changed; rotation guarantees
+    // consecutive posts differ and every file gets equal use.
+    background: path.join(ASSETS, 'images', 'bg', nextBackground(bgs, shippedCount())),
     startAudio: path.join(ASSETS, 'audio', 'start_audio', pick(starts, 'start')),
     midAudio: path.join(ASSETS, 'audio', 'mid_audio', pick(mids, 'mid')),
     tick: path.join(ASSETS, 'audio', 'sfx', 'tick.wav'),
@@ -253,6 +262,37 @@ function probeClipSeconds(file) {
     throw new Error(`could not determine the length of ${file}`);
   }
   return n / fps;
+}
+
+/**
+ * Locate the generator's check script.
+ *
+ * The payload's `check_script` is supposed to be relative to the run directory, but the agent is
+ * told the run directory as a repo-relative path and reasonably writes the whole thing. Joining
+ * that to the run directory produced a doubled path — `<run>/core/out/runs/<run>/...` — and the
+ * cross-check reported it as "check script not found", which reads like a disagreeing script
+ * rather than a broken path.
+ *
+ * A path is a path. Try the sensible interpretations rather than insisting on one.
+ */
+function resolveRunPath(runDir, declared, taskId) {
+  const candidates = [
+    declared && path.resolve(runDir, declared),
+    declared && path.resolve(ROOT, declared),
+    declared && path.resolve(CORE, declared),
+    path.join(runDir, 'generator.checks', `${taskId}.py`),
+  ].filter(Boolean);
+
+  const found = candidates.find((c) => fs.existsSync(c));
+  if (found) return found;
+
+  // Last resort: whatever .py the generator left in its checks directory.
+  const dir = path.join(runDir, 'generator.checks');
+  if (fs.existsSync(dir)) {
+    const py = fs.readdirSync(dir).filter((f) => f.endsWith('.py'));
+    if (py.length === 1) return path.join(dir, py[0]);
+  }
+  return candidates[0];
 }
 
 function hashSeed(s) {

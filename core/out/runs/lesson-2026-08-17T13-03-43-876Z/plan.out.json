@@ -1,0 +1,51 @@
+{
+  "lesson_id": "multiply-by-11-two-digit",
+  "counter": 2,
+  "concept_slug": "multiply-by-11-two-digit",
+  "tags": ["mental-arithmetic", "multiplication", "shortcut"],
+  "method_name": "Multiply by 11",
+  "applicability": "any two-digit integer N in [10, 99]; when the two digits sum to less than 10 the simple split-add-drop form gives the answer directly, and when the digits sum to 10 or more the middle digit carries 1 into the left digit",
+  "carry_case": "78 × 11: 7 + 8 = 15, so the middle is 5 and 1 carries → (7+1)(5)(8) = 858",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Multiply by 11",
+      "working": "20 × 11 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Split the digits, add them",
+      "working": "ab × 11 → a (a+b) b"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Drop the sum in the middle",
+      "working": "2 (2+0) 0 = 220"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "caveat",
+      "instruction": "If the digits sum to 10 or more, carry",
+      "working": "78 × 11 → 7 | 15 | 8 → 858"
+    }
+  ],
+  "worked_example": {
+    "operands": [20, 11],
+    "result": "220"
+  },
+  "sampling": {
+    "seed": 265429573,
+    "spec": {
+      "min": 10,
+      "max": 99,
+      "filter": {"min_digits": 2, "max_digits": 2}
+    },
+    "n": 1,
+    "draws": [20],
+    "notes": "Range [10,99] with two-digit presentation filter matches the declared applicability. Draw 20 was used as-is; the trick applies (digit sum 2 < 10, no carry) and the caveat step covers the carry branch on 78."
+  },
+  "nulls": []
+}

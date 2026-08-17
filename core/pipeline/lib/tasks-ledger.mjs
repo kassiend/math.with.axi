@@ -127,10 +127,20 @@ export function findCandidates(structureId, categories, durationS, ledger = load
   };
 }
 
-/** Rule 1 — exact statement, any duration, any status. Checked separately: it is unconditional. */
+/**
+ * Rule 1 — exact statement collision, either duration.
+ *
+ * Only SHIPPED entries block. This used to match any status, which meant a run that failed for
+ * an infrastructure reason poisoned its own retry: the failure recorded the statement, and the
+ * next attempt at the very same puzzle was rejected as a duplicate of something that never went
+ * out. Dedup exists to stop a puzzle being published twice, not to stop it being attempted twice.
+ *
+ * Repeated failure is handled where it belongs — by the attempt counter in the worker and by
+ * MAX_FAILED_ATTEMPTS on the shape.
+ */
 export function statementExists(statement, ledger = load()) {
   const norm = normaliseStatement(statement);
-  const hit = ledger.entries.find((e) => e.statement_norm === norm);
+  const hit = ledger.entries.find((e) => e.statement_norm === norm && e.status === 'shipped');
   return hit ? { duplicate: true, task_id: hit.task_id, duration_s: hit.duration_s } : { duplicate: false };
 }
 

@@ -1,0 +1,15 @@
+{
+  "task_id": "cube-power-sum-x-plus-inv-4",
+  "duration_s": 40,
+  "structure_id": "cube-power-sum-from-linear-reciprocal",
+  "categories": [
+    "system-of-equations"
+  ],
+  "description": "Find x³ + 1/x³",
+  "statement": "x + 1/x = 4",
+  "statement_latex": "x + \\dfrac{1}{x} = 4",
+  "answer": "52",
+  "answer_latex": "52",
+  "steps_expected": 2,
+  "nulls": []
+}

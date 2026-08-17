@@ -1,0 +1,15 @@
+{
+  "task_id": "sum-first-20-odd-numbers",
+  "duration_s": 20,
+  "structure_id": "sum-first-n-odd-numbers-square",
+  "categories": ["sequence", "arithmetic-shortcut"],
+  "description": "Add them up.",
+  "statement": "1 + 3 + 5 + … + 39 = ?",
+  "statement_latex": "1 + 3 + 5 + \\dots + 39 = \\;?",
+  "answer": "400",
+  "answer_latex": "400",
+  "solution_sketch": "The terms are the first 20 odd numbers (last term 39 = 2·20 − 1). The sum of the first n odd numbers is n², so the total is 20² = 400. You can spot the pattern from 1, 1+3=4, 1+3+5=9, 1+3+5+7=16 — consecutive perfect squares.",
+  "difficulty_rationale": "Naive route: add 20 numbers head-to-tail in under 20 s — not going to happen. The insight is that 1, 3, 5, … are the odd numbers and their running totals 1, 4, 9, 16 are perfect squares, so the sum of the first n is n². Counting the terms (last term 39 = 2·20 − 1 ⇒ n = 20) gives 20² = 400 in a single mental step. The pattern is reachable cold because the first few partial sums announce themselves, and there is exactly one arithmetic step after the insight.",
+  "check_script": "core/out/runs/task-20s-2026-08-17T13-23-53-221Z/generator.checks/sum-first-20-odd-numbers.py",
+  "nulls": []
+}

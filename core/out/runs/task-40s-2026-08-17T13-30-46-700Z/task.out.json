@@ -1,0 +1,16 @@
+{
+  "task_id": "cube-power-sum-x-plus-inv-4",
+  "duration_s": 40,
+  "structure_id": "cube-power-sum-from-linear-reciprocal",
+  "categories": ["system-of-equations"],
+  "description": "Find x³ + 1/x³",
+  "statement": "x + 1/x = 4",
+  "statement_latex": "x + \\dfrac{1}{x} = 4",
+  "answer": "52",
+  "answer_latex": "52",
+  "solution_sketch": "Cube the given: (x + 1/x)³ = x³ + 3(x + 1/x) + 1/x³. Isolate the target to get x³ + 1/x³ = (x + 1/x)³ − 3(x + 1/x) = 4³ − 3·4 = 64 − 12 = 52.",
+  "difficulty_rationale": "Naive route is to solve x² − 4x + 1 = 0 for x = 2 ± √3 and then cube the surd — doable but slow without paper. The insight is to cube the given identity and see that the cross-terms collapse to 3(x + 1/x). After that: 4³ = 64, 3·4 = 12, 64 − 12 = 52 — two cheap mental steps. Twenty seconds is not enough for an average adult to first recognise the identity and then execute the cube and the subtraction; the whole thing lands comfortably inside forty.",
+  "steps_expected": 2,
+  "check_script": "generator.checks/cube-power-sum-x-plus-inv-4.py",
+  "nulls": []
+}

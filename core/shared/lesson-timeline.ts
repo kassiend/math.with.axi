@@ -14,8 +14,18 @@ export const FPS = 30;
 export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
-/** mas_chromo is 121 frames at 24 fps = 5.0417 s, i.e. 151.25 frames at 30 fps. */
-export const INTRO_CLIP_FRAMES = 152;
+/**
+ * The greeting, retimed. See the note in task-timeline.ts — five seconds of waving before the
+ * lesson starts is five seconds of people scrolling past.
+ *
+ * A lesson's intro also carries narration, which usually outlasts 1.5 s. The clip finishes early
+ * and the page holds the mascot still in the same place until the hand-off, so nothing pops.
+ */
+export const INTRO_SOURCE_SECONDS = 121 / 24;
+export const INTRO_SECONDS = 1.5;
+export const INTRO_CLIP_FRAMES = Math.round(INTRO_SECONDS * FPS);        // 45
+export const INTRO_PLAYBACK_RATE = INTRO_SOURCE_SECONDS / INTRO_SECONDS; // ~3.36x
+
 export const HANDOFF_FRAMES = 24;
 export const CARD_IN_FRAMES = 14;
 export const HOLD_FRAMES = 15;
@@ -35,6 +45,8 @@ export interface LessonStepPhase extends Phase {
 export interface LessonTimeline {
   fps: number;
   intro: Phase;
+  /** Frame the mascot CLIP stops on. The intro phase can run longer if the narration does. */
+  introClipEnd: number;
   handoff: Phase;
   cardIn: Phase;
   steps: LessonStepPhase[];
@@ -73,7 +85,7 @@ export function buildLessonTimeline(introSeconds: number, steps: StepInput[]): L
 
   return {
     fps: FPS,
-    intro, handoff, cardIn, steps: phases, hold,
+    intro, introClipEnd: Math.min(INTRO_CLIP_FRAMES, intro.end), handoff, cardIn, steps: phases, hold,
     totalFrames,
     totalSeconds: Number((totalFrames / FPS).toFixed(3)),
     overCeiling: totalFrames > MAX_FRAMES,
