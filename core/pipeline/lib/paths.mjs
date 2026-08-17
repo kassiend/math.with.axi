@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { venvPython } from './platform.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
@@ -20,6 +21,9 @@ export const LOGS = path.join(OUT, 'logs');
 export const ASSETS = path.join(ROOT, 'assets');
 
 /** Interpreter for every SymPy check. Never the system python. */
-export const PYTHON = path.join(CORE, '.venv', 'bin', 'python');
+export const PYTHON = venvPython(path.join(CORE, '.venv'));
+
+/** Local CLI shims, so nothing depends on a global npm install. */
+export const NODE_BIN = path.join(CORE, 'node_modules', '.bin');
 
 export const runDir = (runId) => path.join(OUT, 'runs', runId);

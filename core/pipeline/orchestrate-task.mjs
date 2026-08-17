@@ -22,7 +22,8 @@ import path from 'node:path';
 import { captureTask, StatementDoesNotFit } from './stages/capture-task.mjs';
 import { crossCheck } from './lib/sympy.mjs';
 import * as tasksLedger from './lib/tasks-ledger.mjs';
-import { ASSETS, CORE, ROOT } from './lib/paths.mjs';
+import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
+import { resolveBin, runTool, isWindows } from './lib/platform.mjs';
 import { buildTaskTimeline } from '../shared/task-timeline.ts';
 
 const argv = process.argv.slice(2);
@@ -143,8 +144,10 @@ async function main() {
   const outFile = path.join(CORE, 'out', 'renders', `${run.id}.mp4`);
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
 
-  execFileSync('npx', [
-    'remotion', 'render', path.join(CORE, 'video', 'index.ts'), 'Task', outFile,
+  // The local shim rather than npx: npx is an extra resolution step that breaks on Windows,
+  // where the installed CLI is remotion.cmd and execFile cannot run a .cmd without a shell.
+  runTool(resolveBin('remotion', { localBinDir: NODE_BIN }), [
+    'render', path.join(CORE, 'video', 'index.ts'), 'Task', outFile,
     '--props', propsFile, '--public-dir', PUBLIC, '--concurrency', '1', '--log', 'info',
   ], { cwd: CORE, stdio: ['ignore', 'inherit', 'inherit'], maxBuffer: 1 << 24 });
 
@@ -264,6 +267,13 @@ function log(run, event, data) {
 
 /** A closed gate is a recorded outcome, not a crash. Nothing downstream runs. */
 function close(run, task, status, stage, problems) {
+  // A dry run must not mutate state. Recording a rejection during a rehearsal would count
+  // against future attempts on a topic that was never actually tried.
+  if (has('dry-run')) {
+    console.error(`\n[dry-run] gate would close at "${stage}" (${status}); nothing recorded.`);
+    process.exitCode = 2;
+    return 2;
+  }
   log(run, 'gate.closed', { status, stage, problems });
   fs.writeFileSync(path.join(run.dir, 'outcome.json'), JSON.stringify({ status, stage, problems }, null, 2));
   tasksLedger.record({

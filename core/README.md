@@ -191,3 +191,48 @@ domain of elementary mathematics.
 - **Visual design is scaffold-grade.** `web/src/styles.css` is a placeholder. The installed design
   skills are the tools for the real thing.
 - **No publishing stage.** The pipeline produces a file. Getting it onto Instagram is manual.
+
+---
+
+## Daily worker
+
+Produces one lesson, one 20-second task and one 40-second task, and delivers all three to a
+single Telegram chat as **documents** — sent as documents rather than video so Telegram does not
+re-encode the render.
+
+```bash
+cd core
+npm install
+npm run worker -- pair       # once: message the bot, it captures your chat id
+npm run worker -- status     # configuration, prerequisites, what has shipped
+npm run worker -- now        # one batch immediately, then exit
+npm run worker               # run forever, firing daily at WORKER_DAILY_AT
+```
+
+Configuration lives in `.env` at the repository root — see `.env.example`. Nothing is passed on
+the command line, so no secret ends up in shell history or in `ps`.
+
+**Delivery is locked to one chat.** `pair` records your private chat id; every send then checks
+both that the id matches *and* that the chat type is `private`. A group someone adds the bot to
+fails both checks, so a misconfiguration cannot leak a post.
+
+**Uniqueness is the ledgers' job, not the worker's.** `content/ledger.json` and
+`content/tasks-ledger.json` are consulted before anything renders: a repeated lesson concept, a
+repeated puzzle shape, or a shape reused across the two durations is rejected at the gate. The
+worker then retries — and the retry lands somewhere else precisely because the ledger has just
+recorded the rejection. A closed gate is a normal outcome, not an error.
+
+Posts are independent within a batch. One failing does not cancel the others; failures are
+reported in a message to the same chat.
+
+### Cross-platform
+
+No cron, no launchd, no Task Scheduler — the schedule lives in the worker process, because those
+three have nothing in common and a long-lived Node process is the one thing all three OSes start
+the same way. Everything that shells out is resolved per platform: the venv interpreter
+(`bin/python` vs `Scripts\python.exe`), npm CLI shims (`remotion` vs `remotion.cmd`, which
+`execFile` cannot run without a shell), and HTTP through Node's own `fetch` rather than `curl`.
+
+Still required on every platform: Node ≥ 20, Python 3 with the venv created, ffmpeg/ffprobe on
+PATH, and the Claude Code CLI signed in. `npm run worker -- status` checks all of them and says
+which is missing rather than failing mid-batch.

@@ -11,7 +11,8 @@ import { execFile } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { promisify } from 'node:util';
-import { CORE, RENDERS } from '../lib/paths.mjs';
+import { CORE, NODE_BIN, RENDERS } from '../lib/paths.mjs';
+import { resolveBin, runTool, isWindows } from '../lib/platform.mjs';
 
 const run_ = promisify(execFile);
 
@@ -40,7 +41,7 @@ export async function render(run, { capture, budget, mascot }) {
   fs.writeFileSync(propsFile, JSON.stringify(props, null, 2));
 
   const args = [
-    'remotion', 'render',
+    'render',
     path.join(CORE, 'video', 'index.ts'),
     COMPOSITION_ID,
     outFile,
@@ -51,7 +52,7 @@ export async function render(run, { capture, budget, mascot }) {
     '--log', 'info',
   ];
 
-  await run_('npx', args, { cwd: CORE, maxBuffer: 1 << 24 });
+  await run_(resolveBin('remotion', { localBinDir: NODE_BIN }), args, { cwd: CORE, maxBuffer: 1 << 24, shell: isWindows });
 
   if (!fs.existsSync(outFile)) throw new Error(`remotion reported success but ${outFile} is missing`);
   return { file: outFile, props: propsFile };

@@ -7,3 +7,6 @@
 {"t":"2026-08-17T12:09:54.057Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_greetings1.mp3","mid_audio":"hurry3.mp3","hurry_clip":"hurry-hurry5.webm","hurry_audio_s":1.645688,"total_frames":1405,"hurry_enter":917}
 {"t":"2026-08-17T12:14:42.478Z","event":"capture.done","frames":1405,"font_size":42}
 {"t":"2026-08-17T12:17:03.944Z","event":"done","video":"output/posts/tasks/40s/denest-9-plus-4-sqrt-5.mp4"}
+{"t":"2026-08-17T12:53:30.841Z","event":"run.start","task_id":"denest-9-plus-4-sqrt-5","duration_s":40,"seed":-1950632397}
+{"t":"2026-08-17T12:53:30.842Z","event":"gate.closed","status":"rejected","stage":"dedup","problems":[{"duplicate":true,"task_id":"denest-9-plus-4-sqrt-5","duration_s":40}]}
+{"t":"2026-08-17T12:54:42.929Z","event":"run.start","task_id":"denest-9-plus-4-sqrt-5","duration_s":40,"seed":-1950632397}

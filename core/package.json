@@ -17,7 +17,8 @@
     "sync:backgrounds": "node tools/sync-backgrounds.mjs",
     "smoke": "node tools/smoke.mjs",
     "typecheck": "tsc --noEmit",
-    "verify:env": "node tools/verify-env.mjs"
+    "verify:env": "node tools/verify-env.mjs",
+    "worker": "node worker/index.mjs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",

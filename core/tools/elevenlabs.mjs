@@ -52,7 +52,7 @@ const cacheKey = (text, voice, model, settings) =>
  * Synthesize one clip. Returns its path, measured duration, and whether the cache served it.
  * The duration is measured with ffprobe, never estimated — it becomes the step's on-screen length.
  */
-export function say(text, outFile, { settings = DEFAULT_SETTINGS, env = loadEnv() } = {}) {
+export async function say(text, outFile, { settings = DEFAULT_SETTINGS, env = loadEnv() } = {}) {
   if (!text || !text.trim()) throw new Error('refusing to synthesize empty text');
 
   fs.mkdirSync(CACHE_DIR, { recursive: true });
@@ -62,35 +62,28 @@ export function say(text, outFile, { settings = DEFAULT_SETTINGS, env = loadEnv(
   const cached = path.join(CACHE_DIR, `${hash}.mp3`);
 
   if (!fs.existsSync(cached)) {
-    const body = JSON.stringify({ text, model_id: env.model, voice_settings: settings });
-    const headerFile = path.join(CACHE_DIR, `${hash}.headers`);
-
-    // The key goes in through a curl config on stdin, never in argv — anything in argv is
-    // readable by `ps` for every process on the machine.
-    execFileSync('curl', [
-      '-sS', '-K', '-', '-X', 'POST', `${API}/text-to-speech/${env.voice}`,
-      '-H', 'content-type: application/json',
-      '-H', 'accept: audio/mpeg',
-      '-D', headerFile,
-      '--data-binary', body,
-      '-o', cached,
-    ], {
-      input: `header = "xi-api-key: ${env.key}"\n`,
-      stdio: ['pipe', 'pipe', 'pipe'],
+    // Node's own fetch, not curl: curl is not guaranteed on Windows, and this keeps the key out
+    // of argv, where `ps` would expose it to every process on the machine.
+    const res = await fetch(`${API}/text-to-speech/${env.voice}`, {
+      method: 'POST',
+      headers: {
+        'xi-api-key': env.key,
+        'content-type': 'application/json',
+        accept: 'audio/mpeg',
+      },
+      body: JSON.stringify({ text, model_id: env.model, voice_settings: settings }),
     });
 
-    const status = fs.existsSync(headerFile)
-      ? (fs.readFileSync(headerFile, 'utf8').match(/HTTP\/[\d.]+ (\d+)/) ?? [])[1]
-      : null;
-    fs.rmSync(headerFile, { force: true });
-
-    // A JSON error body lands in the mp3 slot and would otherwise be cached as "audio".
-    const head = fs.existsSync(cached) ? fs.readFileSync(cached).subarray(0, 1).toString() : '';
-    if (status !== '200' || head === '{') {
-      const detail = fs.existsSync(cached) ? fs.readFileSync(cached, 'utf8').slice(0, 300) : '(no body)';
-      fs.rmSync(cached, { force: true });
-      throw new Error(`ElevenLabs returned ${status ?? 'no status'}: ${detail}`);
+    if (!res.ok) {
+      throw new Error(`ElevenLabs returned ${res.status}: ${(await res.text()).slice(0, 300)}`);
     }
+
+    const buf = Buffer.from(await res.arrayBuffer());
+    // A JSON error body with a 200 would otherwise be cached as "audio" and fail much later.
+    if (buf.subarray(0, 1).toString() === '{') {
+      throw new Error(`ElevenLabs returned JSON where audio was expected: ${buf.toString('utf8').slice(0, 300)}`);
+    }
+    fs.writeFileSync(cached, buf);
   }
 
   const fromCache = fs.existsSync(outFile) && fs.readFileSync(outFile).equals(fs.readFileSync(cached));
@@ -108,11 +101,10 @@ export function say(text, outFile, { settings = DEFAULT_SETTINGS, env = loadEnv(
   return { file: outFile, seconds: Number(seconds.toFixed(3)), chars: text.length, cached: fromCache, hash };
 }
 
-export function quota(env = loadEnv()) {
-  const raw = execFileSync('curl', ['-sS', '-K', '-', `${API}/user/subscription`], {
-    input: `header = "xi-api-key: ${env.key}"\n`, encoding: 'utf8',
-  });
-  const j = JSON.parse(raw);
+export async function quota(env = loadEnv()) {
+  const res = await fetch(`${API}/user/subscription`, { headers: { 'xi-api-key': env.key } });
+  if (!res.ok) throw new Error(`ElevenLabs returned ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const j = await res.json();
   return {
     tier: j.tier,
     used: j.character_count,
@@ -128,9 +120,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   try {
     if (argv[0] === 'say') {
       const text = flag('text') ?? fs.readFileSync(flag('text-file'), 'utf8');
-      console.log(JSON.stringify(say(text, path.resolve(flag('out'))), null, 2));
+      console.log(JSON.stringify(await say(text, path.resolve(flag('out'))), null, 2));
     } else if (argv[0] === 'quota') {
-      console.log(JSON.stringify(quota(), null, 2));
+      console.log(JSON.stringify(await quota(), null, 2));
     } else {
       console.error('commands: say --text <t> --out <file> | say --text-file <f> --out <file> | quota');
       process.exit(2);
