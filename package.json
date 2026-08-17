@@ -9,6 +9,7 @@
     "status": "npm --prefix core run worker -- status",
     "verify:env": "npm --prefix core run verify:env",
     "setup": "npm --prefix core install && npm --prefix core run setup",
-    "setup:check": "npm --prefix core run setup:check"
+    "setup:check": "npm --prefix core run setup:check",
+    "desktop": "powershell -ExecutionPolicy Bypass -File desktop/build.ps1"
   }
 }

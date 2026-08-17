@@ -7,6 +7,9 @@
  *   npm run worker -- now       run one batch immediately, then exit
  *   npm run worker              run forever, firing once a day at WORKER_DAILY_AT
  *
+ * Add `--posts lesson` (or task20, task40, or a comma-separated list) to either run form to
+ * produce a subset. The Axi desktop app is a front end for exactly these commands.
+ *
  * Runs unchanged on macOS, Windows and Linux: no cron, no launchd, no Task Scheduler. The
  * schedule lives in this process because those three schedulers have nothing in common, and a
  * long-lived Node process is the one thing all three can start the same way.
@@ -240,12 +243,39 @@ async function cmdLoop(cfg) {
 
 // ---------------------------------------------------------------------------
 
+/**
+ * `--posts lesson` / `--posts task20,task40` — produce a subset of the configured posts.
+ *
+ * An override rather than a second source of truth: WORKER_POSTS still decides what a scheduled
+ * day contains, and this narrows one manual run. Unknown names are refused here instead of being
+ * skipped silently in runBatch, where a typo would read as "that post failed".
+ */
+function postsOverride(argv) {
+  const i = argv.indexOf('--posts');
+  if (i === -1) return null;
+  const raw = argv[i + 1];
+  if (!raw) throw new Error('--posts needs a value, e.g. --posts lesson');
+
+  const wanted = raw.split(',').map((s) => s.trim()).filter(Boolean);
+  const known = Object.keys(PRODUCERS);
+  const bad = wanted.filter((k) => !known.includes(k));
+  if (bad.length) throw new Error(`unknown post kind: ${bad.join(', ')} — expected ${known.join(', ')}`);
+  if (!wanted.length) throw new Error('--posts needs at least one kind');
+  return wanted;
+}
+
 async function main() {
-  const cmd = process.argv[2] ?? 'loop';
+  const argv = process.argv.slice(2);
+  const cmd = argv[0] ?? 'loop';
 
   let cfg;
   try {
     cfg = loadConfig();
+    const only = postsOverride(argv);
+    if (only) {
+      cfg = { ...cfg, posts: only };
+      log('posts.override', { posts: only });
+    }
   } catch (err) {
     console.error(`✗ ${err.message}`);
     return 1;
