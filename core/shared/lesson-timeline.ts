@@ -15,16 +15,20 @@ export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
 /**
- * The greeting, retimed. See the note in task-timeline.ts — five seconds of waving before the
- * lesson starts is five seconds of people scrolling past.
+ * The greeting, at the clip's own speed.
  *
- * A lesson's intro also carries narration, which usually outlasts 1.5 s. The clip finishes early
- * and the page holds the mascot still in the same place until the hand-off, so nothing pops.
+ * mas_chromo is 121 frames at 24 fps = 5.0417 s. It was previously squeezed into 1.5 s, which
+ * meant a 3.36x playback rate — the wave came out frantic rather than brisk. Retiming a gesture
+ * that was animated for one speed does not read as the same gesture faster, it reads as wrong,
+ * so the clip now plays at 1x and the intro is as long as the clip.
+ *
+ * A lesson's intro also carries narration. Whichever of the two is longer sets the phase length;
+ * if the narration wins, the clip holds its last frame in the same place, so nothing pops.
  */
 export const INTRO_SOURCE_SECONDS = 121 / 24;
-export const INTRO_SECONDS = 1.5;
-export const INTRO_CLIP_FRAMES = Math.round(INTRO_SECONDS * FPS);        // 45
-export const INTRO_PLAYBACK_RATE = INTRO_SOURCE_SECONDS / INTRO_SECONDS; // ~3.36x
+export const INTRO_SECONDS = INTRO_SOURCE_SECONDS;
+export const INTRO_CLIP_FRAMES = Math.round(INTRO_SECONDS * FPS);        // 151
+export const INTRO_PLAYBACK_RATE = 1;
 
 export const HANDOFF_FRAMES = 24;
 export const CARD_IN_FRAMES = 14;
