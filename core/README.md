@@ -194,6 +194,25 @@ domain of elementary mathematics.
 
 ---
 
+## Fresh clone — start here
+
+A clone contains no generated artifacts: no node_modules, no venv, no keyed mascot, no staged
+backgrounds, no web build. That is deliberate — the alternative is 2 GB of capture frames in
+git — but it means nothing renders until they are made.
+
+```bash
+npm run setup          # from the repository root; does all of it, in order
+npm run setup:check    # report what is missing, change nothing
+```
+
+It installs node dependencies, creates the Python venv with sympy, downloads Chromium for
+Playwright, syncs the agent definitions and backgrounds, keys the mascot clips, extracts the
+hand-off still, builds both pages, and copies `.env.example` to `.env` for you to fill in.
+
+Still needed on the machine beforehand: **Node 20+**, **Python 3**, **ffmpeg**, and the
+**Claude Code CLI** signed in. `npm run worker -- status` prints where it found each one, or
+how to install it if it did not.
+
 ## Daily worker
 
 Produces one lesson, one 20-second task and one 40-second task, and delivers all three to a

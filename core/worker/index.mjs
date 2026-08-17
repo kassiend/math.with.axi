@@ -108,8 +108,11 @@ async function cmdStatus(cfg) {
   console.log('Posts per run        ', cfg.posts.join(', '));
   console.log('Attempts per post    ', cfg.maxAttempts);
 
-  const missing = checkPrerequisites({ python: PYTHON, localBinDir: NODE_BIN });
-  console.log('Prerequisites        ', missing.length ? `MISSING: ${missing.join(', ')}` : 'ok');
+  const { checks, missing } = checkPrerequisites({ python: PYTHON, localBinDir: NODE_BIN });
+  console.log('\nPrerequisites');
+  for (const c of checks) {
+    console.log(`  ${c.ok ? '✓' : '✗'} ${c.name.padEnd(12)} ${c.ok ? c.path : 'NOT FOUND — ' + c.hint}`);
+  }
 
   const lessons = ledger.load().entries.filter((e) => e.status === 'shipped');
   const tasks = tasksLedger.load().entries.filter((e) => e.status === 'shipped');
@@ -136,6 +139,21 @@ async function cmdStatus(cfg) {
  * is better than a day with none, and the one that failed is reported rather than swallowed.
  */
 async function runBatch(cfg) {
+  // Checked here, not only in the scheduler loop. `now` used to skip this and go straight to the
+  // agents, so a missing CLI produced three identical failures carrying the shell's own error
+  // instead of one line saying what to install.
+  const { missing } = checkPrerequisites({ python: PYTHON, localBinDir: NODE_BIN });
+  if (missing.length) {
+    const detail = missing.map((m) => `• ${m.name} — ${m.hint}`).join('\n');
+    log('prerequisites.missing', { missing: missing.map((m) => m.name) });
+    console.error(`\n✗ cannot run: missing ${missing.map((m) => m.name).join(', ')}\n${detail}\n`);
+    try {
+      await tg.sendMessage(cfg.token, cfg.chatId,
+        `Cannot generate today — this machine is missing:\n${detail}`);
+    } catch { /* the whole point is that the machine is not set up; do not mask that */ }
+    return missing.map((m) => ({ kind: m.name, ok: false, error: 'not installed' }));
+  }
+
   await tg.assertOwnerPrivateChat(cfg.token, cfg.chatId);
 
   const results = [];
@@ -195,11 +213,13 @@ async function cmdLoop(cfg) {
   const at = `${String(cfg.dailyAt.hour).padStart(2, '0')}:${String(cfg.dailyAt.minute).padStart(2, '0')}`;
   log('worker.start', { daily_at: `${at} local`, posts: cfg.posts });
 
-  // Verified once at startup so a missing dependency is a clear message now rather than a failed
+  // Verified at startup so a missing dependency is a clear message now rather than a failed
   // batch at nine in the morning.
-  const missing = checkPrerequisites({ python: PYTHON, localBinDir: NODE_BIN });
+  const { missing } = checkPrerequisites({ python: PYTHON, localBinDir: NODE_BIN });
   if (missing.length) {
-    console.error(`✗ missing prerequisites: ${missing.join(', ')}`);
+    console.error('✗ missing prerequisites:');
+    for (const m of missing) console.error(`  • ${m.name} — ${m.hint}`);
+    console.error('\nRun `npm run worker -- status` for the full picture.');
     return 1;
   }
   await tg.assertOwnerPrivateChat(cfg.token, cfg.chatId);

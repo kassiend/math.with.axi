@@ -8,6 +8,7 @@
     "pipeline": "npm --prefix core run pipeline --",
     "status": "npm --prefix core run worker -- status",
     "verify:env": "npm --prefix core run verify:env",
-    "setup": "npm --prefix core install"
+    "setup": "npm --prefix core install && npm --prefix core run setup",
+    "setup:check": "npm --prefix core run setup:check"
   }
 }

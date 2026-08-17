@@ -23,15 +23,75 @@ export function venvPython(venvDir) {
 }
 
 /**
+ * Extensions the OS will treat as executable, in the order it tries them.
+ * On Windows this comes from PATHEXT; a CLI may be .cmd, .exe, .bat or .ps1 depending on how it
+ * was installed, and assuming one of them is how this broke.
+ */
+function executableExtensions() {
+  if (!isWindows) return [''];
+  const fromEnv = (process.env.PATHEXT ?? '.COM;.EXE;.BAT;.CMD').split(';').filter(Boolean);
+  // .ps1 is not in PATHEXT by default but some installers only drop a PowerShell shim.
+  return [...new Set([...fromEnv.map((e) => e.toLowerCase()), '.ps1'])];
+}
+
+/** Directories worth looking in beyond PATH, because installers do not always update it. */
+function extraSearchDirs() {
+  const home = process.env.USERPROFILE ?? process.env.HOME ?? '';
+  const dirs = [];
+  if (home) {
+    dirs.push(path.join(home, '.local', 'bin'));          // Claude Code native installer
+    dirs.push(path.join(home, '.claude', 'bin'));
+    dirs.push(path.join(home, 'bin'));
+  }
+  if (isWindows) {
+    if (process.env.APPDATA) dirs.push(path.join(process.env.APPDATA, 'npm'));   // npm -g shims
+    if (process.env.LOCALAPPDATA) {
+      dirs.push(path.join(process.env.LOCALAPPDATA, 'Programs', 'claude'));
+      dirs.push(path.join(process.env.LOCALAPPDATA, 'npm'));
+    }
+  } else {
+    dirs.push('/usr/local/bin', '/opt/homebrew/bin');
+  }
+  return dirs;
+}
+
+/**
+ * Find an executable on disk, the way the shell would — plus a few places installers use that
+ * they forget to add to PATH.
+ *
+ * Returns an absolute path, or null. A caller that gets null should say "not installed" rather
+ * than hand a bare name to the shell: on a Russian-locale Windows the shell's own "not
+ * recognized" error comes back in the OEM codepage and arrives as mojibake, which tells the user
+ * nothing at all.
+ */
+export function findExecutable(name) {
+  const exts = executableExtensions();
+  const sep = isWindows ? ';' : ':';
+  const dirs = [...(process.env.PATH ?? '').split(sep).filter(Boolean), ...extraSearchDirs()];
+
+  for (const dir of dirs) {
+    for (const ext of exts) {
+      const candidate = path.join(dir, name + ext);
+      try {
+        if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) return candidate;
+      } catch { /* unreadable directory on PATH — skip it */ }
+    }
+  }
+  return null;
+}
+
+/**
  * Resolve an npm-installed CLI to something execFile can actually run.
  * Prefers the local node_modules/.bin shim, which avoids depending on a global install at all.
  */
 export function resolveBin(name, { localBinDir } = {}) {
   if (localBinDir) {
-    const local = path.join(localBinDir, isWindows ? `${name}.cmd` : name);
-    if (fs.existsSync(local)) return local;
+    for (const ext of executableExtensions()) {
+      const local = path.join(localBinDir, name + ext);
+      if (fs.existsSync(local)) return local;
+    }
   }
-  return isWindows ? `${name}.cmd` : name;
+  return findExecutable(name) ?? name;
 }
 
 /**
@@ -59,15 +119,46 @@ export function haveTool(cmd, versionArg = '--version') {
   }
 }
 
+/** How to install each dependency, per platform. Printed with the failure, not buried in a README. */
+const INSTALL_HINTS = {
+  ffmpeg: isWindows
+    ? 'winget install Gyan.FFmpeg   (then reopen the terminal so PATH updates)'
+    : 'brew install ffmpeg   /   apt install ffmpeg',
+  ffprobe: 'ships with ffmpeg — installing ffmpeg gives you both',
+  claude: isWindows
+    ? 'irm https://claude.ai/install.ps1 | iex    (PowerShell), then reopen the terminal'
+    : 'curl -fsSL https://claude.ai/install.sh | bash',
+  python: isWindows
+    ? 'py -3 -m venv core\\.venv && core\\.venv\\Scripts\\pip install sympy'
+    : 'python3 -m venv core/.venv && core/.venv/bin/pip install sympy',
+};
+
 /**
- * Everything the pipeline shells out to. Checked before a scheduled run starts, so a missing
- * dependency is reported once at startup rather than three agent invocations later.
+ * Everything the pipeline shells out to, with where each one was found.
+ *
+ * Reported before any batch starts. Discovering a missing CLI three agent invocations in gives
+ * you the shell's own error, which on a non-English Windows arrives in the OEM codepage and is
+ * unreadable — the user sees mojibake instead of "Claude Code is not installed".
  */
 export function checkPrerequisites({ python, localBinDir } = {}) {
-  const missing = [];
-  if (!haveTool('ffmpeg', '-version')) missing.push('ffmpeg');
-  if (!haveTool('ffprobe', '-version')) missing.push('ffprobe');
-  if (!haveTool(resolveBin('claude', { localBinDir }))) missing.push('claude (Claude Code CLI)');
-  if (python && !fs.existsSync(python)) missing.push(`python venv at ${python}`);
-  return missing;
+  const checks = [];
+
+  for (const [name, versionArg] of [['ffmpeg', '-version'], ['ffprobe', '-version']]) {
+    const found = findExecutable(name);
+    checks.push({ name, ok: Boolean(found) && haveTool(found, versionArg), path: found, hint: INSTALL_HINTS[name] });
+  }
+
+  const claude = resolveBin('claude', { localBinDir });
+  const claudeFound = path.isAbsolute(claude) && fs.existsSync(claude);
+  checks.push({
+    name: 'claude', ok: claudeFound && haveTool(claude),
+    path: claudeFound ? claude : null, hint: INSTALL_HINTS.claude,
+  });
+
+  checks.push({
+    name: 'python venv', ok: Boolean(python) && fs.existsSync(python),
+    path: python && fs.existsSync(python) ? python : null, hint: INSTALL_HINTS.python,
+  });
+
+  return { checks, missing: checks.filter((c) => !c.ok) };
 }
