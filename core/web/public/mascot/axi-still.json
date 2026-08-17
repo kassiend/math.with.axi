@@ -1,0 +1,30 @@
+{
+  "source": "video/public/mascot/mas_chromo.webm",
+  "video": {
+    "w": 1920,
+    "h": 1080
+  },
+  "crop_bbox": [
+    653,
+    119,
+    1280,
+    1031
+  ],
+  "intro_video": {
+    "scale": 1.010526,
+    "width": 1940.21,
+    "height": 1091.37,
+    "left": -616.67,
+    "top": 108.15
+  },
+  "frame_rect": {
+    "h": 921.6,
+    "w": 633.6,
+    "x": 43.2,
+    "y": 228.4
+  },
+  "frame": {
+    "w": 720,
+    "h": 1280
+  }
+}

@@ -1,5 +1,23 @@
 {
   "version": 1,
   "note": "Daily-task ledger. Separate from ledger.json: a lesson is deduplicated by mathematical concept, a task by puzzle shape. Rules live in pipeline/lib/tasks-ledger.mjs — exact statement collision blocks outright; structure_id repeated within the last 10 shipped tasks of that duration (or reused across durations) blocks; primary category repeated within the last 3 blocks. structure_id is the load-bearing field: changing operands is not a new task.",
-  "entries": []
+  "entries": [
+    {
+      "task_id": "sqrt-12-times-27",
+      "duration_s": 20,
+      "structure_id": "radical-of-product-perfect-square",
+      "categories": [
+        "powers-roots",
+        "arithmetic-shortcut"
+      ],
+      "statement": "√(12 · 27) = ?",
+      "answer": "18",
+      "status": "shipped",
+      "created_at": "2026-08-17T09:52:03.906Z",
+      "seed": 409436602,
+      "video": "output/posts/tasks/20s/sqrt-12-times-27.mp4",
+      "run_dir": "out/runs/task-20s-001",
+      "statement_norm": "√(12*27)=?"
+    }
+  ]
 }

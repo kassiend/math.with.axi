@@ -13,8 +13,15 @@ export default defineConfig({
     emptyOutDir: true,
     assetsInlineLimit: 0,
     rollupOptions: {
+      // Two independent pages: the lesson stage and the daily-task card. Separate entries rather
+      // than one page with a mode flag — they share nothing but the capture contract, and a
+      // shared bundle would make each capture load the other's code.
+      input: {
+        index: path.resolve(__dirname, 'index.html'),
+        task: path.resolve(__dirname, 'task.html'),
+      },
       output: {
-        // One chunk, deterministic names — the capture loads exactly one script.
+        // Deterministic names — each capture loads exactly one script.
         manualChunks: undefined,
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].js',
