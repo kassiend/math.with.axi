@@ -17,6 +17,58 @@ This is what `video/mascot.json` points at.
 Everything below is why the earlier clips did not work, kept because the same mistakes are easy
 to repeat with the next asset.
 
+## Two rules that keep subjects opaque
+
+Both were learned by shipping a post where the mascot and the hurry clip were visibly
+see-through.
+
+### 1. Never key a clip that already has alpha
+
+Every clip in `assets/video/hurry/` was already matted by the artist. They were keyed anyway,
+because the alpha check read `pix_fmt`. **A VP9 alpha WebM stores alpha in a separate layer and
+still reports `pix_fmt=yuv420p`** — so a pix_fmt check reports "no alpha" about a file that has
+one, and the second key eats what was already cut.
+
+Detect with the tag, not the format:
+
+```bash
+ffprobe -v error -select_streams v:0 -show_entries stream_tags=alpha_mode \
+        -of default=nk=1:nw=1 clip.webm     # "1" -> already matted, do not key
+```
+
+`tools/chromakey.mjs` now checks this first and prints `already has alpha, passed through
+unkeyed`. `tools/probe-assets.mjs` reads the tag too, so it no longer mislabels these clips.
+
+This pitfall was documented here before it was acted on — the note about ffprobe's reporting was
+in this file while the tool was still keying matted clips. A documented trap is not a fixed one.
+
+### 2. Harden the alpha of anything that IS keyed
+
+`chromakey`'s `blend` produces an alpha *gradient across the whole subject*, not just its edge.
+Measured on the keyed `mas_chromo`:
+
+| | before hardening | after |
+|---|---|---|
+| fully transparent | 83.2 % | 83.6 % |
+| **semi-transparent** | **4.6 %** | **0.1 %** |
+| fully opaque | 9.1 % | 16.3 % |
+
+The subject occupies roughly 16 % of the frame, so before hardening barely half of the mascot was
+solid. Over the white task card that reads as a ghost.
+
+The curve, applied after the key and in `rgba` so alpha is not chroma-subsampled first:
+
+```
+a' = clip((a - 40) * 255 / 60, 0, 255)
+```
+
+Below 40 fully transparent, 100 and above fully opaque, the band between is the soft silhouette.
+On by default; `--alpha-floor` and `--alpha-width` tune it, `--no-harden` disables it.
+
+**Preview against white, not against dark.** Previews used to composite over the lesson's dark
+background, where translucency is invisible. They now use white, which is what these clips
+actually sit on.
+
 ## Two things that were wrong before anything could be judged
 
 **1. `chromakey` is the wrong filter for a white or black background.** It compares chroma only
@@ -41,8 +93,8 @@ correctly-keyed output "no-alpha". Check the tag, or check the preview.
 |---|---|---|---|
 | `mas_chromo.mp4` 1920×1080 24fps | `0x1b9e35` green | chromakey + despill | **Clean. In use.** |
 | `mas.mp4` / `mas2.mp4` 1280×720 24fps | `0xf4f5f0` near-white | colorkey | Superseded. See the limitation below. |
-| `hurry/papapa.webm`, `hurry/witchcat.webm`, `hurry/hurry.webm` 512×512 | `0x000000` black | colorkey | Key cleanly — the subjects have saturated outlines. Meme reaction clips, not Axi. |
-| `hurry/dumdum.webm` 512×512 | `0x000000` over a chalkboard | colorkey | Not keyable and not a mascot: a full-frame graphic, a kitten head over grey formula texture. Keying pure black correctly leaves the formula layer behind. Use as a background element or not at all. |
+| `hurry/*.webm` 512×512 | — | **passthrough** | All six are already matted (`alpha_mode=1`) and are never keyed. Pool: `hurry`, `hurry5`, `hurry6`, `papapa`, `witchcat`. |
+| `hurry/dumdum.webm` 512×512 | — | passthrough | Excluded from the pool, but not for keying reasons: its alpha deliberately carries a translucent sheet of formulas behind the kitten, which over the white card reads as a smudge rather than a sticker. |
 
 ## Why the white-background clips cannot be rescued
 

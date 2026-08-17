@@ -152,6 +152,19 @@ export function record(entry, { file = TASKS_LEDGER } = {}) {
   return entry.task_id;
 }
 
+/**
+ * Drop every row for a task_id. Used only when re-rendering a post that already shipped, so the
+ * rebuild replaces its row instead of stacking a second one. Not a general delete: removing a
+ * shipped topic to sneak it past dedup would defeat the whole ledger.
+ */
+export function remove(taskId, { file = TASKS_LEDGER } = {}) {
+  const ledger = load(file);
+  const before = ledger.entries.length;
+  ledger.entries = ledger.entries.filter((e) => e.task_id !== taskId);
+  save(ledger, file);
+  return before - ledger.entries.length;
+}
+
 // ---------------------------------------------------------------------------
 // CLI — the task generator calls this instead of reading the ledger itself.
 //   node core/pipeline/lib/tasks-ledger.mjs candidates '<structure_id>' '<cat,cat>' 20

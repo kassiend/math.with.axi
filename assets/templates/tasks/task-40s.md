@@ -203,14 +203,55 @@ exactly the image the footer shows.
 | property | value |
 |---|---|
 | box | x 224, y 752, w 270, h 270 |
-| source | random clip from `assets/video/hurry/`, keyed, looped if shorter than the audio |
+| source | random clip from `assets/video/hurry/`, **overlaid as-is**, looped if shorter than the audio |
 | enter | scale 0.6 → 1.0, opacity 0 → 1, 11 frames, ease-out |
 | exit | scale 1.0 → 0.6, opacity 1 → 0, 11 frames, ease-in |
 
-`hurry/dumdum.webm` is a full-frame graphic, not a keyable subject — exclude it. Usable pool:
-`hurry.webm`, `papapa.webm`, `witchcat.webm`.
+`hurry/dumdum.webm` is excluded from the random pool: its alpha deliberately carries a translucent
+sheet of formulas behind the subject, which over the white card reads as a smudge rather than a
+sticker. Usable pool: `hurry.webm`, `hurry5.webm`, `hurry6.webm`, `papapa.webm`, `witchcat.webm`.
 
-### 5.7 Fonts
+### 5.7 Alpha — the two rules that keep subjects opaque
+
+Both were learned by shipping a post where the mascot and the hurry cat were visibly see-through.
+
+**1. Never key a clip that already has alpha. Overlay it as-is.**
+
+Every clip in `assets/video/hurry/` is already matted. Running a key over an existing matte eats
+what the artist cut and leaves the subject translucent.
+
+Detection must use the **`alpha_mode` tag**, never `pix_fmt`:
+
+```bash
+ffprobe -v error -select_streams v:0 -show_entries stream_tags=alpha_mode \
+        -of default=nk=1:nw=1 clip.webm     # "1" means it already has alpha
+```
+
+A VP9 alpha WebM stores its alpha in a separate layer, so `pix_fmt` still reports `yuv420p`. A
+pix_fmt check says "no alpha" about a file that has one. `tools/chromakey.mjs` detects this and
+prints `already has alpha, passed through unkeyed`.
+
+**2. Harden the alpha of anything that IS keyed.**
+
+`chromakey`'s `blend` produces an alpha *gradient across the whole subject*, not just its edge. On
+`mas_chromo` that left only 9 % of the frame fully opaque against ~16 % of actual subject — barely
+half the mascot was solid, and over the white card it read as a ghost.
+
+The fix is a curve applied after the key, in `rgba` so alpha is not chroma-subsampled first:
+
+```
+a' = clip((a - 40) * 255 / 60, 0, 255)
+```
+
+Below 40 → fully transparent, 100 and above → fully opaque, the band between is the soft edge.
+Semi-transparent pixels drop from 4.6 % of the frame to 0.1 %. `tools/chromakey.mjs` applies this
+by default and reports `hardened=true`; `--alpha-floor` and `--alpha-width` tune it, `--no-harden`
+disables it.
+
+**Check previews against white, not against a dark ground.** A translucent subject is invisible
+on dark and obvious on white, and white is what these clips actually sit on.
+
+### 5.8 Fonts
 
 Inter, vendored via `@fontsource/inter` — never the system font, or the capture becomes
 machine-dependent and frame determinism is gone.

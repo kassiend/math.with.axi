@@ -30,8 +30,15 @@ const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d :
 const has = (n) => argv.includes(`--${n}`);
 
 const PUBLIC = path.join(CORE, 'video', 'public');
-/** dumdum is a full-frame graphic, not a keyable subject — see docs/mascot-keying.md. */
-const HURRY_POOL = ['hurry-hurry.webm', 'hurry-papapa.webm', 'hurry-witchcat.webm'];
+/**
+ * dumdum is excluded: its alpha deliberately includes a translucent sheet of formulas behind the
+ * subject, which over the white card reads as a smudge rather than a sticker. Every other clip is
+ * a clean cut-out. See docs/mascot-keying.md.
+ */
+const HURRY_POOL = [
+  'hurry-hurry.webm', 'hurry-hurry5.webm', 'hurry-hurry6.webm',
+  'hurry-papapa.webm', 'hurry-witchcat.webm',
+];
 
 // ---------------------------------------------------------------------------
 
@@ -48,10 +55,18 @@ async function main() {
   log(run, 'run.start', { task_id: task.task_id, duration_s: task.duration_s, seed });
 
   // ---- 1. Dedup ----------------------------------------------------------
-  const dup = tasksLedger.statementExists(task.statement);
-  if (dup.duplicate) return close(run, task, 'rejected', 'dedup', [dup]);
-  const cand = tasksLedger.findCandidates(task.structure_id, task.categories, task.duration_s);
-  if (cand.blocked.length) return close(run, task, 'rejected', 'dedup', cand.blocked);
+  // --rerender rebuilds a post that already shipped, after a rendering fix. Dedup exists to stop
+  // the same puzzle being *published twice*, not to stop the same file being rebuilt, so it is
+  // skipped here and the ledger row is replaced rather than appended.
+  const rerender = has('rerender');
+  if (!rerender) {
+    const dup = tasksLedger.statementExists(task.statement);
+    if (dup.duplicate) return close(run, task, 'rejected', 'dedup', [dup]);
+    const cand = tasksLedger.findCandidates(task.structure_id, task.categories, task.duration_s);
+    if (cand.blocked.length) return close(run, task, 'rejected', 'dedup', cand.blocked);
+  } else {
+    log(run, 'dedup.skipped', { reason: 'rerender of an existing post' });
+  }
 
   // ---- 2. Independent verification ---------------------------------------
   const generatorScript = path.join(runDir, task.check_script);
@@ -117,7 +132,7 @@ async function main() {
       src: `mascot/${picks.hurryClip}`,
       enter: timeline.hurry.enter,
       exit: timeline.hurry.exit,
-      clipSeconds: probeDuration(path.join(PUBLIC, 'mascot', picks.hurryClip)),
+      clipSeconds: probeClipSeconds(path.join(PUBLIC, 'mascot', picks.hurryClip)),
     },
     audio,
   };
@@ -140,6 +155,7 @@ async function main() {
   fs.mkdirSync(path.dirname(published), { recursive: true });
   fs.copyFileSync(outFile, published);
 
+  if (rerender) tasksLedger.remove(task.task_id);
   tasksLedger.record({
     task_id: task.task_id,
     duration_s: task.duration_s,
@@ -205,6 +221,35 @@ function probeDuration(file) {
   const s = Number(out);
   if (!Number.isFinite(s)) throw new Error(`could not measure ${file}`);
   return s;
+}
+
+/**
+ * Length of a video clip, measured rather than trusted.
+ *
+ * Several of the hurry WebMs report `format=duration 0.001` and no stream duration at all. Taken
+ * at face value that made <Loop> restart every frame, so the overlay sat frozen on frame 0 for
+ * its whole appearance — a defect that renders without erroring. When the container's answer is
+ * implausible, count the frames and divide by the frame rate.
+ */
+function probeClipSeconds(file) {
+  const fromFormat = Number(execFileSync('ffprobe', [
+    '-v', 'error', '-show_entries', 'format=duration',
+    '-of', 'default=noprint_wrappers=1:nokey=1', file,
+  ], { encoding: 'utf8' }).trim());
+  if (Number.isFinite(fromFormat) && fromFormat >= 0.05) return fromFormat;
+
+  const [rate, frames] = execFileSync('ffprobe', [
+    '-v', 'error', '-c:v', 'libvpx-vp9', '-select_streams', 'v:0', '-count_frames',
+    '-show_entries', 'stream=r_frame_rate,nb_read_frames', '-of', 'csv=p=0', file,
+  ], { encoding: 'utf8' }).trim().split(',');
+
+  const [num, den] = String(rate).split('/').map(Number);
+  const fps = den ? num / den : num;
+  const n = Number(frames);
+  if (!Number.isFinite(fps) || !fps || !Number.isFinite(n) || !n) {
+    throw new Error(`could not determine the length of ${file}`);
+  }
+  return n / fps;
 }
 
 function hashSeed(s) {

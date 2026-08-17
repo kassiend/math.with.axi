@@ -18,6 +18,9 @@ function probe(file) {
   const raw = execFileSync('ffprobe', [
     '-v', 'error',
     '-show_entries', 'stream=codec_type,codec_name,pix_fmt,width,height,r_frame_rate',
+    // alpha_mode is the ONLY reliable alpha signal for VP9: the alpha layer is stored separately
+    // and pix_fmt still reads yuv420p, so a pix_fmt check calls a matted clip "no alpha".
+    '-show_entries', 'stream_tags=alpha_mode',
     '-show_entries', 'format=duration,format_name',
     '-of', 'json', file,
   ], { encoding: 'utf8' });
@@ -31,9 +34,18 @@ function probe(file) {
     size: v ? `${v.width}x${v.height}` : null,
     fps: v?.r_frame_rate && v.r_frame_rate !== '0/0' ? v.r_frame_rate : null,
     pix_fmt: v?.pix_fmt ?? null,
-    has_alpha: v ? ALPHA_PIX_FMTS.includes(v.pix_fmt) : null,
+    has_alpha: v ? (alphaModeTag(v) === '1' || ALPHA_PIX_FMTS.includes(v.pix_fmt)) : null,
     duration: j.format?.duration ? Number(Number(j.format.duration).toFixed(3)) : null,
   };
+}
+
+/**
+ * WebM tag names are not case-normalised: the same encoder writes `alpha_mode` in one file and
+ * `ALPHA_MODE` in another. A case-sensitive lookup reports "no alpha" about half the pool.
+ */
+function alphaModeTag(stream) {
+  const key = Object.keys(stream.tags ?? {}).find((k) => k.toLowerCase() === 'alpha_mode');
+  return key ? stream.tags[key] : null;
 }
 
 function walk(dir) {
@@ -62,8 +74,11 @@ if (process.argv.includes('--json')) {
     );
   }
   const noAlpha = rows.filter((r) => r.has_alpha === false && /\.(mp4|mov|webm|mkv)$/i.test(r.file));
+  const withAlpha = rows.filter((r) => r.has_alpha === true && /\.(mp4|mov|webm|mkv)$/i.test(r.file));
   if (noAlpha.length) {
-    console.log(`\n${noAlpha.length} video asset(s) without alpha. Run "npm run chromakey" to key them,`);
-    console.log('or re-export the mascot with a real alpha channel (VP9 yuva420p / ProRes 4444).');
+    console.log(`\n${noAlpha.length} video asset(s) without alpha — "npm run chromakey" will key these.`);
+  }
+  if (withAlpha.length) {
+    console.log(`${withAlpha.length} video asset(s) already matted — chromakey passes these through untouched.`);
   }
 }
