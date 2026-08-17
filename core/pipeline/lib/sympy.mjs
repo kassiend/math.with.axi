@@ -37,13 +37,17 @@ export async function runCheck(scriptPath, { timeout = DEFAULT_TIMEOUT_MS, cwd }
   if (!pythonAvailable()) {
     return { ok: false, error: `venv interpreter missing at ${PYTHON} — run tools/verify-env.mjs` };
   }
-  if (!fs.existsSync(scriptPath)) {
-    return { ok: false, error: `check script not found: ${scriptPath}` };
+  // Resolved before use: the child runs with cwd set to the script's directory, so a relative
+  // path would be re-resolved against that directory and double up. The failure surfaced as a
+  // generic "check failed", which reads like a disagreeing script rather than a bad path.
+  const script = path.resolve(scriptPath);
+  if (!fs.existsSync(script)) {
+    return { ok: false, error: `check script not found: ${script}` };
   }
   try {
-    const { stdout } = await run(PYTHON, [scriptPath], {
+    const { stdout } = await run(PYTHON, [script], {
       timeout,
-      cwd: cwd ?? path.dirname(scriptPath),
+      cwd: cwd ?? path.dirname(script),
       maxBuffer: 1 << 20,
       // No network by convention; the checks are pure SymPy. Nothing here grants one.
       env: { PATH: '/usr/bin:/bin', PYTHONDONTWRITEBYTECODE: '1', PYTHONHASHSEED: '0' },
