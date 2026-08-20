@@ -1,7 +1,11 @@
 /**
  * Phase math for a daily-task post. Imported by BOTH the capture page and the Remotion
- * composition, so the two can never drift: the page draws the card at frame 176 because this
- * module says so, and Remotion stops the intro video at frame 151 for the same reason.
+ * composition, so the two can never drift.
+ *
+ * THERE IS NO MASCOT INTRO. The post opens on the card, with the puzzle already legible, and the
+ * greeting audio plays over it from frame 0. A mascot waving does not earn the first three
+ * seconds of a short-form post — the problem does, and every second spent before it is a second
+ * spent being scrolled past. The mascot still remains where it always was, in the card footer.
  *
  * Every visual is a pure function of the frame index. Nothing here reads a clock.
  *
@@ -12,24 +16,11 @@ export const FPS = 30;
 export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
-/**
- * The greeting.
- *
- * mas_chromo is 121 frames at 24 fps = 5.0417 s of real time. Played at speed that is far too
- * long for the front of a short-form post — five seconds before the puzzle appears is five
- * seconds of people scrolling past. It is retimed instead of trimmed, so the whole wave still
- * reads, just briskly.
- */
-export const INTRO_SOURCE_SECONDS = 121 / 24;
-export const INTRO_SECONDS = 1.5;
-export const INTRO_FRAMES = Math.round(INTRO_SECONDS * FPS);           // 45
-export const INTRO_PLAYBACK_RATE = INTRO_SOURCE_SECONDS / INTRO_SECONDS; // ~3.36x
-
-export const HANDOFF_FRAMES = 24;
-export const CARD_IN_FRAMES = 14;
+/** The card scales in from centre; short, because the puzzle should be readable immediately. */
+export const CARD_IN_FRAMES = 12;
 export const HOLD_FRAMES = 15;
 
-/** Background blur at rest, in px. Ramps up across the hand-off. */
+/** Background blur. Constant from frame 0 — there is no sharp phase to ramp from any more. */
 export const BLUR_PX = 14;
 
 /** The hurry overlay enters somewhere in this window of the countdown. */
@@ -40,8 +31,6 @@ export interface Phase { start: number; end: number }
 export interface TaskTimeline {
   fps: number;
   durationS: number;
-  intro: Phase;
-  handoff: Phase;
   cardIn: Phase;
   timer: Phase;
   hold: Phase;
@@ -70,9 +59,7 @@ export function buildTaskTimeline(
 ): TaskTimeline {
   const timerFrames = Math.round(durationS * FPS);
 
-  const intro = { start: 0, end: INTRO_FRAMES };
-  const handoff = { start: intro.end, end: intro.end + HANDOFF_FRAMES };
-  const cardIn = { start: handoff.end, end: handoff.end + CARD_IN_FRAMES };
+  const cardIn = { start: 0, end: CARD_IN_FRAMES };
   const timer = { start: cardIn.end, end: cardIn.end + timerFrames };
   const hold = { start: timer.end, end: timer.end + HOLD_FRAMES };
 
@@ -86,7 +73,7 @@ export function buildTaskTimeline(
   return {
     fps: FPS,
     durationS,
-    intro, handoff, cardIn, timer, hold,
+    cardIn, timer, hold,
     totalFrames: hold.end,
     tickFrames,
     hurry: { enter, exit: enter + audioFrames, audioFrames },

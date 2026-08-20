@@ -75,7 +75,6 @@ if (!payload) {
           frame={frame}
           timeline={timeline}
           background={payload.background}
-          still={payload.still}
           title={title}
           statementHtml={html}
           statementFontSize={fit.fontSize}

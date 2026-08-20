@@ -282,21 +282,19 @@ machine-dependent and frame determinism is gone.
 
 | phase | frames | seconds | what happens |
 |---|---|---|---|
-| **A** intro | 0 – 151 | 0.00 – 5.07 | `mas_chromo` keyed, full frame, over the random background. A random `assets/audio/start_audio/*.mp3` plays from frame 0 (2.2–3.2 s, then silence to the end of the intro). |
-| **B** hand-off | 152 – 175 | 5.07 – 5.87 | The **last frame** of `mas_chromo` freezes and animates — scale and translate — into the footer slot (§5.5). Background blur ramps 0 → 14 px over the same 24 frames. |
-| **C** card in | 176 – 189 | 5.87 – 6.33 | Card scales 0.85 → 1.00 and fades 0 → 1 from centre. Title, ring track and statement appear with it. Ring accent starts full. |
-| **D** timer | 190 – 1389 | 6.33 – 46.33 | 40.0 s countdown. Accent arc depletes to zero. |
-| **E** hold | 1390 – 1404 | 46.33 – 46.83 | Empty ring, statement still readable. Cut. |
+| **A** card in | 0 – 11 | 0.00 – 0.40 | Card scales 0.85 → 1.00 and fades in from centre over the blurred background. Title, ring track and statement are legible almost immediately. A random `assets/audio/start_audio/*.mp3` plays from frame 0. |
+| **B** timer | 12 – 1211 | 0.40 – 40.40 | 40.0 s countdown. Accent arc depletes to zero. |
+| **C** hold | 1212 – 1226 | — | Empty ring, statement still readable. Cut. |
 
-**Total: 1405 frames, 46.83 s.**
+**Total: 1227 frames, 40.90 s.**
 
-> Instagram Reels allows this comfortably, but 47 seconds is long for a puzzle post. If retention
-> data says otherwise, the lever is the intro (phase A can be trimmed to 2–3 s), not the timer —
-> the timer is the promise made to the viewer.
+> There is NO mascot intro. The post opens on the card, with the puzzle legible in the first
+> frame, and the greeting is audio over it. A mascot waving does not earn the opening seconds of
+> a short-form post; the problem does. The mascot still sits in the card footer.
 
 ### Ticking
 
-`assets/audio/sfx/tick.wav` at frames **190 + 30k** for k = 0…39 — forty ticks, one per second of
+`assets/audio/sfx/tick.wav` at frames **12 + 30k** for k = 0…39 — forty ticks, one per second of
 the countdown. No tick on the final frame.
 
 ### Hurry window
@@ -304,7 +302,7 @@ the countdown. No tick on the final frame.
 Entry frame is drawn from **60–80 % of the timer**, seeded and recorded:
 
 ```
-enter = 190 + round(1200 × u),  u ~ Uniform(0.60, 0.80)     // frames 910 – 1150
+enter = 12 + round(1200 × u),  u ~ Uniform(0.60, 0.80)     
 ```
 
 At `enter`: the hurry overlay scales in (§5.6) **and** a random `assets/audio/mid_audio/*.mp3`

@@ -282,17 +282,15 @@ machine-dependent, which breaks frame determinism.
 
 | phase | frames | seconds | what happens |
 |---|---|---|---|
-| **A** intro | 0 – 151 | 0.00 – 5.07 | `mas_chromo` keyed, full frame, over the random background. A random `assets/audio/start_audio/*.mp3` plays from frame 0 (they run 2.2–3.2 s and simply end; the intro continues silent). |
-| **B** hand-off | 152 – 175 | 5.07 – 5.87 | The **last frame** of `mas_chromo` freezes and animates — scale and translate — into the footer slot (§5.5). Background blur ramps 0 → 14 px over the same 24 frames. |
-| **C** card in | 176 – 189 | 5.87 – 6.33 | Card scales 0.85 → 1.00 and fades 0 → 1 from centre. Title, ring track and statement appear with it. Ring accent starts full. |
-| **D** timer | 190 – 789 | 6.33 – 26.33 | 20.0 s countdown. Accent arc depletes to zero. |
-| **E** hold | 790 – 804 | 26.33 – 26.83 | Empty ring, statement still readable. Cut. |
+| **A** card in | 0 – 11 | 0.00 – 0.40 | Card scales 0.85 → 1.00 and fades in from centre over the blurred background. Title, ring track and statement are legible almost immediately. A random `assets/audio/start_audio/*.mp3` plays from frame 0. |
+| **B** timer | 12 – 611 | 0.40 – 20.40 | 20.0 s countdown. Accent arc depletes to zero. |
+| **C** hold | 612 – 626 | — | Empty ring, statement still readable. Cut. |
 
-**Total: 805 frames, 26.83 s.**
+**Total: 627 frames, 20.90 s.**
 
 ### Ticking
 
-`assets/audio/sfx/tick.wav` at frames **190 + 30k** for k = 0…19 — twenty ticks, one per second of
+`assets/audio/sfx/tick.wav` at frames **12 + 30k** for k = 0…19 — twenty ticks, one per second of
 the countdown. No tick on the final frame.
 
 ### Hurry window
@@ -300,7 +298,7 @@ the countdown. No tick on the final frame.
 Entry frame is drawn from **60–80 % of the timer**, seeded and recorded:
 
 ```
-enter = 190 + round(600 × u),  u ~ Uniform(0.60, 0.80)     // frames 550 – 670
+enter = 12 + round(600 × u),  u ~ Uniform(0.60, 0.80)     
 ```
 
 At `enter`: the hurry overlay scales in (§5.6) **and** a random `assets/audio/mid_audio/*.mp3`

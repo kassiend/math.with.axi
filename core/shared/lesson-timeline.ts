@@ -15,20 +15,17 @@ export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
 /**
- * The greeting, retimed. See the note in task-timeline.ts — five seconds of waving before the
- * lesson starts is five seconds of people scrolling past.
+ * THERE IS NO MASCOT INTRO. The lesson opens on the card with the first step already legible,
+ * and the hook narration plays over it. A mascot waving does not earn the opening seconds of a
+ * short-form post; the question does. The mascot still stays in the card footer, where it was.
  *
- * A lesson's intro also carries narration, which usually outlasts 1.5 s. The clip finishes early
- * and the page holds the mascot still in the same place until the hand-off, so nothing pops.
+ * The hook still exists as AUDIO — it is the thing that has to catch someone in three seconds.
+ * It simply plays over the first step instead of over a wave.
  */
-export const INTRO_SOURCE_SECONDS = 121 / 24;
-export const INTRO_SECONDS = 1.5;
-export const INTRO_CLIP_FRAMES = Math.round(INTRO_SECONDS * FPS);        // 45
-export const INTRO_PLAYBACK_RATE = INTRO_SOURCE_SECONDS / INTRO_SECONDS; // ~3.36x
-
-export const HANDOFF_FRAMES = 24;
-export const CARD_IN_FRAMES = 14;
+export const CARD_IN_FRAMES = 12;
 export const HOLD_FRAMES = 15;
+
+/** Background blur. Constant from frame 0 — there is no sharp phase to ramp from any more. */
 export const BLUR_PX = 14;
 
 /** Hard ceiling from the brief: one minute. */
@@ -44,11 +41,9 @@ export interface LessonStepPhase extends Phase {
 
 export interface LessonTimeline {
   fps: number;
-  intro: Phase;
-  /** Frame the mascot CLIP stops on. The intro phase can run longer if the narration does. */
-  introClipEnd: number;
-  handoff: Phase;
   cardIn: Phase;
+  /** The spoken hook, played over the first step rather than over a mascot. */
+  hook: Phase;
   steps: LessonStepPhase[];
   hold: Phase;
   totalFrames: number;
@@ -63,21 +58,22 @@ export interface StepInput { stepId: string; seconds: number }
  * @param steps         measured duration of each step's narration clip, in order
  */
 export function buildLessonTimeline(introSeconds: number, steps: StepInput[]): LessonTimeline {
-  // The intro runs for whichever is longer: the mascot clip or the narration over it. If the
-  // narration outlasts the clip, the clip holds its last frame — which is the same still the
-  // hand-off then animates, so nothing jumps.
-  const introFrames = Math.max(INTRO_CLIP_FRAMES, Math.round(introSeconds * FPS));
+  const cardIn = { start: 0, end: CARD_IN_FRAMES };
 
-  const intro = { start: 0, end: introFrames };
-  const handoff = { start: intro.end, end: intro.end + HANDOFF_FRAMES };
-  const cardIn = { start: handoff.end, end: handoff.end + CARD_IN_FRAMES };
+  // The hook is spoken over the FIRST step, so the viewer reads the problem while hearing why it
+  // is interesting. It is a phase rather than a prepended silence because the audio clip is
+  // separate and has to be placed on the timeline.
+  const hookFrames = Math.max(1, Math.round(introSeconds * FPS));
+  const hook = { start: cardIn.end, end: cardIn.end + hookFrames };
 
   const phases: LessonStepPhase[] = [];
-  let cursor = cardIn.end;
+  let cursor = hook.start;
   steps.forEach((s, index) => {
     const frames = Math.max(1, Math.round(s.seconds * FPS));
-    phases.push({ index, stepId: s.stepId, seconds: s.seconds, start: cursor, end: cursor + frames });
-    cursor += frames;
+    // Step 0 stays on screen for the hook as well as for its own line.
+    const span = index === 0 ? frames + hookFrames : frames;
+    phases.push({ index, stepId: s.stepId, seconds: s.seconds, start: cursor, end: cursor + span });
+    cursor += span;
   });
 
   const hold = { start: cursor, end: cursor + HOLD_FRAMES };
@@ -85,7 +81,7 @@ export function buildLessonTimeline(introSeconds: number, steps: StepInput[]): L
 
   return {
     fps: FPS,
-    intro, introClipEnd: Math.min(INTRO_CLIP_FRAMES, intro.end), handoff, cardIn, steps: phases, hold,
+    cardIn, hook, steps: phases, hold,
     totalFrames,
     totalSeconds: Number((totalFrames / FPS).toFixed(3)),
     overCeiling: totalFrames > MAX_FRAMES,

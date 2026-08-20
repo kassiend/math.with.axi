@@ -1,15 +1,17 @@
 /**
  * Daily-task composition.
  *
- * The captured page supplies the background, the mascot hand-off and the card. Remotion adds the
- * two things a screenshot cannot carry — the video layers and the audio:
+ * The captured page supplies the background, the card and the mascot. Remotion adds the two
+ * things a screenshot cannot carry — the hurry clip and the audio:
  *
- *   1. the keyed intro clip, on top of the captured background, up to the hand-off
- *   2. the keyed hurry clip, during its window
- *   3. audio: one opener, one tick per second of countdown, one mid clip with the hurry overlay
+ *   1. the keyed hurry clip, during its window
+ *   2. audio: one opener, one tick per second of countdown, one mid clip with the hurry overlay
  *
- * Frame numbers come from shared/task-timeline.ts, the same module the page used, so the intro
- * cannot end on a different frame than the still begins on.
+ * There is no intro clip. The post opens on the card so the puzzle is legible immediately; the
+ * greeting is audio only, over the card.
+ *
+ * Frame numbers come from shared/task-timeline.ts, the same module the page used, so the hurry
+ * overlay cannot land on a frame the page did not draw.
  */
 import {
   AbsoluteFill, Audio, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame,
@@ -24,14 +26,6 @@ const DESIGN_H = 1280;
 export type TaskVideoProps = {
   runId: string;
   capture: { publicPath: string; frames: number; fps: number; width: number; height: number };
-  intro: {
-    src: string;
-    endFrame: number;
-    /** Retimes the greeting to ~1.5s; see shared/task-timeline.ts. */
-    playbackRate?: number;
-    /** Absolute CSS box, in design units, from tools/extract-mascot-still.mjs. */
-    box: { left: number; top: number; width: number; height: number };
-  };
   /** clipSeconds is the keyed clip's own length — the overlay loops it to cover the audio. */
   hurry: null | { src: string; enter: number; exit: number; clipSeconds: number };
   audio: {
@@ -46,12 +40,11 @@ export type TaskVideoProps = {
 export const taskVideoDefaults: TaskVideoProps = {
   runId: 'preview',
   capture: { publicPath: '', frames: 1, fps: 30, width: 1080, height: 1920 },
-  intro: { src: '', endFrame: 0, playbackRate: 1, box: { left: 0, top: 0, width: 0, height: 0 } },
   hurry: null,
   audio: { start: null, tick: null, tickFrames: [], mid: null, midFrame: null },
 };
 
-export const TaskVideo: React.FC<TaskVideoProps> = ({ capture, intro, hurry, audio }) => {
+export const TaskVideo: React.FC<TaskVideoProps> = ({ capture, hurry, audio }) => {
   const frame = useCurrentFrame();
   const scale = capture.width / DESIGN_W;
 
@@ -63,20 +56,6 @@ export const TaskVideo: React.FC<TaskVideoProps> = ({ capture, intro, hurry, aud
           can then use the same numbers the page and the template use. */}
       <AbsoluteFill style={{ transform: `scale(${scale})`, transformOrigin: 'top left',
                              width: DESIGN_W, height: DESIGN_H }}>
-        {intro.src && (
-          <Sequence from={0} durationInFrames={intro.endFrame}>
-            <AbsoluteFill>
-              <OffthreadVideo
-                src={staticFile(intro.src)}
-                transparent
-                muted
-                playbackRate={intro.playbackRate ?? 1}
-                style={{ position: 'absolute', ...intro.box, objectFit: 'fill' }}
-              />
-            </AbsoluteFill>
-          </Sequence>
-        )}
-
         {hurry && (
           // Inside a Sequence so the clip's own time starts at the entry frame. Without it,
           // OffthreadVideo reads absolute composition time — at frame 605 that seeks 20 s into a

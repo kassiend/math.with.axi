@@ -2,51 +2,41 @@
   "runId": "lesson-multiply-by-11-two-digit",
   "capture": {
     "publicPath": "captures/lesson-multiply-by-11-two-digit",
-    "frames": 1106,
+    "frames": 1080,
     "fps": 30,
     "width": 1080,
     "height": 1920
-  },
-  "intro": {
-    "src": "mascot/mas_chromo.webm",
-    "clipFrames": 152,
-    "box": {
-      "left": -618.82,
-      "top": 106.87,
-      "width": 1944.47,
-      "height": 1093.77
-    }
   },
   "audio": {
     "clips": [
       {
         "id": "intro",
         "src": "audio/lesson-multiply-by-11-two-digit/intro.mp3",
-        "from": 0,
+        "from": 12,
         "durationInFrames": 180
       },
       {
         "id": "s1",
         "src": "audio/lesson-multiply-by-11-two-digit/s1.mp3",
-        "from": 218,
+        "from": 192,
         "durationInFrames": 187
       },
       {
         "id": "s2",
         "src": "audio/lesson-multiply-by-11-two-digit/s2.mp3",
-        "from": 405,
+        "from": 379,
         "durationInFrames": 235
       },
       {
         "id": "s3",
         "src": "audio/lesson-multiply-by-11-two-digit/s3.mp3",
-        "from": 640,
+        "from": 614,
         "durationInFrames": 223
       },
       {
         "id": "s4",
         "src": "audio/lesson-multiply-by-11-two-digit/s4.mp3",
-        "from": 863,
+        "from": 837,
         "durationInFrames": 228
       }
     ]

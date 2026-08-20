@@ -103,22 +103,8 @@
       ],
       "statement": "Last digit of 3^2026",
       "answer": "9",
-      "status": "failed",
-      "created_at": "2026-08-17T13:40:55.211Z",
-      "failed_at": "verification",
-      "statement_norm": "lastdigitof3^2026"
-    },
-    {
-      "task_id": "last-digit-3-pow-2026",
-      "duration_s": 20,
-      "structure_id": "remainder-cycle-power",
-      "categories": [
-        "divisibility-remainder"
-      ],
-      "statement": "Last digit of 3^2026",
-      "answer": "9",
       "status": "shipped",
-      "created_at": "2026-08-17T13:58:02.642Z",
+      "created_at": "2026-08-20T17:11:49.821Z",
       "seed": -1174754027,
       "video": "output/posts/tasks/20s/last-digit-3-pow-2026.mp4",
       "run_dir": "out/runs/task-20s-2026-08-17T13-39-00-216Z",

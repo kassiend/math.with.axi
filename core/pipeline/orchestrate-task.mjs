@@ -25,7 +25,7 @@ import * as tasksLedger from './lib/tasks-ledger.mjs';
 import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
 import { resolveBin, runTool, isWindows } from './lib/platform.mjs';
-import { buildTaskTimeline, INTRO_PLAYBACK_RATE } from '../shared/task-timeline.ts';
+import { buildTaskTimeline } from '../shared/task-timeline.ts';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -86,8 +86,6 @@ async function main() {
   log(run, 'picks', { ...relPicks(picks), hurry_audio_s: hurryAudioSeconds,
                       total_frames: timeline.totalFrames, hurry_enter: timeline.hurry.enter });
 
-  const still = JSON.parse(fs.readFileSync(path.join(CORE, 'web', 'public', 'mascot', 'axi-still.json'), 'utf8'));
-
   if (has('dry-run')) {
     log(run, 'dry-run', { note: 'gates passed; capture and render skipped' });
     return 0;
@@ -102,7 +100,6 @@ async function main() {
       ...task,
       seed,
       background: path.basename(picks.background),
-      still,
       hurry_audio_seconds: hurryAudioSeconds,
     }, {
       onProgress: (done, total, ms) =>
@@ -124,13 +121,6 @@ async function main() {
     runId: run.id,
     capture: { publicPath: shot.publicPath, frames: shot.frames, fps: shot.fps,
                width: shot.width, height: shot.height },
-    intro: {
-      src: 'mascot/mas_chromo.webm',
-      endFrame: timeline.intro.end,
-      playbackRate: INTRO_PLAYBACK_RATE,
-      box: { left: still.intro_video.left, top: still.intro_video.top,
-             width: still.intro_video.width, height: still.intro_video.height },
-    },
     hurry: {
       src: `mascot/${picks.hurryClip}`,
       enter: timeline.hurry.enter,

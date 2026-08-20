@@ -1,32 +1,24 @@
 /**
  * Lesson post composition.
  *
- * The captured page supplies the background, the mascot hand-off and the card. Remotion adds what
- * a screenshot cannot carry:
+ * The captured page supplies the background, the card and the mascot. Remotion adds what a
+ * screenshot cannot carry:
  *
- *   1. the keyed intro clip, over the captured background, up to the hand-off
- *   2. the narration — one ElevenLabs clip per step, laid end to end at their measured lengths
+ *   the narration — one ElevenLabs clip per step, laid end to end at their measured lengths.
+ *
+ * There is no intro clip. The lesson opens on the card with the first step legible; the hook is
+ * audio only, spoken over that first step.
  *
  * No stopwatch, no hurry overlay, no ticking. A lesson has no time pressure.
  *
- * Frame numbers come from shared/lesson-timeline.ts, the same module the page used, so the intro
- * cannot end on a different frame than the still begins on.
+ * Frame numbers come from shared/lesson-timeline.ts, the same module the page used, so a clip
+ * cannot land on a frame the page did not draw.
  */
-import { AbsoluteFill, Audio, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from 'remotion';
-
-const DESIGN_W = 720;
+import { AbsoluteFill, Audio, Img, Sequence, staticFile, useCurrentFrame } from 'remotion';
 
 export type LessonPostProps = {
   runId: string;
   capture: { publicPath: string; frames: number; fps: number; width: number; height: number };
-  intro: {
-    src: string;
-    /** Frame the mascot clip stops on. The clip is shorter than the intro when narration runs long. */
-    clipFrames: number;
-    /** Retimes the greeting to ~1.5s; see shared/lesson-timeline.ts. */
-    playbackRate?: number;
-    box: { left: number; top: number; width: number; height: number };
-  };
   audio: {
     /** Narration clips in order: the intro first, then one per step. */
     clips: Array<{ id: string; src: string; from: number; durationInFrames: number }>;
@@ -36,38 +28,15 @@ export type LessonPostProps = {
 export const lessonPostDefaults: LessonPostProps = {
   runId: 'preview',
   capture: { publicPath: '', frames: 1, fps: 30, width: 1080, height: 1920 },
-  intro: { src: '', clipFrames: 0, playbackRate: 1, box: { left: 0, top: 0, width: 0, height: 0 } },
   audio: { clips: [] },
 };
 
-export const LessonPostVideo: React.FC<LessonPostProps> = ({ capture, intro, audio }) => {
+export const LessonPostVideo: React.FC<LessonPostProps> = ({ capture, audio }) => {
   const frame = useCurrentFrame();
-  const scale = capture.width / DESIGN_W;
 
   return (
     <AbsoluteFill style={{ backgroundColor: '#000' }}>
       <CaptureLayer publicPath={capture.publicPath} frames={capture.frames} frame={frame} />
-
-      {/* Design-unit coordinate space, scaled up to the render resolution once, so everything
-          below uses the same numbers as the page and the template. */}
-      <AbsoluteFill style={{
-        transform: `scale(${scale})`, transformOrigin: 'top left',
-        width: DESIGN_W, height: capture.height / scale,
-      }}>
-        {intro.src && intro.clipFrames > 0 && (
-          <Sequence from={0} durationInFrames={intro.clipFrames}>
-            <AbsoluteFill>
-              <OffthreadVideo
-                src={staticFile(intro.src)}
-                transparent
-                muted
-                playbackRate={intro.playbackRate ?? 1}
-                style={{ position: 'absolute', ...intro.box, objectFit: 'fill' }}
-              />
-            </AbsoluteFill>
-          </Sequence>
-        )}
-      </AbsoluteFill>
 
       {audio.clips.map((c) => (
         <Sequence key={c.id} from={c.from} durationInFrames={c.durationInFrames}>

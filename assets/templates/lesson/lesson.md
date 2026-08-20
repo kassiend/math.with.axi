@@ -317,16 +317,22 @@ past its allowance — instruction max 2 lines, working max 3. **If either still
 
 | phase | frames | what happens |
 |---|---|---|
-| **A** intro | 0 → `max(152, intro_audio)` | `mas_chromo` keyed over the background, **intro narration from ElevenLabs** plays from frame 0. If the narration outlasts the clip, the clip holds its last frame. |
-| **B** hand-off | 24 frames | Last frame of `mas_chromo` freezes and animates into the footer slot; background blur ramps 0 → 14 px. |
-| **C** card in | 14 frames | Card scales 0.85 → 1.00, fades in from centre. |
-| **D** steps | Σ clip durations | Each step holds for exactly its audio clip's measured length. Cross-fade 8 frames between steps; text swaps, title and footer never move. |
-| **E** hold | 15 frames | Last step stays readable. Cut. |
+| **A** card in | 12 | Card scales 0.85 → 1.00 and fades in from centre over the blurred background, already showing **step 1**. |
+| **B** hook | length of the intro clip | The spoken hook plays *over step 1*, so the viewer reads the problem while hearing why it matters. |
+| **C** steps | Σ clip durations | Each step holds for exactly its audio clip's measured length. Cross-fade 8 frames between steps; title and footer never move. |
+| **D** hold | 15 frames | Last step stays readable. Cut. |
+
+**There is NO mascot intro.** The lesson opens on the card. A mascot waving does not earn the
+opening seconds of a short-form post — the question does, and the first three seconds are the
+whole of retention. The mascot still sits in the card footer, where it always ended up anyway.
+
+**The hook survives as audio.** It is still the first thing heard, still written to catch someone
+in three seconds; it simply plays over the first step instead of over a wave.
 
 **No stopwatch, no hurry overlay.** Those belong to the task format; a lesson has no time pressure
 and adding one would tell the viewer to rush the one thing they should not.
 
-Pre-recorded `assets/audio/start_audio/*` is **not used** — the intro voice is generated with the
+Pre-recorded `assets/audio/start_audio/*` is **not used** — the hook voice is generated with the
 rest of the narration so it is one performance.
 
 ### 5.5 Hard ceiling
