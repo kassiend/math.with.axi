@@ -44,8 +44,35 @@ export function loadEnv() {
       'Until it is, stories must source every image from Wikimedia Commons or ship without one.'
     );
   }
-  return { key, model: env.GEMINI_IMAGE_MODEL || 'gemini-2.5-flash-image' };
+  return { key, model: env.GEMINI_IMAGE_MODEL || DEFAULT_MODEL };
 }
+
+/**
+ * Default model. gemini-2.5-flash-image at $0.039/image: on the generateContent path, widely
+ * available, and cheap enough that a $25 balance covers roughly 200 stories at three images each.
+ *
+ * Cheaper options exist and both work through this tool — see the table in
+ * assets/templates/stories/story.md §8. Switch by setting GEMINI_IMAGE_MODEL.
+ */
+export const DEFAULT_MODEL = 'gemini-2.5-flash-image';
+
+/** Published price per generated image, for the cost line in the run log. */
+export const PRICE_PER_IMAGE = {
+  'imagen-4.0-fast-generate-001': 0.02,
+  'imagen-4.0-generate-001': 0.04,
+  'imagen-4.0-ultra-generate-001': 0.06,
+  'gemini-3.1-flash-lite-image': 0.0336,
+  'gemini-2.5-flash-image': 0.039,
+  'gemini-3.1-flash-image': 0.067,
+  'gemini-3-pro-image': 0.134,
+};
+
+/**
+ * Imagen and Gemini image models sit on DIFFERENT endpoints with different request and response
+ * shapes — `:predict` with `instances` for Imagen, `:generateContent` with `contents` for Gemini.
+ * Handled here so the choice of model stays a one-line setting rather than a code change.
+ */
+const isImagen = (model) => /^imagen-/i.test(model);
 
 export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
   if (!prompt?.trim()) throw new Error('refusing to generate from an empty prompt');
@@ -61,22 +88,35 @@ export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
   const cached = path.join(CACHE_DIR, `${hash}.png`);
 
   if (!fs.existsSync(cached)) {
-    const res = await fetch(`${API}/${env.model}:generateContent?key=${env.key}`, {
+    const imagen = isImagen(env.model);
+    const url = `${API}/${env.model}:${imagen ? 'predict' : 'generateContent'}?key=${env.key}`;
+    const payload = imagen
+      ? { instances: [{ prompt }], parameters: { sampleCount: 1, aspectRatio: '1:1' } }
+      : { contents: [{ parts: [{ text: prompt }] }] };
+
+    const res = await fetch(url, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+      body: JSON.stringify(payload),
     });
-    if (!res.ok) throw new Error(`Gemini returned ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    if (!res.ok) throw new Error(`${env.model} returned ${res.status}: ${(await res.text()).slice(0, 300)}`);
 
     const body = await res.json();
-    const part = body?.candidates?.[0]?.content?.parts?.find((p) => p.inlineData?.data);
-    if (!part) throw new Error(`Gemini returned no image: ${JSON.stringify(body).slice(0, 300)}`);
-    fs.writeFileSync(cached, Buffer.from(part.inlineData.data, 'base64'));
+    const b64 = imagen
+      ? body?.predictions?.[0]?.bytesBase64Encoded
+      : body?.candidates?.[0]?.content?.parts?.find((p) => p.inlineData?.data)?.inlineData?.data;
+    if (!b64) throw new Error(`${env.model} returned no image: ${JSON.stringify(body).slice(0, 300)}`);
+    fs.writeFileSync(cached, Buffer.from(b64, 'base64'));
   }
 
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.copyFileSync(cached, outFile);
-  return { file: outFile, bytes: fs.statSync(outFile).size, hash, generated: true, prompt };
+  return {
+    file: outFile, bytes: fs.statSync(outFile).size, hash, generated: true, prompt,
+    model: env.model,
+    // Recorded so a run's cost is visible in its own log rather than discovered on a bill.
+    usd: PRICE_PER_IMAGE[env.model] ?? null,
+  };
 }
 
 /** Is generation available at all? Used to fail a run early rather than mid-way. */

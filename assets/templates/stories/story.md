@@ -208,7 +208,20 @@ node core/tools/gemini-image.mjs generate "<prompt>" --out <run>/images/i2.png
 > presented as a historical fact — the visual form of the fabrication §3.3 forbids everywhere
 > else. Real people come from Commons, or the story runs without a portrait.
 
-Generation may be unavailable — the API key is supplied separately and `gemini-image.mjs check`
+**Cost.** Each generated image is billed. Published prices, Aug 2026:
+
+| model | per image | note |
+|---|---|---|
+| `imagen-4.0-fast-generate-001` | $0.020 | cheapest; strong on photoreal scenes |
+| `gemini-3.1-flash-lite-image` | $0.0336 | newest cheap tier |
+| **`gemini-2.5-flash-image`** | **$0.039** | **default** — proven, best instruction-following |
+| `imagen-4.0-generate-001` | $0.040 | |
+| `gemini-3-pro-image` | $0.134 | overkill for a 350×294 card slot |
+
+The card shows images at 350 × 294 design px, so resolution above 1K buys nothing visible. Keep
+generated images to what the story genuinely needs — two or three — rather than one per beat.
+
+Generation may be unavailable — the key is supplied separately and `gemini-image.mjs check`
 reports it. If it is unavailable, say so in `nulls[]` and design around what Commons has. Do not
 ship a placeholder.
 
