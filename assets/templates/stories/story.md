@@ -231,6 +231,11 @@ Check the running total:
 node core/tools/gemini-image.mjs cost          # spend so far against a $25 budget
 ```
 
+Generated images come back **4:3** (1200 × 896 observed). Left unset the model returns landscape
+(1408 × 768), and the card slot is 350 × 294 — `object-fit: cover` would then discard most of the
+frame, so the composition the prompt asked for is not the one that ships. Write prompts for a
+4:3 frame with the subject centred and margins to spare.
+
 Generation may be unavailable — the key is supplied separately and `gemini-image.mjs check`
 reports it. If it is unavailable, say so in `nulls[]` and design around what Commons has. Do not
 ship a placeholder.

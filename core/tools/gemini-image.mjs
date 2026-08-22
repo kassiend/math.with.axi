@@ -76,6 +76,16 @@ export const PRICE_PER_IMAGE = {
  */
 const isImagen = (model) => /^imagen-/i.test(model);
 
+/**
+ * Aspect ratio of generated images.
+ *
+ * Left unset, Gemini returns landscape (1408x768 observed), and the card slot is 350x294 design
+ * px — a ratio of about 1.19. `object-fit: cover` would then throw away most of a landscape
+ * frame, so the composition the prompt asked for is not the composition that ships. 4:3 is the
+ * closest supported ratio to the slot, and crops least.
+ */
+export const ASPECT_RATIO = '4:3';
+
 export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
   if (!prompt?.trim()) throw new Error('refusing to generate from an empty prompt');
   if (REAL_PERSON_MARKERS.some((re) => re.test(prompt))) {
@@ -94,8 +104,11 @@ export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
     const imagen = isImagen(env.model);
     const url = `${API}/${env.model}:${imagen ? 'predict' : 'generateContent'}?key=${env.key}`;
     const payload = imagen
-      ? { instances: [{ prompt }], parameters: { sampleCount: 1, aspectRatio: '1:1' } }
-      : { contents: [{ parts: [{ text: prompt }] }] };
+      ? { instances: [{ prompt }], parameters: { sampleCount: 1, aspectRatio: ASPECT_RATIO } }
+      : {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { imageConfig: { aspectRatio: ASPECT_RATIO } },
+        };
 
     const res = await fetch(url, {
       method: 'POST',
@@ -121,8 +134,9 @@ export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
   return {
     file: outFile, bytes: fs.statSync(outFile).size, hash, generated: true, prompt,
     model: env.model,
-    // Recorded so a run's cost is visible in its own log rather than discovered on a bill.
-    usd: PRICE_PER_IMAGE[env.model] ?? null,
+    // What THIS call cost. A cache hit is free; reporting the list price would let a caller
+    // summing these figures double-count an image it never paid for.
+    usd: wasCached ? 0 : (PRICE_PER_IMAGE[env.model] ?? null),
   };
 }
 
