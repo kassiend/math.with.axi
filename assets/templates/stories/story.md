@@ -50,10 +50,14 @@ same isolation boundary as everywhere else, `core/agents/ISOLATION.md`.
   "title":        "Who is Euler?",       // the card headline, English, <= 3 lines
 
   "beats": [                             // four, in this order. See §5
-    { "beat": "hook",      "narration": "...", "display": "...", "visual": "image|formula|shape|none" },
-    { "beat": "turn",      "narration": "...", "display": "...", "visual": "..." },
+    { "beat": "hook",      "narration": "...", "display": "...",
+      "visual": "image|formula|shape|none",
+      "image_id": "i1" },                // REQUIRED when visual is "image" — which image.
+                                         // Omitted, images are handed out in order and a beat
+                                         // may get one that does not match what it says.
+    { "beat": "turn",      "narration": "...", "display": "...", "visual": "image", "image_id": "i2" },
     { "beat": "mechanism", "narration": "...", "display": "...", "visual": "formula" },
-    { "beat": "payoff",    "narration": "...", "display": "...", "visual": "..." }
+    { "beat": "payoff",    "narration": "...", "display": "...", "visual": "image", "image_id": "i1" }
   ],
 
   "formula_latex": "e^{i\\pi} + 1 = 0",  // exactly one. Mandatory — see §6

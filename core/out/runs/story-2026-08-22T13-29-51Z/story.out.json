@@ -1,0 +1,93 @@
+{
+  "story_id": "napkin-ring-height-only",
+  "area": "topology-and-geometry",
+  "subject_slug": "napkin-ring-problem",
+  "angle_slug": "same-height-same-volume",
+  "title": "Same height, same volume.",
+
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "Drill through a marble and through the Earth. Trim both leftover rings to the same height — they hold the same volume.",
+      "display": "Marble ring = Earth ring",
+      "visual": "image"
+    },
+    {
+      "beat": "turn",
+      "narration": "It's called the napkin-ring theorem. Punch a cylinder through any sphere and the leftover band's volume depends only on its height.",
+      "display": "The napkin-ring theorem",
+      "visual": "image"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Slice the ring flat. Each slice is an annulus — sphere outer edge minus cylinder inner edge — and the R-squared cancels. What's left is pi times h-squared-over-four, minus z-squared. Add the slices, and the ring integrates to pi h cubed over six.",
+      "display": "R cancels in the integral",
+      "visual": "formula"
+    },
+    {
+      "beat": "payoff",
+      "narration": "So a jeweller with a marble and a giant with a moon — same-height rings, same amount of stuff.",
+      "display": "Height is the whole answer",
+      "visual": "image"
+    }
+  ],
+
+  "formula_latex": "V = \\dfrac{\\pi h^{3}}{6}",
+  "mechanism": "Set the sphere at the origin and the cylinder on the z-axis. At height z the sphere's cross-section is a disk of area pi*(R^2 - z^2); the cylinder's cross-section is a disk of area pi*(R^2 - (h/2)^2), from Pythagoras applied to the cylinder radius. The napkin ring's slice at height z is the annulus between them, of area pi*((R^2 - z^2) - (R^2 - (h/2)^2)) = pi*((h/2)^2 - z^2). Every R has cancelled before integration. Integrating from z = -h/2 to z = h/2 gives V = pi*h^3/6, independent of the sphere's radius.",
+  "check_script": "generator.checks/napkin-ring-height-only.py",
+
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "After a cylindrical hole is drilled through a sphere, the volume of the remaining band depends only on the band's height, not on the sphere's original radius.",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "quote": "It is a counterintuitive fact that this volume does not depend on the original sphere's radius but only on the resulting band's height."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "The napkin-ring band's volume is a function of the band height h alone (not of the sphere radius R).",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "quote": "The volume of the band depends on h"
+    },
+    {
+      "claim_id": "f3",
+      "claim": "The result is named the napkin-ring problem because the remaining band resembles a napkin ring.",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "quote": "The problem is so called because the part that remains resembles the shape of a napkin ring"
+    },
+    {
+      "claim_id": "f4",
+      "claim": "An early study of this problem was written by the 17th-century Japanese mathematician Seki Kōwa.",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "quote": "An early study of this problem was written by 17th-century Japanese mathematician Seki Kōwa"
+    }
+  ],
+
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i1.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A 4:3 landscape editorial illustration on a clean cream background. Two solid metallic rings arranged side by side, both the same height. The left ring is carved from a small red marble (thick walls, tiny hole). The right ring is carved from a giant blue planet (very thin walls, huge cylindrical hole down the middle). Both rings show polished bronze surfaces and a matte cross-section face revealing the sphere-and-cylinder geometry. The two rings are exactly the same vertical height. Centered composition, generous margins, no text, no labels, no formulas, soft even lighting, minimalist geometric-illustration style."
+    },
+    {
+      "image_id": "i2",
+      "role": "diagram",
+      "source": "generated",
+      "file": "images/i2.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A 4:3 landscape geometric diagram on a clean cream background. A translucent glass sphere sits centered. A vertical cylinder is drilled through its center from top to bottom, removing a plug and the two spherical caps. The remaining 'napkin ring' band around the equator is highlighted in warm bronze. A dashed vertical line indicates the height h of the ring, labeled with a small letter h in serif math italics near the side. The sphere's radius R is drawn as a faint ghost dashed line from center to surface. Clean scientific-illustration style, thin ink lines, subtle shading, generous margins, centered composition, no other text."
+    }
+  ],
+
+  "nulls": [
+    {
+      "field": "images[].commons_search",
+      "reason": "Commons only has animated GIFs of the napkin-ring construction, which the wikimedia tool rejects on unsupported type; both images were generated instead."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "claim_id": "napkin-ring-height-only",
+  "formula_latex": "V = \\dfrac{\\pi h^{3}}{6}",
+  "mechanism": "Set the sphere at the origin and the cylinder on the z-axis. At height z the sphere's cross-section is a disk of area pi*(R^2 - z^2); the cylinder's cross-section is a disk of area pi*(R^2 - (h/2)^2), from Pythagoras applied to the cylinder radius. The napkin ring's slice at height z is the annulus between them, of area pi*((R^2 - z^2) - (R^2 - (h/2)^2)) = pi*((h/2)^2 - z^2). Every R has cancelled before integration. Integrating from z = -h/2 to z = h/2 gives V = pi*h^3/6, independent of the sphere's radius.",
+  "title": "Same height, same volume."
+}

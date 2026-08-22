@@ -1,0 +1,27 @@
+{"t":"2026-08-22T13:40:59.722Z","event":"run.start","story_id":"napkin-ring-height-only","area":"topology-and-geometry","subject":"napkin-ring-problem"}
+{"t":"2026-08-22T13:40:59.723Z","event":"validation","checked":4,"findings":0}
+{"t":"2026-08-22T13:41:00.205Z","event":"crosscheck","agreed":true,"generator":"pi*h**3/6","verifier":"pi*h**3/6"}
+{"t":"2026-08-22T13:41:00.207Z","event":"timeline","total_frames":1589,"total_seconds":52.967,"beats":["hook:10.16s","turn:10.96s","mechanism:21.28s","payoff:9.68s"],"mascot":{"enter":{"start":0,"end":154},"rest":{"start":154,"end":1536},"exit":{"start":1536,"end":1589}}}
+{"t":"2026-08-22T13:41:00.209Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-22T13:41:00.223Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-22T13:41:17.062Z","event":"run.start","story_id":"napkin-ring-height-only","area":"topology-and-geometry","subject":"napkin-ring-problem"}
+{"t":"2026-08-22T13:41:17.063Z","event":"validation","checked":4,"findings":0}
+{"t":"2026-08-22T13:41:17.401Z","event":"crosscheck","agreed":true,"generator":"pi*h**3/6","verifier":"pi*h**3/6"}
+{"t":"2026-08-22T13:41:17.402Z","event":"timeline","total_frames":1589,"total_seconds":52.967,"beats":["hook:10.16s","turn:10.96s","mechanism:21.28s","payoff:9.68s"],"mascot":{"enter":{"start":0,"end":154},"rest":{"start":154,"end":1536},"exit":{"start":1536,"end":1589}}}
+{"t":"2026-08-22T13:41:17.403Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-22T13:45:35.010Z","event":"capture.done","frames":1589}
+{"t":"2026-08-22T13:48:17.365Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":52.967}
+{"t":"2026-08-22T13:49:39.430Z","event":"run.start","story_id":"napkin-ring-height-only","area":"topology-and-geometry","subject":"napkin-ring-problem"}
+{"t":"2026-08-22T13:49:39.430Z","event":"validation","checked":4,"findings":0}
+{"t":"2026-08-22T13:49:39.862Z","event":"crosscheck","agreed":true,"generator":"pi*h**3/6","verifier":"pi*h**3/6"}
+{"t":"2026-08-22T13:49:39.863Z","event":"timeline","total_frames":1589,"total_seconds":52.967,"beats":["hook:10.16s","turn:10.96s","mechanism:21.28s","payoff:9.68s"],"mascot":{"enter":{"start":0,"end":154},"rest":{"start":154,"end":1536},"exit":{"start":1536,"end":1589}}}
+{"t":"2026-08-22T13:49:39.864Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-08-22T13:53:33.223Z","event":"capture.done","frames":1589}
+{"t":"2026-08-22T13:56:12.934Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":52.967}
+{"t":"2026-08-22T13:57:49.164Z","event":"run.start","story_id":"napkin-ring-height-only","area":"topology-and-geometry","subject":"napkin-ring-problem"}
+{"t":"2026-08-22T13:57:49.164Z","event":"validation","checked":4,"findings":0}
+{"t":"2026-08-22T13:57:49.650Z","event":"crosscheck","agreed":true,"generator":"pi*h**3/6","verifier":"pi*h**3/6"}
+{"t":"2026-08-22T13:57:49.651Z","event":"timeline","total_frames":1589,"total_seconds":52.967,"beats":["hook:10.16s","turn:10.96s","mechanism:21.28s","payoff:9.68s"],"mascot":{"enter":{"start":0,"end":154},"rest":{"start":154,"end":1536},"exit":{"start":1536,"end":1589}}}
+{"t":"2026-08-22T13:57:49.653Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-08-22T14:02:15.904Z","event":"capture.done","frames":1589}
+{"t":"2026-08-22T14:05:02.079Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":52.967}

@@ -1,0 +1,29 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[excited] Drill through a marble — and through the Earth. [pause] Trim both leftover rings to the same height... they hold the same volume.",
+      "audio": "audio/hook.mp3",
+      "seconds": 10.16
+    },
+    {
+      "beat": "turn",
+      "narration": "[curious] It's called the napkin-ring theorem. [pause] Punch a cylinder through any sphere — and the leftover band's volume depends only on its height.",
+      "audio": "audio/turn.mp3",
+      "seconds": 10.96
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[thoughtful] Slice the ring flat. Each slice is an annulus — sphere outer edge, minus cylinder inner edge — and the R-squared cancels. [confident] What's left is pi times h-squared-over-four, minus z-squared. Add the slices... and the ring integrates to pi h cubed over six.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 21.28
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] So a jeweller with a marble... and a giant with a moon — [confident] same-height rings, same amount of stuff.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 9.68
+    }
+  ],
+  "total_seconds": 52.08
+}
