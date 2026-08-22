@@ -162,3 +162,15 @@ export function checkPrerequisites({ python, localBinDir } = {}) {
 
   return { checks, missing: checks.filter((c) => !c.ok) };
 }
+
+/**
+ * ffmpeg and ffprobe, resolved to absolute paths once.
+ *
+ * Called by bare name these fail with `spawnSync ffprobe ENOENT` — a message that names neither
+ * the tool's purpose nor how to fix it, and which lands AFTER the agents have already run and
+ * cost minutes. Windows installers in particular drop ffmpeg somewhere PATH never learns about.
+ *
+ * Falls back to the bare name so that, if it still fails, the error is the familiar one.
+ */
+export const FFMPEG = findExecutable('ffmpeg') ?? 'ffmpeg';
+export const FFPROBE = findExecutable('ffprobe') ?? 'ffprobe';

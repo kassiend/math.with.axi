@@ -16,6 +16,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { CORE, ROOT } from '../pipeline/lib/paths.mjs';
+import { FFPROBE } from '../pipeline/lib/platform.mjs';
 
 const CACHE_DIR = path.join(CORE, 'out', 'tts-cache');
 const API = 'https://api.elevenlabs.io/v1';
@@ -89,7 +90,7 @@ export async function say(text, outFile, { settings = DEFAULT_SETTINGS, env = lo
   const fromCache = fs.existsSync(outFile) && fs.readFileSync(outFile).equals(fs.readFileSync(cached));
   fs.copyFileSync(cached, outFile);
 
-  const seconds = Number(execFileSync('ffprobe', [
+  const seconds = Number(execFileSync(FFPROBE, [
     '-v', 'error', '-show_entries', 'format=duration',
     '-of', 'default=noprint_wrappers=1:nokey=1', outFile,
   ], { encoding: 'utf8' }).trim());

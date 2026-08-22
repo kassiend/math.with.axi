@@ -93,3 +93,6 @@ html, body {
 
 /* The mascot is a fixed part of the card now, not something that flies in. */
 .footer-mascot { position: absolute; object-fit: contain; }
+
+/* KaTeX inside the title inherits the title size and weight rather than imposing its own. */
+.title .katex { font-size: 1em; color: inherit; font-weight: inherit; }

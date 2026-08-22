@@ -16,7 +16,9 @@ export interface TaskSceneProps {
   frame: number;
   timeline: TaskTimeline;
   background: string;
+  /** Plain text, or pre-rendered KaTeX markup when the description contains mathematics. */
   title: string;
+  titleIsHtml?: boolean;
   statementHtml: string;
   statementFontSize: number;
 }
@@ -54,6 +56,8 @@ function Card(props: TaskSceneProps) {
         opacity: t, transform: `scale(${scale.toFixed(4)})`,
       }}
     >
+      {/* A title like "Find 4^x + 8^x" printed literally puts raw carets on the card beside a
+          properly typeset ring. When the payload supplies LaTeX, the title is typeset too. */}
       <div
         className="title"
         style={{
@@ -62,9 +66,10 @@ function Card(props: TaskSceneProps) {
           lineHeight: `${TITLE.lineHeight}px`,
           maxWidth: `${TITLE.maxWidth}px`,
         }}
-      >
-        {props.title}
-      </div>
+        {...(props.titleIsHtml
+          ? { dangerouslySetInnerHTML: { __html: props.title } }
+          : { children: props.title })}
+      />
 
       <Ring frame={frame} timeline={timeline} />
 

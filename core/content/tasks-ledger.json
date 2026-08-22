@@ -109,6 +109,38 @@
       "video": "output/posts/tasks/20s/last-digit-3-pow-2026.mp4",
       "run_dir": "out/runs/task-20s-2026-08-17T13-39-00-216Z",
       "statement_norm": "lastdigitof3^2026"
+    },
+    {
+      "task_id": "percent-84-of-25",
+      "duration_s": 20,
+      "structure_id": "percent-swap-reversal",
+      "categories": [
+        "percentage"
+      ],
+      "statement": "84% of 25 = ?",
+      "answer": "21",
+      "status": "shipped",
+      "created_at": "2026-08-22T09:06:26.187Z",
+      "seed": -993979329,
+      "video": "output/posts/tasks/20s/percent-84-of-25.mp4",
+      "run_dir": "out/runs/task-20s-2026-08-22T08-59-28-601Z",
+      "statement_norm": "84%of25=?"
+    },
+    {
+      "task_id": "power-rewrite-from-2x-equals-3",
+      "duration_s": 40,
+      "structure_id": "find-linear-combination-of-powers-from-base-value",
+      "categories": [
+        "logarithm-exponent"
+      ],
+      "statement": "2^x = 3",
+      "answer": "36",
+      "status": "shipped",
+      "created_at": "2026-08-22T09:17:16.558Z",
+      "seed": -785301225,
+      "video": "output/posts/tasks/40s/power-rewrite-from-2x-equals-3.mp4",
+      "run_dir": "out/runs/task-40s-2026-08-22T09-01-45-473Z",
+      "statement_norm": "2^x=3"
     }
   ]
 }

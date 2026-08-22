@@ -1,0 +1,19 @@
+{
+  "task_id": "power-rewrite-from-2x-equals-3",
+  "duration_s": 40,
+  "structure_id": "find-linear-combination-of-powers-from-base-value",
+  "categories": [
+    "logarithm-exponent"
+  ],
+  "description": "Find 4^x + 8^x",
+  "statement": "2^x = 3",
+  "statement_latex": "2^{x} = 3",
+  "answer": "36",
+  "answer_latex": "36",
+  "solution_sketch": "Do not solve for x. Rewrite the target in the same base: 4^x = (2^x)^2 = 3^2 = 9, and 8^x = (2^x)^3 = 3^3 = 27. Add: 9 + 27 = 36.",
+  "difficulty_rationale": "The naive route is to solve 2^x = 3 for x = log_2(3) ≈ 1.585 and then evaluate 4^1.585 + 8^1.585 — impossible without a calculator. The insight is to leave x alone and rewrite the target in the common base 2: 4^x = (2^x)^2, 8^x = (2^x)^3. After the insight there are three cheap steps — square 3, cube 3, add — so a solver who sees the trick still spends about 15 s carrying it out. 20 s is not enough because most readers first attempt to isolate x, then have to abandon that route and re-see the expression.",
+  "steps_expected": 3,
+  "check_script": "generator.checks/power-rewrite-from-2x-equals-3.py",
+  "nulls": [],
+  "description_latex": "\\text{Find } 4^x + 8^x"
+}

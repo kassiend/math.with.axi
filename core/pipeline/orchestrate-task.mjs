@@ -24,7 +24,7 @@ import { crossCheck } from './lib/sympy.mjs';
 import * as tasksLedger from './lib/tasks-ledger.mjs';
 import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
-import { resolveBin, runTool, isWindows } from './lib/platform.mjs';
+import { FFPROBE, isWindows, resolveBin, runTool } from './lib/platform.mjs';
 import { buildTaskTimeline } from '../shared/task-timeline.ts';
 
 const argv = process.argv.slice(2);
@@ -216,7 +216,7 @@ function stageAudio(runId, picks, timeline) {
 }
 
 function probeDuration(file) {
-  const out = execFileSync('ffprobe', [
+  const out = execFileSync(FFPROBE, [
     '-v', 'error', '-show_entries', 'format=duration',
     '-of', 'default=noprint_wrappers=1:nokey=1', file,
   ], { encoding: 'utf8' }).trim();
@@ -234,13 +234,13 @@ function probeDuration(file) {
  * implausible, count the frames and divide by the frame rate.
  */
 function probeClipSeconds(file) {
-  const fromFormat = Number(execFileSync('ffprobe', [
+  const fromFormat = Number(execFileSync(FFPROBE, [
     '-v', 'error', '-show_entries', 'format=duration',
     '-of', 'default=noprint_wrappers=1:nokey=1', file,
   ], { encoding: 'utf8' }).trim());
   if (Number.isFinite(fromFormat) && fromFormat >= 0.05) return fromFormat;
 
-  const [rate, frames] = execFileSync('ffprobe', [
+  const [rate, frames] = execFileSync(FFPROBE, [
     '-v', 'error', '-c:v', 'libvpx-vp9', '-select_streams', 'v:0', '-count_frames',
     '-show_entries', 'stream=r_frame_rate,nb_read_frames', '-of', 'csv=p=0', file,
   ], { encoding: 'utf8' }).trim().split(',');

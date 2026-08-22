@@ -25,6 +25,9 @@ entry in `nulls[]` — never an invented value.
   "categories":     ["string"],      // 1-2 from §4
   "description":    "string | null", // English, shown at the top of the card.
                                      // null -> the card renders "Answer in the comments"
+  "description_latex": "string | null", // REQUIRED when the description contains mathematics.
+                                     // Without it "Find 4^x + 8^x" prints raw carets next to a
+                                     // properly typeset ring. Wrap prose in \\text{...}.
   "statement":      "string",        // the puzzle AS RENDERED inside the ring. Plain text or
                                      // LaTeX (see §5.4). Must fit; see the hard limit in §5.4
   "statement_latex": "string | null",

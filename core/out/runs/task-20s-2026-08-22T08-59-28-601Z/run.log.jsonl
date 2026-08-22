@@ -1,0 +1,7 @@
+{"t":"2026-08-22T09:01:45.094Z","event":"run.start","task_id":"percent-84-of-25","duration_s":20,"seed":-993979329}
+{"t":"2026-08-22T09:01:45.462Z","event":"crosscheck","agreed":true,"generator":"21","verifier":"21"}
+{"t":"2026-08-22T09:06:26.190Z","event":"run.start","task_id":"percent-84-of-25","duration_s":20,"seed":-993979329}
+{"t":"2026-08-22T09:06:26.665Z","event":"crosscheck","agreed":true,"generator":"21","verifier":"21"}
+{"t":"2026-08-22T09:06:27.408Z","event":"picks","background":"bg2.jpeg","start_audio":"axi_greetings2.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-hurry5.webm","hurry_audio_s":2.19425,"total_frames":627,"hurry_enter":435}
+{"t":"2026-08-22T09:08:25.353Z","event":"capture.done","frames":627,"font_size":38}
+{"t":"2026-08-22T09:09:22.055Z","event":"done","video":"output/posts/tasks/20s/percent-84-of-25.mp4"}

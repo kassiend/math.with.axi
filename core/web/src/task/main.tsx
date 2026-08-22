@@ -53,7 +53,12 @@ if (!payload) {
   );
 
   const html = statementHtml(payload.statement, payload.statement_latex);
-  const title = payload.description ?? TITLE.fallback;
+  // description_latex wins when present, so a title carrying mathematics is typeset rather than
+  // printed with ASCII carets beside a properly set ring.
+  const titleIsHtml = Boolean(payload.description_latex);
+  const title = titleIsHtml
+    ? statementHtml(payload.description ?? '', payload.description_latex)
+    : (payload.description ?? TITLE.fallback);
 
   // Fonts must be loaded before measuring, or the fit is computed against a fallback face and
   // the real face overflows the ring.
@@ -76,6 +81,7 @@ if (!payload) {
           timeline={timeline}
           background={payload.background}
           title={title}
+          titleIsHtml={titleIsHtml}
           statementHtml={html}
           statementFontSize={fit.fontSize}
         />,
