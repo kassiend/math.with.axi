@@ -48,13 +48,15 @@ export function loadEnv() {
 }
 
 /**
- * Default model. gemini-2.5-flash-image at $0.039/image: on the generateContent path, widely
- * available, and cheap enough that a $25 balance covers roughly 200 stories at three images each.
+ * Default model. gemini-3-pro-image at $0.134/image — chosen for composition fidelity rather than
+ * resolution: the card slot is 350x294 design px, so anything above 1K is cropped away unseen.
+ * The case for it is hit-rate. A regeneration costs a full image either way, so a model that
+ * lands the brief first time is not as expensive as the sticker price suggests.
  *
- * Cheaper options exist and both work through this tool — see the table in
- * assets/templates/stories/story.md §8. Switch by setting GEMINI_IMAGE_MODEL.
+ * It is still nearly four times the cheapest option, and the balance is small. Watch the running
+ * total with `node core/tools/gemini-image.mjs cost`, and switch models in .env if it bites.
  */
-export const DEFAULT_MODEL = 'gemini-2.5-flash-image';
+export const DEFAULT_MODEL = 'gemini-3-pro-image';
 
 /** Published price per generated image, for the cost line in the run log. */
 export const PRICE_PER_IMAGE = {
@@ -86,8 +88,9 @@ export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
   fs.mkdirSync(CACHE_DIR, { recursive: true });
   const hash = crypto.createHash('sha256').update(JSON.stringify({ prompt, model: env.model })).digest('hex').slice(0, 32);
   const cached = path.join(CACHE_DIR, `${hash}.png`);
+  const wasCached = fs.existsSync(cached);
 
-  if (!fs.existsSync(cached)) {
+  if (!wasCached) {
     const imagen = isImagen(env.model);
     const url = `${API}/${env.model}:${imagen ? 'predict' : 'generateContent'}?key=${env.key}`;
     const payload = imagen
@@ -111,11 +114,45 @@ export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
 
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.copyFileSync(cached, outFile);
+
+  // Billed only when the API was actually called; a cache hit costs nothing.
+  if (!wasCached) recordSpend({ model: env.model, usd: PRICE_PER_IMAGE[env.model] ?? null, prompt: prompt.slice(0, 120) });
+
   return {
     file: outFile, bytes: fs.statSync(outFile).size, hash, generated: true, prompt,
     model: env.model,
     // Recorded so a run's cost is visible in its own log rather than discovered on a bill.
     usd: PRICE_PER_IMAGE[env.model] ?? null,
+  };
+}
+
+/**
+ * Every generation is appended here, so spend is visible while it happens rather than on a bill.
+ * The balance funding this is small enough that one runaway loop matters.
+ */
+export const SPEND_LOG = path.join(CORE, 'out', 'image-spend.jsonl');
+
+function recordSpend(row) {
+  fs.mkdirSync(path.dirname(SPEND_LOG), { recursive: true });
+  fs.appendFileSync(SPEND_LOG, JSON.stringify({ t: new Date().toISOString(), ...row }) + '\n');
+}
+
+/** Total spent so far, and what remains of a stated budget. */
+export function spend(budgetUsd = 25) {
+  if (!fs.existsSync(SPEND_LOG)) return { images: 0, usd: 0, budget: budgetUsd, remaining: budgetUsd, byModel: {} };
+  const rows = fs.readFileSync(SPEND_LOG, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l));
+  const byModel = {};
+  let usd = 0;
+  for (const r of rows) {
+    usd += r.usd ?? 0;
+    byModel[r.model] = (byModel[r.model] ?? 0) + 1;
+  }
+  return {
+    images: rows.length,
+    usd: Number(usd.toFixed(3)),
+    budget: budgetUsd,
+    remaining: Number((budgetUsd - usd).toFixed(3)),
+    byModel,
   };
 }
 
@@ -132,9 +169,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (argv[0] === 'generate') {
       console.log(JSON.stringify(await generate(argv[1] ?? '', path.resolve(flag('out'))), null, 2));
     } else if (argv[0] === 'check') {
-      console.log(JSON.stringify({ available: available() }, null, 2));
+      console.log(JSON.stringify({ available: available(), model: available() ? loadEnv().model : null }, null, 2));
+    } else if (argv[0] === 'cost') {
+      console.log(JSON.stringify(spend(Number(flag('budget') ?? 25)), null, 2));
     } else {
-      console.error('commands: generate <prompt> --out <file> | check');
+      console.error('commands: generate <prompt> --out <file> | check | cost [--budget 25]');
       process.exit(2);
     }
   } catch (err) {

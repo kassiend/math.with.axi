@@ -214,12 +214,22 @@ node core/tools/gemini-image.mjs generate "<prompt>" --out <run>/images/i2.png
 |---|---|---|
 | `imagen-4.0-fast-generate-001` | $0.020 | cheapest; strong on photoreal scenes |
 | `gemini-3.1-flash-lite-image` | $0.0336 | newest cheap tier |
-| **`gemini-2.5-flash-image`** | **$0.039** | **default** — proven, best instruction-following |
+| `gemini-2.5-flash-image` | $0.039 | good instruction-following, much cheaper |
 | `imagen-4.0-generate-001` | $0.040 | |
-| `gemini-3-pro-image` | $0.134 | overkill for a 350×294 card slot |
+| **`gemini-3-pro-image`** | **$0.134** | **default** — best composition fidelity |
 
-The card shows images at 350 × 294 design px, so resolution above 1K buys nothing visible. Keep
-generated images to what the story genuinely needs — two or three — rather than one per beat.
+The card shows images at 350 × 294 design px, so resolution above 1K is cropped away unseen. Pro
+is the default for hit-rate rather than pixels: a regeneration costs a full image either way, so
+a model that lands the brief first time is cheaper than its sticker price.
+
+**At this price the image budget is the binding constraint on the section.** Roughly $0.40 a
+story at three images, so a $25 balance is about 62 stories. Generate only what the story
+genuinely needs — two or three — never one per beat, and reach for Commons first every time.
+Check the running total:
+
+```bash
+node core/tools/gemini-image.mjs cost          # spend so far against a $25 budget
+```
 
 Generation may be unavailable — the key is supplied separately and `gemini-image.mjs check`
 reports it. If it is unavailable, say so in `nulls[]` and design around what Commons has. Do not
