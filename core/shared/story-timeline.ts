@@ -37,8 +37,9 @@ export interface MascotGeometry {
   source: string;
   source_fps: number;
   source_frames: number;
-  phases: { enter: SourceSpan; rest: SourceSpan; exit: SourceSpan };
-  seconds: { enter: number; rest: number; exit: number };
+  pause_at_seconds: number;
+  phases: { play: SourceSpan; freeze: SourceSpan; resume: SourceSpan };
+  seconds: { play: number; resume: number };
   box: { left: number; top: number; width: number; height: number };
 }
 
@@ -50,14 +51,18 @@ export interface StoryTimeline {
   totalFrames: number;
   totalSeconds: number;
   overCeiling: boolean;
-  /** Composition-frame windows for the three mascot phases. */
+  /**
+   * The mascot take, played once and split in three: run it to the pause point, hold that frame
+   * while the story runs, then resume so the remaining footage carries him off exactly as the
+   * video ends. No loop — a looped hold reads as a stutter, and a frozen frame reads as someone
+   * standing still, which is what he is doing.
+   */
   mascot: {
-    enter: Phase;
-    rest: Phase;
-    exit: Phase;
-    /** Where to seek into the clip for each phase, in composition frames. */
-    seek: { enter: number; rest: number; exit: number };
-    restLoopFrames: number;
+    play: Phase;
+    freeze: Phase;
+    resume: Phase;
+    /** The composition frame the take is paused on, and where the resume seeks to. */
+    pauseFrame: number;
   };
 }
 
@@ -79,12 +84,12 @@ export function buildStoryTimeline(beats: BeatInput[], mascot: MascotGeometry): 
 
   // Source frames are at the clip's own rate; composition frames are at FPS. Convert once.
   const toComp = (srcFrames: number) => Math.round((srcFrames / mascot.source_fps) * FPS);
-  const enterFrames = toComp(mascot.phases.enter.to - mascot.phases.enter.from);
-  const exitFrames = toComp(mascot.phases.exit.to - mascot.phases.exit.from);
-  const restLoopFrames = toComp(mascot.phases.rest.to - mascot.phases.rest.from);
+  const pauseFrame = toComp(mascot.phases.play.to);
+  const resumeFrames = toComp(mascot.phases.resume.to - mascot.phases.resume.from);
 
-  // The exit is anchored to the END of the video, so he clears the frame exactly as it finishes.
-  const exitStart = Math.max(enterFrames, totalFrames - exitFrames);
+  // The resume is anchored to the END of the video, so he clears the frame as it finishes. If the
+  // story is too short to fit both halves, the freeze collapses rather than the exit being cut.
+  const resumeStart = Math.max(pauseFrame, totalFrames - resumeFrames);
 
   return {
     fps: FPS,
@@ -95,15 +100,10 @@ export function buildStoryTimeline(beats: BeatInput[], mascot: MascotGeometry): 
     totalSeconds: Number((totalFrames / FPS).toFixed(3)),
     overCeiling: totalFrames > MAX_FRAMES,
     mascot: {
-      enter: { start: 0, end: Math.min(enterFrames, exitStart) },
-      rest: { start: Math.min(enterFrames, exitStart), end: exitStart },
-      exit: { start: exitStart, end: totalFrames },
-      seek: {
-        enter: toComp(mascot.phases.enter.from),
-        rest: toComp(mascot.phases.rest.from),
-        exit: toComp(mascot.phases.exit.from),
-      },
-      restLoopFrames: Math.max(1, restLoopFrames),
+      play: { start: 0, end: Math.min(pauseFrame, resumeStart) },
+      freeze: { start: Math.min(pauseFrame, resumeStart), end: resumeStart },
+      resume: { start: resumeStart, end: totalFrames },
+      pauseFrame,
     },
   };
 }

@@ -1,42 +1,48 @@
 /**
  * Layout for the story card, in 720x1280 design units.
  *
- * Measured from assets/templates/stories/story_example.png (1440x2560, i.e. 2x). The card,
- * background and wordmark are shared with the other two sections — see ../card.ts.
+ * DIFFERENT FROM THE FIRST PASS, which followed story_example.png literally and read as a mostly
+ * empty card: a 350x294 picture floating in a 612-wide box, with two thirds of the card white.
+ * A story has to hold a scrolling thumb for fifty seconds, and white space does not.
  *
- * The mascot band is deliberately EMPTY here: the mascot is video, composited by Remotion on top
- * of this capture. The page only reserves the space.
+ * The visual now fills the card's usable width, the title sits tight above it, and the beat line
+ * sits directly under it in the accent colour. Nothing else competes.
  */
-export { CARD, FOOTER, FRAME, CARD_PAD, CONTENT_WIDTH } from '../card';
+export { CARD, FRAME, CARD_PAD, CONTENT_WIDTH } from '../card';
 import { CONTENT_WIDTH } from '../card';
 
-/** Reserved for the mascot clip. Nothing is drawn here by the page. */
-export const MASCOT_BAND = { x: 328, y: 157, w: 69, h: 107 };
+/**
+ * Reserved for the mascot clip; nothing is drawn here by the page.
+ * Larger than the mockup's 69x107 — at that size he was a detail rather than a presence.
+ */
+export const MASCOT_BAND = { x: 310, y: 150, w: 100, h: 155 };
 
 /** The story headline. Constant for the whole post — it names the story, not the beat. */
 export const TITLE = {
-  top: 352,
-  fontSize: 52,
-  lineHeightRatio: 1.2,
+  top: 330,
+  fontSize: 54,
+  lineHeightRatio: 1.16,
   maxLines: 3,
   minFontSize: 34,
   maxWidth: CONTENT_WIDTH,
-  colour: '#000000',
+  colour: '#0B0D12',
 };
 
-/** One visual at a time — a sourced image, a typeset formula, or a drawn shape. */
-export const VISUAL = { x: 185, y: 520, w: 350, h: 294, radius: 28 };
+/**
+ * One visual at a time. Nearly the full card width — a picture that fills the frame is the
+ * difference between a slide and something worth watching.
+ */
+export const VISUAL = { x: 78, y: 500, w: 564, h: 470, radius: 32 };
 
-/** The per-beat display line, below the visual. Minimum information, never the narration. */
+/** The per-beat line, directly under the visual, in the accent colour so the eye lands on it. */
 export const DISPLAY = {
-  top: 856,
-  fontSize: 42,
-  lineHeightRatio: 1.26,
-  maxLines: 3,
-  minFontSize: 28,
+  top: 1002,
+  fontSize: 44,
+  lineHeightRatio: 1.22,
+  maxLines: 2,
+  minFontSize: 30,
   maxWidth: CONTENT_WIDTH,
-  colour: '#000000',
-  accent: '#1E76C3',
+  colour: '#1E76C3',
 };
 
 export const FIT_STEP = 2;

@@ -25,3 +25,10 @@
 {"t":"2026-08-22T13:57:49.653Z","event":"picks","background":"bg1.jpeg"}
 {"t":"2026-08-22T14:02:15.904Z","event":"capture.done","frames":1589}
 {"t":"2026-08-22T14:05:02.079Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":52.967}
+{"t":"2026-08-22T14:21:04.634Z","event":"run.start","story_id":"napkin-ring-height-only","area":"topology-and-geometry","subject":"napkin-ring-problem"}
+{"t":"2026-08-22T14:21:04.635Z","event":"validation","checked":4,"findings":0}
+{"t":"2026-08-22T14:21:05.098Z","event":"crosscheck","agreed":true,"generator":"pi*h**3/6","verifier":"pi*h**3/6"}
+{"t":"2026-08-22T14:21:05.099Z","event":"timeline","total_frames":1375,"total_seconds":45.833,"beats":["hook:7.921s","turn:8.409s","mechanism:21.26s","payoff:7.323s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1254},"resume":{"start":1254,"end":1375}}}
+{"t":"2026-08-22T14:21:05.100Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-08-22T14:25:44.468Z","event":"capture.done","frames":1375}
+{"t":"2026-08-22T14:28:01.450Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":45.833}

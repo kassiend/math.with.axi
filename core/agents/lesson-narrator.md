@@ -43,21 +43,24 @@ Model is **`eleven_v3`**, which reads inline audio tags. A flat read loses the v
 second, so tag every line.
 
 ```
-[excited] Heey — how do you solve 23 times 11 in your head? [pause] Watch this.
-[curious] Take the two digits apart. [pause] Two … and three.
-[confident] Add them. Two plus three is five. [pause]
+[excited] Heey, how do you solve 23 times 11 in your head? Watch this.
+[curious] Take the two digits apart. Two, and three.
+[confident] Add them. Two plus three is five.
 [excited] Now drop the five right between them. Two-five-three. That's it.
-[warm] Try it on your own number. [pause] Tell me what you got.
+[warm] Try it on your own number, and tell me what you got.
 ```
 
-- **`[pause]` is a short beat**, about a third of a second. It is not a timed hold. Need a longer
-  gap? End the step — the step boundary carries the silence. A 30-second pause inside a
-  60-second video is not a thing.
-- **One or two tags per step**, at the head of the phrase they colour. Tags on every clause make
+- **DO NOT USE `[pause]`.** Measured: one `[pause]` tag produced **2.98 seconds of dead air** in a
+  ten-second clip, and a 52-second story carried about nine seconds of silence. It does not read
+  as a dramatic beat; it reads as a buffering video. Ordinary punctuation paces a line perfectly
+  well, and the pipeline trims long gaps afterwards anyway.
+- **No ellipses and no em-dashes as pacing devices.** `...` and `—` are read as long holds by the
+  same mechanism. Use a comma or a full stop.
+- **One or two tags per beat**, at the head of the phrase they colour. Tags on every clause make
   the read theatrical, which is worse than flat.
 - **Never put a tag inside a number or a formula.**
 - **Spell numbers the way they should be heard**: "twenty-three times eleven", not `23 × 11` —
-  the model will read the glyph literally and it will sound wrong.
+  the model reads the glyph literally and it sounds wrong.
 - Useful here: `[excited]`, `[curious]`, `[confident]`, `[warm]`, `[thoughtful]`, `[whispers]`
   for an aside. Skip the comedic tags — this is a teacher, not a bit.
 
@@ -68,7 +71,7 @@ generate the opener so the whole post is one performance in one voice.
 
 It poses the problem and promises the payoff, in one or two sentences:
 
-> `[excited] Heey — how do you solve 443 times 123 in your head? [pause] First you split it, then you...`
+> `[excited] Heey, how do you solve 443 times 123 in your head? First you split it, then you double.`
 
 ## 4. Audio — one clip per step
 
@@ -78,12 +81,12 @@ One TTS request per step, plus one for the intro. **Not one continuous take.**
 Per-step clips also mean a line that reads badly can be regenerated on its own.
 
 ```bash
-curl -sS -X POST "https://api.elevenlabs.io/v1/text-to-speech/$ELEVENLABS_VOICE_ID" \
-  -H "xi-api-key: $ELEVENLABS_API_KEY" -H "content-type: application/json" \
-  -d '{"text":"...","model_id":"eleven_v3",
-       "voice_settings":{"stability":0.45,"similarity_boost":0.8,"style":0.35}}' \
-  -o "<run>/audio/s1.mp3"
+node core/tools/elevenlabs.mjs say --text "<narration>" --out <run>/audio/s1.mp3
 ```
+
+Always the tool, never hand-rolled HTTP: it holds the voice settings, caches by text hash so an
+unchanged line is not re-billed, and trims the long silences that otherwise make the read sound
+like a buffering video. It prints the measured duration as JSON.
 
 Credentials come from the environment. **Never write the key into a file, a prompt, a log or a
 commit.** If you can see it in your output, it has leaked.

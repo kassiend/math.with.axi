@@ -7,12 +7,12 @@
  *   1. the mascot — one keyed clip, played in three measured phases
  *   2. the narration — one ElevenLabs clip per beat, at their measured lengths
  *
- * The mascot walks in and opens a book, holds while the story runs, and walks off so that he
- * clears the frame exactly as the video ends. All three phases come from ONE take, seeked to
- * different points: splicing a second clip in would make him jump, since the other available
- * clip is a different aspect and a different scale.
+ * The mascot take is played once and split in three: run it to the pause point, FREEZE that
+ * frame while the story runs, then resume so the remaining footage carries him off exactly as the
+ * video ends. Freezing rather than looping matters — a looped hold reads as a stutter, while a
+ * held frame reads as what he is actually doing, which is standing still and reading.
  */
-import { AbsoluteFill, Audio, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Audio, Freeze, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from 'remotion';
 
 const DESIGN_W = 720;
 const DESIGN_H = 1280;
@@ -25,12 +25,11 @@ export type StoryVideoProps = {
   mascot: null | {
     src: string;
     box: { left: number; top: number; width: number; height: number };
-    enter: Span;
-    rest: Span;
-    exit: Span;
-    /** Where to seek into the clip for each phase, in composition frames. */
-    seek: { enter: number; rest: number; exit: number };
-    restLoopFrames: number;
+    play: Span;
+    freeze: Span;
+    resume: Span;
+    /** The composition frame the take pauses on, and where the resume seeks to. */
+    pauseFrame: number;
   };
   audio: { clips: Array<{ id: string; src: string; from: number; durationInFrames: number }> };
 };
@@ -58,14 +57,9 @@ export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio }
       }}>
         {mascot && (
           <>
-            <MascotPhase span={mascot.enter} seek={mascot.seek.enter} src={mascot.src} box={mascot.box} />
-            {/* The hold is a short stretch of the same take, looped — a frozen mascot for forty
-                seconds reads as a broken render rather than as someone reading. */}
-            <MascotPhase
-              span={mascot.rest} seek={mascot.seek.rest} src={mascot.src} box={mascot.box}
-              loopFrames={mascot.restLoopFrames}
-            />
-            <MascotPhase span={mascot.exit} seek={mascot.seek.exit} src={mascot.src} box={mascot.box} />
+            <MascotSpan span={mascot.play} src={mascot.src} box={mascot.box} />
+            <MascotSpan span={mascot.freeze} src={mascot.src} box={mascot.box} freezeAt={mascot.pauseFrame} />
+            <MascotSpan span={mascot.resume} src={mascot.src} box={mascot.box} trimBefore={mascot.pauseFrame} />
           </>
         )}
       </AbsoluteFill>
@@ -80,15 +74,18 @@ export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio }
 };
 
 /**
- * One phase of the mascot take. `trimBefore` seeks into the clip; the Sequence positions it on
- * the composition timeline. Without the Sequence the video would read absolute composition time
- * and every phase would show the wrong moment.
+ * One span of the mascot take.
+ *
+ * The Sequence positions it on the composition timeline; `trimBefore` seeks into the clip;
+ * `freezeAt` holds a single frame. Without the Sequence the video reads absolute composition time
+ * and every span would show the wrong moment.
  */
-const MascotPhase: React.FC<{
-  span: Span; seek: number; src: string;
+const MascotSpan: React.FC<{
+  span: Span; src: string;
   box: { left: number; top: number; width: number; height: number };
-  loopFrames?: number;
-}> = ({ span, seek, src, box, loopFrames }) => {
+  trimBefore?: number;
+  freezeAt?: number;
+}> = ({ span, src, box, trimBefore, freezeAt }) => {
   const duration = span.end - span.start;
   if (duration <= 0) return null;
 
@@ -97,7 +94,7 @@ const MascotPhase: React.FC<{
       src={staticFile(src)}
       transparent
       muted
-      trimBefore={seek}
+      trimBefore={trimBefore}
       style={{ position: 'absolute', ...box, objectFit: 'fill' }}
     />
   );
@@ -105,7 +102,7 @@ const MascotPhase: React.FC<{
   return (
     <Sequence from={span.start} durationInFrames={duration}>
       <AbsoluteFill>
-        {loopFrames ? <Loop durationInFrames={loopFrames}>{video}</Loop> : video}
+        {freezeAt != null ? <Freeze frame={freezeAt}>{video}</Freeze> : video}
       </AbsoluteFill>
     </Sequence>
   );

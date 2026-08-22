@@ -164,18 +164,19 @@ ELEVENLABS_MODEL=eleven_v3
 **Tag every line with intonation and stops.** A flat read loses the viewer in the first second.
 
 ```
-[excited] Heey — how do you solve 23 times 11 in your head? [pause] Watch this.
-[curious] Take the two digits apart. [pause] Two … and three.
-[confident] Add them. Two plus three is five. [pause]
+[excited] Heey, how do you solve 23 times 11 in your head? Watch this.
+[curious] Take the two digits apart. Two, and three.
+[confident] Add them. Two plus three is five.
 [excited] Now drop the five right between them. Two-five-three. That's it.
-[warm] Try it on your own number. [pause] Tell me what you got.
+[warm] Try it on your own number, and tell me what you got.
 ```
 
 Rules that matter:
 
-- **`[pause]` is a short beat**, roughly a third of a second. It is not a timed hold. If a longer
-  gap is needed, end the step there and let the step boundary carry the silence — a 30-second
-  pause inside a 60-second video is not a thing.
+- **Do not use `[pause]`.** Measured: one tag produced 2.98 s of dead air in a ten-second clip.
+  It reads as a buffering video, not as a dramatic beat. Punctuation paces a line well enough,
+  and long gaps are trimmed after synthesis anyway.
+- **No ellipses or em-dashes as pacing devices** — the same mechanism reads them as long holds.
 - **One or two tags per step**, at the start of the phrase they colour. Tags sprayed across every
   clause make the read theatrical and worse.
 - **Say the numbers as words** where the model would otherwise misread them: `23 × 11` reads

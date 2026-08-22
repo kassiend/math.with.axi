@@ -141,6 +141,11 @@ Structure is fixed. See the **story-hook** skill for why, and for openings that 
 | `mechanism` | 12–40 s | the formula, shown and explained |
 | `payoff` | last 8–12 s | where it lives today — what the viewer now holds |
 
+**Narration must sound like speech, not like a recording.** No `[pause]` tags, no ellipses, no
+em-dashes as pacing: one `[pause]` was measured producing 2.98 s of silence in a ten-second clip.
+Emotion tags yes, one or two per beat; timing comes from punctuation, and the pipeline trims
+anything longer than 0.3 s afterwards.
+
 Each beat carries **two texts, and they are not the same text**:
 
 - `narration` — full sentences, spoken. This is what is heard.

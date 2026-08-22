@@ -84,7 +84,7 @@ async function main() {
   log(run, 'timeline', {
     total_frames: timeline.totalFrames, total_seconds: timeline.totalSeconds,
     beats: timeline.beats.map((b) => `${b.beat}:${b.seconds}s`),
-    mascot: { enter: timeline.mascot.enter, rest: timeline.mascot.rest, exit: timeline.mascot.exit },
+    mascot: { play: timeline.mascot.play, freeze: timeline.mascot.freeze, resume: timeline.mascot.resume },
   });
 
   // ---- RENDER GATE 3: the ceiling ----------------------------------------
@@ -159,11 +159,10 @@ async function main() {
     mascot: {
       src: mascotGeom.source,
       box: mascotGeom.box,
-      enter: timeline.mascot.enter,
-      rest: timeline.mascot.rest,
-      exit: timeline.mascot.exit,
-      seek: timeline.mascot.seek,
-      restLoopFrames: timeline.mascot.restLoopFrames,
+      play: timeline.mascot.play,
+      freeze: timeline.mascot.freeze,
+      resume: timeline.mascot.resume,
+      pauseFrame: timeline.mascot.pauseFrame,
     },
     audio,
   };

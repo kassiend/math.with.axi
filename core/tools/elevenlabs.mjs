@@ -16,13 +16,28 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { CORE, ROOT } from '../pipeline/lib/paths.mjs';
-import { FFPROBE } from '../pipeline/lib/platform.mjs';
+import { FFMPEG, FFPROBE } from '../pipeline/lib/platform.mjs';
 
 const CACHE_DIR = path.join(CORE, 'out', 'tts-cache');
 const API = 'https://api.elevenlabs.io/v1';
 
-/** Deliberately conservative: an over-styled read makes a teacher sound like an advert. */
-export const DEFAULT_SETTINGS = { stability: 0.45, similarity_boost: 0.8, style: 0.35 };
+/**
+ * Lower stability and higher style than the cautious defaults: at 0.45/0.35 the read came back
+ * flat and even, which on short-form video sounds like a recording rather than a person.
+ */
+export const DEFAULT_SETTINGS = { stability: 0.32, similarity_boost: 0.8, style: 0.6 };
+
+/**
+ * Silence trimming, applied after synthesis.
+ *
+ * MEASURED, not guessed: a single `[pause]` tag produced 2.98 s of dead air in a 10 s clip, and
+ * one 52-second story carried about 9 seconds of silence. Prompt guidance alone cannot fix this
+ * — the model decides how long a beat lasts — so the audio is trimmed deterministically here as
+ * well. Silences longer than TRIM_ABOVE are cut back to TRIM_KEEP; leading silence goes entirely.
+ */
+export const TRIM_ABOVE = 0.30;
+export const TRIM_KEEP = 0.22;
+export const TRIM_THRESHOLD = '-38dB';
 
 export function loadEnv() {
   const file = path.join(ROOT, '.env');
@@ -87,9 +102,11 @@ export async function say(text, outFile, { settings = DEFAULT_SETTINGS, env = lo
     fs.writeFileSync(cached, buf);
   }
 
-  const fromCache = fs.existsSync(outFile) && fs.readFileSync(outFile).equals(fs.readFileSync(cached));
-  fs.copyFileSync(cached, outFile);
+  const wasCached = fs.existsSync(outFile) && fs.readFileSync(outFile).equals(fs.readFileSync(cached));
+  trimSilence(cached, outFile);
 
+  // Measured AFTER trimming: this duration becomes the beat's on-screen length, so it has to be
+  // the length of the file that actually plays.
   const seconds = Number(execFileSync(FFPROBE, [
     '-v', 'error', '-show_entries', 'format=duration',
     '-of', 'default=noprint_wrappers=1:nokey=1', outFile,
@@ -99,7 +116,26 @@ export async function say(text, outFile, { settings = DEFAULT_SETTINGS, env = lo
     throw new Error(`synthesized clip has no measurable duration: ${outFile}`);
   }
 
-  return { file: outFile, seconds: Number(seconds.toFixed(3)), chars: text.length, cached: fromCache, hash };
+  return { file: outFile, seconds: Number(seconds.toFixed(3)), chars: text.length, cached: wasCached, hash };
+}
+
+/**
+ * Copy `src` to `dest`, capping every internal silence and stripping the leading one.
+ *
+ * Falls back to a plain copy if ffmpeg refuses: a clip with long pauses is worse than one without,
+ * but a missing clip is worse than both.
+ */
+export function trimSilence(src, dest) {
+  const filter = [
+    `silenceremove=start_periods=1:start_silence=0.03:start_threshold=${TRIM_THRESHOLD}`,
+    `stop_periods=-1:stop_duration=${TRIM_ABOVE}:stop_silence=${TRIM_KEEP}:stop_threshold=${TRIM_THRESHOLD}`,
+  ].join(':');
+  try {
+    execFileSync(FFMPEG, ['-y', '-v', 'error', '-i', src, '-af', filter, '-c:a', 'libmp3lame', '-q:a', '2', dest],
+      { stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch {
+    fs.copyFileSync(src, dest);
+  }
 }
 
 export async function quota(env = loadEnv()) {

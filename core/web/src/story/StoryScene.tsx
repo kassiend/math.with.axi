@@ -5,7 +5,7 @@
  * walks out — composited by Remotion on top of this capture. The page reserves its band and
  * draws everything else.
  */
-import { CARD, DISPLAY, FOOTER, TITLE, VISUAL } from './layout';
+import { CARD, DISPLAY, TITLE, VISUAL } from './layout';
 import type { LineFit } from './fit';
 import {
   BLUR_PX, StoryTimeline, beatAt, beatOpacity, easeOutCubic, lerp, progress,
@@ -95,13 +95,6 @@ function Card(props: StorySceneProps) {
         </div>
       )}
 
-      <div className="wordmark" style={{
-        left: `${FOOTER.wordmark.x - CARD.x}px`,
-        top: `${1120 - CARD.y - FOOTER.wordmark.fontSize}px`,
-        fontSize: `${FOOTER.wordmark.fontSize}px`,
-      }}>
-        {FOOTER.wordmark.text}
-      </div>
     </div>
   );
 }
