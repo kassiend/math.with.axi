@@ -20,7 +20,8 @@
     "verify:env": "node tools/verify-env.mjs",
     "worker": "node worker/index.mjs",
     "setup": "node tools/setup.mjs",
-    "setup:check": "node tools/setup.mjs --check"
+    "setup:check": "node tools/setup.mjs --check",
+    "sync:skills": "node tools/sync-skills.mjs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",

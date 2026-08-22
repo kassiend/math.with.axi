@@ -16,6 +16,7 @@
  */
 import * as ledger from './ledger.mjs';
 import * as tasksLedger from './tasks-ledger.mjs';
+import * as storiesLedger from './stories-ledger.mjs';
 
 /**
  * Subject areas for daily-task puzzles. Much wider than the original list, which was
@@ -89,6 +90,22 @@ export const LESSON_AREAS = Object.freeze([
 ]);
 
 /**
+ * Story categories. Wider than a list of topics on purpose: these are five different KINDS of
+ * video, and rotating between them is what stops the section becoming "dead mathematicians" —
+ * which is where an unguided agent lands, every time, because that is what "math story" evokes.
+ *
+ * Order matters for the same reason it does elsewhere: ties in the least-recently-used sort break
+ * by pool position, so the visually strongest and least obvious kinds come first.
+ */
+export const STORY_AREAS = Object.freeze([
+  'topology-and-geometry',   // the mesmerising visual: curves that draw a heart, a Möbius strip
+  'probability-and-statistics', // the illusion of control, base rates, why gamblers lose
+  'financial-mathematics',   // compounding, hedging, what a formula does to money
+  'math-in-real-life',       // where it is already running: GPS, compression, queues
+  'biography',               // a person, a formula, and where that formula is used today
+]);
+
+/**
  * Order a pool by how long each entry has gone unused: never-used first, then oldest-used.
  *
  * @param pool   candidate areas
@@ -114,6 +131,17 @@ export function nextTaskArea(durationS, led = tasksLedger.load()) {
     .filter(Boolean);
   const ordered = byLeastRecentlyUsed(pool, recent);
   return { assigned: ordered[0], alternatives: ordered.slice(1, 4), poolSize: pool.length, used: recent.length };
+}
+
+/** The kind of story to tell next. */
+export function nextStoryArea(led) {
+  const ledger = led ?? storiesLedger.load();
+  const recent = ledger.entries
+    .filter((e) => e.status === 'shipped')
+    .map((e) => e.area)
+    .filter(Boolean);
+  const ordered = byLeastRecentlyUsed(STORY_AREAS, recent);
+  return { assigned: ordered[0], alternatives: ordered.slice(1, 3), poolSize: STORY_AREAS.length, used: recent.length };
 }
 
 /** The area a new lesson must use. Lessons share one pool regardless of length. */
@@ -142,5 +170,6 @@ export function nextBackground(files, shippedCount) {
 /** Total shipped posts across both ledgers — the rotation index for backgrounds. */
 export function shippedCount() {
   return ledger.load().entries.filter((e) => e.status === 'shipped').length
-       + tasksLedger.load().entries.filter((e) => e.status === 'shipped').length;
+       + tasksLedger.load().entries.filter((e) => e.status === 'shipped').length
+       + storiesLedger.load().entries.filter((e) => e.status === 'shipped').length;
 }

@@ -1,0 +1,63 @@
+---
+name: video-prompt
+description: Writing the prompts that drive this pipeline's agents and image generation. Use when authoring or revising a template in assets/templates/, when an agent keeps producing the same thing, or when a generated image comes back generic. Covers why choice produces sameness and what to assign instead.
+---
+
+# Video prompt
+
+Prompts in this pipeline are **specifications**, not requests. They are read by an agent whose
+output goes through gates it cannot argue with, so vagueness does not become creativity — it
+becomes a rejected run.
+
+## The lesson this codebase learned the hard way
+
+**An agent given a list and asked to choose picks the most prototypical item, every time.**
+
+Asked to pick a "maths trick" it picks multiplication shortcuts and square roots. Asked for a
+"math story" it picks dead European men. A recency rule over the last three is far too weak to
+stop it: it oscillates between two favourites forever and never breaks the rule.
+
+The fix is not a better-worded request. **Stop asking.** Assign the subject from a rotation
+computed outside the model, hand it over as a constraint, and let the agent choose everything
+else. The agent still picks the idea, the numbers, the framing — just not the one decision it is
+reliably bad at.
+
+## Structure of a template here
+
+1. **Output contract first.** The exact JSON, field by field, with what `null` means for each.
+   An agent that knows the shape stops improvising one.
+2. **Deduplication before invention.** Query the ledger, then think. Reversed, the agent falls in
+   love with an idea and then argues the duplicate is different.
+3. **The assigned constraint**, stated as not-yours-to-choose, with the reason. Agents comply
+   better with a rule whose purpose they can see.
+4. **Calibration by example**, in a table: too easy / right / too hard, with a verdict per row.
+   Abstract adjectives like "challenging" mean nothing; two worked examples pin the band.
+5. **The gates**, stated as code that will run, not as encouragement.
+
+## Phrasings that work
+
+- **"X is assigned, not chosen"** — closes the negotiation before it opens.
+- **"If you cannot do X, return null with a reason"** — gives a legitimate exit, which is what
+  stops fabrication. An agent with no way out invents one.
+- **"A mismatch means rejection, not repair"** — pre-empts the helpful instinct to fix the text
+  so the check passes.
+- **Naming the failure mode**: "this is how a bogus trick survives review" makes the rule stick
+  where "be careful" does not.
+
+## Phrasings that fail
+
+- "Be creative" / "be original" — produces the average of everything it has seen labelled creative.
+- "High quality" — no operational meaning; nothing to check against.
+- "Try to avoid repetition" — an aspiration, not a constraint. Repetition is prevented by a ledger.
+- Long lists with no ordering — the agent takes the first item. If order matters, say so; if it
+  should not matter, rotate it in code.
+
+## Image-generation prompts
+
+- **Subject, then style, then constraints** — in that order; models weight early tokens heavily.
+- **Say what is in frame, not what it feels like.** "A wooden bridge over a river, engraving
+  style, no people" beats "an evocative historical scene".
+- **State the negative space.** Compositing needs room: "centred subject, plain background, wide
+  margins" saves a re-generation.
+- **Never generate a likeness of a real person.** On a biography that is an invented face
+  presented as fact — the visual form of the fabrication the pipeline forbids everywhere else.

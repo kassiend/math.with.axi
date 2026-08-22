@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "note": "Math-story ledger. Separate from the lesson and task ledgers because it answers a different question: a lesson dedups on concept, a task on puzzle shape, a story on subject and angle. Euler may be a lesson concept AND a story subject; only telling the same story twice is a repeat. Rules live in pipeline/lib/stories-ledger.mjs.",
+  "entries": []
+}

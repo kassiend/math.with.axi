@@ -1,0 +1,68 @@
+---
+name: story-hook
+description: Structure and openings for short-form mathematics stories. Use when writing a math-story script — the hook, the turn, the payoff — or when a story reads as a Wikipedia summary rather than something someone would stay for. Covers what earns the first three seconds and why chronological order kills a story.
+---
+
+# Story hook
+
+A math story competes with a thumb. It loses in the first three seconds or it does not lose at all.
+
+## The one rule
+
+**Open on the consequence, not the person.**
+
+An audience does not care that Euler was born in Basel in 1707. They care that a man went blind
+and then produced *more* mathematics than before. The birth date can come later, or never.
+
+| dead opening | live opening |
+|---|---|
+| "Leonhard Euler was an 18th-century Swiss mathematician." | "He lost his sight — and then wrote half his life's work." |
+| "The Black–Scholes model prices options." | "Two men wrote a formula. Within a decade it was moving a trillion dollars a day." |
+| "A Möbius strip has one side." | "Cut this loop down the middle and you don't get two loops. You get one, twice as long." |
+
+Every live opening states an outcome that sounds impossible. The story is then the explanation.
+
+## Structure — four beats, always
+
+1. **Hook (0–3 s).** The impossible-sounding consequence. No names, no dates, no context.
+2. **Turn (3–12 s).** Who or what, and the problem they were actually stuck on. The first name
+   can appear here; by now the viewer wants it.
+3. **Mechanism (12–40 s).** The mathematics. One formula, shown and *explained* — this is the
+   part that separates the channel from a trivia account. If there is no mechanism, there is no
+   story worth telling.
+4. **Payoff (last 8–12 s).** Where it lives today. The viewer should finish able to point at
+   something in their own life and say "that is this."
+
+## What kills a story
+
+- **Chronology.** "He was born… he studied… he then… and later…" is a timeline, not a story.
+  A timeline has no tension because nothing is at stake at any point in it.
+- **Adjective stacking.** "Brilliant, prolific, legendary" tells the viewer what to feel instead
+  of giving them a reason to feel it. One concrete number beats five adjectives: *886 publications*
+  says "prolific" better than "prolific" does.
+- **The formula as decoration.** Showing `e^{iπ} + 1 = 0` and calling it beautiful is a screensaver.
+  Saying *why* five unrelated constants land on zero is a story.
+- **Ending on the person.** "He died in 1783." So what. End on the viewer: what they now hold.
+
+## The payoff is the hardest beat
+
+Most drafts nail the hook and trail off. Force the last line to answer: **what does the viewer
+do differently, notice differently, or distrust differently now?**
+
+- probability → "the next time a streak feels due, it isn't"
+- finance → "that is why your loan costs what it costs"
+- topology → "you have been tying this knot your whole life"
+
+## Voice
+
+One person telling one person something they just found out. Not a lecture, not a documentary
+narrator. Contractions, short sentences, one idea per sentence. If a sentence needs a comma to
+survive, it probably needs to be two sentences.
+
+## Never
+
+- Never invent a quote. Attributed lines are the single most-repeated fabrication in maths
+  history content ("God made the integers…" is real; most anecdotes are not).
+- Never round a date to make a rhythm work.
+- Never imply causation between a life event and a discovery unless a source states it. "He went
+  blind, so he turned inward" is a nice line and an invented one.
