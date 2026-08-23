@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "task_id": "power-rewrite-from-2x-equals-3",
+      "script": "verifier.checks/power-rewrite-from-2x-equals-3.py",
+      "computed": "36",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Statement 2^x = 3 uniquely determines x = log_2(3) in the reals (3 > 0, unique real branch, no sign ambiguity). Then 4^x = (2^x)^2 = 9 and 8^x = (2^x)^3 = 27, giving 4^x + 8^x = 36. Answer is an exact integer, in simplest form."
+}

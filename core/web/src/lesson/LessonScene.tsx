@@ -1,8 +1,9 @@
 /**
  * The lesson card scene. Every visual is a pure function of `frame`.
  *
- * What this page does not draw: the intro clip. That is video, composited by Remotion on top of
- * this capture. The page draws the background it sits on, the still it hands off to, and the card.
+ * There is no mascot intro any more: the lesson opens on the card with the first step already
+ * legible, and the spoken hook plays over it. The mascot sits in the footer, where it always
+ * appeared once the card was up.
  *
  * No stopwatch and no hurry overlay — those are the task format's language. A lesson has no time
  * pressure, and putting a countdown on one would tell the viewer to rush the thing they came to
@@ -14,10 +15,6 @@ import {
   BLUR_PX, LessonTimeline, bodyOpacity, easeOutCubic, lerp, progress, stepAt,
 } from '../../../shared/lesson-timeline';
 
-export interface StillGeometry {
-  frame_rect: { x: number; y: number; w: number; h: number };
-}
-
 export interface LessonStepContent {
   step_id: string;
   instruction: string;
@@ -28,7 +25,6 @@ export interface LessonSceneProps {
   frame: number;
   timeline: LessonTimeline;
   background: string;
-  still: StillGeometry;
   /** `Math tricks #N` — same on every step. It identifies the post, not the step. */
   title: string;
   steps: LessonStepContent[];
@@ -36,53 +32,17 @@ export interface LessonSceneProps {
 }
 
 export function LessonScene(props: LessonSceneProps) {
-  const { frame, timeline } = props;
   return (
     <div className="frame">
-      <Background frame={frame} timeline={timeline} src={props.background} />
+      <Background src={props.background} />
       <Card {...props} />
-      <MascotStill frame={frame} timeline={timeline} still={props.still} />
     </div>
   );
 }
 
-function Background({ frame, timeline, src }: {
-  frame: number; timeline: LessonTimeline; src: string;
-}) {
-  const t = easeOutCubic(progress(frame, timeline.handoff));
-  const blur = frame < timeline.handoff.start ? 0 : lerp(0, BLUR_PX, t);
-  return (
-    <img className="bg" src={`./bg/${src}`} alt=""
-         style={{ filter: blur > 0.01 ? `blur(${blur.toFixed(2)}px)` : 'none' }} />
-  );
-}
-
-/**
- * The still the intro video hands off to. Hidden while the video is on screen, then animated from
- * exactly where the video left the mascot into the footer slot. Both rects come from
- * tools/extract-mascot-still.mjs, which is what makes the cut invisible.
- */
-function MascotStill({ frame, timeline, still }: {
-  frame: number; timeline: LessonTimeline; still: StillGeometry;
-}) {
-  // Visible from the moment the clip stops, not from the hand-off. The greeting is retimed to
-  // 1.5 s while the intro narration usually runs longer, so without this the mascot would vanish
-  // for the remainder of the intro and reappear when the hand-off began.
-  if (frame < timeline.introClipEnd) return null;
-
-  const from = still.frame_rect;
-  const to = FOOTER.mascot;
-  const t = easeOutCubic(progress(frame, timeline.handoff));
-
-  const h = lerp(from.h, to.h, t);
-  const w = h * (from.w / from.h);
-  const x = lerp(from.x, to.x + (to.w - w) / 2, t);
-  const y = lerp(from.y, to.y + (to.h - h), t);
-
-  return (
-    <img className="mascot-still" src="./mascot/axi-still.png" alt=""
-         style={{ left: `${x}px`, top: `${y}px`, width: `${w}px`, height: `${h}px` }} />
-  );
+function Background({ src }: { src: string }) {
+  // Blurred from frame 0 — there is no sharp intro phase to ramp from any more.
+  return <img className="bg" src={`./bg/${src}`} alt="" style={{ filter: `blur(${BLUR_PX}px)` }} />;
 }
 
 function Card(props: LessonSceneProps) {
@@ -135,8 +95,16 @@ function Card(props: LessonSceneProps) {
         </div>
       )}
 
-      {/* No mascot image here: the animated still from the hand-off comes to rest in this slot
-          and stays. A second copy inside the card would double it mid-flight. */}
+      {/* The mascot lives here and only here now — there is no intro clip for it to fly in from. */}
+      <img
+        className="footer-mascot"
+        src="./mascot/axi-still.png"
+        alt=""
+        style={{
+          left: `${FOOTER.mascot.x - CARD.x}px`, top: `${FOOTER.mascot.y - CARD.y}px`,
+          width: `${FOOTER.mascot.w}px`, height: `${FOOTER.mascot.h}px`,
+        }}
+      />
       <div className="wordmark" style={{
         left: `${FOOTER.wordmark.x - CARD.x}px`,
         top: `${FOOTER.wordmark.baseline - CARD.y - FOOTER.wordmark.fontSize}px`,

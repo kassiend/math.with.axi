@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "napkin-ring-height-only",
+      "detail": "The story does not state the geometric constraint 0 <= h <= 2R. Outside this range the setup is ill-defined: the Pythagorean step gives cylinder radius squared a^2 = R^2 - (h/2)^2, which is negative for h > 2R (no such cylinder exists) and equals R^2 for h = 0 (the drill removes the whole sphere, V = 0). At the boundary h = 2R the 'hole' has zero radius, so the 'napkin ring' is the full sphere; the formula still holds there (pi*(2R)^3/6 = 4*pi*R^3/3), but the mental picture the story sells breaks. This is a domain-of-validity omission, not a defect in the derivation itself.",
+      "witness": "h = 3, R = 1: the story's formula returns 9*pi/2, but no napkin ring exists because a drill of positive radius cannot leave a band taller than the sphere's diameter."
+    },
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "napkin-ring-height-only",
+      "detail": "The mechanism silently relies on the drill being coaxial with the measurement axis and on h being defined as the full height of the remaining band (tip-of-cap to tip-of-cap on the cylinder wall, not sphere-pole to sphere-pole). Both are conventional and correct, but a careful story should name them. Without the coaxiality assumption the cross-sections are not concentric and the annulus-area step fails."
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "napkin-ring-height-only",
+      "script": "verifier.checks/napkin-ring-height-only.py",
+      "computed": "pi*h**3/6",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

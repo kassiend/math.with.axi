@@ -1,0 +1,60 @@
+{
+  "runId": "story-napkin-ring-height-only",
+  "capture": {
+    "publicPath": "captures/story-napkin-ring-height-only",
+    "frames": 1375,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 1254
+    },
+    "resume": {
+      "start": 1254,
+      "end": 1375
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-napkin-ring-height-only/hook.mp3",
+        "from": 12,
+        "durationInFrames": 238
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-napkin-ring-height-only/turn.mp3",
+        "from": 250,
+        "durationInFrames": 252
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-napkin-ring-height-only/mechanism.mp3",
+        "from": 502,
+        "durationInFrames": 638
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-napkin-ring-height-only/payoff.mp3",
+        "from": 1140,
+        "durationInFrames": 220
+      }
+    ]
+  }
+}

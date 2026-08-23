@@ -1,0 +1,15 @@
+{
+  "task_id": "power-rewrite-from-2x-equals-3",
+  "duration_s": 40,
+  "structure_id": "find-linear-combination-of-powers-from-base-value",
+  "categories": [
+    "logarithm-exponent"
+  ],
+  "description": "Find 4^x + 8^x",
+  "statement": "2^x = 3",
+  "statement_latex": "2^{x} = 3",
+  "answer": "36",
+  "answer_latex": "36",
+  "steps_expected": 3,
+  "nulls": []
+}

@@ -25,7 +25,7 @@ import * as ledger from './lib/ledger.mjs';
 import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
 import { resolveBin, runTool, isWindows } from './lib/platform.mjs';
-import { buildLessonTimeline, INTRO_PLAYBACK_RATE, FPS } from '../shared/lesson-timeline.ts';
+import { buildLessonTimeline, FPS } from '../shared/lesson-timeline.ts';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -87,13 +87,11 @@ async function main() {
   }
 
   const picks = pickAssets();
-  const still = readJson(path.join(CORE, 'web', 'public', 'mascot', 'axi-still.json'), 'axi-still.json');
   log(run, 'picks', { background: path.basename(picks.background) });
 
   const lessonPayload = {
     title: `Math tricks #${counter}`,
     background: path.basename(picks.background),
-    still,
     intro_seconds: narration.intro.seconds,
     steps: plan.steps.map((s, i) => ({
       step_id: s.step_id,
@@ -134,17 +132,6 @@ async function main() {
     capture: {
       publicPath: shot.publicPath, frames: shot.frames, fps: shot.fps,
       width: shot.width, height: shot.height,
-    },
-    intro: {
-      src: 'mascot/mas_chromo.webm',
-      // The clip is retimed to 1.5 s and usually finishes before the narration does. When it
-      // stops, the page is already holding its last frame in the same place, so nothing pops.
-      clipFrames: timeline.introClipEnd,
-      playbackRate: INTRO_PLAYBACK_RATE,
-      box: {
-        left: still.intro_video.left, top: still.intro_video.top,
-        width: still.intro_video.width, height: still.intro_video.height,
-      },
     },
     audio,
   };
@@ -215,8 +202,8 @@ function pickAssets() {
 
 /**
  * Stage the narration under video/public and place each clip on the timeline.
- * The intro clip starts at frame 0; each step's clip starts when its step does. Nothing is
- * stretched — the step lengths were derived from these very durations.
+ * The hook plays over the first step, then that step's own line follows it. Later steps start
+ * when their step does. Nothing is stretched — the step lengths came from these very durations.
  */
 function stageAudio(run, narration, timeline) {
   const dir = path.join(PUBLIC, 'audio', run.id);
@@ -233,17 +220,19 @@ function stageAudio(run, narration, timeline) {
   clips.push({
     id: 'intro',
     src: copy(narration.intro.audio, 'intro.mp3'),
-    from: 0,
-    durationInFrames: Math.round(narration.intro.seconds * FPS),
+    from: timeline.hook.start,
+    durationInFrames: timeline.hook.end - timeline.hook.start,
   });
 
   narration.steps.forEach((s, i) => {
     const phase = timeline.steps[i];
+    // Step 0 shares its phase with the hook, so its own line starts where the hook ends.
+    const from = i === 0 ? timeline.hook.end : phase.start;
     clips.push({
       id: s.step_id,
       src: copy(s.audio, `${s.step_id}.mp3`),
-      from: phase.start,
-      durationInFrames: phase.end - phase.start,
+      from,
+      durationInFrames: Math.max(1, Math.round(s.seconds * FPS)),
     });
   });
 

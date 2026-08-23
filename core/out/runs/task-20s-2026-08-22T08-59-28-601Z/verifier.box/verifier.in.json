@@ -1,0 +1,27 @@
+{
+  "task_id": "percent-84-of-25",
+  "duration_s": 20,
+  "structure_id": "percent-swap-reversal",
+  "categories": [
+    "percentage"
+  ],
+  "description": null,
+  "statement": "84% of 25 = ?",
+  "statement_latex": null,
+  "answer": "21",
+  "answer_latex": null,
+  "nulls": [
+    {
+      "field": "description",
+      "reason": "no title needed; the statement is self-contained and the card renders the default 'Answer in the comments'"
+    },
+    {
+      "field": "statement_latex",
+      "reason": "plain text form fits the ring; LaTeX would not change the glyphs"
+    },
+    {
+      "field": "answer_latex",
+      "reason": "answer is a bare integer, LaTeX form identical to plain"
+    }
+  ]
+}

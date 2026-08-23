@@ -78,3 +78,6 @@ html, body {
   padding: 60px; text-align: center;
   background: #7f1d1d; color: #fff; font-size: 32px; font-weight: 600;
 }
+
+/* The mascot is a fixed part of the card now, not something that flies in. */
+.footer-mascot { position: absolute; object-fit: contain; }

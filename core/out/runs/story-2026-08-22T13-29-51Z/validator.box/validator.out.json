@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence located on the page; directly asserts that the band's volume depends only on the resulting band's height and not on the original sphere's radius, which is the claim."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "The page reads 'The volume of the band depends on h but not on R : V = πh³/6.' The cited fragment appears verbatim within that sentence and supports the claim that the volume is a function of h alone."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence appears on the page and directly gives the etymology attributed to it in the claim."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence appears verbatim and supports the historical attribution to the 17th-century Japanese mathematician Seki Kōwa."
+    }
+  ],
+  "findings": [],
+  "unverifiable": []
+}

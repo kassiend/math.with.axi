@@ -14,6 +14,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { CORE, PYTHON } from '../pipeline/lib/paths.mjs';
+import { FFMPEG } from '../pipeline/lib/platform.mjs';
 
 const KEYED = path.join(CORE, 'video', 'public', 'mascot', 'mas_chromo.webm');
 const OUT_PNG = path.join(CORE, 'web', 'public', 'mascot', 'axi-still.png');
@@ -42,7 +43,7 @@ fs.mkdirSync(path.dirname(OUT_PNG), { recursive: true });
 // -c:v libvpx-vp9 on the input is mandatory or the alpha layer is silently dropped.
 const full = path.join(CORE, 'out', 'logs', 'mascot-lastframe.png');
 fs.mkdirSync(path.dirname(full), { recursive: true });
-execFileSync('ffmpeg', [
+execFileSync(FFMPEG, [
   '-y', '-v', 'error',
   '-c:v', 'libvpx-vp9', '-i', KEYED,
   '-vf', 'select=eq(n\\,120),format=rgba',   // 121 frames, 0-indexed

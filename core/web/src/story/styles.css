@@ -1,0 +1,60 @@
+/* Story card styling. Design units are 720x1280; the capture scales the whole thing.
+
+   No CSS transitions or animations anywhere — the frame number drives every visual. */
+
+*, *::before, *::after { box-sizing: border-box; transition: none !important; animation: none !important; }
+
+html, body {
+  margin: 0; padding: 0; width: 720px; height: 1280px; overflow: hidden;
+  background: #000;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.frame { position: relative; width: 720px; height: 1280px; overflow: hidden; }
+
+.bg {
+  position: absolute; left: -20px; top: -20px; width: 760px; height: 1320px;
+  object-fit: cover; object-position: center;
+}
+
+.card {
+  position: absolute; background: #FFFFFF;
+  border-style: solid; border-color: #000000;
+  transform-origin: center center; z-index: 2;
+}
+
+.story-title {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  text-align: center; font-weight: 800; letter-spacing: -0.01em;
+  /* Width is set inline. Without an explicit width an absolutely positioned box with left:50%
+     shrink-to-fits into half the card, and the fit probe's 500px measurement becomes a lie. */
+}
+
+/* The visual slot. Overflow hidden so a sourced image fills it without spilling past the radius. */
+.visual { position: absolute; overflow: hidden; background: #F4F5F7; }
+.visual-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.visual-formula,
+.visual-shape {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: #FFFFFF;
+}
+.visual-formula { font-size: 46px; color: #1E76C3; }
+.visual-formula .katex { font-size: 1em; color: inherit; }
+.visual-shape svg { width: 100%; height: 100%; }
+
+.display {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  text-align: center; font-weight: 800; letter-spacing: -0.01em;
+}
+
+.wordmark { position: absolute; font-weight: 600; color: #000000; white-space: nowrap; }
+
+.fatal {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px; text-align: center;
+  background: #7f1d1d; color: #fff; font-size: 32px; font-weight: 600;
+}

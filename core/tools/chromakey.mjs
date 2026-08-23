@@ -38,6 +38,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { ASSETS, CORE } from '../pipeline/lib/paths.mjs';
+import { FFMPEG, FFPROBE } from '../pipeline/lib/platform.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -73,7 +74,7 @@ fs.mkdirSync(PREVIEW_DIR, { recursive: true });
 
 /** Sample the top-left corner of frame 0 as raw RGB. Corners are background far more often than not. */
 function sampleKeyColour(file) {
-  const buf = execFileSync('ffmpeg', [
+  const buf = execFileSync(FFMPEG, [
     '-v', 'error', '-i', file,
     '-vf', 'crop=8:8:0:0,scale=1:1,format=rgb24',
     '-frames:v', '1', '-f', 'rawvideo', '-',
@@ -99,13 +100,13 @@ function saturationOf(hex) {
  * about a file that has one — and keying it a second time destroys the matte.
  */
 function hasAlpha(file) {
-  const tag = execFileSync('ffprobe', [
+  const tag = execFileSync(FFPROBE, [
     '-v', 'error', '-select_streams', 'v:0',
     '-show_entries', 'stream_tags=alpha_mode', '-of', 'default=nk=1:nw=1', file,
   ], { encoding: 'utf8' }).trim();
   if (tag === '1') return true;
 
-  const pixFmt = execFileSync('ffprobe', [
+  const pixFmt = execFileSync(FFPROBE, [
     '-v', 'error', '-select_streams', 'v:0',
     '-show_entries', 'stream=pix_fmt', '-of', 'csv=p=0', file,
   ], { encoding: 'utf8' }).trim();
@@ -126,7 +127,7 @@ function keyOne(file) {
       fs.copyFileSync(file, out);
     } else {
       // ProRes 4444 and friends: transcode the container, keep the existing alpha as-is.
-      execFileSync('ffmpeg', [
+      execFileSync(FFMPEG, [
         '-y', '-v', 'error', '-i', file,
         '-c:v', 'libvpx-vp9', '-pix_fmt', 'yuva420p', '-auto-alt-ref', '0',
         '-b:v', '0', '-crf', '28', '-an', out,
@@ -163,7 +164,7 @@ function keyOne(file) {
   }
   steps.push('format=yuva420p');
 
-  execFileSync('ffmpeg', [
+  execFileSync(FFMPEG, [
     '-y', '-v', 'error', '-i', file,
     '-vf', steps.join(','),
     '-c:v', 'libvpx-vp9',
@@ -196,7 +197,7 @@ function keyOne(file) {
  * failed when it did not. (Chrome, and therefore Remotion, decodes the alpha correctly.)
  */
 function writePreview(clip, preview) {
-  execFileSync('ffmpeg', [
+  execFileSync(FFMPEG, [
     '-y', '-v', 'error',
     '-f', 'lavfi', '-i', `color=c=${PREVIEW_BG}:s=512x512`,
     '-c:v', 'libvpx-vp9', '-i', clip,

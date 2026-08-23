@@ -3,7 +3,7 @@
   "width": 1080,
   "height": 1920,
   "fps": 30,
-  "frames": 1106,
+  "frames": 1080,
   "fit": {
     "fits": true,
     "results": [
@@ -1150,33 +1150,7 @@
     "frame-01076.png",
     "frame-01077.png",
     "frame-01078.png",
-    "frame-01079.png",
-    "frame-01080.png",
-    "frame-01081.png",
-    "frame-01082.png",
-    "frame-01083.png",
-    "frame-01084.png",
-    "frame-01085.png",
-    "frame-01086.png",
-    "frame-01087.png",
-    "frame-01088.png",
-    "frame-01089.png",
-    "frame-01090.png",
-    "frame-01091.png",
-    "frame-01092.png",
-    "frame-01093.png",
-    "frame-01094.png",
-    "frame-01095.png",
-    "frame-01096.png",
-    "frame-01097.png",
-    "frame-01098.png",
-    "frame-01099.png",
-    "frame-01100.png",
-    "frame-01101.png",
-    "frame-01102.png",
-    "frame-01103.png",
-    "frame-01104.png",
-    "frame-01105.png"
+    "frame-01079.png"
   ],
   "dir": "/Users/kassiend_/Desktop/math.push/core/video/public/captures/lesson-multiply-by-11-two-digit"
 }

@@ -67,7 +67,6 @@ if (!payload) {
           frame={frame}
           timeline={timeline}
           background={payload.background}
-          still={payload.still}
           title={payload.title}
           steps={payload.steps}
           fits={fit.results}

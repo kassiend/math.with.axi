@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "task_id": "percent-84-of-25",
+      "script": "verifier.checks/percent-84-of-25.py",
+      "computed": "21",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "unambiguous": "The phrasing 'X% of Y' has a single conventional reading: (X/100)*Y. No branch or sign ambiguity.",
+    "exact": "84/100 * 25 = 2100/100 = 21 exactly; no rounding is involved.",
+    "simplest_form": "The stated answer is the bare integer 21, which is already in simplest form.",
+    "sign_and_branch": "Both operands are positive; the product is a single non-negative rational that reduces to a positive integer. No sign or branch pitfall."
+  }
+}

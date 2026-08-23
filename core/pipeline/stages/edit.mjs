@@ -16,6 +16,7 @@ import { promisify } from 'node:util';
 import { runAgent } from '../lib/agent-runner.mjs';
 import { frozenHash, frozenDiff } from '../lib/payload.mjs';
 import { ROOT } from '../lib/paths.mjs';
+import { FFPROBE } from '../lib/platform.mjs';
 
 const run_ = promisify(execFile);
 
@@ -95,7 +96,7 @@ export async function buildBudget(run) {
 async function probeDuration(file) {
   if (!fs.existsSync(file)) return null;
   try {
-    const { stdout } = await run_('ffprobe', [
+    const { stdout } = await run_(FFPROBE, [
       '-v', 'error', '-show_entries', 'format=duration',
       '-of', 'default=noprint_wrappers=1:nokey=1', file,
     ]);

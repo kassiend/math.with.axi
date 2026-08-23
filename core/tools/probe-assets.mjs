@@ -11,11 +11,12 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { ASSETS } from '../pipeline/lib/paths.mjs';
+import { FFPROBE } from '../pipeline/lib/platform.mjs';
 
 const ALPHA_PIX_FMTS = ['yuva420p', 'yuva422p', 'yuva444p', 'rgba', 'bgra', 'argb', 'abgr', 'ya8'];
 
 function probe(file) {
-  const raw = execFileSync('ffprobe', [
+  const raw = execFileSync(FFPROBE, [
     '-v', 'error',
     '-show_entries', 'stream=codec_type,codec_name,pix_fmt,width,height,r_frame_rate',
     // alpha_mode is the ONLY reliable alpha signal for VP9: the alpha layer is stored separately
