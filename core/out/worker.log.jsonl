@@ -37,3 +37,47 @@
 {"t":"2026-08-17T17:25:41.520Z","event":"post.start","kind":"lesson","attempt":3}
 {"t":"2026-08-17T17:46:52.888Z","event":"post.delivered","kind":"lesson","id":"remainder-mod-9-digit-sum","file":"output\\posts\\lessons\\remainder-mod-9-digit-sum.mp4"}
 {"t":"2026-08-17T17:46:52.889Z","event":"post.start","kind":"task20","attempt":1}
+{"t":"2026-08-17T18:48:03.047Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-17T19:25:40.447Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-17T19:25:41.292Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-17T19:33:52.549Z","event":"post.gate-closed","kind":"lesson","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-17T19:33:52.550Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-17T19:58:11.686Z","event":"post.delivered","kind":"lesson","id":"multiply-near-100-complement-base","file":"output\\posts\\lessons\\multiply-near-100-complement-base.mp4"}
+{"t":"2026-08-17T19:58:11.687Z","event":"batch.done","ok":1,"failed":0}
+{"t":"2026-08-18T10:29:29.801Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-18T10:29:33.142Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-18T10:29:41.487Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-18T10:37:39.034Z","event":"post.gate-closed","kind":"lesson","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-18T10:37:39.034Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-18T10:44:20.452Z","event":"post.error","kind":"lesson","attempt":2,"error":"lesson: forbidden keys survived projection: operand_draw.draws.1.seed_note — the Verifier must not see how the payload was produced"}
+{"t":"2026-08-18T10:44:20.452Z","event":"post.start","kind":"lesson","attempt":3}
+{"t":"2026-08-18T10:52:16.332Z","event":"post.gate-closed","kind":"lesson","attempt":3,"stage":"orchestrator"}
+{"t":"2026-08-18T10:52:16.333Z","event":"post.start","kind":"task20","attempt":1}
+{"t":"2026-08-18T10:55:28.852Z","event":"post.gate-closed","kind":"task20","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-18T10:55:28.853Z","event":"post.start","kind":"task20","attempt":2}
+{"t":"2026-08-18T11:07:24.159Z","event":"post.delivered","kind":"task20","id":"percent-42-of-x-is-36","file":"output\\posts\\tasks\\20s\\percent-42-of-x-is-36.mp4"}
+{"t":"2026-08-18T11:07:24.163Z","event":"post.start","kind":"task40","attempt":1}
+{"t":"2026-08-18T11:23:05.675Z","event":"post.delivered","kind":"task40","id":"exp-chain-3x4-4y9-xy","file":"output\\posts\\tasks\\40s\\exp-chain-3x4-4y9-xy.mp4"}
+{"t":"2026-08-18T11:23:05.817Z","event":"batch.done","ok":2,"failed":1}
+{"t":"2026-08-18T17:08:47.279Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-18T17:08:48.818Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-18T17:12:06.998Z","event":"post.error","kind":"lesson","attempt":1,"error":"axi-lesson-planner exited 1: "}
+{"t":"2026-08-18T17:12:06.999Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-18T17:21:32.604Z","event":"post.error","kind":"lesson","attempt":2,"error":"axi-lesson-narrator exited 1: "}
+{"t":"2026-08-18T17:21:32.604Z","event":"post.start","kind":"lesson","attempt":3}
+{"t":"2026-08-18T17:24:39.367Z","event":"post.error","kind":"lesson","attempt":3,"error":"axi-lesson-planner exited 1: "}
+{"t":"2026-08-18T17:24:39.854Z","event":"batch.done","ok":0,"failed":1}
+{"t":"2026-08-18T17:57:07.607Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-18T17:57:08.407Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-18T18:00:35.148Z","event":"post.error","kind":"lesson","attempt":1,"error":"axi-lesson-planner exited 1: "}
+{"t":"2026-08-18T18:00:35.148Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-18T18:22:26.562Z","event":"post.delivered","kind":"lesson","id":"reverse-percentage-recover-original-price","file":"output\\posts\\lessons\\reverse-percentage-recover-original-price.mp4"}
+{"t":"2026-08-18T18:22:26.563Z","event":"batch.done","ok":1,"failed":0}
+{"t":"2026-08-19T05:44:42.226Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-19T05:44:44.830Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-19T05:57:09.558Z","event":"post.gate-closed","kind":"lesson","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-19T05:57:09.559Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-19T06:00:20.157Z","event":"post.error","kind":"lesson","attempt":2,"error":"axi-lesson-planner exited 1: "}
+{"t":"2026-08-19T06:00:20.157Z","event":"post.start","kind":"lesson","attempt":3}
+{"t":"2026-08-19T06:09:30.225Z","event":"post.gate-closed","kind":"lesson","attempt":3,"stage":"orchestrator"}
+{"t":"2026-08-19T06:09:30.576Z","event":"batch.done","ok":0,"failed":1}
