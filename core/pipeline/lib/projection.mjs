@@ -28,7 +28,27 @@ export const LESSON_VISIBLE = Object.freeze([
   'lesson_id', 'counter', 'concept_slug', 'tags', 'method_name',
   'applicability', 'carry_case', 'steps', 'worked_example', 'nulls',
 ]);
-export const LESSON_DRAW_VISIBLE = Object.freeze(['seed', 'spec', 'draws', 'rejection_rate', 'construction']);
+export const LESSON_DRAW_VISIBLE = Object.freeze([
+  'seed', 'spec', 'draws', 'rejection_rate', 'construction', 'n', 'unit', 'rejections',
+]);
+
+/**
+ * What the story Validator sees.
+ *
+ * Narrower than it looks. `check_script` is withheld by FORBIDDEN_KEY_PATTERNS anyway; `images`
+ * and `nulls` are withheld deliberately — the Validator's job is to open the URLs in `facts[]`
+ * and confirm the quote is there and supports the claim, and knowing which claims the writer
+ * already flagged as shaky is precisely the hint that turns checking into agreeing.
+ *
+ * `beats` crosses stripped down to what is asserted — beat, narration, display. `visual` and
+ * `image_id` are production decisions, not claims, and a validator reading them starts reviewing
+ * the edit instead of the facts.
+ */
+export const STORY_VISIBLE = Object.freeze([
+  'story_id', 'area', 'subject_slug', 'angle_slug', 'title',
+  'beats', 'formula_latex', 'mechanism', 'facts',
+]);
+export const STORY_BEAT_VISIBLE = Object.freeze(['beat', 'narration', 'display']);
 
 /** Key names that must never reach the Verifier, whatever list they hide behind. */
 export const FORBIDDEN_KEY_PATTERNS = Object.freeze([
@@ -79,10 +99,36 @@ export function projectTask(payload) {
 
 export function projectLesson(plan) {
   const out = project(plan, LESSON_VISIBLE);
-  if (plan.operand_draw) {
-    out.operand_draw = project(plan.operand_draw, LESSON_DRAW_VISIBLE);
+  // `sampling` is accepted as an alias because planners have written both names — the field was
+  // required by section 3.4 long before the plan schema named it. Getting this wrong is not a
+  // cosmetic drift: the draw silently fails to cross, the Verifier reports operand provenance as
+  // unverifiable, and the lesson fails a gate for a fact it was actually given.
+  const drawn = plan.operand_draw ?? plan.sampling;
+  if (drawn) {
+    out.operand_draw = project(drawn, LESSON_DRAW_VISIBLE);
   }
   return assertClean(out, 'lesson');
+}
+
+export function projectStory(story) {
+  const out = project(story, STORY_VISIBLE);
+  if (Array.isArray(out.beats)) {
+    out.beats = out.beats.map((b) => project(b, STORY_BEAT_VISIBLE));
+  }
+  return assertClean(out, 'story');
+}
+
+/**
+ * Write the sandbox the story Validator runs in.
+ *
+ * Same shape as the Verifier's box and for the same reason: the boundary is a directory the agent
+ * is pointed at, not an instruction it is asked to honour.
+ */
+export function writeValidatorBox(runDir, projected) {
+  const box = path.join(runDir, 'validator.box');
+  fs.mkdirSync(box, { recursive: true });
+  fs.writeFileSync(path.join(box, 'validator.in.json'), JSON.stringify(projected, null, 2));
+  return box;
 }
 
 /**

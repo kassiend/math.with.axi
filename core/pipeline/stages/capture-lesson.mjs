@@ -42,6 +42,9 @@ function serve(rootDir, entry) {
 
 export class DisplayTextDoesNotFit extends Error {}
 
+/** A step carried a diagram spec the lesson visual registry cannot draw. */
+export class VisualDoesNotBuild extends Error {}
+
 export async function captureLesson(run, lesson, opts = {}) {
   const webDist = opts.webDist ?? path.join(CORE, 'web', 'dist');
   if (!fs.existsSync(path.join(webDist, 'lesson.html'))) {
@@ -70,6 +73,13 @@ export async function captureLesson(run, lesson, opts = {}) {
     await page.goto(`http://127.0.0.1:${port}/lesson.html`, { waitUntil: 'load' });
     await page.waitForFunction(() => window.__axiReady === true, null, { timeout: 30_000 });
 
+    // Checked before the fit, because a broken diagram is the more fundamental failure: a step
+    // whose picture cannot be drawn has nothing to fit text around.
+    const visuals = await page.evaluate(() => window.__axiVisuals ?? null);
+    if (visuals && !visuals.ok) {
+      throw new VisualDoesNotBuild(JSON.stringify(visuals.problems));
+    }
+
     const fit = await page.evaluate(() => window.__axiFit ?? null);
     if (!fit?.fits) {
       throw new DisplayTextDoesNotFit(JSON.stringify(fit?.problems ?? 'the page reported no fit result'));
@@ -80,7 +90,7 @@ export async function captureLesson(run, lesson, opts = {}) {
 
     const manifest = {
       run_id: run.id, width: DESIGN_W * SCALE, height: DESIGN_H * SCALE,
-      fps: FPS, frames, fit, files: [],
+      fps: FPS, frames, fit, visuals, files: [],
     };
 
     const started = Date.now();

@@ -51,12 +51,14 @@ same isolation boundary as everywhere else, `core/agents/ISOLATION.md`.
 
   "beats": [                             // four, in this order. See §5
     { "beat": "hook",      "narration": "...", "display": "...",
-      "visual": "image|formula|shape|none",
+      "visual": "image|formula|shape|plot|none",
       "image_id": "i1" },                // REQUIRED when visual is "image" — which image.
                                          // Omitted, images are handed out in order and a beat
                                          // may get one that does not match what it says.
     { "beat": "turn",      "narration": "...", "display": "...", "visual": "image", "image_id": "i2" },
     { "beat": "mechanism", "narration": "...", "display": "...", "visual": "formula" },
+                                         // or "plot" plus a `plot` object — a curve computed from
+                                         // its equation and built on screen. See math-visual.
     { "beat": "payoff",    "narration": "...", "display": "...", "visual": "image", "image_id": "i1" }
   ],
 
@@ -165,6 +167,32 @@ When the formula asserts something SymPy can settle, write a check exactly as th
 pipelines do — the orchestrator runs it against an independent one from `axi-verifier`, and any
 disagreement fails the story. The text is not edited to match the code.
 
+**The check's output contract, which bites hardest on story claims.** The orchestrator reads only
+the **last line** of stdout and requires it to be exactly one JSON object:
+
+```
+{"claim_id": "...", "computed": "<canonical value string>", "agrees": true}
+```
+
+and it passes the formula gate only when the generator's `computed` string **equals** the
+verifier's, character for character. Print nothing after that line; do not pretty-print it across
+several lines (the last line would then be a bare `}`); do not emit only human "OK" lines.
+
+`computed` is a single decisive value, not a test log. For a formula that reduces to an
+expression, it is that expression in canonical SymPy form (the napkin-ring story emitted
+`pi*h**3/6` from both scripts). For a claim with no single scalar — an identity, a procedure, an
+optimisation — anchor it on a **canonical worked instance** and emit the SymPy-canonical string of
+that instance's decisive result, so two blind scripts converge on the same characters:
+
+- an identity or procedure → run it on the concrete example the story's own text names, and emit
+  that result (e.g. the Euclid loop on 1920 and 1080 emits `120`);
+- an optimisation → evaluate the closed-form optimum on one fixed dataset named in the check
+  itself, and emit the coefficients (e.g. the least-squares fit to `x=(1,2,3), y=(2,3,5)` emits
+  `(1/3, 3/2)`).
+
+The rich, per-script assertions still belong in the script — they are each script's own thorough
+check — but they go to stderr or to earlier stdout lines, never into `computed`.
+
 When it cannot — a definition, a historical statement, a modelling assumption — set
 `check_script` to `null` **with a reason in `nulls[]`**. An invented check that proves nothing is
 worse than an honest gap.
@@ -272,9 +300,16 @@ Identical to the other two sections — the same component, the same numbers:
 | title | y 367–407, centred, Inter ExtraBold ≈ 52 px, max 3 lines |
 | image / visual | x 185–535 (w 350), y 520–814 (h 294), rounded corners, centred |
 
-The formula and drawn shapes occupy the same band as the image — one visual at a time, swapped
-per beat. Auto-fit as elsewhere; if it does not fit at the floor, the beat is rejected rather
-than overflowing.
+The formula, drawn shapes and plots occupy the same band as the image — one visual at a time,
+swapped per beat. A `plot` gets the band at 564 x 470 and builds itself over its first 1.5 s.
+
+A long beat — the mechanism runs past 30 s — should not hold one still picture. Give it `steps`:
+an ordered list of visuals, each weighted by the WORD COUNT of the narration it illustrates, so the
+picture advances with the voice. Steps may be formulas, plots, shapes, or `anim` (computed
+animations: `gcd-subtraction`, `least-squares`, `fourier-build`, `nash-matrix`, `nash-mixing`). See
+the math-visual skill.
+Auto-fit as elsewhere; if it does not fit at the floor, the beat is rejected rather than
+overflowing.
 
 ### 9.3 The mascot — enter, read, leave
 
@@ -302,8 +337,33 @@ Rendered at the **mockup size**, not full-bleed: ~69 × 107 design px in the mas
 Free, with a hard ceiling of **90 seconds** — the practical limit shared by Reels and TikTok's
 short-form surface. The narration decides the length; the Editor cuts only if it overruns.
 
-Below ~35 s the mechanism beat cannot breathe. Below **10 s** the post is impossible: the mascot
-alone needs 6 s to enter and 4 s to leave.
+Both numbers below are the length of the WHOLE POST, not of a beat. Below ~35 s of finished
+video there is not enough room left for the mechanism beat to breathe once the other three have
+had their seconds. Below **10 s** the post is impossible: the mascot alone needs 6 s to enter and
+4 s to leave.
+
+There is no floor on an individual beat. A mechanism that carries its whole construction in 28 s
+is a well-cut mechanism, not a rushed one.
+
+**Write to a word budget, because the ceiling is enforced after the audio is paid for.** The
+orchestrator builds the timeline from the measured clip lengths and only then checks 90 s, so a
+script that runs long closes as `blocked / over-90s-ceiling` having already spent the ElevenLabs
+characters.
+
+Measured on this voice and model, twice: **2.27 words per second**, counting narration with the
+emotion tags stripped. (101 words / 44.91 s on the first shipped story; 82 words / 36.11 s on a
+single mechanism beat.) Emotion tags cost time without being words, so the figure already
+includes them.
+
+| target | clean words |
+|---|---|
+| 90 s, the hard ceiling | 202 — do not aim here |
+| 85 s | 191 |
+| **80 s, the sane target** | **180** |
+| 70 s | 157 |
+
+Add ~1 s for the card-in and the closing hold. Do not estimate at some other rate: two drafts
+were written at an assumed 2.6 words/s and both came out over the ceiling.
 
 ### 9.5 Fonts
 

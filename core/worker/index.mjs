@@ -8,7 +8,9 @@
  *   npm run worker              run forever, firing once a day at WORKER_DAILY_AT
  *
  * Add `--posts lesson` (or task20, task40, or a comma-separated list) to either run form to
- * produce a subset. The Axi desktop app is a front end for exactly these commands.
+ * produce a subset, `--topic "..."` to assign a lesson subject by hand instead of taking the next
+ * one from the rotation, and `--resume <run-dir>` to continue an interrupted lesson run instead
+ * of starting a new one. The Axi desktop app is a front end for exactly these commands.
  *
  * Runs unchanged on macOS, Windows and Linux: no cron, no launchd, no Task Scheduler. The
  * schedule lives in this process because those three schedulers have nothing in common, and a
@@ -163,12 +165,16 @@ async function runBatch(cfg) {
   for (const kind of cfg.posts) {
     const produce = PRODUCERS[kind];
     if (!produce) { log('post.unknown', { kind }); continue; }
+    // Only the lesson producer takes a subject; a task's area comes from its own rotation.
+    const opts = kind === 'lesson'
+      ? { ...(cfg.topic ? { topic: cfg.topic } : {}), ...(cfg.resume ? { resume: cfg.resume } : {}) }
+      : {};
 
     let delivered = false;
     for (let attempt = 1; attempt <= cfg.maxAttempts && !delivered; attempt++) {
       log('post.start', { kind, attempt });
       try {
-        const post = await produce({ log: (m) => console.log(m) });
+        const post = await produce({ log: (m) => console.log(m), ...opts });
         await tg.sendDocument(cfg.token, cfg.chatId, post.video, {
           caption: CAPTIONS[kind]?.(post.meta) ?? path.basename(post.video),
         });
@@ -250,6 +256,38 @@ async function cmdLoop(cfg) {
  * day contains, and this narrows one manual run. Unknown names are refused here instead of being
  * skipped silently in runBatch, where a typo would read as "that post failed".
  */
+/**
+ * `--topic "..."` — assign the lesson subject by hand for this run.
+ *
+ * The rotation in §2.2 of the brief exists to stop an AGENT from choosing, because an agent asked
+ * for "a maths trick" picks multiplication shortcuts every time. A person asking for a specific
+ * lesson is not that failure mode, so this is allowed — but it does not advance the rotation, and
+ * the run log records that the subject was assigned rather than drawn.
+ */
+function topicOverride(argv) {
+  const i = argv.indexOf('--topic');
+  if (i === -1) return null;
+  const raw = argv[i + 1];
+  if (!raw || raw.startsWith('--')) throw new Error('--topic needs a value, e.g. --topic "lattice multiplication"');
+  return raw;
+}
+
+/**
+ * `--resume <run-dir>` — continue an interrupted lesson run.
+ *
+ * Each stage is skipped when its output file already exists. Without this, an interruption after
+ * the planner does not merely cost another planner invocation: it throws away the plan that was
+ * produced and generates a DIFFERENT lesson under the same request, which is the more expensive
+ * kind of loss.
+ */
+function resumeOverride(argv) {
+  const i = argv.indexOf('--resume');
+  if (i === -1) return null;
+  const raw = argv[i + 1];
+  if (!raw || raw.startsWith('--')) throw new Error('--resume needs a run directory');
+  return raw;
+}
+
 function postsOverride(argv) {
   const i = argv.indexOf('--posts');
   if (i === -1) return null;
@@ -275,6 +313,18 @@ async function main() {
     if (only) {
       cfg = { ...cfg, posts: only };
       log('posts.override', { posts: only });
+    }
+    const topic = topicOverride(argv);
+    if (topic) {
+      cfg = { ...cfg, topic };
+      log('topic.override', { topic });
+    }
+    const resume = resumeOverride(argv);
+    if (resume) {
+      cfg = { ...cfg, resume, posts: only ?? ['lesson'], maxAttempts: 1 };
+      // Retrying a resume would re-run the same finished stages against the same plan and reach
+      // the same gate. A resumed run gets one attempt.
+      log('resume.override', { resume });
     }
   } catch (err) {
     console.error(`✗ ${err.message}`);

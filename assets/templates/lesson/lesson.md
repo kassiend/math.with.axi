@@ -122,15 +122,56 @@ show three, which is a good default, but a method that genuinely needs two or fo
       "step_id": "s1",
       "purpose": "pose",              // pose | rule | apply | result | caveat
       "instruction": "Multiply by 11",// the BLACK line
-      "working":     "23 × 11 = ?"    // the BLUE line
+      "working":     "23 × 11 = ?",   // the BLUE line
+      "visual":      null             // optional diagram — see §2.5
     }
   ],
   "worked_example": { "operands": [23, 11], "result": "253" },
+
+  // §3.4 — how the operands were drawn. The field is named `operand_draw`, and the name matters:
+  // it is what crosses to the Verifier so the draw can be replayed. Under any other name the
+  // draw does not cross, the Verifier reports operand provenance as UNVERIFIABLE, and the lesson
+  // fails a gate over a fact it was in fact given.
+  "operand_draw": {
+    "seed":   970938345,
+    "spec":   {"min": 1, "max": 3},        // the DECLARED range, fixed before the draw
+    "n":      4,
+    "unit":   "one decimal digit per draw, composed in order into a1, a0, b1, b0",
+    "draws":  [2, 3, 2, 2],
+    "rejections": [],
+    "rejection_rate": 0
+  },
   "nulls": [{"field": "...", "reason": "..."}]
 }
 ```
 
 Write it to `<run>/plan.out.json`.
+
+**Your own check is a gate, not a report.** You write `generator.checks/<lesson_id>.py`, and it
+must confirm the worked example *and* the `applicability` claim — not by re-walking the displayed
+steps, but from the stated rule, exhaustively over the stated domain where that domain is finite.
+
+If it prints `FAILED`, **the plan is wrong and must not be emitted.** Fix the plan — usually the
+`applicability` boundary or the `carry_case` — and run the check again. Emitting a plan whose own
+check failed spends a Narrator, a Verifier and a set of TTS clips to rediscover something you were
+already told, and it burns an attempt against the topic in the ledger.
+
+**Output contract.** The orchestrator reads only the **last line** your check prints on stdout,
+and it must be exactly one line of JSON:
+
+```json
+{"claim_id": "<lesson_id>", "computed": "<worked example result>", "agrees": true}
+```
+
+Print as much readable detail above it as you like — that detail is what makes the check worth
+reading when it fails. But a check that ends in prose cannot be cross-checked against the
+Verifier's, and the lesson then fails the render gate over its formatting rather than over its
+mathematics. The Verifier is held to the same contract; both scripts must satisfy it.
+
+The commonest way this goes wrong is stating a boundary as an *if and only if* when only one
+direction holds. "The read-off works exactly when every band is below 10" sounds precise and is
+false: a leftmost band of 10 or more simply spills into the next place and still reads correctly.
+Test both directions. A condition that is sufficient but not necessary must say so.
 
 ### 2.4 The caveat is not optional
 
@@ -141,6 +182,43 @@ case where it fails teaches a bug, and the viewer finds it within a minute of tr
 If the technique genuinely has no exception, `carry_case` is `null` **with a reason in `nulls[]`**,
 and the Verifier will be asked to confirm that. An unstated exception is the single most common
 way this format goes wrong.
+
+### 2.5 Visuals — a closed registry, not free-form drawing
+
+A step may carry a **diagram** instead of relying on its two lines alone:
+
+```jsonc
+{ "step_id": "s2", "purpose": "apply",
+  "instruction": "Count the crossings",
+  "working": "left, middle, right",
+  "visual": { "type": "line-multiplication", "a": 21, "b": 13, "stage": "count" } }
+```
+
+The registry lives in `core/web/src/lesson/visuals.tsx` and it is **closed**. You choose a `type`
+and its parameters; you never write markup, SVG, coordinates or colours. A type the registry does
+not know closes the render gate before a frame is captured — it is not drawn as anything.
+
+| `type` | draws | params |
+|---|---|---|
+| `line-multiplication` | two families of sticks, their crossings dotted by place value, the count in each band, and the product | `a`, `b` (two-digit, no zero digit), `stage` |
+| `method-compare` | the same lattice, then under each band: the digit products that fill it, what they are worth, and the sum | `a`, `b` |
+
+`stage` says how far the picture is taken, so a lesson can build the method across its steps
+rather than giving the answer away on step one:
+
+- `draw` — the sticks only
+- `count` — sticks, crossings, and the count in each band
+- `answer` — all of that plus the product (the default)
+
+**A step with a visual is laid out differently.** Its two lines move to the TOP of the card and
+shrink (instruction 38 px, max 2 lines; working 40 px, max **1** line), and the diagram takes the
+space below. Keep the display text of a visual step shorter than usual — a working line that wraps
+is rejected at the fit gate, and here it has no second line to wrap into.
+
+Do not put a visual on every step. The picture is worth its space when it carries something the
+sentence cannot: the crossings appearing one family at a time, or two methods landing on the same
+three piles. A diagram under a step that just states a rule is decoration, and decoration costs
+the viewer the seconds the next step needed.
 
 ---
 
@@ -314,6 +392,24 @@ past its allowance — instruction max 2 lines, working max 3. **If either still
 > `step1/3.png` because its text wraps to two lines. The sizes above are the spec; auto-fit
 > handles the wrapping case.
 
+### 5.3a The visual slot
+
+A step carrying a `visual` (§2.5) re-anchors its text and hands the rest of the card to a diagram.
+
+| property | value |
+|---|---|
+| slot | x 110, y 502, w 500, h 456 |
+| body (visual steps) | top-anchored at y 326, gap 20; instruction 38 px / 2 lines, working 40 px / **1** line; fit floor 28 px |
+| body (plain steps) | unchanged — centred on y 561 at 50/52 px, per §5.3 |
+
+Everything in the slot is computed from the operands and is a pure function of the frame. The
+diagram builds across **85 %** of its step and holds the finished state for the rest, so the
+picture advances with the sentence explaining it instead of racing ahead and waiting.
+
+Both diagrams check themselves before drawing: the lattice reproduces `a × b` by counting its own
+crossings, and the comparison re-sums its own columns. A picture that disagrees with the
+arithmetic is a failure, not a frame.
+
 ### 5.4 Timeline — 30 fps
 
 | phase | frames | what happens |
@@ -358,6 +454,12 @@ teaches a *technique*, so the rule from the original brief is back in force: sta
 it works, and give the case where it breaks. `carry_case` is that case. A technique that "seems to
 always work" needs either a whitelisted theorem from `core/verify/theorems.json` or an exhaustive
 SymPy check over a stated finite domain — an assertion of universality is not evidence.
+
+**Visuals build or the run stops.** Every `visual` on the plan is validated on the capture page
+before a single frame is written: an unknown type, an operand the diagram cannot draw, or a
+picture whose own arithmetic disagrees with `a × b` closes the gate at `visual-does-not-build`.
+There is no fallback rendering — a lesson does not ship with a blank or a red slot where a
+diagram was promised.
 
 **§3.3 no gap-filling — applies.** Missing information is `null` plus a machine-readable reason.
 

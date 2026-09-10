@@ -114,6 +114,19 @@ async function main() {
     return imageSrc[imageIds[imageCursor++ % imageIds.length]];
   };
 
+  /**
+   * A step inside a beat needs the same two resolutions the beat itself gets, and for the same
+   * reason: the page is handed a FILE PATH and a LATEX STRING, never an image id or an implicit
+   * fallback. Passing steps through untouched left `visual: "image"` steps holding an `image_id`
+   * the page does not read, and `visual: "formula"` steps holding nothing at all — both of which
+   * render as an empty slot, silently, in the middle of a beat that is otherwise fine.
+   */
+  const resolveStep = (s) => ({
+    ...s,
+    image: s.visual === 'image' ? imageForBeat(s) : null,
+    formula_latex: s.visual === 'formula' ? (s.formula_latex ?? story.formula_latex) : null,
+  });
+
   const payload = {
     title: story.title,
     background,
@@ -126,6 +139,16 @@ async function main() {
       image: b.visual === 'image' ? imageForBeat(b) : null,
       formula_latex: b.visual === 'formula' ? (b.formula_latex ?? story.formula_latex) : null,
       shape_svg: b.visual === 'shape' ? (b.shape_svg ?? null) : null,
+      // The spec goes through as written; the page compiles and samples it. Handing the page an
+      // equation rather than a path is the point — a curve computed here would be a second
+      // implementation of the sampler, and the two would drift.
+      plot: b.visual === 'plot' ? (b.plot ?? null) : null,
+      anim: b.visual === 'anim' ? (b.anim ?? null) : null,
+      // A long beat may carry a word-weighted sequence of visuals instead of one. The timing and
+      // the drawing stay the page's; only the two things the page cannot look up — which file an
+      // image id names, and the story's formula when a step does not carry its own — are resolved
+      // here, exactly as they are for a whole beat.
+      steps: Array.isArray(b.steps) ? b.steps.map(resolveStep) : null,
     })),
   };
 

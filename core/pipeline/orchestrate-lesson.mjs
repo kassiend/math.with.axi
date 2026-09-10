@@ -5,12 +5,19 @@
  *   plan + narration -> cross-check (two independent SymPy scripts) -> 60 s ceiling
  *                    -> RENDER GATE -> capture (Playwright) -> compose (Remotion) -> ledger
  *
- * Three hard conditions guard the render, all in code:
- *   1. the SymPy cross-check agreed
+ * Four hard conditions guard the render, all in code:
+ *   1. the Verifier passed the lesson AND the two SymPy scripts agreed
  *   2. the total runtime is under 60 seconds
  *   3. every display line fits the card (enforced in the capture stage)
+ *   4. every diagram builds (enforced in the capture stage)
  *
  * None has an override flag.
+ *
+ * Condition 1 is one condition, not two, and it is computed by the SAME `verdictFrom` the older
+ * orchestrator uses. This file used to check only that the two scripts printed the same number,
+ * which let a lesson through whose scripts agreed while the Verifier's report carried fatal
+ * findings — exactly the case the Verifier exists to catch, since a script confirms the worked
+ * example and the report is where a false generalisation gets recorded.
  *
  * Usage:
  *   node core/pipeline/orchestrate-lesson.mjs --run <run-dir> [--seed N] [--dry-run] [--rerender]
@@ -19,8 +26,9 @@ import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { captureLesson, DisplayTextDoesNotFit } from './stages/capture-lesson.mjs';
+import { captureLesson, DisplayTextDoesNotFit, VisualDoesNotBuild } from './stages/capture-lesson.mjs';
 import { crossCheck } from './lib/sympy.mjs';
+import { verdictFrom } from './stages/verify.mjs';
 import * as ledger from './lib/ledger.mjs';
 import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
@@ -65,8 +73,30 @@ async function main() {
     agreed: cross.agreed, generator: cross.generator.computed, verifier: cross.verifier.computed,
   });
 
+  // The Verifier's own report, which is where a false generalisation or an unstated assumption
+  // is recorded. A missing report is a failure, not a pass: an agent that wrote no report
+  // verified nothing.
+  const reportFile = path.join(runDir, 'verifier.box', 'verifier.out.json');
+  const report = fs.existsSync(reportFile) ? JSON.parse(fs.readFileSync(reportFile, 'utf8')) : null;
+  const verdict = verdictFrom(report, {
+    passed: cross.agreed,
+    results: [cross],
+    reason: cross.agreed ? null : 'independent SymPy cross-check did not agree',
+  });
+  log(run, 'verdict', {
+    passed: verdict.passed,
+    fatal: (report?.findings ?? []).filter((f) => f.severity === 'fatal').length,
+    reasons: verdict.reasons,
+  });
+
   // ---- RENDER GATE, condition 1 ------------------------------------------
-  if (!cross.agreed) return close(run, plan, 'failed', 'verification', cross.failures);
+  if (!verdict.passed) {
+    return close(run, plan, 'failed', 'verification', [
+      ...verdict.reasons.map((reason) => ({ side: 'verdict', error: reason })),
+      ...cross.failures,
+      ...(report?.findings ?? []).filter((f) => f.severity === 'fatal'),
+    ]);
+  }
 
   // ---- 3. Timeline + ceiling ---------------------------------------------
   const timeline = buildLessonTimeline(
@@ -97,6 +127,9 @@ async function main() {
       step_id: s.step_id,
       instruction: s.instruction,
       working: s.working,
+      // Declarative only — the registry in web/src/lesson/visuals.tsx decides what it draws, and
+      // the capture page refuses a spec it cannot build before a single frame is written.
+      visual: s.visual ?? null,
       seconds: narration.steps[i]?.seconds ?? 0,
     })),
   };
@@ -120,6 +153,9 @@ async function main() {
     // ---- RENDER GATE, condition 3 ----------------------------------------
     if (err instanceof DisplayTextDoesNotFit) {
       return close(run, plan, 'blocked', 'display-text-does-not-fit', [{ reason: err.message }]);
+    }
+    if (err instanceof VisualDoesNotBuild) {
+      return close(run, plan, 'blocked', 'visual-does-not-build', [{ reason: err.message }]);
     }
     throw err;
   }

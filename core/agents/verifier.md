@@ -68,6 +68,8 @@ Write scripts to `<run>/verifier.checks/<claim_id>.py`. Each prints one line of 
 
 Run them with `core/.venv/bin/python`. No network. They must terminate.
 
+`computed` is a single canonical value, not a log, and it must be the **last line** of stdout — the orchestrator compares it character-for-character against the other script's, so put per-check detail on earlier lines or stderr. When the claim has no single scalar (an identity, a procedure, an optimisation), anchor `computed` on a canonical worked instance and emit its result in SymPy-canonical form; see the story template’s "output contract" note.
+
 ## The mismatch rule
 
 If the code does not agree with the text:

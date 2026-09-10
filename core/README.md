@@ -230,6 +230,18 @@ npm run worker               # run forever, firing daily at WORKER_DAILY_AT
 
 Run it from the repository root or from `core/` — the root `package.json` just delegates.
 
+Two flags narrow a manual run:
+
+```bash
+npm run worker -- now --posts lesson              # just the lesson, not all three
+npm run worker -- now --posts lesson --topic "…"  # and assign its subject by hand
+```
+
+`--topic` overrides the area rotation for that run only. The rotation exists to stop an *agent*
+from choosing — asked for "a maths trick" it picks multiplication shortcuts every time — and a
+person asking for a specific lesson is not that failure mode. It does not advance the rotation,
+and the run log records that the subject was assigned rather than drawn.
+
 Each task video is followed by a **separate message with the answer** and the trick behind it.
 Separate rather than in the caption: a caption travels with the file if it is forwarded, and a
 task post that carries its own answer is spoiled. Lessons get no answer note — the answer is the
