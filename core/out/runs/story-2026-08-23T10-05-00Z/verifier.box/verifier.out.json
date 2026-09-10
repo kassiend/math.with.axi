@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "gauss-legendre-least-squares",
+      "script": "verifier.checks/gauss-legendre-least-squares.py",
+      "computed": "(1/3, 3/2)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

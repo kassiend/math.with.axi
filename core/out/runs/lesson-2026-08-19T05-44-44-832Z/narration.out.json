@@ -1,0 +1,51 @@
+{
+  "intro": {
+    "narration": "[excited] Eight percent a year. [pause] When does your money double?",
+    "audio": "audio/intro.mp3",
+    "seconds": 4.4
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] There's a shortcut for this. [pause] They call it the Rule of seventy-two.",
+      "instruction": "The Rule of 72",
+      "working": "8% a year -> doubles when?",
+      "audio": "audio/s1.mp3",
+      "seconds": 6.48
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Take seventy-two, divide by the growth rate. [pause] That's your answer in years.",
+      "instruction": "Divide 72 by the rate",
+      "working": "years = 72 / r",
+      "audio": "audio/s2.mp3",
+      "seconds": 6.72
+    },
+    {
+      "step_id": "s3",
+      "narration": "[curious] Our rate is eight. [pause] Seventy-two over eight is nine.",
+      "instruction": "The rate is 8",
+      "working": "72 / 8 = 9",
+      "audio": "audio/s3.mp3",
+      "seconds": 6.8
+    },
+    {
+      "step_id": "s4",
+      "narration": "[excited] Nine years. [pause] And one point oh eight, nine times over? One point nine nine nine.",
+      "instruction": "9 years to double",
+      "working": "1.08^9 = 1.999",
+      "audio": "audio/s4.mp3",
+      "seconds": 9.36
+    },
+    {
+      "step_id": "s5",
+      "narration": "[thoughtful] But only from four to twelve percent. [pause] At fifty it claims one point four four — really one point seven one. [warm] Try your own rate.",
+      "instruction": "Big rates break it",
+      "working": "50%: 72/50 = 1.44, true 1.71",
+      "audio": "audio/s5.mp3",
+      "seconds": 11.92
+    }
+  ],
+  "total_seconds": 45.68,
+  "nulls": []
+}

@@ -1,0 +1,40 @@
+{
+  "status": "inconclusive",
+  "findings": [
+    {
+      "severity": "major",
+      "kind": "cherry-picked-operands",
+      "claim_id": "stacked-discounts-multiply-keepers",
+      "detail": "The operand audit trail does not close. operand_draw.draws is [1, 8] but worked_example.operands is [10, 80]. No transform from draws to operands is declared anywhere in the payload. Worse, the declared presentation filter says max_digits: 1, which the operands actually presented (10 and 80, two digits each) do not satisfy - so the filter describes the draws but not the numbers put on screen. A x10 mapping is the obvious guess, but guessing it would be filling a gap, and the filter contradiction means the stated filter cannot be the one that governed the presented operands. Mitigating, and stated plainly: the taught rule is exact everywhere in its stated domain (proved symbolically below), so there exists no (a,b) that could hide a failure. This is an auditability defect, NOT evidence that a failing case was dodged.",
+      "witness": "draws [1,8] vs operands [10,80]; filter max_digits=1 vs presented operands of 2 digits"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "stacked-discounts-multiply-keepers",
+      "detail": "Display steps: read in order, s1->s4 do produce the stated result, and no step needed to reach 18%/82% is absent in substance. One elision - between s2 ('keep 90% x keep 20%') and s3 ('0.9 x 0.2 = 0.18') the percent-to-decimal conversion is performed silently; 90% becoming 0.9 is never shown. Likewise the 100-10=90 and 100-80=20 arithmetic behind s2 is implied by the instruction 'Multiply what's left, don't add what's off' rather than displayed. Both are standard elisions a viewer can bridge, and s4's instruction 'Take the rest off 100%' does cover the 100-18=82 move, so the chain is followable.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "stacked-discounts-multiply-keepers",
+      "detail": "The applicability asserts the rule is exact 'for any starting price' and 'in either order, because multiplication commutes'. That is true in exact arithmetic and I verified it. It assumes unrounded arithmetic, which the payload never states. Under real till behaviour (round to the cent after each discount) order can change the final price by one cent: at a price of 0.08, 10%-then-80% gives 0.01 while 80%-then-10% gives 0.02. For the drawn pair specifically, per-step rounding never diverged from one-shot x0.18 across all 20000 prices from 0.01 to 200.00, so the worked example itself is unaffected. Flagged as minor because the claim is mathematical and is correct as mathematics.",
+      "witness": "price 0.08 with a=10,b=80: order AB -> 0.01, order BA -> 0.02 under per-step ROUND_HALF_UP to cents"
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "stacked-discounts-multiply-keepers",
+      "script": "verifier.checks/stacked-discounts-multiply-keepers.py",
+      "computed": "18% left, 82% off (100 -> 90 -> 18)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim_id": "stacked-discounts-multiply-keepers",
+      "reason": "Cannot determine whether the presented operands 10 and 80 were drawn or hand-picked. The payload declares seed 342587197 and draws [1,8], but (a) no PRNG algorithm is specified, so seed->draws cannot be reproduced, and (b) the presented operands [10,80] differ from the declared draws with no stated transform, while the declared filter max_digits=1 is inconsistent with the two-digit operands actually shown. Provenance of the operand is therefore undetermined rather than confirmed or refuted."
+    }
+  ]
+}

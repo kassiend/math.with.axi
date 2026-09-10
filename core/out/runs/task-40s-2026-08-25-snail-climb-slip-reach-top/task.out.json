@@ -1,0 +1,24 @@
+{
+  "task_id": "snail-climb-slip-reach-top",
+  "duration_s": 40,
+  "structure_id": "snail-climb-slip-reach-top",
+  "categories": [
+    "functional-pattern"
+  ],
+  "description": "When does the snail reach the top?",
+  "description_latex": null,
+  "statement": "10 m pole, +3 m by day, -2 m by night",
+  "statement_latex": "\\begin{gathered}10\\text{ m pole}\\\\+3\\text{ by day}\\\\-2\\text{ by night}\\end{gathered}",
+  "answer": "8",
+  "answer_latex": "8",
+  "solution_sketch": "The net gain over a full day-night is 1 m, which suggests 10 days - the trap. But on the day the snail's daytime climb first reaches the top it never slips back. After night 7 it is at 7 m; on day 8 it climbs 7 + 3 = 10 and is out. Answer: day 8.",
+  "difficulty_rationale": "Naive route: net progress is 3 - 2 = 1 m per day, so 10 m looks like 10 days. That is the wrong answer and the whole point of the puzzle. Insight: the slip only happens if the snail is still on the pole at nightfall, so the last day's 3 m climb is not reduced - you must track the height at the end of each night and find the first day whose daytime climb crosses 10. After the insight there are two cheap steps: after night k the height is k metres, and you need k + 3 >= 10, giving k = 7 and so day 8. Seeing that the final day breaks the 1-m-per-day pattern, rather than dividing 10 by 1, takes real thought yet no paper - comfortably a 40-second puzzle and a classic 20-second trap.",
+  "steps_expected": 2,
+  "check_script": "core/out/runs/task-40s-2026-08-25-snail-climb-slip-reach-top/generator.checks/snail-climb-slip-reach-top.py",
+  "nulls": [
+    {
+      "field": "categories",
+      "reason": "The run's assigned 40s area was modular-arithmetic; this task was commissioned as 'a logical, interesting puzzle', which the 40s pool has no exact bucket for. Tagged functional-pattern because the snail is an iterated day/night process with a state that updates each step, which is the nearest pool member. The assigned area is instead used by the third task of this batch (last-two-digits-7-pow-2024), so the rotation is not simply skipped."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "intro",
+    "out": "audio/intro.mp3",
+    "text": "[excited] Eight percent a year. [pause] When does your money double?"
+  },
+  {
+    "id": "s1",
+    "out": "audio/s1.mp3",
+    "text": "[curious] There's a shortcut for this. [pause] They call it the Rule of seventy-two."
+  },
+  {
+    "id": "s2",
+    "out": "audio/s2.mp3",
+    "text": "[confident] Take seventy-two, divide by the growth rate. [pause] That's your answer in years."
+  },
+  {
+    "id": "s3",
+    "out": "audio/s3.mp3",
+    "text": "[curious] Our rate is eight. [pause] Seventy-two over eight is nine."
+  },
+  {
+    "id": "s4",
+    "out": "audio/s4.mp3",
+    "text": "[excited] Nine years. [pause] And one point oh eight, nine times over? One point nine nine nine."
+  },
+  {
+    "id": "s5",
+    "out": "audio/s5.mp3",
+    "text": "[thoughtful] But only from four to twelve percent. [pause] At fifty it claims one point four four — really one point seven one. [warm] Try your own rate."
+  }
+]

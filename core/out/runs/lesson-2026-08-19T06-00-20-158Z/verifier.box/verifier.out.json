@@ -1,0 +1,65 @@
+{
+  "status": "failed",
+  "findings": [
+    {
+      "severity": "fatal",
+      "kind": "false-generalisation",
+      "claim_id": "estimate-square-root-nearest-square",
+      "detail": "The applicability text concludes 'Two decimal places are therefore reliable for any a >= 40.' This does not follow and is false. The error bound 1/(8a) is ~0.00266 at a=47 and ~0.00313 at a=40, but agreement to two decimal places requires the estimate and the true value to fall on the same side of a .xx5 rounding boundary, which an error bound of 0.003 does not guarantee. Exhaustive search over n in [1,400000] with a = round(sqrt(n)) finds 5946 integers where a >= 40, |d| <= a, the estimate is a correct upper bound, the overshoot is genuinely under 1/(8a) - and yet round(estimate,2) != round(sqrt(n),2). Failures do not die out with size: they occur at a as large as 632 within the searched range. The 'therefore' is an unsupported leap from an absolute error bound to a correct-digits claim.",
+      "witness": "n=2251: a=47, d=42, |d|<=a; estimate = 47 + 42/94 = 47.4468085..., true = 47.4447046..., overshoot 0.0021039 < 1/376 = 0.0026596. Estimate rounds to 47.45, truth rounds to 47.44. Note this uses the SAME anchor a=47 as the lesson's own worked example."
+    },
+    {
+      "severity": "fatal",
+      "kind": "inconsistent-counterexample",
+      "claim_id": "estimate-square-root-nearest-square",
+      "detail": "carry_case asserts 'the two-decimal accuracy is gone as soon as |d| > a', which presents |d| > a as the boundary separating two-decimal-accurate cases from inaccurate ones. The arithmetic inside carry_case is correct (a=40 gives 47.9, 0.656 high vs true 47.244047), but the stated condition does not delimit the failure it claims to delimit: two-decimal accuracy is also lost at many n with |d| <= a and the correct nearest anchor. The applicability condition therefore fails to exclude the counterexample class, and the lesson offers no genuine boundary for its headline accuracy claim.",
+      "witness": "n=2251 (a=47, |d|=42 <= 47, nearest anchor used, two decimals still wrong); also n=1721 (a=41, d=40, est 41.4878 -> 41.49, true 41.48494 -> 41.48)"
+    },
+    {
+      "severity": "major",
+      "kind": "arithmetic",
+      "claim_id": "estimate-square-root-nearest-square",
+      "detail": "worked_example.signed_error is stated as '+0.00064'. Computed on the worked operand n=2232: estimate 47.2446808510638 minus true 47.2440472440709 = 0.0006336069930, which rounds to +0.00063 at five decimal places, not +0.00064. All other worked_example fields (anchor 47, gap 23, correction 23/94 = 0.2447, result 47.24, exact 47.244047...) verify correctly.",
+      "witness": "n=2232: signed error = 0.00063360699, stated +0.00064"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "estimate-square-root-nearest-square",
+      "detail": "Missing display step. The method's correctness depends entirely on anchoring at the NEAREST square - s5 exists purely to make that point - yet no step shows how a viewer locates that anchor. Step s3's instruction says 'Find the anchor and the gap' but its working simply asserts '47^2 = 2209'. A viewer reading the steps in order is never shown how 47 was arrived at from 2232, nor the subtraction 2232 - 2209 = 23 (only its result 'd = 23' appears). Steps s1-s4 do otherwise chain correctly to the stated result 47.24.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "estimate-square-root-nearest-square",
+      "detail": "Ambiguous notation in rule step s2: 'a + d / 2a' reads under standard left-to-right precedence as a + (d/2)*a, not a + d/(2a). Step s4 disambiguates via 'Divide by 2x47', so the worked example is unaffected, but the stated general rule as rendered is not the rule being applied.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "estimate-square-root-nearest-square",
+      "detail": "Domain mismatch between the draw spec and the accuracy claim. The draw range [1100,2999] yields anchors a in 33..55, so 461 of the 1900 admissible operands (24%) have a < 40 and fall outside the 'a >= 40' guarantee the lesson states. A further 136 operands inside the draw range break the two-decimal claim outright. The sampler can therefore produce operands the lesson's own accuracy statement does not cover.",
+      "witness": "n=1100 (a=33, below the claimed a>=40 threshold); n=1563,1639,1721,1890,1897,1978,2067,2251,2344,... (a>=40, two decimals wrong)"
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "estimate-square-root-nearest-square",
+      "script": "verifier.checks/estimate-square-root-nearest-square.py",
+      "computed": "47.24",
+      "agrees": false
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim_id": "estimate-square-root-nearest-square/operand_draw",
+      "reason": "Cannot confirm draws=[2232] actually derives from seed=412825855: the payload names a seed but not the PRNG algorithm or draw procedure, so the draw is not reproducible from the payload alone. Indirect evidence favours a genuine draw rather than hand-picking - the declared filter (max_digits, positive_only) is stated purely in rendering terms and excludes no failure cases, rejection_rate 0 is consistent with every value in [1100,2999] being 4-digit and positive, and the range demonstrably retains the 136 operands that falsify the lesson's own accuracy claim, which a rigged filter would have removed. The seed-to-draw link itself remains unverified."
+    },
+    {
+      "claim_id": "estimate-square-root-nearest-square/universality",
+      "reason": "The 'never below sqrt(n)' and 'overshoots by less than 1/(8a)' claims are asserted for ALL positive integers n. My exhaustive check covers n in [1,400000] only, with zero violations, and the AM-GM argument quoted in the payload is sound for the upper-bound half. No whitelisted theorem id or hypothesis mapping is supplied for the unbounded claim, so universality over all positive integers is not established by the payload as given, only strongly supported."
+    }
+  ]
+}

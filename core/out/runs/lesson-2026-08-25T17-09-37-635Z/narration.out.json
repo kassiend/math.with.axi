@@ -1,0 +1,64 @@
+{
+  "lesson_id": "line-multiplication-crossings-two-digit",
+  "counter": 7,
+  "voice_model": "eleven_v3",
+  "intro": {
+    "narration": "[excited] How do you solve twelve times twenty-three by just drawing lines? Watch.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.023
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "narration": "[curious] Twelve times twenty-three. No times tables, no long multiplication.",
+      "instruction": "Multiply without times tables",
+      "working": "12 × 23 = ?",
+      "visual": null,
+      "audio": "audio/s1.mp3",
+      "seconds": 5.372
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "narration": "[confident] Draw each digit as that many lines. One number slants this way, the other crosses it.",
+      "instruction": "Draw each digit as that many lines, one number each way",
+      "working": "digit 3 → 3 lines",
+      "visual": { "type": "line-multiplication", "a": 12, "b": 23, "stage": "draw" },
+      "audio": "audio/s2.mp3",
+      "seconds": 5.911
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "narration": "[curious] Now count the crossings in each diagonal band. Two, seven, six.",
+      "instruction": "Count the crossings in each diagonal band",
+      "working": "2 | 7 | 6",
+      "visual": { "type": "line-multiplication", "a": 12, "b": 23, "stage": "count" },
+      "audio": "audio/s3.mp3",
+      "seconds": 6.107
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "narration": "[excited] Each band is what a column of the sum would hold. Read them off. Two hundred seventy-six.",
+      "instruction": "Each band is the digit product a column would hold",
+      "working": "12 × 23 = 276",
+      "visual": { "type": "method-compare", "a": 12, "b": 23 },
+      "audio": "audio/s4.mp3",
+      "seconds": 5.364
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "narration": "[thoughtful] One catch. A band of ten or more carries left, so four, ten, six is really five hundred six. [warm] Try your own.",
+      "instruction": "A band of 10 or more carries left",
+      "working": "23 × 22 → 4 | 10 | 6 = 506",
+      "visual": null,
+      "audio": "audio/s5.mp3",
+      "seconds": 10.855
+    }
+  ],
+  "total_seconds": 38.632,
+  "nulls": []
+}

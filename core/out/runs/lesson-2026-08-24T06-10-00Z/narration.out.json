@@ -1,0 +1,58 @@
+{
+  "lesson_id": "estimate-product-round-to-nearest-ten",
+  "counter": 6,
+  "intro": {
+    "narration": "[excited] Heey, how do you estimate forty-nine times forty-eight in your head? Round, then multiply.",
+    "audio": "audio/intro.mp3",
+    "seconds": 6.679
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "narration": "[curious] Here's our problem. Forty-nine times forty-eight.",
+      "instruction": "Estimate a product",
+      "working": "49 × 48 ≈ ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 3.463
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "narration": "[confident] Round each number to the nearest ten, then just multiply them.",
+      "instruction": "Round each factor to the nearest ten, then multiply",
+      "working": "a × b ≈ (round a)(round b)",
+      "audio": "audio/s2.mp3",
+      "seconds": 3.913
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "narration": "[confident] Forty-nine and forty-eight both round up to fifty. Fifty times fifty is two thousand five hundred.",
+      "instruction": "Round 49 and 48 up to 50, then multiply",
+      "working": "50 × 50 = 2500",
+      "audio": "audio/s3.mp3",
+      "seconds": 7.07
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "narration": "[warm] Both rounded up, so that's a ceiling. The real answer, two thousand three hundred fifty-two, sits just below.",
+      "instruction": "Both rounded up, so 2500 is a ceiling",
+      "working": "49 × 48 = 2352 (2500 is ~6% high)",
+      "audio": "audio/s4.mp3",
+      "seconds": 8.08
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "narration": "[thoughtful] But watch out. Round one up and one down, and you can't tell which side you land on. Forty-seven times forty-three rounds to two thousand, yet the truth is two thousand twenty-one.",
+      "instruction": "Opposite rounding hides the direction",
+      "working": "47 × 43 → 50 × 40 = 2000, but true = 2021",
+      "audio": "audio/s5.mp3",
+      "seconds": 12.19
+    }
+  ],
+  "total_seconds": 41.395,
+  "nulls": []
+}

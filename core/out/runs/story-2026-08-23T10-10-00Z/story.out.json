@@ -1,0 +1,246 @@
+{
+  "story_id": "hilbert-space-infinite-pythagoras",
+  "area": "biography",
+  "subject_slug": "david-hilbert",
+  "angle_slug": "hilbert-space-infinite-pythagoras",
+  "title": "Perpendicular isn't enough.",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "An MP3 throws away most of the recording and most listeners can't hear the difference. [curious] Behind that is Pythagoras, with infinitely many sides.",
+      "display": "75-95% smaller than CD audio",
+      "visual": "image",
+      "image_id": "i1"
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] David Hilbert, Göttingen, around 1909. He's working on integral equations, where the unknown isn't a number, it's a function. So he introduced a Euclidean space with infinitely many dimensions. One point per function.",
+      "display": "A function becomes a point.",
+      "visual": "image",
+      "image_id": "i2"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[curious] Two functions are perpendicular when the integral of their product is zero, and sine waves of different frequencies pass that test. So a square-integrable function gets coordinates, one per wave. Square and add them: at most its length squared. At most. [surprised] The flat function, one, has every sine coordinate zero, but its length isn't. Miss one direction and a function hides in the gap: you need a complete basis. Add back the constant and the cosines, and at most becomes exactly.",
+      "display": "Exactly needs a complete basis.",
+      "visual": "formula",
+      "steps": [
+        {
+          "visual": "anim",
+          "anim": {
+            "type": "fourier-build"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] Two places it lives. An MP3 turns sound into frequency components and blurs the ones most ears won't catch. An MRI scanner never photographs you; it fills a grid of spatial frequencies and turns that into a picture. Don't store the wave. Store its coordinates.",
+      "display": "MP3 files. MRI scans.",
+      "visual": "image",
+      "image_id": "i1"
+    }
+  ],
+  "formula_latex": "\\begin{aligned}\\sum_{n}\\langle f,e_{n}\\rangle^{2}\\;&\\le\\;\\lVert f\\rVert^{2}\\quad(\\forall f\\in L^{2})\\\\ \\text{equality }\\forall f\\;&\\iff\\;\\{e_{n}\\}\\ \\text{complete}\\end{aligned}",
+  "mechanism": "Work in L^2(-pi, pi), the square-integrable functions on the interval; f must be square-integrable for its coordinates and length to exist at all - that is the standing hypothesis on f. The inner product of f and g is the integral of f times g, the squared length of f is the integral of f squared, and f and g are perpendicular when that integral is zero. Everything here is for real-valued f, which is why the formula has no modulus bars; for complex f the inner product conjugates one factor and the squares become squared moduli. The sine functions e_n(x) = sin(nx)/sqrt(pi), n = 1, 2, 3, ..., are orthonormal. Orthonormality alone gives Bessel's inequality and nothing stronger: for EVERY f the sum of the squared coordinates is AT MOST the squared length. Equality is a separate question, and the quantifiers decide it. Two statements are true and they are different. Pointwise: for a given f, equality holds exactly when f lies in the closed span of the system. Universally: equality holds for EVERY f exactly when the system is complete, that is, an orthonormal basis whose span is dense. The card states the universal form, with 'for all f' written inside the left half of the biconditional. The naive pointwise reading 'equality iff complete' is false, and the sine system shows why: f = x (odd) already gives equality against the sines, 2*pi^3/3 on both sides, even though the sines are incomplete. Forward direction, cited: when the orthonormal system is complete, Bessel's inequality becomes the equality known as Parseval's identity. Converse direction, proved: if the system is not complete then, by the standard characterisation, there is a nonzero g orthogonal to every e_n; all of g's coordinates are then zero, so its coordinate sum is 0 while its squared length is positive, and equality fails for g. The two directions together give the universal biconditional. The sine system is the concrete instance: g = 1 is orthogonal to every sine, so the constant function alone certifies incompleteness, and equality fails for it (2*pi against 0), as it does for cos x (pi against 0) and x^2 (2*pi^5/5 against 0). The repair is to supply the missing directions. Adding the constant 1/sqrt(2*pi) AND the cosines cos(nx)/sqrt(pi) to the sines gives the trigonometric system, a complete orthonormal basis of L^2(-pi, pi) - a standard theorem; its span's density follows from the Stone-Weierstrass theorem (strictly, uniform density of trigonometric polynomials among continuous periodic functions, which then yields L^2 density by the usual steps). Note f = 1 is repaired by the CONSTANT direction, not by any cosine, so 'add the cosines' alone would not fix it; the constant term is essential. What the script does and does not do: it PROVES orthonormality symbolically and proves the converse instance; it ILLUSTRATES Bessel and Parseval on five witnesses of both parities; and it demonstrates that no finite witness set can establish completeness, by exhibiting a four-direction orthonormal system (Gram-Schmidt on {1, x, x^2, cos x}) that reproduces the exact squared length of all five witnesses yet is incomplete, its residual on cos 2x having positive norm. Completeness of the trigonometric basis therefore rests on the cited theorem, never on the witnesses.",
+  "check_script": "generator.checks/parseval-needs-completeness.py",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "MP3 compression discards a large share of a recording, commonly a 75 to 95 percent reduction in size against CD-quality audio, and still sounds like a faithful reproduction to most listeners.",
+      "url": "https://en.wikipedia.org/wiki/MP3",
+      "quote": "It was designed to greatly reduce the amount of data required to represent audio, yet still sound like a faithful reproduction of the original uncompressed audio to most listeners; for example, compared to CD-quality digital audio, MP3 compression can commonly achieve a 75–95% reduction in size, depending on the bit rate."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "MP3 compression works by reducing the accuracy of the components of a sound that psychoacoustic analysis judges to be beyond most people's hearing.",
+      "url": "https://en.wikipedia.org/wiki/MP3",
+      "quote": "In short, MP3 compression works by reducing the accuracy of certain components of sound that are considered (by psychoacoustic analysis) to be beyond the hearing capabilities of most humans."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "An MP3 encoder transforms each block of the recorded sound from the time domain into frequency-domain samples before coding it.",
+      "url": "https://en.wikipedia.org/wiki/MP3",
+      "quote": "These 576 consecutive samples, initially in the time domain, are transformed in one block to 576 frequency-domain samples by MDCT."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "An MRI scanner records data in k-space, a space of spatial frequencies that is the Fourier transform of the image, rather than recording the image directly.",
+      "url": "https://en.wikipedia.org/wiki/K-space_in_magnetic_resonance_imaging",
+      "quote": "In magnetic resonance imaging (MRI), the k-space or reciprocal space (a mathematical space of spatial frequencies) is obtained as the 2D or 3D Fourier transform of the image measured."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "The MRI image is produced by mathematically processing that raw k-space data once the scan has filled it.",
+      "url": "https://en.wikipedia.org/wiki/K-space_in_magnetic_resonance_imaging",
+      "quote": "When k-space is full (at the end of the scan) the data are mathematically processed to produce a final image. Thus k-space holds raw data before reconstruction."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "David Hilbert held the chair of Professor of Mathematics at the University of Göttingen from 1895 onwards.",
+      "url": "https://en.wikipedia.org/wiki/David_Hilbert",
+      "quote": "In 1895, as a result of intervention on his behalf by Felix Klein, he obtained the position of Professor of Mathematics at the University of Göttingen."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Around 1909 Hilbert was at work on differential and integral equations.",
+      "url": "https://en.wikipedia.org/wiki/David_Hilbert",
+      "quote": "Around 1909, Hilbert dedicated himself to the study of differential and integral equations; his work had direct consequences for important parts of modern functional analysis."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "To carry out that work Hilbert introduced an infinite-dimensional Euclidean space, which was only later called Hilbert space.",
+      "url": "https://en.wikipedia.org/wiki/David_Hilbert",
+      "quote": "In order to carry out these studies, Hilbert introduced the concept of an infinite dimensional Euclidean space, later called Hilbert space."
+    },
+    {
+      "claim_id": "f9",
+      "claim": "In an integral equation the unknown being solved for is a function, not a number.",
+      "url": "https://en.wikipedia.org/wiki/Integral_equation",
+      "quote": "In mathematical analysis, integral equations are equations in which an unknown function appears under an integral sign."
+    },
+    {
+      "claim_id": "f10",
+      "claim": "Hilbert's work on integral equations established the basis for his work on infinite-dimensional space, later called Hilbert space.",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Hilbert/",
+      "quote": "This work also established the basis for his work on infinite-dimensional space, later called Hilbert space, a concept that is useful in mathematical analysis and quantum mechanics."
+    },
+    {
+      "claim_id": "f11",
+      "claim": "For functions, the integral of a product plays the role of the dot product, and two functions are orthogonal, meaning perpendicular, when that integral is zero.",
+      "url": "https://en.wikipedia.org/wiki/Orthogonal_functions",
+      "quote": "Conceptually, the above integral is the equivalent of a vector dot product; two vectors are mutually independent (orthogonal) if their dot-product is zero."
+    },
+    {
+      "claim_id": "f12",
+      "claim": "Sine functions of different whole-number frequencies are orthogonal on the interval from minus pi to pi, because the integral of their product vanishes.",
+      "url": "https://en.wikipedia.org/wiki/Orthogonal_functions",
+      "quote": "and the integral of the product of the two sine functions vanishes."
+    },
+    {
+      "claim_id": "f13",
+      "claim": "Bessel's inequality is the generalisation of the Pythagorean theorem to infinite-dimensional spaces.",
+      "url": "https://en.wikipedia.org/wiki/Bessel%27s_inequality",
+      "quote": "Conceptually, the inequality is a generalization of the Pythagorean theorem to infinite-dimensional spaces."
+    },
+    {
+      "claim_id": "f14",
+      "claim": "For an orthonormal sequence, the sum of the squared coordinates of a vector cannot exceed its total energy, that is, its squared length. This is the 'at most' in the story's formula, and it holds for every square-integrable f.",
+      "url": "https://en.wikipedia.org/wiki/Bessel%27s_inequality",
+      "quote": "the inequality guarantees that the sum of these contributions cannot exceed the total energy of"
+    },
+    {
+      "claim_id": "f15",
+      "claim": "Forward direction of the biconditional: when the orthonormal system is a complete orthonormal basis, Bessel's inequality becomes the equality known as Parseval's identity, with no energy lost.",
+      "url": "https://en.wikipedia.org/wiki/Bessel%27s_inequality",
+      "quote": "When the orthonormal sequence forms a complete orthonormal basis, Bessel's inequality becomes an equality known as Parseval's identity. This signifies that the sum of the energies of the projections equals the total energy of the vector, meaning no energy is \"lost.\""
+    },
+    {
+      "claim_id": "f16",
+      "claim": "Being complete is a strictly stronger condition than being orthonormal: an orthonormal basis is an orthonormal system whose linear span is additionally dense.",
+      "url": "https://en.wikipedia.org/wiki/Orthonormal_basis",
+      "quote": "An orthonormal basis is an orthonormal system with the additional property that the linear span of"
+    },
+    {
+      "claim_id": "f17",
+      "claim": "Parseval's identity, stated for an orthonormal basis, is the direct analogue of the Pythagorean theorem: the sum of the squares of a vector's components in an orthonormal basis equals its squared length.",
+      "url": "https://en.wikipedia.org/wiki/Parseval%27s_identity",
+      "quote": "This is directly analogous to the Pythagorean theorem in Euclidean geometry, which asserts that the sum of the squares of the components of a vector in an orthonormal basis is equal to the squared length of the vector."
+    },
+    {
+      "claim_id": "f18",
+      "claim": "Converse direction, cited input: the only vector orthogonal to a dense linear subspace is the zero vector, so a nonzero vector orthogonal to an entire orthonormal system certifies that the system's span is not dense, i.e. the system is not complete.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+      "quote": "This is related to the fact that the only vector orthogonal to a dense linear subspace is the zero vector, for if S is any orthonormal set and v is orthogonal to S, then v is orthogonal to the closure of the linear span of S, which is the whole space."
+    },
+    {
+      "claim_id": "f19",
+      "claim": "The normalised constant together with the cosines and the sines forms an orthonormal basis for the square-integrable functions on the interval from minus pi to pi.",
+      "url": "https://en.wikipedia.org/wiki/Fourier_series",
+      "quote": "also forms an orthonormal basis for"
+    },
+    {
+      "claim_id": "f20",
+      "claim": "The density of the trigonometric basis's span, which is its completeness, follows from the Stone-Weierstrass theorem.",
+      "url": "https://en.wikipedia.org/wiki/Fourier_series",
+      "quote": "The density of their span is a consequence of the Stone–Weierstrass theorem, but follows also from the properties of classical kernels like the Fejér kernel."
+    },
+    {
+      "claim_id": "f21",
+      "claim": "The Fourier basis is complete, so Parseval's identity holds for every square-integrable function once the full trigonometric system is used.",
+      "url": "https://en.wikipedia.org/wiki/Fourier_series",
+      "quote": "Because of the least squares property, and because of the completeness of the Fourier basis, we obtain an elementary convergence result."
+    },
+    {
+      "claim_id": "f22",
+      "claim": "The relevant Hilbert space here is a space of square-integrable functions; square-integrability is the condition on f under which these coordinate and length arguments apply.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+      "quote": "examples of Hilbert spaces include spaces of square-integrable functions, spaces of sequences, Sobolev spaces consisting of generalized functions, and Hardy spaces of holomorphic functions."
+    },
+    {
+      "claim_id": "f23",
+      "claim": "Exact analogues of the Pythagorean theorem hold in a Hilbert space, which is what licenses calling this 'Pythagoras with infinitely many sides'.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+      "quote": "Exact analogs of the Pythagorean theorem and parallelogram law hold in a Hilbert space."
+    }
+  ],
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "diagram",
+      "source": "generated",
+      "file": "images/i1.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A 4:3 landscape editorial diagram, flat minimal geometric-illustration style, on a clean warm cream background with generous margins and a centered composition. On the left third: one complicated dark-ink audio waveform, dense and irregular, drawn inside a softly rounded rectangle. A slim horizontal arrow points from it to the right. On the right two thirds: a neat vertical stack of five simple smooth sine waves of increasing frequency, drawn one under another in muted colours from top to bottom - deep navy, teal, amber, rust, plum - each sine wave paired with a small solid filled square to its right, the squares decreasing in size going down the stack. Beneath the stack, three small faint dots suggesting the pattern continues forever. Thin confident ink linework, soft even lighting, no text, no numbers, no letters, no labels, no formulas, no people."
+    },
+    {
+      "image_id": "i2",
+      "role": "portrait",
+      "source": "commons",
+      "file": "images/i2.jpg",
+      "attribution": "Unknown author — File:David Hilbert, 1907.jpg, Public domain, via Wikimedia Commons. File-page credit line: [Photograph]: David Hilbert. (1907). American Journal of Mathematics, 29(1).",
+      "source_url": "https://commons.wikimedia.org/wiki/File:David_Hilbert,_1907.jpg",
+      "prompt": null
+    }
+  ],
+  "nulls": [
+    {
+      "field": "check_script - scope of what is proved vs illustrated",
+      "reason": "The script PROVES orthonormality symbolically and proves the converse as an instance (g = 1 orthogonal to all sines, coordinate sum 0 < ||g||^2 = 2*pi). It only ILLUSTRATES Bessel and Parseval on five witnesses, and it deliberately does NOT establish completeness: it includes a four-direction orthonormal system (Gram-Schmidt on {1, x, x^2, cos x}) that matches all five witnesses' squared lengths exactly yet is incomplete (residual of cos 2x has positive norm), to show that no finite witness set can certify completeness. Completeness of the trigonometric basis is taken from the cited theorem (f19, f20, f21), not from the script."
+    },
+    {
+      "field": "mechanism - 'complete' has two senses",
+      "reason": "Completeness of the orthonormal system means its span is dense (f16, f18), which is not the same as metric completeness of the space L^2 itself. Both are called completeness in this subject; the story uses only the first sense. The narration says 'a complete basis' and 'nothing left out in the gap' rather than the word 'dense', which no viewer parses in three seconds."
+    },
+    {
+      "field": "f20 - Stone-Weierstrass is shorthand",
+      "reason": "Stone-Weierstrass gives uniform density of trigonometric polynomials among continuous 2*pi-periodic functions (on the circle), not directly in C([-pi, pi]) under the sup norm; reaching L^2(-pi, pi) density needs the further standard steps (continuous periodic functions are L^2-dense, and uniform convergence implies L^2 convergence on a finite interval). The conclusion is correct and the attribution conventional; the mechanism states the caveat explicitly rather than hiding it, and f21 cites the completeness of the Fourier basis directly."
+    },
+    {
+      "field": "L^2 hypothesis in the spoken narration",
+      "reason": "The mechanism narration says 'a square-integrable function' once, and the formula carries the domain restriction (for all f in L^2); the fuller reason square-integrability is required - that a non-square-integrable f can have a divergent coordinate and an undefined left-hand side - is stated in the mechanism field and rests on f22, not on the narration, which has no room for it."
+    },
+    {
+      "field": "images[i2].attribution - author name",
+      "reason": "The photographer of the 1907 Hilbert photograph is not recorded on Commons (the file's Artist field reads 'Unknown author'), so no individual can be credited; the file page and the American Journal of Mathematics credit line stand in its place. Licence on the file page is Public domain, which clears the tool's gate."
+    },
+    {
+      "field": "images[i2].file - framing note",
+      "reason": "The Commons original is 1185x1695 portrait and the card slot is landscape with object-fit: cover, which would have cropped through Hilbert's face. The file in this run is the original cropped to 1185x995 at y=150 (head and shoulders), nothing else: no retouching, no compositing, no change to the subject."
+    },
+    {
+      "field": "quantum mechanics",
+      "reason": "Not claimed in this revision. The sourceable statement is only that von Neumann used Hilbert spaces in the foundations of quantum mechanics, which is weaker than 'built quantum mechanics on this space'; the seconds it would cost belong to the completeness argument, so the claim is not made at all."
+    },
+    {
+      "field": "quotation of Hilbert and his state of mind",
+      "reason": "No words are attributed to Hilbert and no inner state either: the turn says he is 'working on' integral equations, which the source states, not 'stuck on' them, which no source supports."
+    },
+    {
+      "field": "causal link from Hilbert to MP3 or MRI",
+      "reason": "No source states that audio coding or MRI reconstruction descend from Hilbert's papers, so the payoff asserts only what is sourced: that both store frequency components rather than the raw wave. What is offered to the viewer is the shared mathematics, not a line of influence."
+    }
+  ]
+}

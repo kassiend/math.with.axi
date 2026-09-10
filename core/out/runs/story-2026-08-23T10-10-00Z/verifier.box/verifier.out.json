@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "hilbert-space-infinite-pythagoras",
+      "detail": "Not a defect; recorded so the pass is honest about what is proved versus cited. Two inputs to the universal biconditional are true standard theorems that no terminating symbolic computation can establish, and the payload now correctly attributes both to citation rather than to the script: (a) the FORWARD direction, complete => Parseval equality for all f, stated as 'cited'; and (b) the completeness of the trigonometric system in L^2(-pi, pi), stated to rest 'on the cited theorem, never on the witnesses'. I accept both by citation, as genuine standard mathematics, and verified everything around them: the sine and trigonometric systems are orthonormal; Bessel holds on all five witnesses; the trig basis gives Parseval equality on all five; the constant direction alone (not any cosine) repairs f=1; and the two-independent-ways computation of ||x||^2 agrees (integral 2*pi**3/3 = coordinate sum 4*pi*sum(1/n^2) = 2*pi**3/3). This is the earlier 'checks all of it' over-claim now fixed: the script's role is explicitly demoted to illustration and the theorems carry the universal weight.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "hilbert-space-infinite-pythagoras",
+      "script": "verifier.checks/hilbert-space-infinite-pythagoras.py",
+      "computed": "2*pi**3/3",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "resolved_prior_findings": [
+    {
+      "prior_severity": "fatal",
+      "prior_kind": "inconsistent-counterexample",
+      "was": "The displayed 'equality <=> complete' left f free, so read pointwise its 'only if' half was false (f = x gives equality against the incomplete sine system), and the prose stated that very instance as if it supported the claim.",
+      "now": "FIXED. The formula's second line now reads 'equality for all f  <=>  {e_n} complete', with the universal quantifier written INSIDE the left half. Under that scoping I verified both directions: forward (complete => Parseval) is cited and illustrated with equality on all five witnesses against the full trigonometric basis; converse (equality-for-all-f => complete) is proved (see below). The f = x case is now explicitly named as the TRAP -- 'The naive pointwise reading equality iff complete is false, and the sine system shows why: f = x (odd) already gives equality against the sines ... even though the sines are incomplete' -- and I confirmed it is exactly that: f = x gives equality (2*pi**3/3 both sides) on the incomplete sine system, while f = 1 gives strict inequality (0 < 2*pi). The prose no longer contradicts the headline; it supplies the correct pointwise characterisation 'equality holds exactly when f lies in the closed span', which I confirmed on both f = x (in span, equality) and f = 1 (not in span, strict)."
+    },
+    {
+      "prior_severity": "major",
+      "prior_kind": "unsupported-universality",
+      "was": "The converse ('complete is precisely the condition under which Bessel becomes equality') was asserted with the word 'precisely' rather than argued.",
+      "now": "FIXED. The converse is now proved: 'if the system is not complete then, by the standard characterisation, there is a nonzero g orthogonal to every e_n; all of g's coordinates are then zero, so its coordinate sum is 0 while its squared length is positive, and equality fails for g.' The argument is valid -- its one cited input, that an incomplete orthonormal set admits a nonzero orthogonal vector, is the standard definition-level characterisation in a Hilbert space -- and it does the actual work: from that g, sum = 0 < ||g||^2 kills universal equality. I verified two concrete instances of the proof's arithmetic: for the sines, g = 1 is orthogonal to every e_n with coordinate sum 0 and ||g||^2 = 2*pi > 0; and a parity-free instance, the trigonometric basis with cos(x) deleted, where g = cos x is orthogonal to every remaining direction with sum 0 and ||g||^2 = pi > 0."
+    },
+    {
+      "prior_severity": "major",
+      "prior_kind": "unsupported-universality",
+      "was": "'The script checks all of it symbolically on five witnesses' let a finite witness set stand in for the universal claim and for completeness.",
+      "now": "FIXED. The payload now states plainly 'What the script does and does not do: it PROVES orthonormality ... and proves the converse instance; it ILLUSTRATES Bessel and Parseval on five witnesses ...; and it demonstrates that no finite witness set can establish completeness, by exhibiting a four-direction orthonormal system (Gram-Schmidt on {1, x, x^2, cos x}) that reproduces the exact squared length of all five witnesses yet is incomplete, its residual on cos 2x having positive norm. Completeness of the trigonometric basis therefore rests on the cited theorem, never on the witnesses.' I reproduced that construction independently: the Gram-Schmidt system is orthonormal, matches the exact squared norm of all five witnesses, and is incomplete with residual ||cos 2x - projection||^2 = pi*(765 - 8*pi**4)/(8*(90 - pi**4)) = 0.7565 > 0. The witnesses are now correctly confined to illustration."
+    },
+    {
+      "prior_severity": "minor",
+      "prior_kind": "unstated-assumption",
+      "was": "Square-integrability of f was never stated as the standing hypothesis; 'the identity holds for every f' carried no restriction.",
+      "now": "FIXED. The mechanism now opens 'Work in L^2(-pi, pi) ... f must be square-integrable for its coordinates and length to exist at all - that is the standing hypothesis on f', and the formula itself carries the qualifier '(for all f in L^2)'."
+    },
+    {
+      "prior_severity": "minor",
+      "prior_kind": "other",
+      "was": "'density follows from the Stone-Weierstrass theorem' compressed the C(circle)-to-L^2(-pi,pi) steps into one attribution.",
+      "now": "FIXED. Now stated with the caveat: 'its span's density follows from the Stone-Weierstrass theorem (strictly, uniform density of trigonometric polynomials among continuous periodic functions, which then yields L^2 density by the usual steps)'."
+    }
+  ]
+}

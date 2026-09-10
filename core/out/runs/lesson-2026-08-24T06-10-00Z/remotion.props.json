@@ -1,0 +1,50 @@
+{
+  "runId": "lesson-estimate-product-round-to-nearest-ten",
+  "capture": {
+    "publicPath": "captures/lesson-estimate-product-round-to-nearest-ten",
+    "frames": 1268,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "intro",
+        "src": "audio/lesson-estimate-product-round-to-nearest-ten/intro.mp3",
+        "from": 12,
+        "durationInFrames": 200
+      },
+      {
+        "id": "s1",
+        "src": "audio/lesson-estimate-product-round-to-nearest-ten/s1.mp3",
+        "from": 212,
+        "durationInFrames": 104
+      },
+      {
+        "id": "s2",
+        "src": "audio/lesson-estimate-product-round-to-nearest-ten/s2.mp3",
+        "from": 316,
+        "durationInFrames": 117
+      },
+      {
+        "id": "s3",
+        "src": "audio/lesson-estimate-product-round-to-nearest-ten/s3.mp3",
+        "from": 433,
+        "durationInFrames": 212
+      },
+      {
+        "id": "s4",
+        "src": "audio/lesson-estimate-product-round-to-nearest-ten/s4.mp3",
+        "from": 645,
+        "durationInFrames": 242
+      },
+      {
+        "id": "s5",
+        "src": "audio/lesson-estimate-product-round-to-nearest-ten/s5.mp3",
+        "from": 887,
+        "durationInFrames": 366
+      }
+    ]
+  }
+}

@@ -190,6 +190,73 @@
       "status": "failed",
       "created_at": "2026-08-19T06:09:29.147Z",
       "failed_at": "verification"
+    },
+    {
+      "id": "lesson-estimate-product-round-to-nearest-ten",
+      "concept_slug": "estimate-product-round-to-nearest-ten",
+      "title": "Estimate a product",
+      "area": "estimation-and-bounding",
+      "tags": [
+        "bounding",
+        "estimation",
+        "mental-arithmetic",
+        "multiplication"
+      ],
+      "counter": 6,
+      "status": "shipped",
+      "created_at": "2026-08-23T19:57:04.796Z",
+      "seconds": 42.267,
+      "video": "output\\posts\\lessons\\estimate-product-round-to-nearest-ten.mp4",
+      "run_dir": "out\\runs\\lesson-2026-08-24T06-10-00Z"
+    },
+    {
+      "id": "lesson-line-multiplication-crossings-two-digit",
+      "concept_slug": "line-multiplication-lattice",
+      "title": "Multiply by drawing lines",
+      "tags": [
+        "lattice",
+        "mental-arithmetic",
+        "multiplication",
+        "place-value",
+        "visual-method"
+      ],
+      "status": "failed",
+      "created_at": "2026-08-25T17:09:36.715Z",
+      "failed_at": "verification"
+    },
+    {
+      "id": "lesson-line-multiplication-crossings-two-digit",
+      "concept_slug": "line-multiplication-lattice",
+      "title": "Multiply by drawing lines",
+      "tags": [
+        "lattice",
+        "mental-arithmetic",
+        "multiplication",
+        "place-value",
+        "visual-method"
+      ],
+      "status": "failed",
+      "created_at": "2026-08-25T17:21:19.142Z",
+      "failed_at": "verification"
+    },
+    {
+      "id": "lesson-line-multiplication-crossings-two-digit",
+      "concept_slug": "line-multiplication-lattice",
+      "title": "Multiply by drawing lines",
+      "area": "multiplication-shortcut",
+      "tags": [
+        "lattice",
+        "mental-arithmetic",
+        "multiplication",
+        "place-value",
+        "visual-method"
+      ],
+      "counter": 7,
+      "status": "shipped",
+      "created_at": "2026-08-25T17:24:45.662Z",
+      "seconds": 39.533,
+      "video": "output\\posts\\lessons\\line-multiplication-crossings-two-digit.mp4",
+      "run_dir": "out\\runs\\lesson-2026-08-25T17-09-37-635Z"
     }
   ]
 }

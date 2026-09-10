@@ -1,0 +1,19 @@
+{
+  "task_id": "percent-25-more-reverse-drop",
+  "duration_s": 20,
+  "structure_id": "percent-increase-to-decrease-inversion",
+  "categories": [
+    "percentage"
+  ],
+  "description": "By what percent is a less than b?",
+  "statement": "b is 25% more than a",
+  "statement_latex": null,
+  "answer": "20%",
+  "answer_latex": "20\\%",
+  "nulls": [
+    {
+      "field": "statement_latex",
+      "reason": "statement is a plain English sentence with one percent literal; the plain-text form renders exactly, so no LaTeX form exists to supply"
+    }
+  ]
+}

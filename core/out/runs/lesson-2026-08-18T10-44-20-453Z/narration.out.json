@@ -1,0 +1,51 @@
+{
+  "intro": {
+    "narration": "[excited] Heey — three percent of a hundred twenty-five? [pause] Flip it.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.12
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Three percent of a hundred twenty-five looks awkward.",
+      "instruction": "Flip the percent",
+      "working": "3% of 125 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 3.36
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] But A percent of B always equals B percent of A. [pause] Swap them.",
+      "instruction": "Swap the two numbers",
+      "working": "a% of b = b% of a",
+      "audio": "audio/s2.mp3",
+      "seconds": 6.64
+    },
+    {
+      "step_id": "s3",
+      "narration": "[excited] So do the easy side: a hundred twenty-five percent of three. That's three, plus three quarters.",
+      "instruction": "Do the easy side",
+      "working": "125% of 3 = 3 + 0.75",
+      "audio": "audio/s3.mp3",
+      "seconds": 7.6
+    },
+    {
+      "step_id": "s4",
+      "narration": "[confident] Which is three point seven five. [pause] Read it straight back.",
+      "instruction": "Read it back",
+      "working": "3% of 125 = 3.75",
+      "audio": "audio/s4.mp3",
+      "seconds": 6.08
+    },
+    {
+      "step_id": "s5",
+      "narration": "[thoughtful] One catch — this is \"of\", not \"off\". [pause] Twenty percent off fifty is forty, but fifty percent off twenty is ten.",
+      "instruction": "“off” is not “of”",
+      "working": "20% off 50 = 40, 50% off 20 = 10",
+      "audio": "audio/s5.mp3",
+      "seconds": 11.92
+    }
+  ],
+  "total_seconds": 40.72,
+  "nulls": []
+}

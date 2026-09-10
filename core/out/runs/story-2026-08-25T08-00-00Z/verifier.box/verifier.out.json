@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "nash-equilibrium-in-28-pages",
+      "detail": "Not a defect; recorded so the pass is honest about the boundary between what is computed and what is cited. The card has two lines and only the first is the kind of thing a script can settle. Line one, the definition, is an inequality quantified over every player and every alternative strategy — on a FIXED game that is decidable, and I decided it on both of the payload's games by intersecting the two best-response correspondences and re-testing each candidate against a fully mixed deviation r in [0,1] using sympy.maximum, not merely against the two pure ones. Line two, existence for every finite game, quantifies over all games; no terminating computation reaches it, and the payload already attributes it to citation and calls the script's role there instantiation. I accept it on that basis. Everything the script does claim, I reproduced independently and it agreed to the character: (-2, -2, 6/13, 7/13, 34/65)."
+    },
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "nash-equilibrium-in-28-pages",
+      "detail": "Stated, not objected to. The card's second line reads 'finitely many actions => there exists a mixed sigma*', which silently also assumes finitely many PLAYERS. The mechanism field supplies that in its opening sentence ('finitely many players, each with a finite set of actions'), so the hypothesis is not missing from the payload — only from the eight words on screen, where it will not fit and where every instance shown has two players anyway. I checked that no narration line overstates it either: 'Then one always exists' is spoken directly after 'Some games have no such point', so its antecedent is the class of games under discussion, not all games whatsoever."
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "nash-equilibrium-in-28-pages",
+      "detail": "Checked for the failure mode this kind of story usually has: a narration line quietly stronger than the mathematics. Three candidates, all clean. (a) 'Stable, and worse for both' — verified as a strict inequality on both coordinates, -2 < -1 for each player, not a weak one. (b) 'Talking beats silence either way' — verified as strict dominance cell by cell (0 > -1 against Silent, -2 > -3 against Talk), which is stronger than what the sentence promises and so cannot be contradicted by it. (c) 'Then one always exists' — the existence claim, handled above. I also confirmed the story never says the equilibrium is UNIQUE in general or GOOD in general; uniqueness is asserted only of the two named instances, where I verified it by exhausting the candidate set."
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "nash-equilibrium-in-28-pages",
+      "script": "verifier.checks/nash-equilibrium-in-28-pages.py",
+      "computed": "(-2, -2, 6/13, 7/13, 34/65)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "method": "Best-response correspondences built as explicit piecewise objects and intersected, rather than support enumeration: for each player the payoff difference between their two actions is affine in the opponent's mix, so its sign gives the best reply and its root gives the indifference point. The candidate set is then the four corners, the two pure-against-indifferent edges and the single interior crossing; each candidate is re-tested from the bare definition against a fully mixed deviation. A separate 260x260 numeric pass minimises total regret over the unit square as a guard against a symbolic slip, and its argmin matched the exact answer in both games."
+}

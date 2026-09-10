@@ -23,6 +23,106 @@
       ],
       "video": "output/posts/stories/napkin-ring-height-only.mp4",
       "run_dir": "out/runs/story-2026-08-22T13-29-51Z"
+    },
+    {
+      "story_id": "euclid-one-line-loop",
+      "area": "biography",
+      "subject_slug": "euclid",
+      "angle_slug": "euclidean-algorithm-oldest-still-running",
+      "title": "Euclid's one-line loop.",
+      "status": "shipped",
+      "created_at": "2026-08-23T17:53:40.288Z",
+      "seconds": 79.5,
+      "image_credits": [
+        {
+          "source": "commons",
+          "attribution": "Jusepe de Ribera — File:Jusepe de Ribera - Euclid - 2001.26 - J. Paul Getty Museum.jpg, Public domain, via Wikimedia Commons"
+        }
+      ],
+      "video": "output\\posts\\stories\\euclid-one-line-loop.mp4",
+      "run_dir": "out\\runs\\story-2026-08-23T10-00-00Z"
+    },
+    {
+      "story_id": "gauss-legendre-least-squares",
+      "area": "biography",
+      "subject_slug": "carl-friedrich-gauss",
+      "angle_slug": "least-squares-legendre-priority",
+      "title": "Legendre published it. Gauss claimed it.",
+      "status": "shipped",
+      "created_at": "2026-08-23T18:13:10.994Z",
+      "seconds": 74.6,
+      "image_credits": [
+        {
+          "source": "commons",
+          "attribution": "Carl Friedrich Gauss — File:Gauss, Carl Friedrich – Theoria motus corporum coelestium in sectionibus conicis solem ambientium, 1809 – BEIC 12217180.jpg, Public domain, via Wikimedia Commons"
+        },
+        {
+          "source": "commons",
+          "attribution": "Gottlieb Biermann / After Christian Albrecht Jensen — File:Carl Friedrich Gauss.jpg, Public domain, via Wikimedia Commons"
+        },
+        {
+          "source": "generated",
+          "attribution": null
+        }
+      ],
+      "video": "output\\posts\\stories\\gauss-legendre-least-squares.mp4",
+      "run_dir": "out\\runs\\story-2026-08-23T10-05-00Z"
+    },
+    {
+      "story_id": "hilbert-space-infinite-pythagoras",
+      "area": "biography",
+      "subject_slug": "david-hilbert",
+      "angle_slug": "hilbert-space-infinite-pythagoras",
+      "title": "Perpendicular isn't enough.",
+      "status": "shipped",
+      "created_at": "2026-08-23T18:36:01.936Z",
+      "seconds": 78.967,
+      "image_credits": [
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "commons",
+          "attribution": "Unknown author — File:David Hilbert, 1907.jpg, Public domain, via Wikimedia Commons. File-page credit line: [Photograph]: David Hilbert. (1907). American Journal of Mathematics, 29(1)."
+        }
+      ],
+      "video": "output\\posts\\stories\\hilbert-space-infinite-pythagoras.mp4",
+      "run_dir": "out\\runs\\story-2026-08-23T10-10-00Z"
+    },
+    {
+      "story_id": "nash-equilibrium-in-28-pages",
+      "area": "biography",
+      "subject_slug": "john-forbes-nash",
+      "angle_slug": "nash-equilibrium-the-film-got-it-wrong",
+      "title": "The film got the math wrong.",
+      "status": "shipped",
+      "created_at": "2026-08-25T08:49:39.157Z",
+      "seconds": 85.1,
+      "image_credits": [
+        {
+          "source": "commons",
+          "attribution": "Tony Shek — File:Russell Crowe TIFF 2006.jpg, CC BY-SA 2.0, via Wikimedia Commons"
+        },
+        {
+          "source": "commons",
+          "attribution": "Economicforum — File:John Forbes Nash, Jr..jpg, CC BY-SA 3.0, via Wikimedia Commons"
+        },
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "generated",
+          "attribution": null
+        }
+      ],
+      "video": "output\\posts\\stories\\nash-equilibrium-in-28-pages.mp4",
+      "run_dir": "out\\runs\\story-2026-08-25T08-00-00Z"
     }
   ]
 }

@@ -1,0 +1,170 @@
+{
+  "lesson_id": "undo-discount-find-original-price",
+  "counter": 5,
+  "area": "percentage-and-discount",
+  "concept_slug": "undo-discount-find-original-price",
+  "tags": ["discount", "mental-arithmetic", "percentage", "reverse", "shortcut"],
+  "method_name": "Undo a discount",
+  "applicability": "One single discount of d% taken off one original price P, where the sale price S you can see is the exact product S = P(1 - d/100) and 0 <= d < 100. The original is then recovered by DIVIDING by the fraction you kept: P = S / (1 - d/100). That is exact for every real P > 0 and every such d - it is just the inverse of one multiplication, so there is nothing to approximate. The mental tenths form shown on the cards is the case d = 10k for a whole number of tenths k = 1..9: a discount of 10k% means you kept (10 - k) tenths of the price, so one tenth of the original is S / (10 - k) and the original is ten of those. The worked example's original price being a multiple of 10 is a presentation choice only - it keeps the intermediate tenth whole (66 / 6 = 11 rather than 11.3...) and has no effect on whether the method works. The claim is verified exhaustively over the declared draw domain (k = 1..9 crossed with P = 40, 50, ..., 250) and over the wider grid of every integer d = 0..99 against every P = 1..500 in exact rational arithmetic. At d = 100 the rule has no answer at all, which is why the domain stops strictly below it.",
+  "carry_case": "Adding the percent back is not the inverse, and this is the mistake the method exists to kill. At 40% off a sale price of 66, the tempting move is 66 + 40% of 66 = 66 + 26.40 = 92.40 - but the answer is 110. The percent is always taken from the ORIGINAL, and 40% of 110 is 44, while 40% of the shrunken 66 is only 26.40; the add-back is short by exactly that 17.60 gap. It is not a near miss that happens to be bad here: S(1 + d/100) = P(1 - d^2/10000), which is strictly less than P for every 0 < d < 100 and every P > 0, so adding the percent back undershoots EVERY time, and the bigger the discount the worse it is (a 50%-off item needs doubling, not +50%). The taught division rule itself has exactly one input it cannot handle: d = 100, where every original price whatsoever produces S = 0, so 0 divided by a kept fraction of 0 names no starting price - the rule is inverting a multiplication, and multiplying by zero is not invertible.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Undo a discount",
+      "working": "66 after 40% off. Start?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Divide by what you kept",
+      "working": "40% off → kept 6 tenths"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Cut the sale into tenths",
+      "working": "66 ÷ 6 = 11"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Take ten of them",
+      "working": "11 × 10 = 110"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Never add the % back",
+      "working": "66 + 40% = 92.4, not 110"
+    }
+  ],
+  "worked_example": {
+    "operands": [66, 40],
+    "result": "110"
+  },
+  "operand_draw": {
+    "seed": 366732696,
+    "draws": [
+      {
+        "role": "discount_tenths",
+        "seed": 366732696,
+        "spec": { "min": 1, "max": 9, "filter": { "positive_only": true } },
+        "n": 1,
+        "draws": [4],
+        "attempts": 1,
+        "rejections": [],
+        "rejection_rate": 0,
+        "rejection_rate_alarm": false
+      },
+      {
+        "role": "original_price_tens",
+        "seed": 366732696,
+        "spec": { "min": 4, "max": 25, "filter": { "positive_only": true } },
+        "n": 1,
+        "draws": [11],
+        "attempts": 1,
+        "rejections": [],
+        "rejection_rate": 0,
+        "rejection_rate_alarm": false
+      }
+    ],
+    "construction": "Two draws, both on the run's seed 366732696, both through core/pipeline/lib/sampling.mjs draw(). The sampler emits uniform INTEGERS over a declared [min,max], so a range that is a set of multiples of ten can only be declared in units of ten - that unit is part of the range declaration, made before any draw was seen, and the raw draws are recorded here so the whole thing replays. Draw 1: k = 4 over [1,9], k being the number of tenths knocked off, so the discount is 10k = 40%. That range is [1,9] for a stated mathematical reason and not a cosmetic one: k is exactly the set of discounts for which the mental tenths step exists, and k = 10 (100% off) is excluded because it is the single input the rule cannot invert, which is stated in carry_case rather than hidden by the range. Draw 2: u = 11 over [4,25], u being the original price in tens, so the original price is 10u = 110. The sale price shown on the card, 66, is not drawn and not chosen - it is forced by the two draws as 110 x (1 - 40/100). No filter did any work in either draw (rejection_rate 0 on both, one attempt each), so every value in both ranges was reachable, including the ones that render less prettily: k = 3 would have given 66/7-style sevenths and k = 7 thirds, and either would have been kept and shown as dealt. The multiple-of-ten price range is a presentation constraint under §3.4 - it decides whether the intermediate tenth is a whole number, never whether the method works, and applicability states that the division form is exact for every real price. The declared result 110 is reported as the direct value of 66 / (1 - 40/100), computed in exact rationals, not by replaying the tenths steps on the cards."
+  },
+  "dedup_check": {
+    "tool": "core/pipeline/lib/ledger.mjs findCandidates and nextCounter, called through the module API. The documented CLI form `node core/pipeline/lib/ledger.mjs candidates ...` exits 0 silently on this host because the guard `import.meta.url === file://${process.argv[1]}` never matches a Windows argv path; sampling.mjs carries the same guard and the same silent failure, so the draws were taken through draw() directly. Nothing was blocked. nextCounter() returned 5, one above the highest shipped counter (4, multiply-near-100-complement-base).",
+    "chosen": {
+      "concept_slug": "undo-discount-find-original-price",
+      "tags_probed": ["discount", "mental-arithmetic", "percentage", "reverse", "shortcut"],
+      "blocked": [],
+      "candidates": [
+        {
+          "id": "lesson-percent-swap-a-of-b-equals-b-of-a",
+          "concept_slug": "percent-swap-a-of-b-equals-b-of-a",
+          "status": "failed",
+          "verdict": "Nearest neighbour on tags - same area, four shared tags. Not a duplicate: that lesson is a commutativity observation used to make one FORWARD percentage easier to say (4% of 75 = 75% of 4). It computes a percentage of a known number. This lesson runs the operation backwards: the original number is the unknown, and the mechanism is inverting a multiplication by division. Swapping the operands does not help at all here - you cannot flip 66 and 40 into anything useful, because 40 is not a price. Also never shipped: one failure, so the slug is neither blocking nor closed, and no viewer has seen it."
+        },
+        {
+          "id": "lesson-stacked-discounts-multiply-keepers",
+          "concept_slug": "stacked-discounts-multiply-keepers",
+          "status": "failed",
+          "verdict": "Shares the 'keeper fraction' idea, which is the only genuine overlap risk. Judged not a duplicate: that lesson is about composing TWO forward discounts and showing 30% then 20% is not 50%. This one has a single discount and asks the opposite question - given the end price, recover the start. A viewer who had watched the stacking lesson would still reach for 'add 40% back' on this problem and still get 92.40. Different question, different failure mode, and it never shipped either."
+        },
+        {
+          "id": "lesson-multiply-near-100-complement-base",
+          "concept_slug": "multiply-near-100-complement-base",
+          "status": "shipped",
+          "verdict": "Shipped, two shared tags (mental-arithmetic, shortcut). A multiplication shortcut for a pair of factors near 100; no percentages, no inverse, no unknown. Unrelated beyond both being mental methods."
+        },
+        {
+          "id": "lesson-square-two-digit-ending-in-5",
+          "concept_slug": "square-two-digit-ending-in-5",
+          "status": "shipped",
+          "verdict": "Shipped. Single-input squaring trick, different trigger, no division and no unknown quantity. Unrelated."
+        },
+        {
+          "id": "lesson-multiply-by-11-two-digit",
+          "concept_slug": "multiply-by-11-two-digit",
+          "status": "shipped",
+          "verdict": "Shipped. Digit-block multiplication with a carry caveat. Nothing shared but the general shape of a mental shortcut. Unrelated."
+        },
+        {
+          "id": "lesson-remainder-mod-9-digit-sum",
+          "concept_slug": "remainder-mod-9-digit-sum",
+          "status": "shipped",
+          "verdict": "Shipped. Produces a remainder from digits; no percentage, no inverse. Unrelated."
+        },
+        {
+          "id": "lesson-divisibility-by-7-double-last-digit",
+          "concept_slug": "divisibility-by-7-double-last-digit",
+          "status": "failed",
+          "verdict": "Never shipped, divisibility test. Unrelated."
+        },
+        {
+          "id": "lesson-divisibility-by-11-alternating-sum",
+          "concept_slug": "divisibility-by-11-alternating-sum",
+          "status": "failed",
+          "verdict": "Never shipped, divisibility test. Unrelated."
+        },
+        {
+          "id": "lesson-multiply-equidistant-difference-of-squares",
+          "concept_slug": "multiply-equidistant-difference-of-squares",
+          "status": "failed",
+          "verdict": "Never shipped, multiplication identity. Unrelated."
+        }
+      ]
+    },
+    "also_probed": [
+      {
+        "concept_slug": "percent-of-number-ten-percent-ladder",
+        "verdict": "Clear of the ledger (no blocks). Rejected for this run: finding 15% by taking 10% then half of it is the forward direction again, and it is the sub-skill this lesson already uses inside step 3 rather than a separate mechanism. It also has a weak caveat - the ladder does not break, it only gets longer for a percent like 17 - and a lesson whose caveat is 'this takes more steps' teaches nothing about where it fails."
+      },
+      {
+        "concept_slug": "percent-change-up-then-down-asymmetry",
+        "verdict": "Clear of the ledger, and a real future lesson (+20% then -20% lands at 96%, not 100%). Not used here because it is an observation about a number rather than a method the viewer can run on their own inputs, and its punchline is the same asymmetry that this lesson's carry_case already demonstrates concretely."
+      },
+      {
+        "concept_slug": "reverse-vat-or-tax-divide-by-multiplier",
+        "verdict": "Clear of the ledger, but it is the same mechanism with the sign flipped (divide by 1 + t/100 instead of 1 - d/100). Shipping both would be one inverse taught twice, so it is left as the natural extension a viewer works out themselves rather than run as a near-duplicate lesson."
+      }
+    ]
+  },
+  "nulls": [
+    {
+      "field": "applicability.rounded_sale_prices",
+      "reason": "The method is claimed exact only when the visible sale price is the exact product P(1 - d/100). Shops round to the nearest penny, so a ticket reading 66.00 may have come from 65.997, and the recovered original then carries that rounding scaled up by 1/(1 - d/100) - about 1.67x at 40% off. No bound on that error is asserted here because none was tested, per §3.3."
+    },
+    {
+      "field": "applicability.multiple_or_compound_reductions",
+      "reason": "Nothing is claimed about a price that went through two discounts, a discount plus tax, or a member's extra percent at the till. Dividing by one keeper fraction inverts one multiplication only; what the correct single divisor would be in those cases was not tested, so it is not stated."
+    },
+    {
+      "field": "applicability.undoing_an_increase",
+      "reason": "The card teaches discounts. Undoing a percentage INCREASE is the same inverse with 1 + d/100 in place of 1 - d/100, but the lesson makes no claim about it and the cards never show it, so the condition is left absent rather than guessed at."
+    },
+    {
+      "field": "carry_case.secondary_break",
+      "reason": "carry_case names two things because they are different in kind and both are load-bearing: the add-back trap (the intuitive rule, wrong for every discount) and d = 100 (the one input the taught division rule cannot invert). Neither is a substitute for the other, and collapsing them into one sentence would hide whichever was dropped."
+    }
+  ]
+}

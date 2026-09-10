@@ -1,0 +1,29 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "An MP3 throws away most of the recording and most listeners can't hear the difference. [curious] Behind that is Pythagoras, with infinitely many sides.",
+      "audio": "audio/hook.mp3",
+      "seconds": 10.189
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] David Hilbert, Göttingen, around 1909. He's working on integral equations, where the unknown isn't a number, it's a function. So he introduced a Euclidean space with infinitely many dimensions. One point per function.",
+      "audio": "audio/turn.mp3",
+      "seconds": 15.46
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[curious] Two functions are perpendicular when the integral of their product is zero, and sine waves of different frequencies pass that test. So a square-integrable function gets coordinates, one per wave. Square and add them: at most its length squared. At most. [surprised] The flat function, one, has every sine coordinate zero, but its length isn't. Miss one direction and a function hides in the gap: you need a complete basis. Add back the constant and the cosines, and at most becomes exactly.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 33.023
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] Two places it lives. An MP3 turns sound into frequency components and blurs the ones most ears won't catch. An MRI scanner never photographs you; it fills a grid of spatial frequencies and turns that into a picture. Don't store the wave. Store its coordinates.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 19.35
+    }
+  ],
+  "total_seconds": 78.022
+}

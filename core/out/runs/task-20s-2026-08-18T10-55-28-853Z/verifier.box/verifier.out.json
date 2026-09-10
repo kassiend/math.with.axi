@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "percent-42-of-x-is-36",
+      "detail": "The 'statement' field alone ('42% of x = 36') is a datum, not a question, and on its own determines only x = 600/7. The interrogative that selects the published answer ('What is 70% of x?') lives in the 'description' field. Taken together the two fields are unambiguous and determine 60 uniquely, so this is a note about field composition rather than a mathematical defect: a reader shown only 'statement' could not arrive at 60. No change to the verdict.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "percent-42-of-x-is-36",
+      "script": "verifier.checks/percent-42-of-x-is-36.py",
+      "computed": "60",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "uniqueness": "solveset over the reals returns the singleton {600/7}; the equation is linear in x, so there is no second branch and no sign ambiguity to resolve. The 'watch the sign and the branch' concern does not bite here: the coefficient 42/100 and the constant 36 are both positive, so x > 0 and 70% of x > 0.",
+    "exactness": "Computed entirely in sympy Rationals, never floats. 42% was taken as 42/100 exactly. Result is 60 with reduced denominator q = 1, i.e. an exact integer, not a rounded decimal. Note that x itself is 600/7 = 85.714..., which is NOT an integer; the integrality of the answer comes from 70/42 = 5/3 dividing 36 exactly, and 5/3 * 36 = 60. A solver who rounded x to 85.71 would get 59.997 and could mistake 60 for a rounding; it is not.",
+    "simplest_form": "'60' is a bare reduced integer. No fraction to reduce, no radical to denest, no unit to attach. answer_latex null is correctly justified since the plain integer renders identically in LaTeX.",
+    "independent_routes": "Two routes computed and cross-checked inside the script: (a) solve 42/100 * x = 36 symbolically, then take 70/100 of the solution; (b) rescale directly, 70% of x = (70/42) * (42% of x) = (5/3) * 36. Both give exactly 60. The solution was also substituted back into the given datum, returning 36.",
+    "scope": "Per the orchestrator's instruction, section 3.2 of the brief (applicability condition and counterexample) is waived for this daily-task post; a one-off puzzle states no reusable technique, so there is no generalisation boundary to attack. Cherry-picked-operand checks are not applicable either: the payload declares no sampling range, seed, or presentation filter, and the two operands 42 and 36 are fixed authored constants rather than draws.",
+    "nulls_audit": "Both declared nulls (statement_latex, answer_latex) carry reasons that match the content: the statement uses only ASCII '%', 'of' and '=' with no LaTeX-only notation, and the answer is a plain integer. Neither null conceals a missing value."
+  }
+}

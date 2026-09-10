@@ -1,0 +1,9 @@
+{"t":"2026-08-25T10:04:20.925Z","event":"run.start","task_id":"last-two-digits-7-pow-2024","duration_s":40,"seed":-1886554145}
+{"t":"2026-08-25T10:04:21.304Z","event":"crosscheck","agreed":true,"generator":"01","verifier":"01"}
+{"t":"2026-08-25T10:04:21.335Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_greetings5.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":2.19425,"total_frames":1227,"hurry_enter":943}
+{"t":"2026-08-25T10:04:21.336Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-25T10:12:06.056Z","event":"run.start","task_id":"last-two-digits-7-pow-2024","duration_s":40,"seed":-1886554145}
+{"t":"2026-08-25T10:12:06.479Z","event":"crosscheck","agreed":true,"generator":"01","verifier":"01"}
+{"t":"2026-08-25T10:12:06.507Z","event":"picks","background":"bg2.jpeg","start_audio":"axi_greetings5.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":2.19425,"total_frames":1227,"hurry_enter":943}
+{"t":"2026-08-25T10:16:06.239Z","event":"capture.done","frames":1227,"font_size":56}
+{"t":"2026-08-25T10:18:58.547Z","event":"done","video":"output\\posts\\tasks\\40s\\last-two-digits-7-pow-2024.mp4"}

@@ -1,0 +1,24 @@
+{"t":"2026-08-25T08:36:41.745Z","event":"run.start","story_id":"nash-equilibrium-in-28-pages","area":"biography","subject":"john-forbes-nash"}
+{"t":"2026-08-25T08:36:41.746Z","event":"validation","checked":23,"findings":2}
+{"t":"2026-08-25T08:36:42.629Z","event":"crosscheck","agreed":true,"generator":"(-2, -2, 6/13, 7/13, 34/65)","verifier":"(-2, -2, 6/13, 7/13, 34/65)"}
+{"t":"2026-08-25T08:36:42.631Z","event":"timeline","total_frames":2553,"total_seconds":85.1,"beats":["hook:9.658s","turn:20.737s","mechanism:34.753s","payoff:19.044s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2432},"resume":{"start":2432,"end":2553}}}
+{"t":"2026-08-25T08:36:42.634Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-25T08:36:42.638Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-25T08:36:53.293Z","event":"run.start","story_id":"nash-equilibrium-in-28-pages","area":"biography","subject":"john-forbes-nash"}
+{"t":"2026-08-25T08:36:53.294Z","event":"validation","checked":23,"findings":2}
+{"t":"2026-08-25T08:36:54.166Z","event":"crosscheck","agreed":true,"generator":"(-2, -2, 6/13, 7/13, 34/65)","verifier":"(-2, -2, 6/13, 7/13, 34/65)"}
+{"t":"2026-08-25T08:36:54.167Z","event":"timeline","total_frames":2553,"total_seconds":85.1,"beats":["hook:9.658s","turn:20.737s","mechanism:34.753s","payoff:19.044s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2432},"resume":{"start":2432,"end":2553}}}
+{"t":"2026-08-25T08:36:54.169Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-25T08:39:13.992Z","event":"run.start","story_id":"nash-equilibrium-in-28-pages","area":"biography","subject":"john-forbes-nash"}
+{"t":"2026-08-25T08:39:13.993Z","event":"validation","checked":23,"findings":2}
+{"t":"2026-08-25T08:39:14.883Z","event":"crosscheck","agreed":true,"generator":"(-2, -2, 6/13, 7/13, 34/65)","verifier":"(-2, -2, 6/13, 7/13, 34/65)"}
+{"t":"2026-08-25T08:39:14.884Z","event":"timeline","total_frames":2553,"total_seconds":85.1,"beats":["hook:9.658s","turn:20.737s","mechanism:34.753s","payoff:19.044s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2432},"resume":{"start":2432,"end":2553}}}
+{"t":"2026-08-25T08:39:14.886Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-25T08:48:11.404Z","event":"capture.done","frames":2553}
+{"t":"2026-08-25T08:49:39.157Z","event":"run.start","story_id":"nash-equilibrium-in-28-pages","area":"biography","subject":"john-forbes-nash"}
+{"t":"2026-08-25T08:49:39.158Z","event":"validation","checked":23,"findings":2}
+{"t":"2026-08-25T08:49:40.051Z","event":"crosscheck","agreed":true,"generator":"(-2, -2, 6/13, 7/13, 34/65)","verifier":"(-2, -2, 6/13, 7/13, 34/65)"}
+{"t":"2026-08-25T08:49:40.052Z","event":"timeline","total_frames":2553,"total_seconds":85.1,"beats":["hook:9.658s","turn:20.737s","mechanism:34.753s","payoff:19.044s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2432},"resume":{"start":2432,"end":2553}}}
+{"t":"2026-08-25T08:49:40.054Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-25T08:58:31.281Z","event":"capture.done","frames":2553}
+{"t":"2026-08-25T09:04:23.349Z","event":"done","video":"output\\posts\\stories\\nash-equilibrium-in-28-pages.mp4","seconds":85.1}

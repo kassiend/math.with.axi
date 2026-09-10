@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "major",
+      "kind": "unstated-assumption",
+      "claim_id": "multiply-near-100-complement-base",
+      "detail": "carry_case asserts, with the word 'Precisely' and no domain qualifier, that 'the digit step is correct exactly when a*b <= 99, with one degenerate escape - when the cross-subtraction comes out as 0'. I tested this as a strict IFF exhaustively over all 10,000 ordered pairs of integers in [1,100]^2: it holds there with zero violations, so the claim is sound everywhere a viewer of a 'near 100' lesson would plausibly land below 100. It is NOT true as an unrestricted statement. The hidden hypotheses are that both gaps are non-negative (both factors <= 100, so the gap product is non-negative) and that the left block is non-negative. Probing outside [1,100]^2 I found 1330 pairs where the stated IFF is false. The cleanest witness with a factor above 100 is 105 x 95: gaps -5 and 5, gap product -25, which satisfies 'a*b <= 99', yet the digit step is not correct - the cross-subtraction is 105 - 5 = 100 and the right block '-25' has no two-digit rendering (true product 9975, not 10025). The cleanest witness NOT covered by any null is -10 x 100: gap product 0 <= 99, but the cross-subtraction is -10, so there is no digit rendering at all (true product -1000). Mitigation, which is why this is major and not fatal: nulls.applicability.factors_above_100 explicitly disclaims factors greater than 100 and mixed pairs, naming 103 x 106 and 97 x 104, so the payload does fence the >100 witnesses elsewhere in the same document; the fence is simply absent from the sentence that says 'exactly when', and non-positive factors are fenced nowhere. The lesson's own operative claim (91-99) is unaffected and was verified exhaustively.",
+      "witness": "105 x 95 (a*b = -25 <= 99, digit step still wrong, true 9975); and -10 x 100 (a*b = 0 <= 99, left block -10, true -1000)"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "multiply-near-100-complement-base",
+      "detail": "carry_case says 'with one degenerate escape ... so 50 x 50 (gaps 50 and 50, product 2500) still reads correctly as 0|2500 = 2500'. The escape CONDITION is stated correctly and generally (cross-subtraction = 0), and I verified it: within [1,100]^2 there are exactly 97 ordered pairs where the gap product overflows two digits yet the concatenation still reads correctly, and every one of them has cross-subtraction 0 - i.e. the condition is exactly right and has no false positives or negatives. But there are 97 such pairs, not one: 2 x 98 = 0|196, 3 x 97 = 0|291, 40 x 60 = 0|2400, and so on. Read as 'one escape clause' the sentence is accurate; read as 'one escaping pair' it is false, and 50 x 50 being the only example shown pushes a reader toward the false reading.",
+      "witness": "40 x 60 = 2400 reads correctly as 0|2400 despite a gap product of 2400"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "multiply-near-100-complement-base",
+      "detail": "Step-order audit of the display cards. s1-s4 are complete and self-contained: 97 x 92 -> gaps 100-97=3 and 100-92=8 -> 97-8=89 -> 3x8=24 -> 8924. Each card's input is produced by a preceding card, nothing is assumed, and reading them in order does yield the stated result 8924, which I confirmed equals 97 x 92 computed directly. The caveat card s5 is the exception: it reads '88 x 89 -> 132 -> 7832' and omits both the cross-subtraction 88 - 11 = 77 and the carrying addition 7700 + 132 = 7832. A viewer with only the cards cannot get from 132 to 7832; the missing link exists in carry_case prose but not on the card. This is a compression defect on a warning card, not a break in the worked chain, hence minor.",
+      "witness": "card s5: '88 x 89 -> 132 -> 7832' (77 and 7700 + 132 never shown)"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "multiply-near-100-complement-base",
+      "detail": "The zero-padding rule ('when a*b < 10 it must be padded with a leading zero, 99 x 98 -> 9702, never 972') lives in the applicability text but appears on the cards only implicitly, via s4's wording 'Gap product = last 2 digits'. I confirmed the rule is not vacuous: for 99 x 98 the unpadded concatenation 97|2 = 972 is wrong while the padded 97|02 = 9702 is right. The drawn example has a*b = 24, so the pad never has to be exercised on screen; the phrase 'last 2 digits' is judged just sufficient to carry the rule, so this is recorded as an observation rather than a missing step.",
+      "witness": "99 x 98: unpadded 972 vs correct 9702"
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "multiply-near-100-complement-base",
+      "script": "verifier.checks/multiply-near-100-complement-base.py",
+      "computed": "8924",
+      "agrees": true,
+      "detail": "Written from the payload text before any inspection of generator material. Confirms: (1) worked example, 97 x 92 = 8924 computed directly and independently reproduced by replaying cards s2-s4; (2) both cross-subtractions agree, 97-8 = 92-3 = 89; (3) the identity (100-a)(100-b) = 100(100-a-b) + a*b symbolically via SymPy expand/simplify for all integers a,b; (4) exhaustive sweep of all 81 ordered pairs in [91,99]^2 - the digit step with zero padding is correct on every one, zero exceptions, and the maximum gap product over the range is exactly 81 as claimed, so the 91-99 window genuinely is exception-free rather than merely asserted; (5) the carry case, gaps 12 and 11, 88-11 = 77, 12x11 = 132, naive glue 77|132 = 77132, true 88 x 89 = 7832 = 7700 + 132, and 88 x 89 really does break the digit step; (6) the contrast case 90 x 91, gaps 10 and 9, product 90, still concatenates correctly as 81|90 = 8190, confirming the payload's claim that the trigger is gap-product size and not gap size; (7) the 'exactly when a*b <= 99 plus the cross-subtraction-0 escape' rule as a strict IFF over all 10,000 pairs in [1,100]^2 - holds with no violations."
+    }
+  ],
+  "unverifiable": [],
+  "operand_draw_audit": {
+    "verdict": "drawn, not hand-picked - reproduced independently",
+    "detail": "The payload declares seed 288838249 over [91,99] with an empty filter and rejection_rate 0. The payload does not name its RNG, so I tested candidate conventions against the declared draw [97, 92]. Python's random.Random(288838249) does not match under randint, choice, randrange, sample, scaled random(), string seeding or shuffle. A mulberry32 PRNG seeded with 288838249, with uniform mapping onto [91,99], produces exactly [97, 92] on its first two outputs. That is an independent reproduction of the declared draw from the declared seed, so the operands were drawn as stated. Separately, the anti-cherry-pick conditions hold on their own terms: the filter is empty, so no presentation screen was applied and all 81 ordered pairs were reachable, including the awkward pad case 99 x 98; the range 91-99 is declared for the stated mathematical reason (single-digit gaps force a*b <= 81) rather than a cosmetic one, and I confirmed that reason is exact; and because I verified the digit step succeeds on every pair in the range, no choice of operand inside the range could have concealed a failure. The counterexample 88 x 89 being outside the declared range is correct practice, not a range violation."
+  }
+}

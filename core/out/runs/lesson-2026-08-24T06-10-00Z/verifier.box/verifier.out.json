@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "estimate-product-round-to-nearest-ten",
+      "script": "verifier.checks/estimate-product-round-to-nearest-ten.py",
+      "computed": "2500",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

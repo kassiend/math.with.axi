@@ -1,0 +1,29 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "A formula came out in a book. It was already in print under another man's name. The author knew, and claimed it anyway.",
+      "audio": "audio/hook.mp3",
+      "seconds": 8.77
+    },
+    {
+      "beat": "turn",
+      "narration": "Carl Friedrich Gauss. Fit a curve to observations and you get more equations than unknowns. Legendre published the fix first. Gauss published his own in 1809, acknowledged Legendre's book, and claimed the method anyway, saying he'd had it since the seventeen nineties. Legendre spent years fighting for his name.",
+      "audio": "audio/turn.mp3",
+      "seconds": 21.399
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Score each answer instead of solving for one. Square every gap between predicted and measured, and add them up. Squaring kills the minus signs, so an overshoot can't hide an undershoot, and doubling a miss quadruples its cost. The total is a bowl with one bottom, unless all your measurements sit at one spot. Set the slope to zero and out comes the answer.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 24.023
+    },
+    {
+      "beat": "payoff",
+      "narration": "Your phone hears more satellites than it needs, and the standard fix is a least-squares adjustment. Your spreadsheet's best-fit line is the same sum. Gauss proved more. With unbiased, equally noisy, independent, normal errors, nothing linear and unbiased beats it. You use it every day.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 19.511
+    }
+  ],
+  "total_seconds": 73.703
+}

@@ -81,3 +81,32 @@
 {"t":"2026-08-19T06:00:20.157Z","event":"post.start","kind":"lesson","attempt":3}
 {"t":"2026-08-19T06:09:30.225Z","event":"post.gate-closed","kind":"lesson","attempt":3,"stage":"orchestrator"}
 {"t":"2026-08-19T06:09:30.576Z","event":"batch.done","ok":0,"failed":1}
+{"t":"2026-08-25T17:02:11.980Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-25T17:02:12.003Z","event":"topic.override","topic":"Line (stick) multiplication — the Japanese/Chinese lattice method: draw each digit as that many parallel lines, cross the two numbers, and count the crossings in each diagonal band to read the answer straight off. Two requirements specific to this lesson: (1) build the picture across the steps with the line-multiplication visual, using its stage field so an early step does not give the answer away; (2) include ONE step carrying the method-compare visual, which is the point of the lesson — the crossings in a band ARE the digit products the standard column/grid method writes in that column, so this is one method seen twice, not two tricks. Draw the worked example's operands from a declared range whose digits stay small enough that the crossings are countable on a phone screen; both operands must be two-digit with no zero digit, which the diagram cannot draw."}
+{"t":"2026-08-25T17:02:12.647Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-25T17:09:37.634Z","event":"post.gate-closed","kind":"lesson","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-25T17:09:37.634Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-08-25T17:13:25.734Z","event":"post.error","kind":"lesson","attempt":2,"error":"axi-lesson-narrator exited 3221225794: "}
+{"t":"2026-08-25T17:13:25.734Z","event":"post.start","kind":"lesson","attempt":3}
+{"t":"2026-08-25T17:13:25.743Z","event":"post.error","kind":"lesson","attempt":3,"error":"axi-lesson-planner exited 3221225794: "}
+{"t":"2026-08-25T17:13:26.143Z","event":"batch.done","ok":0,"failed":1}
+{"t":"2026-08-25T17:14:30.283Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-25T17:14:30.296Z","event":"resume.override","resume":"core/out/runs/lesson-2026-08-25T17-09-37-635Z"}
+{"t":"2026-08-25T17:14:30.977Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-25T17:14:30.978Z","event":"post.error","kind":"lesson","attempt":1,"error":"--resume: no such run directory: C:\\Users\\User\\Desktop\\math.with.axi\\math.with.axi\\core\\core\\out\\runs\\lesson-2026-08-25T17-09-37-635Z"}
+{"t":"2026-08-25T17:14:31.326Z","event":"batch.done","ok":0,"failed":1}
+{"t":"2026-08-25T17:14:49.473Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-25T17:14:49.488Z","event":"resume.override","resume":"core/out/runs/lesson-2026-08-25T17-09-37-635Z"}
+{"t":"2026-08-25T17:14:50.089Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-25T17:16:13.131Z","event":"post.gate-closed","kind":"lesson","attempt":1,"stage":"narrator"}
+{"t":"2026-08-25T17:16:13.475Z","event":"batch.done","ok":0,"failed":1}
+{"t":"2026-08-25T17:17:42.319Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-25T17:17:42.333Z","event":"resume.override","resume":"core/out/runs/lesson-2026-08-25T17-09-37-635Z"}
+{"t":"2026-08-25T17:17:42.957Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-25T17:21:19.598Z","event":"post.gate-closed","kind":"lesson","attempt":1,"stage":"orchestrator"}
+{"t":"2026-08-25T17:21:20.987Z","event":"batch.done","ok":0,"failed":1}
+{"t":"2026-08-25T17:24:44.719Z","event":"posts.override","posts":["lesson"]}
+{"t":"2026-08-25T17:24:44.734Z","event":"resume.override","resume":"core/out/runs/lesson-2026-08-25T17-09-37-635Z"}
+{"t":"2026-08-25T17:24:45.374Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-08-25T17:30:42.523Z","event":"post.delivered","kind":"lesson","id":"line-multiplication-crossings-two-digit","file":"output\\posts\\lessons\\line-multiplication-crossings-two-digit.mp4"}
+{"t":"2026-08-25T17:30:42.524Z","event":"batch.done","ok":1,"failed":0}

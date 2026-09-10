@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "telescoping-product-one-minus-inv-square-10",
+      "script": "verifier.checks/telescoping-product-one-minus-inv-square-10.py",
+      "computed": "11/20",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

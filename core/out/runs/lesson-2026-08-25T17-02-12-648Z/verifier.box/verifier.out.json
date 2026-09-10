@@ -1,0 +1,54 @@
+{
+  "status": "failed",
+  "findings": [
+    {
+      "severity": "fatal",
+      "kind": "false-generalisation",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "The carry procedure stated in carry_case is 'the middle band is not read as a digit 10 - write 0 there and carry 1 into the hundreds band', and it is then generalised explicitly: 'Any pair whose middle band a1*b0 + a0*b1 reaches 10 does this, e.g. 34 x 25.' That generalisation is false, and it is false on the payload's own cited example. For 34 x 25 the bands are 6 | 23 | 20. The middle band 'reaches 10', so the stated rule applies and yields 6+1 | 0 | 20 -> 720. The true product is 850. The rule is correct only in the special case where the middle band is exactly 10 and the units band is below 10 - i.e. essentially only for the worked example itself. Over the full stated domain (both operands two-digit, all four digits non-zero, 6561 pairs) the literally stated carry rule produces the wrong product for 6347 pairs and the right one for only 214. The correct rule is to carry the tens digit of each band right-to-left, which may exceed 1 and may cascade; that rule I verified as exact over all 6561 pairs, but it is nowhere stated in the payload.",
+      "witness": "34 x 25: stated rule gives 720, true product is 850"
+    },
+    {
+      "severity": "fatal",
+      "kind": "unstated-assumption",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "The applicability field correctly identifies the boundary ('valid only when every band count is below 10'), but the lesson only ever teaches a remedy for one band - the middle one - and only for the value exactly 10. No handling is given for a units band of 10 or more, which is common and reaches 81 (a0*b0 up to 9x9), nor for a hundreds band of 10 or more, nor for a carry that cascades from units through tens into hundreds. A viewer who has taken the lesson and meets 19 x 19 (bands 1 | 18 | 81) or 34 x 25 (bands 6 | 23 | 20) has been given no procedure that reaches the right answer. The method needs the general regrouping rule; the payload does not state it.",
+      "witness": "19 x 19: bands 1 | 18 | 81, units band 81 is unaddressed by any stated rule; true product 361"
+    },
+    {
+      "severity": "major",
+      "kind": "inconsistent-counterexample",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "carry_case is not independent of worked_example - it is the worked example ('23 x 22 itself'), as the nulls block concedes. The consequence is not merely stylistic: the lesson never shows the method operating cleanly inside its own applicability condition (all bands below 10), so the condition stated in the applicability field is never actually exercised or contrasted. The single additional pair offered to stand in for an independent exception, 34 x 25, is mishandled by the stated rule (see fatal finding 1), so in effect the payload offers zero correct instances of the exception behaviour it generalises.",
+      "witness": "carry_case operands = worked_example operands = 23 x 22"
+    },
+    {
+      "severity": "major",
+      "kind": "cherry-picked-operands",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "Operand provenance cannot be checked. The payload contains no sampling range, no seed value, no presentation filter, and no list of draws - only a prose assertion inside nulls that 'the seeded draw produced 23 x 22'. There is nothing in the payload against which that assertion can be tested, so I cannot certify the operand was drawn rather than hand-picked. This matters more than usual here: 23 x 22 is one of the very few pairs in the domain (214 of 6561) for which the payload's stated carry rule 'write 0 and carry 1' happens to give the right answer, because its middle band is exactly 10 and its units band is 6. A draw landing precisely on the narrow set of operands where the stated rule does not expose its own error is the pattern a presentation filter would produce. I am not asserting that it did; I am recording that the payload supplies no evidence either way.",
+      "witness": "23 x 22 lies in the 214/6561 subset where the stated carry rule coincidentally works"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "Step ordering: read in sequence, the display steps do not produce the stated result without a gap. s3 ends at '4 | 10 | 6'. s4's working is '4 | 10 | 6 -> 506' with the instruction 'A band of ten or more carries left'. The intermediate regrouped reading 5 | 0 | 6 - which carry_case does spell out in prose - never appears in any step's working, so the viewer must perform the substitution 4+1=5 and 10->0 unaided in the one step that is the whole point of the lesson. A step showing 4 | 10 | 6 -> 5 | 0 | 6 -> 506 is missing.",
+      "witness": "s3 working '4 | 10 | 6' to s4 working '4 | 10 | 6 -> 506'"
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "script": "verifier.checks/line-multiplication-crossings-two-digit.py",
+      "computed": "506",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim_id": "line-multiplication-crossings-two-digit.operand_provenance",
+      "reason": "payload declares no sampling range, seed, presentation filter, or draw list; the claim of a seeded draw appears only as prose in the nulls block and has no machine-checkable counterpart in the payload"
+    }
+  ]
+}

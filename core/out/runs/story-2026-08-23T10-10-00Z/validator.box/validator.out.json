@@ -1,0 +1,199 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/MP3",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim in the lead. Re-checked against the reworded hook: 'most listeners can't hear the difference' uses the source's own phrase 'to most listeners', not a paraphrase dressed as a hedge. Display '75-95% smaller than CD audio' matches '75-95% reduction in size' against 'CD-quality digital audio'. Hook and claim are both MP3-specific; no over-generalisation to other codecs."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/MP3",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim, opening the 'Encoding and decoding' section. Supports the payoff's 'blurs the ones most ears won't catch' - 'most ears won't catch' maps to 'beyond the hearing capabilities of most humans'."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/MP3",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. Describes the actual time-domain-to-frequency-domain mechanism (MDCT), not merely the subject area; supports 'turns sound into frequency components'."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/K-space_in_magnetic_resonance_imaging",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim opening sentence (page italicises the k, so extracted text reads 'k -space'). Supports 'fills a grid of spatial frequencies' rather than recording an image."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/K-space_in_magnetic_resonance_imaging",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. 'k-space holds raw data before reconstruction' licenses 'never photographs you ... turns that into a picture'."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/David_Hilbert",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. Context adds 'He remained there for the rest of his life', so his presence at Goettingen in 1909 is supported, not assumed."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/David_Hilbert",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. The beat now reads 'working on' rather than the earlier 'stuck on', which the source ('dedicated himself to the study of') supports; my previous minor finding on that word is resolved. 'Around 1909' is the source's own hedge, preserved; MacTutor independently says 'in about 1909'."
+    },
+    {
+      "claim_id": "f8",
+      "url": "https://en.wikipedia.org/wiki/David_Hilbert",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim, the sentence following f7. 'In order to carry out these studies' sources the causal 'So he introduced...'. Confirms 'later called Hilbert space'; the beat still avoids using the name anachronistically in 1909."
+    },
+    {
+      "claim_id": "f9",
+      "url": "https://en.wikipedia.org/wiki/Integral_equation",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim opening sentence. Supports 'the unknown isn't a number, it's a function'."
+    },
+    {
+      "claim_id": "f10",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Hilbert/",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. The claim is a subset of the quote (drops the quantum-mechanics tail, consistent with von Neumann's removal). The page presents this as a block quotation from Irving Kaplansky; the claim attributes it to no one, so nothing is misattributed. Corroborates f7 and f8."
+    },
+    {
+      "claim_id": "f11",
+      "url": "https://en.wikipedia.org/wiki/Orthogonal_functions",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. The preceding page sentence, 'The functions f and g are orthogonal when this integral is zero', carries the other half of the claim. Supports the mechanism's opening line."
+    },
+    {
+      "claim_id": "f12",
+      "url": "https://en.wikipedia.org/wiki/Orthogonal_functions",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim, but a sentence fragment. Supported on context: the page states 'the sine functions sin nx and sin mx are orthogonal on the interval x in (-pi, pi) when m != n and n and m are positive integers'."
+    },
+    {
+      "claim_id": "f13",
+      "url": "https://en.wikipedia.org/wiki/Bessel%27s_inequality",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim, third sentence of the lead. Asserts the Pythagoras-to-infinite-dimensions framing specifically for Bessel's inequality, the story's headline relation. Supports the hook."
+    },
+    {
+      "claim_id": "f14",
+      "url": "https://en.wikipedia.org/wiki/Bessel%27s_inequality",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. Bessel's inequality holds for any vector in a Hilbert space against an orthonormal sequence, so 'holds for every square-integrable f' (f being an element of L^2) is supported. The 'energy' of x is defined on the same page as ||x||^2, so 'cannot exceed the total energy' equals 'at most the squared length'. Supports 'at most its length squared'. Stored quote is clipped mid-sentence - see minor finding."
+    },
+    {
+      "claim_id": "f15",
+      "url": "https://en.wikipedia.org/wiki/Bessel%27s_inequality",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. The claim has been narrowed since the previous version to assert ONLY the forward direction ('when the orthonormal system is complete ... becomes ... Parseval's identity'), which is exactly what the source states. My previous finding - that this page was cited for a biconditional it does not state - is resolved: the story now cites only the forward implication here and proves the converse itself (see f18)."
+    },
+    {
+      "claim_id": "f16",
+      "url": "https://en.wikipedia.org/wiki/Orthonormal_basis",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim; clipped before 'S is dense in H' because the sentence continues into inline math. Supported on context: 'An orthonormal basis is an orthonormal system with the additional property that the linear span of S is dense in H', and the following sentences tie this to complete vs incomplete systems. Supports 'complete is strictly stronger than orthonormal'. See minor finding on truncation."
+    },
+    {
+      "claim_id": "f17",
+      "url": "https://en.wikipedia.org/wiki/Parseval%27s_identity",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. The same page states the identity with an explicit universal quantifier ('for every x in H'), consistent with the story's formula card now carrying 'for all f'. Supports the Pythagoras analogue in an orthonormal basis."
+    },
+    {
+      "claim_id": "f18",
+      "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. NEW FACT. Verbatim. This is the cited input for the mechanism's proved converse. The page's preceding sentence makes it exact: 'Completeness of an orthonormal system ... can be equivalently restated as: for every v in H, if <v,e_k> = 0 for all k, then v = 0.' The contrapositive - a nonzero v orthogonal to the whole system means the system is not complete - is precisely what the mechanism uses. Correctly sourced."
+    },
+    {
+      "claim_id": "f19",
+      "url": "https://en.wikipedia.org/wiki/Fourier_series",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim, but the stored quote is only the four-word tail 'also forms an orthonormal basis for'. Supported by the immediately preceding sentence, which spells out the set {1/sqrt2, cos x/sqrt2, sin x/sqrt2, ...} and states it 'also forms an orthonormal basis for L^2([-pi,pi])' - i.e. the constant-plus-cosines-plus-sines system the claim describes. The page normalises everything by 1/sqrt2 (period-normalised inner product); the mechanism uses 1/sqrt(2pi) and 1/sqrt(pi) for the plain integral inner product it defined, which I verified symbolically give exact equality, so this is a convention difference, not an error. See minor finding on the truncated quote."
+    },
+    {
+      "claim_id": "f20",
+      "url": "https://en.wikipedia.org/wiki/Fourier_series",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim. Directly supports 'density of the trigonometric basis's span follows from Stone-Weierstrass'. The mechanism's added parenthetical - that Stone-Weierstrass strictly gives uniform density of trigonometric polynomials among continuous periodic functions, with L^2 density by further steps - is correct standard mathematics and a more careful statement than the source, not an overreach beyond it; it does not attribute the refinement to the page."
+    },
+    {
+      "claim_id": "f21",
+      "url": "https://en.wikipedia.org/wiki/Fourier_series",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim, in 'Convergence theorems'. The clause 'completeness of the Fourier basis' directly supports 'The Fourier basis is complete'. The consequent ('so Parseval holds for every square-integrable f') is a valid inference the story draws from f15 (complete implies Parseval) and f19 (it is an orthonormal basis); the page's convergence result (s_N converges to s in L^2) is equivalent to Parseval. Completeness stated here as a premise for a convergence result rather than as a standalone theorem, but the assertion the claim needs is present."
+    },
+    {
+      "claim_id": "f22",
+      "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. NEW FACT. Verbatim. Supports the mechanism's standing hypothesis 'Work in L^2(-pi, pi), the square-integrable functions'; the page lists spaces of square-integrable functions as examples of Hilbert spaces."
+    },
+    {
+      "claim_id": "f23",
+      "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Verbatim in the lead. Supports the hook's 'Pythagoras, with infinitely many sides'. Survives von Neumann's removal legitimately and is used by the hook; not orphaned."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "f19",
+      "detail": "Three stored quotes are clipped mid-sentence, each stopping immediately before the noun that carries the claim, because the source sentence continues into inline math that the extractor drops. f14 ends at 'the total energy of' (omitting 'x'); f16 ends at 'the linear span of' (omitting 'S is dense in H'); f19 ends at 'also forms an orthonormal basis for' (omitting 'L^2([-pi,pi])'). All three are genuinely verbatim substrings of their pages and all three are supported once the surrounding sentence is read, so none fails on quote_found or supports_claim. But a quote that ends before its load-bearing noun is weak as standalone evidence: a later reader or automated re-check working from the stored string alone could not confirm the claim without re-opening the page. Recommend extending each quote to the end of its clause. This does not affect the verdict.",
+      "evidence": "Full page sentences: '...the sum of these contributions cannot exceed the total energy of x.'; 'An orthonormal basis is an orthonormal system with the additional property that the linear span of S is dense in H.'; '...also forms an orthonormal basis for L^2([-pi,pi]).' The stored quotes stop at 'of', 'span of', and 'basis for' respectively."
+    }
+  ],
+  "unverifiable": []
+}

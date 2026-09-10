@@ -1,0 +1,61 @@
+{
+  "runId": "lesson-reverse-percentage-recover-original-price",
+  "capture": {
+    "publicPath": "captures/lesson-reverse-percentage-recover-original-price",
+    "frames": 1274,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "intro": {
+    "src": "mascot/mas_chromo.webm",
+    "clipFrames": 151,
+    "playbackRate": 1,
+    "box": {
+      "left": -618.82,
+      "top": 106.87,
+      "width": 1944.47,
+      "height": 1093.77
+    }
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "intro",
+        "src": "audio/lesson-reverse-percentage-recover-original-price/intro.mp3",
+        "from": 0,
+        "durationInFrames": 170
+      },
+      {
+        "id": "s1",
+        "src": "audio/lesson-reverse-percentage-recover-original-price/s1.mp3",
+        "from": 208,
+        "durationInFrames": 156
+      },
+      {
+        "id": "s2",
+        "src": "audio/lesson-reverse-percentage-recover-original-price/s2.mp3",
+        "from": 364,
+        "durationInFrames": 175
+      },
+      {
+        "id": "s3",
+        "src": "audio/lesson-reverse-percentage-recover-original-price/s3.mp3",
+        "from": 539,
+        "durationInFrames": 245
+      },
+      {
+        "id": "s4",
+        "src": "audio/lesson-reverse-percentage-recover-original-price/s4.mp3",
+        "from": 784,
+        "durationInFrames": 216
+      },
+      {
+        "id": "s5",
+        "src": "audio/lesson-reverse-percentage-recover-original-price/s5.mp3",
+        "from": 1000,
+        "durationInFrames": 259
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "task_id": "eq-sum-cube-find-product",
+  "duration_s": 40,
+  "structure_id": "sum-and-cube-sum-find-product",
+  "categories": ["system-of-equations"],
+  "description": "Find xy",
+  "description_latex": "\\text{Find } xy",
+  "statement": "x + y = 5,  x^3 + y^3 = 35",
+  "statement_latex": "\\begin{gathered}x+y=5\\\\x^{3}+y^{3}=35\\end{gathered}",
+  "answer": "6",
+  "answer_latex": "6",
+  "solution_sketch": "Use x^3 + y^3 = (x+y)^3 - 3xy(x+y). With x+y = 5: 35 = 125 - 3xy(5) = 125 - 15xy, so 15xy = 90 and xy = 6. (Check: x, y are the roots of t^2 - 5t + 6, namely 2 and 3, and 8 + 27 = 35.)",
+  "difficulty_rationale": "Naive route: solve the system directly - from x + y = 5 substitute y = 5 - x into x^3 + y^3 = 35, expand a cubic in x and solve it. That is real written algebra, too heavy for the head. Insight: never find x and y at all; use the identity x^3 + y^3 = (x+y)^3 - 3xy(x+y), which turns the two givens straight into xy. After the insight there are two cheap steps: compute (x+y)^3 = 125, then solve 125 - 15xy = 35 for xy. Spotting that the sum-of-cubes collapses onto the elementary symmetric functions, rather than grinding the substitution, takes noticeably more than 20 s while none of the steps needs paper.",
+  "steps_expected": 2,
+  "check_script": "core/out/runs/task-40s-2026-08-25-eq-sum-cube-find-product/generator.checks/eq-sum-cube-find-product.py",
+  "nulls": []
+}

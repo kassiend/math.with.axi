@@ -1,0 +1,91 @@
+{
+  "lesson_id": "percent-of-commutes-swap-operands",
+  "counter": 5,
+  "area": "percentage-and-discount",
+  "concept_slug": "percent-of-commutes-swap-operands",
+  "tags": ["percentage", "discount", "mental-arithmetic", "shortcut"],
+  "method_name": "Flip the percent",
+  "applicability": "Any 'a percent OF b'. The identity a% of b = b% of a is exact for every pair of real numbers a and b, because a% of b = (a/100)*b = (a*b)/100 = (b/100)*a = b% of a - multiplication commutes, and dividing by 100 is the same step on both sides. So the swap is always allowed and never approximate; the only question is which of the two forms is easier to do in your head, and you pick that one. It applies to a plain proportion ('percent of'), which includes 'what is the VAT part', 'what is the tip', 'how much is the discount worth'. It does NOT apply to a percent CHANGE - 'a% off b', 'a% added to b' - because those subtract or add the proportion from b, and b - a*b/100 is not symmetric in a and b.",
+  "carry_case": "Percent OFF, where the same swap is false. With the drawn numbers: 88% OFF 75 leaves 75 - 66 = 9, while 75% OFF 88 leaves 88 - 66 = 22. The removed part is the same 66 in both, but what is left is not, so a% off b = b% off a fails for every pair with a != b - the equality b - a*b/100 = a - a*b/100 forces a = b. The 'of' form has no exception at all; the exception is over-extending it to the 'off' form.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Flip the percent",
+      "working": "88% of 75 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Swap the two numbers",
+      "working": "a% of b = b% of a"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Do the easy side",
+      "working": "75% of 88 = 3/4 × 88"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Same answer, less work",
+      "working": "88% of 75 = 66"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Only for \"of\", never \"off\"",
+      "working": "88% off 75 = 9, 75% off 88 = 22"
+    }
+  ],
+  "worked_example": {
+    "operands": [88, 75],
+    "result": "66"
+  },
+  "operand_draw": {
+    "assigned_seed": 343064731,
+    "draws": [
+      {
+        "operand": "a (the awkward-looking percent)",
+        "seed": 343064731,
+        "spec": { "min": 3, "max": 24, "filter": { "max_digits": 2, "nonzero": true, "positive_only": true } },
+        "n": 1,
+        "raw_draws": [22],
+        "mapping": "a = 4 * raw, so raw 22 gives 88",
+        "attempts": 1,
+        "rejections": [],
+        "rejection_rate": 0,
+        "rejection_rate_alarm": false
+      },
+      {
+        "operand": "b (the quantity the percent is taken of)",
+        "seed": 343064732,
+        "seed_note": "assigned seed + 1, declared before the draw, because two operands come from two different declared ranges and one stream cannot serve both",
+        "spec": { "min": 1, "max": 3, "filter": { "max_digits": 1, "nonzero": true, "positive_only": true } },
+        "n": 1,
+        "raw_draws": [3],
+        "mapping": "b = 25 * raw, so raw 3 gives 75",
+        "attempts": 1,
+        "rejections": [],
+        "rejection_rate": 0,
+        "rejection_rate_alarm": false
+      }
+    ],
+    "declared_mapping_rationale": "Both mappings are presentational only. The identity is exact for every real a and b, so no drawn value could ever have been rejected on mathematical grounds and the rejection rate is 0 on both streams. The ranges are chosen so the card carries whole numbers: a is a multiple of 4 in 12..96 and b is in {25, 50, 75}, hence a*b/100 is always an integer. Nothing in either range determines whether the trick works - only how the answer renders.",
+    "range_revisions": [
+      {
+        "declared": "a and b both integer 11..99, single stream, seed 343064731, n=2",
+        "drew": [91, 34],
+        "discarded_because": "The method is about swapping to the easier side. With two arbitrary two-digit numbers neither side is easier (91% of 34 vs 34% of 91), so the range could not carry the lesson. Range replaced, draw never re-rolled."
+      },
+      {
+        "declared": "a integer 11..99 (seed 343064731); b = 25 * raw, raw 1..3 (seed 343064732)",
+        "drew": [91, 75],
+        "discarded_because": "75% of 91 = 68.25 - correct but it puts a decimal on the card for no teaching gain. The a-range was replaced with multiples of 4 so the swapped side lands on a whole number. Again a range change, not a re-roll."
+      }
+    ],
+    "cli_note": "core/pipeline/lib/sampling.mjs guards its CLI with `import.meta.url === file://${process.argv[1]}`, which never matches on Windows, so the CLI prints nothing. The draws above were taken by importing draw() from that same module with the seeds and specs stated here; verifyDraw() replays them. Script kept at <run>/draw.mjs."
+  },
+  "nulls": []
+}

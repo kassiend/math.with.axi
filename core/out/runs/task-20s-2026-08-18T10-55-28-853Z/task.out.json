@@ -1,0 +1,24 @@
+{
+  "task_id": "percent-42-of-x-is-36",
+  "duration_s": 20,
+  "structure_id": "percent-known-part-rescale-to-other-percent",
+  "categories": ["percentage", "ratio-proportion"],
+  "description": "What is 70% of x?",
+  "statement": "42% of x = 36",
+  "statement_latex": null,
+  "answer": "60",
+  "answer_latex": null,
+  "solution_sketch": "70% is 5/3 of 42%, since 42 = 3 x 14 and 70 = 5 x 14. So 70% of x = (5/3)(42% of x) = (5/3)(36) = 60. Equivalently 1% of x = 36/42 = 6/7, and 70 x 6/7 = 60. The value of x itself (600/7) is never needed.",
+  "difficulty_rationale": "The naive route is to solve for x first: x = 36/0.42 = 85.714..., a non-terminating value that stalls mental arithmetic and makes the second step look impossible without paper. The insight is that x is never needed - only the ratio of the two percentages matters, and 42 and 70 visibly share the factor 14, so 70% is 5/3 of 42% and the answer is 36 x 5/3 = 60. That is reachable cold in a few seconds because the two given percentages sit side by side and their common factor is easy to see; the unitary route (1% = 36/42 = 6/7, then x70) is a second, equally clean way in. One idea, two mechanical steps after it lands, clean integer answer, and the visible unknown x makes it look like an equation to solve rather than a proportion to scale.",
+  "check_script": "generator.checks/percent-42-of-x-is-36.py",
+  "nulls": [
+    {
+      "field": "statement_latex",
+      "reason": "plain text renders exactly as intended; no LaTeX-only notation in the statement"
+    },
+    {
+      "field": "answer_latex",
+      "reason": "answer is the plain integer 60; no LaTeX form needed"
+    }
+  ]
+}

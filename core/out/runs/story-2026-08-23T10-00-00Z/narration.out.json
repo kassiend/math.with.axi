@@ -1,0 +1,29 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[curious] Nobody is certain who invented it. It still sits inside the cryptography securing the internet. One line long.",
+      "audio": "audio/hook.mp3",
+      "seconds": 7.833
+    },
+    {
+      "beat": "turn",
+      "narration": "[warm] Euclid's Elements. He wrote it down, probably did not invent it, and almost nothing else is known. He lived around three hundred BC. The painting is from about sixteen thirty. Not his face. [thoughtful] His problem: the largest unit measuring two quantities exactly.",
+      "audio": "audio/turn.mp3",
+      "seconds": 18.698
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[thoughtful] Two positive whole numbers, larger first. The greatest common divisor of a and b equals that of a minus b and b. Why? Anything dividing a and b divides a minus b. Anything dividing b and the difference divides their sum, a. Same divisors, both pairs. And larger first is the loop: it picks which number shrinks. Both stay positive, the total keeps dropping, so it must end with the two equal. 1920 and 1080? Six subtractions to 120.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 35.176
+    },
+    {
+      "beat": "payoff",
+      "narration": "[bright] Your browser's padlock leans on an extended version of this loop. And 1080p? 1920 by 1080 is 16 by 9: 120 fits sixteen across, nine down. Next time you see sixteen by nine: a fraction, reduced.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 16.906
+    }
+  ],
+  "total_seconds": 78.613
+}

@@ -1,0 +1,72 @@
+{
+  "status": "failed",
+  "findings": [
+    {
+      "severity": "major",
+      "kind": "inconsistent-counterexample",
+      "claim_id": "rule-of-72-doubling-time",
+      "detail": "applicability calls the drawn r = 8 'the sharpest point in the range'. That is false, and it contradicts a claim made one clause earlier in the same sentence. The payload itself states the signed error 'crosses zero near r = 7.85'; I locate the crossing at r = 7.8468715, where the error is exactly 0. On the payload's own declared grid (4.0, 4.1, ..., 12.0) the smallest |error| is 0.0220% at r = 7.8, versus 0.0718% at r = 8. So r = 8 is not the sharpest point on the continuum, nor on the stated grid, nor even the nearest grid point to the optimum. It is merely the most accurate INTEGER in the range. The two statements cannot both be true: if the error crosses zero at 7.85, the sharpest point is 7.85, not 8.",
+      "witness": "r = 7.8 -> |err| 0.0220105% < r = 8 -> |err| 0.0718189%; exact optimum r = 7.8468715 -> err 0"
+    },
+    {
+      "severity": "major",
+      "kind": "other",
+      "claim_id": "rule-of-72-doubling-time",
+      "detail": "applicability asserts 'Those two endpoints are the extremes, so the 2% band is tight and cannot be narrowed.' The premise is true - I confirm the signed error is strictly decreasing on [4,12] (e'(r) < 0 at all 1601 sampled points), so the maximum is at r = 4 and the minimum at r = 12 - but the conclusion does not follow and is false. The extreme value is |error| = 1.9007606% at r = 12, a figure the payload itself states as '-1.90%' in the preceding sentence. A 1.91% band therefore also holds across the whole interval, so the 2% band demonstrably CAN be narrowed. The claim of tightness is contradicted by the payload's own numbers. Note the error is in the conservative direction: the stated band is wider than reality, so no learner is misled about accuracy - but 'tight and cannot be narrowed' is a false statement about the bound.",
+      "witness": "max |error| over [4,12] = 1.9007606% at r = 12, so a 1.91% band holds and 2% is not tight"
+    },
+    {
+      "severity": "minor",
+      "kind": "arithmetic",
+      "claim_id": "rule-of-72-doubling-time",
+      "detail": "nulls[applicability.continuous_compounding] states that under continuous compounding 'the error would be a flat +3.88% at every rate'. The flatness is correct - I confirm the relative error is identical at r = 1, 4, 8, 12, 50, 100 - but the value is wrong in the last digit. (72 - 100*ln2)/(100*ln2) = 3.8740429%, which rounds to +3.87%, not +3.88%. Every other percentage in the payload is given correctly rounded to 2 decimal places, so this is an isolated slip rather than a different rounding convention.",
+      "witness": "72/69.31471805599453 - 1 = 0.038740429 -> +3.87%, payload says +3.88%"
+    },
+    {
+      "severity": "minor",
+      "kind": "false-generalisation",
+      "claim_id": "rule-of-72-doubling-time",
+      "detail": "carry_case says the break 'is a drift that grows without bound as r rises'. Measured in the metric the payload uses everywhere else - signed relative error in percent - the drift is bounded: since both 72/r and the true doubling time are strictly positive, the signed relative error is bounded below by -100% and converges to it. I measure -75.09% at r = 1e3, -99.28% at r = 1e5, -99.9998% at r = 1e9. It does not grow without bound; it saturates. The statement is true only under a different metric the payload never introduces, the ratio truth/estimate, which I confirm is unbounded (4.01 at r = 1e3 rising to 597282 at r = 1e9). Since the surrounding sentence quotes percentage errors (-5.31%, -15.77%, -28%), a reader will apply the percentage metric, under which the claim is false.",
+      "witness": "r = 1e9: signed relative error = -99.9998%, bounded by -100%, not unbounded"
+    },
+    {
+      "severity": "minor",
+      "kind": "unsupported-universality",
+      "claim_id": "rule-of-72-doubling-time",
+      "detail": "Scope mismatch between the claim and the evidence offered for it. The claim is continuum-valued: 'across that whole interval |72/r - t| / t is at most 2%' for r in the closed interval [4,12]. The evidence offered is finite: 'exhaustive evaluation over the stated finite domain r = 4.0, 4.1, ..., 12.0', i.e. 81 points. 81 samples establish nothing about the uncountably many r between them; the payload treats the finite check as if it discharged the continuum claim. I note the claim itself is TRUE - I verified it independently on an 8001-point grid (max 1.9007606%) and, more importantly, rigorously via monotonicity: e(r) = (72/r)*ln(1+r/100)/ln2 - 1 has e'(r) < 0 throughout [4,12], so the extremes are the endpoints e(4) = +1.85035% and e(12) = -1.90076% and the bound follows for every real r in the interval. That monotonicity argument is what the payload needed and did not give.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "cherry-picked-operands",
+      "claim_id": "rule-of-72-doubling-time",
+      "detail": "The drawn operand is the single most flattering integer in the entire stated domain. Ranking all 9 candidate integers in [4,12] by |error|: 8 (0.0718%), 7 (0.3997%), 9 (0.5375%), 6 (0.8771%), 10 (0.9975%), 5 (1.361%), 11 (1.452%), 4 (1.850%), 12 (1.901%). The draw landed on rank 1 of 9, where the rule is 26 times more accurate than at r = 12. operand_draw declares a seed (411890531) but no sampling range, no RNG algorithm and no presentation filter, so the draw is not reproducible from the payload and the claim 'nothing on any card was chosen after the draw was seen' cannot be checked. This is flagged rather than treated as fraud because the payload does not hide the consequence: it states the worst cases at both endpoints (+1.85%, -1.90%) explicitly in applicability, which is the opposite of concealment. But a viewer sees only the r = 8 card, where the rule looks near-exact.",
+      "witness": "r = 8 ranks 1st of 9 integers in [4,12] by accuracy; the worst, r = 12, is 26x less accurate"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "rule-of-72-doubling-time",
+      "detail": "Display-step gap. The five steps read in order DO produce the stated result and no arithmetic step is missing: s1 poses r = 8, s2 gives the rule years = 72/r, s3 binds r = 8 and shows 72/8 = 9, s4 states 9 and independently checks 1.08^9 = 1.999 (I confirm 1.9990046, correct to the 4 figures shown, and it correctly lands just under 2, consistent with 9 being a slight under-estimate). The gap is in the domain, not the arithmetic: no card states the interval [4,12]. s5 says only 'Big rates break it' and instances 50%, giving the viewer no threshold. A viewer who took the cards at face value would have no warning at r = 20, where the error is -5.31%, or at r = 3, below the interval. Section 3.2 asks the technique to state precisely when it works; applicability does so, but the viewer-facing surface does not carry it.",
+      "witness": "r = 20 -> -5.31% error, outside the claimed band, yet no card would warn the viewer"
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "rule-of-72-doubling-time",
+      "script": "verifier.checks/rule-of-72-doubling-time.py",
+      "computed": "9",
+      "agrees": false
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim_id": "rule-of-72-doubling-time",
+      "reason": "operand_draw asserts that r = 8 was drawn with seed 411890531 and that nothing was chosen after the draw was seen. The payload states a seed but not the sampling range, not the RNG algorithm and not the presentation filter, so the draw cannot be reproduced from the payload alone and the no-post-hoc-selection claim can be neither confirmed nor refuted. Reporting null rather than guessing. Relevant because the drawn value is the most flattering of the 9 candidate integers in the stated domain."
+    },
+    {
+      "claim_id": "rule-of-72-doubling-time",
+      "reason": "nulls[carry_case.exact_threshold_rate] declines to locate where the 2% band first breaks, which is honest. For the record my own probe puts the upper break at r ~ 12.23 and, unmeasured by the payload, a LOWER break at r ~ 3.69: below r = 3.69 the band also fails, rising to +3.87% as r -> 0. This does not contradict the payload, which claims nothing outside [4,12] and says so, and it confirms the interval is genuinely conservative rather than overreaching - the true safe interval is about [3.69, 12.23] and the stated [4,12] sits strictly inside it. Listed as unverifiable, not as a finding, because the payload makes no claim here to verify."
+    }
+  ]
+}

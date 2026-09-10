@@ -1,0 +1,11 @@
+{"t":"2026-08-25T17:21:19.142Z","event":"run.start","lesson_id":"line-multiplication-crossings-two-digit","counter":7,"seed":-1577381472}
+{"t":"2026-08-25T17:21:19.581Z","event":"crosscheck","agreed":false,"generator":null,"verifier":"276"}
+{"t":"2026-08-25T17:21:19.582Z","event":"verdict","passed":false,"fatal":0,"reasons":["independent SymPy cross-check did not agree","claim line-multiplication-crossings-two-digit: generator — check output is not JSON: RESULT: ALL CHECKS PASSED"]}
+{"t":"2026-08-25T17:21:19.582Z","event":"gate.closed","status":"failed","stage":"verification","problems":[{"side":"verdict","error":"independent SymPy cross-check did not agree"},{"side":"verdict","error":"claim line-multiplication-crossings-two-digit: generator — check output is not JSON: RESULT: ALL CHECKS PASSED"},{"side":"generator","error":"check output is not JSON: RESULT: ALL CHECKS PASSED"}]}
+{"t":"2026-08-25T17:24:45.663Z","event":"run.start","lesson_id":"line-multiplication-crossings-two-digit","counter":7,"seed":-1577381472}
+{"t":"2026-08-25T17:24:46.111Z","event":"crosscheck","agreed":true,"generator":"276","verifier":"276"}
+{"t":"2026-08-25T17:24:46.111Z","event":"verdict","passed":true,"fatal":0,"reasons":[]}
+{"t":"2026-08-25T17:24:46.112Z","event":"timeline","total_frames":1186,"total_seconds":39.533,"steps":["s1:5.372s","s2:5.911s","s3:6.107s","s4:5.364s","s5:10.855s"]}
+{"t":"2026-08-25T17:24:46.113Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-25T17:27:50.806Z","event":"capture.done","frames":1186}
+{"t":"2026-08-25T17:30:37.657Z","event":"done","video":"output\\posts\\lessons\\line-multiplication-crossings-two-digit.mp4","seconds":39.533}

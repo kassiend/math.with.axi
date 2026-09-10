@@ -1,0 +1,82 @@
+{
+  "lesson_id": "multiply-near-100-complement-base",
+  "counter": 4,
+  "concept_slug": "multiply-near-100-complement-base",
+  "tags": [
+    "algebra",
+    "identity",
+    "mental-arithmetic",
+    "multiplication",
+    "shortcut"
+  ],
+  "method_name": "Multiply near 100",
+  "applicability": "Two integers x and y, each in the range 91 to 99 inclusive. Write x = 100 − a and y = 100 − b, so the gaps a and b are single digits 1–9. The identity (100 − a)(100 − b) = 100·(100 − a − b) + a·b is true for ALL integers a and b — it is ordinary expansion — and 100 − a − b can be read off either factor as x − b = y − a, which is why cross-subtracting works and why both cross-subtractions must agree. What the 91–99 restriction buys is the DIGIT step: with a and b in 1–9 the gap product a·b is at most 9 × 9 = 81, so it fits the last two decimal places and the answer is simply the cross-subtraction followed by the gap product written as a two-digit block. The two-digit block is part of the rule, not a detail: when a·b < 10 it must be padded with a leading zero (99 × 98 → 97 then 02 → 9702, never 972). Under that statement the method is exception-free over all 81 ordered pairs in [91, 99]², which the check verifies exhaustively rather than by assertion. Outside that range the identity still holds but the digit step can fail, which is what carry_case shows.",
+  "carry_case": "88 × 89. Both are still 'near 100', so a viewer will try them. The gaps are 12 and 11, the cross-subtraction gives 88 − 11 = 77, and the gap product is 12 × 11 = 132 — three digits, so it no longer fits the last two places. Gluing the blocks together gives 77|132 = 77132, which is wrong by a factor of about ten. The true answer is 88 × 89 = 7832: the hundreds digit of 132 carries into 77, giving 7700 + 132 = 7832. The trigger is the size of the gap product, not the size of a gap: 90 × 91 has gaps 10 and 9, product 90, and still concatenates correctly as 81|90 = 8190. Precisely, the digit step is correct exactly when a·b ≤ 99, with one degenerate escape — when the cross-subtraction comes out as 0 there is no left block for an overflow to corrupt, so 50 × 50 (gaps 50 and 50, product 2500) still reads correctly as 0|2500 = 2500. Both the trigger and that single escape are verified exhaustively, not asserted. Inside 91–99 the gap product can never exceed 81, so neither case can arise.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Multiply near 100",
+      "working": "97 × 92 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Take each gap to 100",
+      "working": "100 − 97 = 3, 100 − 92 = 8"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Subtract a gap crosswise",
+      "working": "97 − 8 = 89"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Gap product = last 2 digits",
+      "working": "3 × 8 = 24 → 8924"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Gap product over 99? Carry",
+      "working": "88 × 89 → 132 → 7832"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      97,
+      92
+    ],
+    "result": "8924"
+  },
+  "nulls": [
+    {
+      "field": "applicability.factors_above_100",
+      "reason": "The lesson claims nothing about factors greater than 100 (e.g. 103 × 106) or about one factor on each side of 100 (97 × 104). The underlying expansion still holds with signed gaps, but the digit step then needs a sign convention for the right-hand block and, in the mixed case, a borrow rather than a carry. Asserting a condition here without testing it would be a guess, so none is asserted, per §3.3."
+    },
+    {
+      "field": "applicability.other_bases",
+      "reason": "Claimed for base 100 only. The same identity at base 1000 or base 10 needs a right-hand block of a different width (three digits, one digit), so the 'two digits' instruction on step 4 would be wrong there. True but different, and not asserted here."
+    },
+    {
+      "field": "applicability.non_integers",
+      "reason": "Only integers are claimed. The identity is algebraic and holds for reals, but 'write the gap product as a two-digit block' has no meaning for a non-integer gap product, and the lesson's payoff is the digit step."
+    }
+  ],
+  "operand_draw": {
+    "seed": 288838249,
+    "spec": {
+      "min": 91,
+      "max": 99,
+      "filter": {}
+    },
+    "draws": [
+      97,
+      92
+    ],
+    "rejection_rate": 0,
+    "construction": "Both operands are drawn: x = 97, y = 92, two integers taken uniformly from [91, 99] with seed 288838249. The range was declared before the draw was seen, and it is declared for a stated mathematical reason rather than a cosmetic one — 91–99 is precisely the window where the gaps are single digits and the gap product therefore cannot exceed 81, which is the condition the lesson claims and the check tests exhaustively. No filter was applied at all (rejection_rate 0), so nothing was screened out: every one of the 81 ordered pairs in the range was reachable, including the awkward ones the lesson has to survive, such as 99 × 98 needing the leading-zero pad. Had the draw produced such a pair it would have been kept and the cards would have shown the pad. Per §3.4 the draw stands as dealt. The carry case 88 × 89 is deliberately constructed and deliberately OUTSIDE the declared range, because a counterexample is by definition the input that breaks the simple rule; §3.4 governs the worked example's operands, not the counterexample. Result 8924 is reported as a bare integer string, computed as 97 × 92 directly and not by replaying the trick."
+  }
+}

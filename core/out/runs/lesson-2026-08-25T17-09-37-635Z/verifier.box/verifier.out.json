@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "Display steps read in order do produce the stated result, but the place-value reading is never stated in step text. s3 ends at the band counts '2 | 7 | 6' and s4 asserts '12 x 23 = 276'; the rule that the three bands are read left to right as hundreds|tens|units appears only in the applicability field (which a viewer does not see) and implicitly in s4's method-compare visual, which shows the column products under the band counts. A viewer following the instruction text alone must supply the concatenation rule themselves. The compare visual plausibly closes the gap, so this is non-blocking, but it is the one place a step could be said to be missing.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "cherry-picked-operands",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "The operand draw is honest by the rules that matter: filter is {} (empty), rejection_rate 0, rejections [], seed and draws are declared, and the draws [1,2,2,3] taken in the declared order a1,a0,b1,b0 do give exactly a=12, b=23 as used. Nothing was filtered out. However the declared sampling range min=1,max=3 is itself a strong bias toward the case where the method reads off cleanly: over digit quadruples in 1..3, 56/81 = 69.1% are carry-free, versus 139/6561 = 2.1% over the full 1..9 range that the stated applicability domain actually covers. There is a legitimate rendering reason to cap digits low (a 1..9 lattice reaches 324 crossings, which cannot be counted by eye), but that rationale is stated nowhere in the payload, neither in the spec nor in nulls. Not concealment: s5 and carry_case disclose the failure mode explicitly and correctly (23 x 22, 34 x 25), so the lesson does not present the clean read-off as universal.",
+      "witness": "spec {min:1,max:3}: 69.1% carry-free vs 2.1% over the stated 1..9 domain"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "detail": "Provenance metadata only, not a mathematical claim: seed 971383332 -> draws [1,2,2,3] cannot be independently replayed without the generator's RNG, which is not part of the payload. Draw integrity therefore rests on the empty filter, the zero rejection count, and the internal consistency of draws with the operands actually used, all three of which check out. Recorded as a finding rather than as an unverifiable claim because no mathematical assertion of the lesson depends on it.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "line-multiplication-crossings-two-digit",
+      "script": "verifier.checks/line-multiplication-crossings-two-digit.py",
+      "computed": "276",
+      "agrees": true,
+      "notes": "Written from the payload text before reading anything of the generator's. Covers: (a) symbolic proof via SymPy that (10a1+a0)(10b1+b0) = 100(a1b1) + 10(a1b0+a0b1) + (a0b0), so the three diagonal bands are exactly the hundreds/tens/units partial products; (b) the worked example 12 x 23 -> bands 2|7|6 -> 276, matching the payload's bands and result; (c) an exhaustive sweep of all 6561 ordered pairs in the stated domain (both operands two-digit, no zero digit), confirming the place-value identity everywhere and confirming the payload's 'valid EXACTLY when the units band and the tens band are each below 10' in BOTH directions with zero mismatches - the condition is necessary as well as sufficient; (d) the unrestricted-leftmost-band claim, verified on all 17 domain pairs where the hundreds band is >= 10 while tens and units stay below 10, all of which still read off correctly, including the payload's 21 x 51 -> 10|7|1 -> 1071; (e) all three named cases, 23 x 22 -> 4|10|6 with true product 506 and carry repair 400+100+6=506, 34 x 25 broken specifically by its units band 4*5=20 as the payload states with true product 850, and 21 x 51; (f) boundary probes just outside the domain."
+    }
+  ],
+  "unverifiable": [],
+  "boundary_probes": {
+    "carry_case_not_null": "carry_case is populated, so the payload is not claiming a universal method; it names the exception and the exception-to-the-exception. Both were tested rather than accepted, and both hold.",
+    "necessity_of_the_condition": "Tested the direction that is easy to get wrong. There is no domain pair where a band of 10 or more still happens to read off correctly by coincidence: equality would force 900H + 90T = 0, impossible for nonzero digits. The word 'exactly' in the applicability is earned.",
+    "left_band_ceiling": "The claim that a large leftmost band merely spills into the thousands digit cannot itself overflow, since the hundreds band is at most 9*9 = 81 and so is always at most two digits. No fourth-digit failure exists.",
+    "zero_digit_exclusion": "Probed just outside the domain. For 10 x 23, 12 x 20 and 20 x 30 the read-off still gives the right answer mathematically (230, 240, 600). The payload's stated reason for excluding zero digits is therefore precisely correct and not a disguised mathematical failure: it says a zero digit is drawn as no lines at all, which the diagram cannot show. The exclusion is a drawing limitation, and the payload says so in exactly those terms.",
+    "three_digit_operands": "Outside the stated two-digit domain the straight read-off genuinely breaks (123 x 23 reads as 24429 against a true 2829), so the domain restriction does real work. Note that the underlying band arithmetic is a split identity that survives any split, so the restriction is about drawability and digit-hood, not about the algebra.",
+    "self_correction": "My first version of this probe asserted that three-digit operands must fail the band identity, and the run returned agrees:false. On inspection the fault was mine, not the payload's: divmod(123,10) splits into 12|3 and the identity holds for any split, digit or not, so my assertion was vacuous rather than a real defect. I repaired my own instrument to test the read-off instead, which is what the payload actually claims. No payload text and no generator code was altered."
+  }
+}

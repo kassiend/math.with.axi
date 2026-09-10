@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "reverse-percentage-recover-original-price",
+      "detail": "Ambiguous wording in applicability. The text reads 'S(1 + d/100) ... is always short of P - by 68 x 1.8 = GBP 122.40 against a true GBP 340'. The literal reading of 'short of P by X' makes X the shortfall, but the true shortfall is 340 - 122.40 = GBP 217.60; 122.40 is the wrong ANSWER, not the gap. The 'against a true GBP 340' clause makes the intended reading recoverable, and every number quoted (68 x 1.8 = 122.40, and its equality with P(1-(d/100)^2) = 340 x 0.36) is arithmetically correct, so this is phrasing, not a computational error.",
+      "witness": "d=80, P=340: wrong answer 122.40, actual shortfall 217.60"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "reverse-percentage-recover-original-price",
+      "detail": "Imprecise justification inside the declared null 'applicability.negative_or_zero_prices'. It says P = 0 is degenerate because 'nothing is recoverable, exactly as in carry_case'. That analogy is not accurate: at P = 0 with a known d < 100 the rule still returns the right answer (S = 0, 0 / 0.2 = 0 = P). The genuine collapse in carry_case is over d = 100, where ALL prices map to 0 simultaneously; P = 0 alone loses nothing. Because this field is a refusal to claim rather than a claim, the effect is over-restriction (a case where the method actually still works is excluded from the stated domain), which is conservative and cannot mislead a viewer. No assertion about the technique is falsified.",
+      "witness": "P=0, d=80: S=0 and 0/(1-80/100)=0=P, recovered correctly"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "reverse-percentage-recover-original-price",
+      "detail": "Imprecise gloss inside the declared null 'applicability.discounts_above_100_percent': 'the algebra would return a negative price'. Verified d in {101,150,200}: what goes negative is the keeper and therefore the SALE price; the recovery division itself still returns the correct positive P (e.g. d=150 gives S=-170 and -170/(-0.5)=340). The null correctly declines to claim the case, so nothing false is asserted about the domain; only the descriptive reason is loose.",
+      "witness": "d=150, P=340: keeper=-1/2, S=-170, S/keeper=340"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "reverse-percentage-recover-original-price",
+      "detail": "Seed provenance is not independently reproducible from the payload. The draw declares seed 369640847, maps d=10k (k in [1,9]) and P=10t (t in [3,40]), and rejection_rate 0, but the payload contains no RNG specification, so I cannot confirm that this seed yields k=8, t=34. I did verify everything that makes the provenance claim matter: both drawn values lie inside their declared ranges, the declared maps do produce d=80/P=340/S=68, the stated presentational reason is provably true (S = t(10-k) is integral for all 342 grid cells, so no card need show pence), and - decisively against cherry-picking - the rule is exact on every one of those 342 cells and on the wider d=0..99 x P=1..500 grid. No filter could therefore have screened out a failing case, because within and far beyond the declared range there are no failing cases. Reported as a finding rather than as unverifiable because no mathematical claim rests on the seed value.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "reverse-percentage-recover-original-price",
+      "detail": "Display-step judgement (no step missing for the result). Read in order the cards do produce 340: s2 gives 100-80=20% -> 0.2, s3 gives 68 / 0.2 = 68 x 5 = 340, s4 confirms 340 - 80% = 68. Each of those five arithmetic assertions was checked independently and holds. The percent-to-decimal conversion in s2 (20% -> 0.2) is carried by an arrow rather than an explicit line, which is terse but not a gap in the derivation. One pedagogical observation, not a correctness defect: the payload's own headline failure mode - the 'near-universal wrong move' of adding the discount back, with its vivid 68 x 1.8 = GBP 122.40 - appears nowhere on the cards as a number. s3's instruction says 'Divide, don't add back' without showing what adding back would cost, and the caveat card s5 spends itself on the rarer d=100 case instead. A viewer therefore never sees the mistake they are most likely to make.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "reverse-percentage-recover-original-price",
+      "script": "verifier.checks/reverse-percentage-recover-original-price.py",
+      "computed": "340",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "method_verified": "P = S / (1 - d/100) for real P > 0 and 0 <= d < 100. Established three ways, all in exact rationals or symbolics, never floats: (1) symbolically via sympy, simplify(P*k/k - P) = 0 for k = 1 - d/100 nonzero, which covers the full real domain claimed; (2) exhaustively over the entire declared draw grid, t in [3,40] x k in [1,9], 342 cells; (3) exhaustively over the wider grid d = 0..99 x P = 1..500, 50000 cells. Non-integer probes (d = 1/3, 100/3, 99.98, 99.99 against P = 19.99, 1/7, 100000) confirm the 'every real P' scope rather than just the integer instances.",
+    "universality_support": "The universality claim is backed by symbolic proof over the stated real domain, not merely by a finite check, so the finite grids are corroboration rather than the load-bearing evidence. This is the correct posture: a check over d=0..99 alone would not license a claim about all real d < 100, and the payload does not rest on one.",
+    "carry_case_consistency": "The counterexample and the applicability condition are mutually consistent, which is the pairing most often broken. d = 100 genuinely breaks the method: keeper(100) = 0 exactly, the rule's own instruction raises ZeroDivisionError, and the stronger information-theoretic claim holds - P -> S collapses every price to 0 (verified for 340, for 5, and for all 38 prices in the drawn range), so no method whatever could invert it. And d = 100 is genuinely excluded by the stated condition, since 0 <= 100 < 100 is false. The boundary is exactly where the payload says it is: exact for every d in [0,100), undefined at 100.",
+    "secondary_claim": "The add-back failure was verified exhaustively rather than accepted: S(1 + d/100) = P(1 - (d/100)^2) < P strictly, for every d in 1..99 against three test prices. The payload's careful hedge 'strictly between 0 and 100' is correct and necessary - at d = 0 adding back is exact, so a claim over [0,100) would have been false.",
+    "nulls_spot_checked": "The declined fields behave as described where it matters. Rounding: a sale price 1p low with keeper 0.2 lands 5p low, matching the null exactly. Stacking: 20% then 10% gives 244.80, not the 238 that a single 30% would give, so the warning is correct. Markup/VAT: 408/1.2 = 340, so the structure does carry over - and the payload still declines to claim it, which is the honest call given it was untested."
+  }
+}

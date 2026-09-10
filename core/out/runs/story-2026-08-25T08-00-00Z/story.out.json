@@ -1,0 +1,331 @@
+{
+  "story_id": "nash-equilibrium-in-28-pages",
+  "area": "biography",
+  "subject_slug": "john-forbes-nash",
+  "angle_slug": "nash-equilibrium-the-film-got-it-wrong",
+  "title": "The film got the math wrong.",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[curious] A film about a mathematician won Best Picture. In one scene, he explains his own big idea. [surprised] The math in it is wrong.",
+      "display": "Best Picture. Wrong math.",
+      "visual": "image",
+      "image_id": "i1"
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] In the scene, the friends agree that nobody approaches the blonde. But if they all stay away, your best move is to go for her. [surprised] One man breaks it and the deal collapses. [curious] The real Nash proved something stronger. Princeton, nineteen fifty. Twenty-eight pages. It shared a Nobel in nineteen ninety-four.",
+      "display": "One defector breaks it.",
+      "visual": "image",
+      "image_id": "i3",
+      "steps": [
+        {
+          "visual": "image",
+          "image_id": "i3",
+          "weight": 33
+        },
+        {
+          "visual": "image",
+          "image_id": "i2",
+          "weight": 6
+        },
+        {
+          "visual": "image",
+          "image_id": "i5",
+          "weight": 12
+        }
+      ]
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[curious] Here is the actual definition. Look at everyone's choice at once. If nobody can do better by changing their own move alone, that is an equilibrium. [thoughtful] Two prisoners. Both silent, one year each. Talk while he stays quiet, you walk. Both talk, two years. Talking beats silence either way. So both talk. [surprised] Stable, and worse for both. Some games have no such point. So Nash let players randomise. Then one always exists.",
+      "display": "No one gains by moving alone.",
+      "visual": "formula",
+      "steps": [
+        {
+          "visual": "formula",
+          "weight": 26
+        },
+        {
+          "visual": "anim",
+          "anim": {
+            "type": "nash-matrix"
+          },
+          "weight": 31
+        },
+        {
+          "visual": "anim",
+          "anim": {
+            "type": "nash-mixing"
+          },
+          "weight": 15
+        }
+      ]
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] Traffic routing. Auction design. Wireless networks. All hunting the same point: where nobody gains by moving alone. [surprised] Study real penalty kicks and the pros already mix almost exactly as the theory predicts. [thoughtful] So when a bad outcome looks like stupidity, look again.",
+      "display": "Not stupidity. Stable.",
+      "visual": "image",
+      "image_id": "i4",
+      "steps": [
+        {
+          "visual": "image",
+          "image_id": "i4",
+          "weight": 17
+        },
+        {
+          "visual": "anim",
+          "anim": {
+            "type": "nash-mixing"
+          },
+          "weight": 15
+        },
+        {
+          "visual": "formula",
+          "weight": 10
+        }
+      ]
+    }
+  ],
+  "formula_latex": "\\begin{gathered}u_{i}(\\sigma_{i}^{*},\\sigma_{-i}^{*})\\;\\ge\\;u_{i}(\\sigma_{i},\\sigma_{-i}^{*})\\\\[6pt]\\text{for every }\\sigma_{i}\\text{, every }i\\\\[16pt]\\text{finite game}\\;\\Longrightarrow\\;\\exists\\,\\sigma^{*}\\end{gathered}",
+  "mechanism": "A game here is: finitely many players, each with a finite set of actions, and a payoff u_i for every combination of actions. A MIXED strategy sigma_i is a probability distribution over player i's actions; a pure action is the special case that puts all the probability on one action. Write sigma* for a whole profile and sigma*_{-i} for everyone's part of it except player i's. The first line of the card is the definition, in full: sigma* is a Nash equilibrium when, for EVERY player i and EVERY alternative strategy sigma_i available to that player, u_i(sigma*_i, sigma*_{-i}) >= u_i(sigma_i, sigma*_{-i}). The quantifier that carries the whole idea is 'holding the others fixed'. Only ONE player moves in each comparison. It is therefore a statement about unilateral deviation and nothing else: an equilibrium is not claimed to be good, not claimed to be unique, and not claimed to be what a group would agree to if it could coordinate. The second line is Nash's existence theorem: a game with finitely many players and finitely many actions each always has at least one equilibrium, once mixed strategies are allowed. Nash proved this by a fixed-point argument (Kakutani in the 1950 paper, Brouwer in the 1951 one); the script does NOT reprove the theorem - no terminating symbolic computation can - it verifies the theorem's conclusion on the two instances the story shows, and it establishes the two structural facts the story asserts about them. Those instances are fixed here in exact rationals so a second, independently written script lands on the same characters. INSTANCE A, the prisoner's dilemma, with the story's own sentences and payoff = minus the years served: row player's actions (Silent, Talk) crossed with column player's actions (Silent, Talk), A_row = [[-1, -3], [0, -2]] and A_col = [[-1, 0], [-3, -2]]. Over ALL mixed strategies it has exactly one Nash equilibrium, (Talk, Talk), with payoff pair (-2, -2), because Talk strictly dominates Silent for both players; and that equilibrium is strictly worse for BOTH than (Silent, Silent) = (-1, -1). This is the whole point of showing it: stable is not the same as good, and the card's inequality never said otherwise. INSTANCE B, a zero-sum penalty kick whose four numbers are ILLUSTRATIVE, chosen only to have the structure a real one has - scoring is likelier when kicker and keeper guess apart, and the two mismatched cells are not equal because a kicker has a stronger side. Row = kicker (Left, Right), column = keeper (Left, Right), the row payoff is the probability the kick scores: B_row = [[1/5, 9/10], [4/5, 1/5]], B_col = -B_row. It has NO pure Nash equilibrium at all - every one of the four cells is broken by a unilateral switch - and exactly one mixed one: the kicker plays Left with probability 6/13, the keeper plays Left with probability 7/13, and the kicker's value is 34/65. At that profile each of the kicker's two actions pays exactly 34/65 against the keeper's mix, which is why randomising is rational rather than lazy. B is the instance that makes the second line of the card necessary: a definition that only ever ranged over pure actions would have nothing to point at here. The decisive value the check reports, and the only thing on its last stdout line, is computed = str(Tuple(u_row, u_col, p_star, q_star, v_star)) = the payoff pair at A's unique equilibrium followed by B's kicker mix on Left, keeper mix on Left, and value: (-2, -2, 6/13, 7/13, 34/65).",
+  "check_script": "generator.checks/nash-equilibrium-two-games.py",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "A 2001 film about John Nash, with Russell Crowe playing him, won four Academy Awards including Best Picture.",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "quote": "A film by the same name was released in 2001, directed by Ron Howard with Russell Crowe playing Nash, and Jennifer Connelly playing Alicia; it won four Academy Awards, including Best Picture."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "In the film, Nash's moment of insight is dramatised as a scene in a bar with his friends — the scene the hook refers to.",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "quote": "In the movie, Nash's eureka moment occurs while he is with his friends in a bar."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "The mathematics in that scene is wrong: the arrangement it describes is not a Nash equilibrium.",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "quote": "The scene that was just described is NOT a Nash equilibrium."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "In the scene the proposal is that nobody goes for the blonde, and that this is the only way the group wins.",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "quote": "But what if no one goes for the blonde? We don't get in each others way and we don't insult the other girls. That's the only way we win."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "The reason the scene fails: if no one goes for the blonde, each friend's best strategy is to go for the blonde, so as soon as one man does, the agreement collapses.",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "quote": "The scene in the film cannot be a Nash equilibrium since if no one goes for the blonde, each of the friends best strategy – given what their friends is doing – is to go for the blonde!"
+    },
+    {
+      "claim_id": "f6",
+      "claim": "Nash earned his PhD in 1950 with a 28-page dissertation on noncooperative games.",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "quote": "Nash earned a PhD in 1950 with a 28-page dissertation on noncooperative games."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Nash began the equilibrium work at Princeton.",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "quote": "At Princeton, he began work on his equilibrium theory, later known as the Nash equilibrium."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "In 1994 that work brought Nash a share of the Nobel Memorial Prize in Economic Sciences, alongside John Harsanyi and Reinhard Selten — hence 'shared a Nobel'.",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "quote": "In 1994, he received the Nobel Memorial Prize in Economic Sciences (along with John Harsanyi and Reinhard Selten) for his game theory work as a Princeton graduate student."
+    },
+    {
+      "claim_id": "f9",
+      "claim": "Von Neumann and Morgenstern's mixed-strategy analysis was restricted to zero-sum games — the limit Nash's result goes past.",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "quote": "The concept of a mixed-strategy equilibrium was introduced by John von Neumann and Oskar Morgenstern in their 1944 book The Theory of Games and Economic Behavior, but their analysis was restricted to the special case of zero-sum games."
+    },
+    {
+      "claim_id": "f10",
+      "claim": "Nash proved existence far more generally than von Neumann had — the support for 'proved something stronger'.",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "quote": "The key to Nash's ability to prove existence far more generally than von Neumann lay in his definition of equilibrium."
+    },
+    {
+      "claim_id": "f11",
+      "claim": "The definition shown on the card: an equilibrium is a profile in which no individual player can increase their own expected payoff by changing their strategy while the others keep theirs unchanged.",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "quote": "If each player has chosen a strategy — an action plan based on what has happened so far in the game — and no individual player can increase their own expected payoff by changing their strategy while the other players keep theirs unchanged, then the current set of strategy choices constitutes a Nash equilibrium."
+    },
+    {
+      "claim_id": "f12",
+      "claim": "In the prisoner's dilemma as stated, neither prisoner testifying means a year in prison each — the story's 'both silent, one year each'.",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "quote": "They plan to sentence both to a year in prison on a lesser charge."
+    },
+    {
+      "claim_id": "f13",
+      "claim": "If one prisoner testifies against the other, he goes free while his partner gets three years — the story's 'talk while he stays quiet, you walk'.",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "quote": "If he testifies against his partner, he will go free while the partner will get three years in prison on the main charge."
+    },
+    {
+      "claim_id": "f14",
+      "claim": "If both testify, both are sentenced to two years — the story's 'both talk, two years'.",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "quote": "If both prisoners testify against each other, both will be sentenced to two years in jail."
+    },
+    {
+      "claim_id": "f15",
+      "claim": "Defecting is the rational move for each prisoner even though cooperating would pay each of them more — the story's 'stable, and worse for both'.",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "quote": "The dilemma arises from the fact that while defecting is rational for each agent, cooperation yields a higher payoff for each."
+    },
+    {
+      "claim_id": "f16",
+      "claim": "Some finite games have no pure-strategy Nash equilibrium at all — the story's 'some games have no such point'.",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "quote": "This game has no pure strategy Nash equilibrium since there is no pure strategy (heads or tails) that is a best response to a best response."
+    },
+    {
+      "claim_id": "f17",
+      "claim": "To randomise, in this technical sense, is to choose a probability distribution over one's pure strategies.",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "quote": "The modern concept of Nash equilibrium is instead defined in terms of mixed strategies, where players choose a probability distribution over possible pure strategies (which might put 100% of the probability on one pure strategy; such pure strategies are a subset of mixed strategies)."
+    },
+    {
+      "claim_id": "f18",
+      "claim": "Nash defined a mixed-strategy equilibrium for any game with a finite set of actions and proved at least one must exist — the story's 'then one always exists', and the second line of the card.",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "quote": "The contribution of Nash in his 1951 article \"Non-Cooperative Games\" was to define a mixed-strategy Nash equilibrium for any game with a finite set of actions and prove that at least one (mixed-strategy) Nash equilibrium must exist in such a game."
+    },
+    {
+      "claim_id": "f19",
+      "claim": "Nash's existence proofs use fixed-point theorems — Kakutani in the 1950 paper, Brouwer in the 1951 one. Stated in the mechanism, not in the narration.",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "quote": "Putting the problem in this framework allowed Nash to employ the Kakutani fixed-point theorem in his 1950 paper to prove existence of equilibria. His 1951 paper used the simpler Brouwer fixed-point theorem for the same purpose."
+    },
+    {
+      "claim_id": "f20",
+      "claim": "Nash equilibrium is applied to traffic flow, to the design of auctions, to penalty kicks in football and to wireless communications — the four the payoff names.",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "quote": "Other applications include traffic flow (see Wardrop's principle), how to organize auctions (see auction theory), the outcome of efforts exerted by multiple parties in the education process, regulatory legislation such as environmental regulations (see tragedy of the commons), natural resource management, analysing strategies in marketing, penalty kicks in football (i.e., soccer; see matching pennies), robot navigation in crowds, energy systems, transportation systems, evacuation problems and wireless communications."
+    },
+    {
+      "claim_id": "f21",
+      "claim": "A penalty kick is a two-by-two game — the kicker picks left or right, the keeper picks left or right — and the kicker scores more often when the two choices do not match, asymmetrically because a kicker has a stronger leg. This is the structure, not the numbers, of the animation's example matrix.",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "quote": "In soccer penalty kicks, the kicker has two options – kick left or kick right – and the goalie has two options – jump left or jump right. The kicker's probability of scoring a goal is higher when the choices do not match, and lower when the choices match. In general, the payoffs are asymmetric because each kicker has a stronger leg (usually the right leg) and his chances are better when kicking to the opposite direction (left)."
+    },
+    {
+      "claim_id": "f22",
+      "claim": "Close examination of what real kickers and goalkeepers actually do found their actions do not deviate significantly from the Nash equilibrium prediction — the story's 'the pros already mix almost exactly as the theory predicts'.",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "quote": "In a close examination of the actions of kickers and goalies, it was found that their actions do not deviate significantly from the prediction of a Nash equilibrium."
+    },
+    {
+      "claim_id": "f23",
+      "claim": "A player who mixes must be indifferent between the actions being mixed — the equality the second animation's crossing point shows.",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "quote": "To calculate the equilibrium point in this game, note that a player playing a mixed strategy must be indifferent between his two actions (otherwise he would switch to a pure strategy)."
+    }
+  ],
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "portrait",
+      "source": "commons",
+      "file": "images/i1.jpg",
+      "attribution": "Tony Shek — File:Russell Crowe TIFF 2006.jpg, CC BY-SA 2.0, via Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Russell_Crowe_TIFF_2006.jpg",
+      "prompt": null
+    },
+    {
+      "image_id": "i2",
+      "role": "portrait",
+      "source": "commons",
+      "file": "images/i2.jpg",
+      "attribution": "Economicforum — File:John Forbes Nash, Jr..jpg, CC BY-SA 3.0, via Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/wiki/File:John_Forbes_Nash,_Jr..jpg",
+      "prompt": null
+    },
+    {
+      "image_id": "i3",
+      "role": "diagram",
+      "source": "generated",
+      "file": "images/i3.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A 4:3 landscape editorial illustration, flat minimal geometric style, on a clean warm cream background with generous margins and a centred composition. Five identical dark-navy circular tokens sit in an evenly spaced row along the bottom, each with a thin ink arrow rising out of it. Four of the arrows curve gently away to the left and right toward a cluster of small teal circles. One arrow, drawn in bright amber and noticeably thicker than the rest, breaks away from the group and points straight up to a single large amber circle set apart at the top centre. Thin confident ink linework, uniform stroke weight, soft even lighting, no text, no numbers, no letters, no labels, no faces, no people."
+    },
+    {
+      "image_id": "i4",
+      "role": "diagram",
+      "source": "generated",
+      "file": "images/i4.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A 4:3 landscape editorial illustration, flat minimal geometric-illustration style, on a clean warm cream background with generous margins, arranged as a tidy two-by-two grid of four simple symbols separated by thin hairline rules. Top left: a deep-navy auction gavel resting on its round block. Top right: a teal cloverleaf motorway interchange seen from directly overhead. Bottom left: an amber broadcast mast with three concentric signal arcs radiating from its tip. Bottom right: a rust-coloured football resting on the penalty spot with a simple goal frame behind it. Thin confident ink linework, uniform stroke weight, soft even lighting, no text, no numbers, no letters, no labels, no faces, no people."
+    },
+    {
+      "image_id": "i5",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i5.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A 4:3 landscape photograph, warm late-afternoon daylight raking in from a tall window on the left, of a slim stack of about thirty typewritten pages bound at the corner with a single brass fastener, lying flat and centred on a worn dark-wood desk. Beside it a fountain pen and a sheet of loose paper with a faint hand-drawn grid of four boxes and two arrows. Mid-century American university setting, muted browns creams and deep greens, shallow depth of field, generous empty margins around the centred stack, no legible text of any kind on any page, no faces, no people."
+    }
+  ],
+  "nulls": [
+    {
+      "field": "area — assignment overridden by the operator",
+      "reason": "The rotation's next area was probability-and-statistics; this run was commissioned as a Nash story, which is biography. Recorded rather than hidden, because the rotation exists precisely to stop biography from taking the section: three of the four shipped stories are already biography, and the next run should take probability-and-statistics or financial-mathematics."
+    },
+    {
+      "field": "check_script — what it proves and what it only instantiates",
+      "reason": "The script PROVES, on the two named games, the complete equilibrium set: for the prisoner's dilemma exactly one over all mixed strategies, (Talk, Talk), payoff (-2, -2), strictly worse for both than mutual silence; for the penalty-kick game no pure equilibrium and exactly one mixed one, (6/13, 7/13) with value 34/65. It does NOT prove Nash's existence theorem itself, the second line of the card, and cannot: that is a statement about every finite game and no terminating computation settles it. The theorem is carried by citation (f18), and the script's role there is to instantiate its conclusion, never to establish it."
+    },
+    {
+      "field": "isolation — the generator and verifier scripts were not written blind",
+      "reason": "The template's cross-check assumes two agents that never see each other's work; this run was executed by one operator, so both scripts were written by the same author. They use deliberately different algorithms — support enumeration with a solve() over indifference conditions, against an explicit piecewise best-response correspondence intersected graph-by-graph, plus an independent 260x260 numeric regret grid — so a coding slip in either would still surface as a disagreement. What they cannot provide is independence of judgement about WHAT to check. Stated because a cross-check that quietly lost its isolation is worse than one that says so."
+    },
+    {
+      "field": "penalty-kick matrix — the four numbers are illustrative",
+      "reason": "20 / 90 / 80 / 20 percent are this story's own example, not measured data. Only their STRUCTURE is sourced (f21): scoring is likelier when kicker and keeper guess apart, and the two mismatched cells differ because a kicker has a stronger side. Both animation panels label them 'example odds' on screen for exactly this reason, and no narration line states them. The equilibrium 6/13 that follows is therefore the equilibrium of the example, not a claim about real football; the separate claim about real football is f22 and is stated only in the words the source uses."
+    },
+    {
+      "field": "'the math in it is wrong' — scope",
+      "reason": "The claim is about the game-theoretic content of one scene (f3, f5), not about the film as a whole and not about Nash's own mathematics. The film's departures from Nash's life are a different subject and are not raised."
+    },
+    {
+      "field": "the film's Academy Awards",
+      "reason": "The story says the film won Best Picture (f1). It does not say Russell Crowe won an Oscar for it, because he did not — he was nominated for Best Actor and did not win. The narration is written so no viewer can read a win into it."
+    },
+    {
+      "field": "no causal claim from the film to the mathematics, or from Nash to the applications",
+      "reason": "The film dramatises a bar scene as the origin of the idea; the story reports that the film does this (f2), not that it is what happened. Likewise the payoff asserts only that these fields apply Nash equilibrium (f20, f22), never that they descend from Nash's papers."
+    },
+    {
+      "field": "no words are attributed to John Nash",
+      "reason": "The only quoted lines in the sources are FILM dialogue (f4), spoken by a character. The narration therefore paraphrases the scene's proposal and never puts a sentence in the real Nash's mouth."
+    },
+    {
+      "field": "'Princeton, nineteen fifty. Twenty-eight pages.'",
+      "reason": "Two separately sourced facts placed side by side (f6, f7), not one derived one. No age is stated: Nash's exact age at submission depends on the month, which the source does not give, and the template's own warning about ages made it not worth the second."
+    },
+    {
+      "field": "images[i1] — framing",
+      "reason": "The Commons original (Tony Shek, 2006) is portrait, 1280x2078 as served, and the card slot is landscape; a straight object-fit crop cut through the chin. The file in this run is that original with the head region scaled to fit the landscape frame and the two side margins filled with a blurred, darkened copy of the same photograph. Nothing about the subject is altered, retouched or composited with any other image. CC BY-SA 2.0 permits the derivative; the attribution line is carried in the ledger."
+    },
+    {
+      "field": "images[i1] — why an actor stands in the hook",
+      "reason": "The hook is about the film, so the film's lead is the right face for it; the real Nash appears in the turn, from Commons (i2). No likeness of either man is generated, and no still from the film is used — a film still is neither public domain nor permissively licensed, so the template's two-sources rule rules it out."
+    },
+    {
+      "field": "images[i3] — what the diagram is",
+      "reason": "An abstraction of the scene's game (a row of players, one breaking from the agreed move), drawn as tokens and arrows. Generated rather than sourced because no permissively licensed image of that scene exists, and generated as shapes rather than figures so that nobody in it can be read as a person, real or invented."
+    }
+  ]
+}

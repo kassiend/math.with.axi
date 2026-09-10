@@ -1,0 +1,18 @@
+{
+  "status": "failed",
+  "stage": "verification",
+  "problems": [
+    {
+      "side": "verdict",
+      "error": "independent SymPy cross-check did not agree"
+    },
+    {
+      "side": "verdict",
+      "error": "claim line-multiplication-crossings-two-digit: generator — check output is not JSON: RESULT: ALL CHECKS PASSED"
+    },
+    {
+      "side": "generator",
+      "error": "check output is not JSON: RESULT: ALL CHECKS PASSED"
+    }
+  ]
+}

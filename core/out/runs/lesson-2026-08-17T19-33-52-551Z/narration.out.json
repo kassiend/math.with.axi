@@ -1,0 +1,73 @@
+{
+  "lesson_id": "multiply-near-100-complement-base",
+  "counter": 4,
+  "intro": {
+    "narration": "[excited] Heey — ninety-seven times ninety-two, in your head? [pause] Watch this.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.6
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Look at them. [pause] Both sit just under a hundred. That's all you need.",
+      "instruction": "Multiply near 100",
+      "working": "97 × 92 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 5.52
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] How far is each one from a hundred? [pause] Three … and eight.",
+      "instruction": "Take each gap to 100",
+      "working": "100 − 97 = 3, 100 − 92 = 8",
+      "audio": "audio/s2.mp3",
+      "seconds": 5.76
+    },
+    {
+      "step_id": "s3",
+      "narration": "[confident] Now subtract crosswise. Ninety-seven minus eight is eighty-nine. [pause] That's the front.",
+      "instruction": "Subtract a gap crosswise",
+      "working": "97 − 8 = 89",
+      "audio": "audio/s3.mp3",
+      "seconds": 8.24
+    },
+    {
+      "step_id": "s4",
+      "narration": "[excited] Multiply the two gaps. Three times eight is twenty-four. [pause] Stick it on the back — eight-nine-two-four.",
+      "instruction": "Gap product = last 2 digits",
+      "working": "3 × 8 = 24 → 8924",
+      "audio": "audio/s4.mp3",
+      "seconds": 10.32
+    },
+    {
+      "step_id": "s5",
+      "narration": "[thoughtful] One catch. Gaps of twelve and eleven give one thirty-two — over ninety-nine, so it carries: seven-eight-three-two. [warm] Try your own.",
+      "instruction": "Gap product over 99? Carry",
+      "working": "88 × 89 → 132 → 7832",
+      "audio": "audio/s5.mp3",
+      "seconds": 10.88
+    }
+  ],
+  "speech_seconds": 46.32,
+  "total_seconds": 49.15,
+  "timeline": {
+    "fps": 30,
+    "a_intro_seconds": 5.6,
+    "b_handoff_seconds": 0.8,
+    "c_card_in_seconds": 0.467,
+    "d_steps_seconds": 40.72,
+    "transitions_seconds": 1.067,
+    "e_hold_seconds": 0.5,
+    "total_frames_estimate": 1475,
+    "ceiling_frames": 1800,
+    "note": "A = max(152 frames, intro clip 168 frames) = 168. D is the sum of the five measured clip durations; each step holds for exactly its own clip. Transitions are the four 8-frame cross-fades counted additively, which is the pessimistic reading. Under the 1800-frame ceiling with 325 frames of headroom."
+  },
+  "audio_settings": {
+    "model_id": "eleven_v3",
+    "voice_settings": { "stability": 0.45, "similarity_boost": 0.8, "style": 0.35 },
+    "tool": "core/tools/elevenlabs.mjs say(), one request per clip, cached by hash of (text, voice, model, settings)",
+    "measurement": "ffprobe format=duration, values used verbatim"
+  },
+  "budget_note": "Speech totals 46.32 s against a 30–40 s aim. Not trimmed: every line carries plan content — s3 and s4 are the two halves of the answer and s5 is the mandatory carry caveat, which §4.2 freezes. Per §5 the read is not sped up and no step is deleted; the post lands at ~49.2 s, comfortably inside the 60 s ceiling, so the decision to cut further is left to the Editor and the gate.",
+  "nulls": []
+}

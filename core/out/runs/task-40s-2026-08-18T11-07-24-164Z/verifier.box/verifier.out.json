@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "exp-chain-3x4-4y9-xy",
+      "detail": "The statement does not explicitly restrict x and y to the reals. Over the reals the answer is forced: t -> 3^t and t -> 4^t are strictly increasing bijections onto (0, inf), so x = log_3 4 and y = log_4 9 are each unique, both positive, and xy = 2 exactly. If complex exponents were admitted, 3^x = 4 and 4^y = 9 would each have countably many solutions x = (ln 4 + 2*pi*i*j)/ln 3, y = (ln 9 + 2*pi*i*k)/ln 4, and xy would not be 2 except for j = k = 0. Real-domain reading is the universal default for this notation, so this does not make the puzzle ambiguous in practice; recorded for completeness only, not as a defect that changes the verdict.",
+      "witness": "x = (ln 4 + 2*pi*i)/ln 3, y = ln 9/ln 4 gives xy = 2 + 2*pi*i/ln 3, not 2"
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "exp-chain-3x4-4y9-xy",
+      "script": "verifier.checks/exp-chain-3x4-4y9-xy.py",
+      "computed": "2",
+      "agrees": true,
+      "detail": "Script solves 3^x = 4 and 4^y = 9 independently with SymPy rather than applying the intended chaining shortcut, confirms each has exactly one real solution, back-substitutes to confirm both equations are satisfied, forms x*y, and simplifies. Symbolic result is the integer 2 (simplify(x*y - 2) == 0). Corroborated numerically at 50 digits: (ln4/ln3)*(ln9/ln4) - 2 < 1e-40. Sign check: x > 0 and y > 0 since both are logs of numbers greater than 1 in bases greater than 1, so xy > 0; the positive branch is the only real branch and no sign ambiguity arises."
+    }
+  ],
+  "unverifiable": [],
+  "judgements": {
+    "unambiguously_determined": true,
+    "unambiguously_determined_detail": "Both equations have unique real solutions because exponentials with base > 1 are strictly monotone, so the quantity xy asked for is single-valued. The description ('Find the value of xy') matches the quantity the statement determines, and statement_latex is a faithful rendering of the plain-text statement.",
+    "exact_not_rounded": true,
+    "exact_not_rounded_detail": "The answer 2 is an exact integer obtained symbolically, not a decimal truncation. The irrational factors cancel identically: x*y = (ln4/ln3)*(ln9/ln4) = ln9/ln3 = 2. No rounding is involved at any point.",
+    "simplest_form": true,
+    "simplest_form_detail": "'2' is an integer in lowest terms; there is no unreduced fraction, unrationalised denominator, or unevaluated logarithm left in the stated answer. answer and answer_latex agree.",
+    "sign_and_branch": "Checked explicitly. x = log_3 4 > 0 and y = log_4 9 > 0, product positive; the stated answer +2 has the correct sign. Over the reals there is a single branch, so no branch selection is needed. The only branch multiplicity would come from admitting complex exponents, noted as the minor finding above.",
+    "steps_expected_plausible": true,
+    "steps_expected_plausible_detail": "steps_expected = 3 is consistent with the natural solution 3^(xy) = (3^x)^y = 4^y = 9 = 3^2, hence xy = 2.",
+    "sampling_integrity": "not-applicable",
+    "sampling_integrity_detail": "The payload declares no sampling range, seed, presentation filter, or draws; the operands are hand-specified for a single puzzle, so there is no cherry-picking claim available to audit.",
+    "section_3_2": "waived per instruction: this is a one-off daily task, not a technique, so applicability condition and counterexample fields are not required and their absence is not treated as a defect.",
+    "universality": "not-claimed; the payload asserts a single numeric value, not a general theorem, so no whitelisted theorem id or exhaustive domain check is owed."
+  }
+}

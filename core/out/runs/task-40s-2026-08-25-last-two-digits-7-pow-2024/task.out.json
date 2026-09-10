@@ -1,0 +1,17 @@
+{
+  "task_id": "last-two-digits-7-pow-2024",
+  "duration_s": 40,
+  "structure_id": "last-two-digits-power-order-mod-100",
+  "categories": ["modular-arithmetic"],
+  "description": "Find the last two digits",
+  "description_latex": null,
+  "statement": "7^{2024}",
+  "statement_latex": "7^{2024}",
+  "answer": "01",
+  "answer_latex": "01",
+  "solution_sketch": "The last two digits are 7^2024 mod 100. Powers of 7 cycle mod 100 with period 4: 7, 49, 43, 01, then repeat (7^4 = 2401 ends in 01). Since 2024 is divisible by 4, 7^2024 ends in the same two digits as 7^4, namely 01.",
+  "difficulty_rationale": "Naive route: there is no way to compute 7^2024 directly, and the last digit alone (which cycles 7, 9, 3, 1) is not enough - the question asks for two digits, so you must work mod 100. Insight: the powers of 7 are periodic mod 100, so find the period by computing 7, 49, 7^3 = 343 -> 43, 7^4 = 2401 -> 01, spotting the cycle length is 4. After the insight two cheap steps remain: reduce the exponent, 2024 mod 4 = 0, and read off the last member of one full cycle, 01. Finding the period mod 100 and handling two digits rather than one is distinctly more than a 20-second last-digit task, but every step is small enough to do in the head.",
+  "steps_expected": 2,
+  "check_script": "core/out/runs/task-40s-2026-08-25-last-two-digits-7-pow-2024/generator.checks/last-two-digits-7-pow-2024.py",
+  "nulls": []
+}

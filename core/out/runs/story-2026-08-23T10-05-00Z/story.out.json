@@ -1,0 +1,195 @@
+{
+  "story_id": "gauss-legendre-least-squares",
+  "area": "biography",
+  "subject_slug": "carl-friedrich-gauss",
+  "angle_slug": "least-squares-legendre-priority",
+  "title": "Legendre published it. Gauss claimed it.",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "A formula came out in a book. It was already in print under another man's name. The author knew, and claimed it anyway.",
+      "display": "Published second. Claimed first.",
+      "visual": "image",
+      "image_id": "i1"
+    },
+    {
+      "beat": "turn",
+      "narration": "Carl Friedrich Gauss. Fit a curve to observations and you get more equations than unknowns. Legendre published the fix first. Gauss published his own in 1809, acknowledged Legendre's book, and claimed the method anyway, saying he'd had it since the seventeen nineties. Legendre spent years fighting for his name.",
+      "display": "More equations than unknowns.",
+      "visual": "image",
+      "image_id": "i2"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Score each answer instead of solving for one. Square every gap between predicted and measured, and add them up. Squaring kills the minus signs, so an overshoot can't hide an undershoot, and doubling a miss quadruples its cost. The total is a bowl with one bottom, unless all your measurements sit at one spot. Set the slope to zero and out comes the answer.",
+      "display": "Square the misses. One bowl, one bottom.",
+      "visual": "formula",
+      "steps": [
+        {
+          "visual": "anim",
+          "anim": {
+            "type": "least-squares"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "beat": "payoff",
+      "narration": "Your phone hears more satellites than it needs, and the standard fix is a least-squares adjustment. Your spreadsheet's best-fit line is the same sum. Gauss proved more. With unbiased, equally noisy, independent, normal errors, nothing linear and unbiased beats it. You use it every day.",
+      "display": "GPS. Every best-fit line.",
+      "visual": "image",
+      "image_id": "i3"
+    }
+  ],
+  "formula_latex": "\\begin{gathered}\\min_{a,\\,b}\\;\\sum_{i=1}^{n}\\bigl(y_i - a - b\\,x_i\\bigr)^{2}\\\\[6pt]\\text{unique iff}\\;\\sum_{i}(x_i-\\bar{x})^{2}>0\\end{gathered}",
+  "mechanism": "With more observations than unknowns no candidate answer satisfies them all, so instead of solving you score. For parameters a and b the miss at point i is the residual y_i - a - b*x_i, and the score is S(a,b) = the sum of those residuals squared; least squares takes whichever a, b makes S smallest. Squaring buys two things. It removes the signs, so a +3 overshoot cannot cancel a -3 undershoot the way it would in a plain sum (+3 and -3 contribute 18, not 0). And cost grows with the square, so doubling one miss quadruples its contribution: at a fixed total absolute error E, splitting that error evenly over k misses costs E^2/k, so the fit prefers many small misses to one big one. S is a quadratic in a and b, so its Hessian H is constant: H = [[2n, 2*sum x_i], [2*sum x_i, 2*sum x_i^2]]. Its trace is 2n + 2*sum x_i^2; the quantity that equals 2n is the top-left entry, the first leading principal minor, not the trace. The two leading principal minors are that 2n, positive for any data at all, and det H = 4(n*sum x_i^2 - (sum x_i)^2) = 4n*sum (x_i - xbar)^2, which is positive exactly when the x values are not all identical. With both minors positive the eigenvalues of this symmetric 2x2 have positive sum and positive product, so both are positive: H is positive definite and S is a strictly convex bowl with exactly one bottom. Under that same condition the bottom is where both partial derivatives vanish, and dS/da = 0 with dS/db = 0 give it in closed form: b = sum (x_i - xbar)(y_i - ybar) / sum (x_i - xbar)^2, the covariance over the variance, and a = ybar - b*xbar. If instead every x_i is the same, det H = 0, the bowl degenerates into a trough and there is no unique answer: for x = (1,1,1), y = (1,2,3), every line with a + b = 2 scores the same. That is why the displayed formula carries its condition.",
+  "check_script": "generator.checks/gauss-least-squares.py",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "Legendre's comet-orbit method left him with more equations than unknowns.",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Legendre/",
+      "quote": "he ended up with more equations than there were unknowns."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Legendre published the least squares method, for fitting a curve to data, in an appendix to that book.",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Legendre/",
+      "quote": "In an appendix Legendre gave the least squares method of fitting a curve to the data available."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "Gauss acknowledged that the method had appeared in Legendre's book and still claimed priority for himself.",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Legendre/",
+      "quote": "while acknowledging that it appeared in Legendre's book, Gauss still claimed priority for himself."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "Legendre fought for many years to have his priority recognised.",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Legendre/",
+      "quote": "This greatly hurt Legendre who fought for many years to have his priority recognised."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "Legendre published the first clear and concise exposition of the method of least squares, in 1805.",
+      "url": "https://en.wikipedia.org/wiki/Least_squares",
+      "quote": "The first clear and concise exposition of the method of least squares was published by Legendre in 1805."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "In his 1809 work on computing orbits Gauss claimed he had held the method of least squares since 1795.",
+      "url": "https://en.wikipedia.org/wiki/Least_squares",
+      "quote": "In that work he claimed to have been in possession of the method of least squares since 1795."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Gauss dated his own use of the method to the mid-1790s, 1794 or 1795.",
+      "url": "https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss",
+      "quote": "that he had been using it since 1794 or 1795."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "Gauss's claim produced a priority dispute with Legendre.",
+      "url": "https://en.wikipedia.org/wiki/Least_squares",
+      "quote": "This naturally led to a priority dispute with Legendre."
+    },
+    {
+      "claim_id": "f9",
+      "claim": "The method as published was an algebraic procedure for fitting linear equations to data, which is the straight-line fit shown in this story.",
+      "url": "https://en.wikipedia.org/wiki/Least_squares",
+      "quote": "The technique is described as an algebraic procedure for fitting linear equations to data"
+    },
+    {
+      "claim_id": "f10",
+      "claim": "Least squares picks the fit that minimises the summed squared distances between the observed data points and the fitted model.",
+      "url": "https://en.wikipedia.org/wiki/Ordinary_least_squares",
+      "quote": "Geometrically, this is seen as the sum of the squared distances, parallel to the axis of the dependent variable, between each data point in the set and the corresponding point on the regression surface"
+    },
+    {
+      "claim_id": "f11",
+      "claim": "Gauss stated that least squares is optimal: in a linear model whose errors have mean zero, are uncorrelated and have equal variances, the least-squares estimator is the best linear unbiased estimator of the coefficients.",
+      "url": "https://en.wikipedia.org/wiki/Least_squares",
+      "quote": "In 1822, Gauss was able to state that the least-squares approach to regression analysis is optimal in the sense that in a linear model where the errors have a mean of zero, are uncorrelated, normally distributed, and have equal variances, the best linear unbiased estimator of the coefficients is the least-squares estimator."
+    },
+    {
+      "claim_id": "f12",
+      "claim": "Gauss proved that the method has the lowest sampling variance among linear unbiased estimators.",
+      "url": "https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss",
+      "quote": "Gauss proved that the method has the lowest sampling variance within the class of linear unbiased estimators"
+    },
+    {
+      "claim_id": "f13",
+      "claim": "A satellite-positioning receiver tracking more satellites than it has unknowns gets an over-dimensioned system of equations.",
+      "url": "https://gssc.esa.int/navipedia/index.php/Code_Based_Positioning_(SPS)",
+      "quote": "In general, an over-dimensioned system is obtained"
+    },
+    {
+      "claim_id": "f14",
+      "claim": "The standard way to solve that over-dimensioned positioning system is a least squares adjustment.",
+      "url": "https://gssc.esa.int/navipedia/index.php/Code_Based_Positioning_(SPS)",
+      "quote": "which can be solved using the Least Squares adjustment."
+    },
+    {
+      "claim_id": "f15",
+      "claim": "The best-fit line a spreadsheet draws is computed by least squares: Excel's LINEST function uses the method.",
+      "url": "https://support.microsoft.com/en-us/office/linest-function-84d7d0d9-6e50-4101-977a-fa7abf772b6d",
+      "quote": "uses the method of least squares for determining the best fit for the data."
+    }
+  ],
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "scene",
+      "source": "commons",
+      "file": "images/i1.jpg",
+      "attribution": "Carl Friedrich Gauss — File:Gauss, Carl Friedrich – Theoria motus corporum coelestium in sectionibus conicis solem ambientium, 1809 – BEIC 12217180.jpg, Public domain, via Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Gauss,_Carl_Friedrich_%E2%80%93_Theoria_motus_corporum_coelestium_in_sectionibus_conicis_solem_ambientium,_1809_%E2%80%93_BEIC_12217180.jpg",
+      "prompt": null
+    },
+    {
+      "image_id": "i2",
+      "role": "portrait",
+      "source": "commons",
+      "file": "images/i2.jpg",
+      "attribution": "Gottlieb Biermann / After Christian Albrecht Jensen — File:Carl Friedrich Gauss.jpg, Public domain, via Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Carl_Friedrich_Gauss.jpg",
+      "prompt": null
+    },
+    {
+      "image_id": "i3",
+      "role": "diagram",
+      "source": "generated",
+      "file": "images/i3.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A 4:3 editorial illustration on a clean cream background, centered composition with generous margins. On the left, a modern smartphone seen from directly above, its screen showing a simple street map with a single blue location dot and a soft translucent accuracy circle around it. Above the phone, four small stylised satellites arranged in a wide arc, each sending a thin dashed line down toward the phone; the dashed lines do not meet at one point but form a tiny triangle of near misses around the blue dot. On the right, a small scatter of dark dots with one straight line drawn through them and short vertical tick marks connecting each dot to the line. Flat minimal geometric illustration style, thin ink lines, muted navy and warm orange accents, soft even lighting, no text, no numbers, no labels, no logos."
+    }
+  ],
+  "nulls": [
+    {
+      "field": "beats[1].narration (year of Legendre's publication)",
+      "reason": "Sources disagree on the year: Wikipedia's Least squares article says Legendre published the first clear exposition in 1805, MacTutor's Legendre biography says the book on comet orbits appeared in 1806. Both agree he published before Gauss, so the narration says only that Legendre published first, and the 1805 date stays in facts[] attached to the source that gives it."
+    },
+    {
+      "field": "beats[1].narration (year Gauss dated his own use to)",
+      "reason": "Wikipedia's Least squares article says 1795; its Carl Friedrich Gauss article says 1794 or 1795. The narration says the mid seventeen nineties, which both support, rather than picking one."
+    },
+    {
+      "field": "story angle (Ceres)",
+      "reason": "An earlier draft hung this story on Gauss using least squares to recover Ceres in 1801. That attribution is contested: the Wikipedia Ceres article credits only an efficient method of orbit determination and never says least squares, the Wikipedia Gauss biography hedges it with likely, and the historiography treats it as open. The claim was dropped rather than hedged, and the angle moved to the priority dispute, which the sources state plainly. Ceres appears nowhere in this script."
+    },
+    {
+      "field": "check_script (historical claims)",
+      "reason": "SymPy settles the displayed formula and nothing else. Who published first, who claimed what, and when, are historical claims carried by facts f1 to f8; the script asserts nothing about them."
+    },
+    {
+      "field": "images[2].source",
+      "reason": "Commons had nothing usable under an accepted licence for a least-squares fit diagram or a satellite-positioning illustration, so the payoff image was generated. One image, gemini-3-pro-image, $0.134. The other two are a public-domain scan and a public-domain painting; no likeness was generated."
+    },
+    {
+      "field": "images (Legendre portrait)",
+      "reason": "Not used. The best-known Legendre portrait on Commons depicts Louis Legendre the politician, not the mathematician, and the one authentic likeness, Boilly's 1820 caricature at File:Legendre.jpg, is 320x400, far below the 564x470 card slot at capture scale. A wrong face is worse than no face, so the hook runs on the 1809 title page instead."
+    }
+  ]
+}

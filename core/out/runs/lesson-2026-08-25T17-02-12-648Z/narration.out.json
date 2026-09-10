@@ -1,0 +1,53 @@
+{
+  "lesson_id": "line-multiplication-crossings-two-digit",
+  "counter": 7,
+  "intro": {
+    "narration": "[excited] How do you multiply twenty-three by twenty-two just by drawing lines? Watch this.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.388
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] No times tables today. Just straight lines.",
+      "instruction": "Multiply with lines, not tables",
+      "working": "23 × 22 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 2.844
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Draw each digit as that many lines. Two and three one way, two and two crossing them.",
+      "instruction": "Draw each digit as that many lines",
+      "working": "2 | 3 one way, 2 | 2 the other",
+      "audio": "audio/s2.mp3",
+      "seconds": 5.889
+    },
+    {
+      "step_id": "s3",
+      "narration": "[curious] Now count the crossings in each diagonal band. Four, ten, and six.",
+      "instruction": "Count the crossings in each band",
+      "working": "4 | 10 | 6",
+      "audio": "audio/s3.mp3",
+      "seconds": 6.257
+    },
+    {
+      "step_id": "s4",
+      "narration": "[thoughtful] Careful, ten is not a digit. Write zero, carry the one left, and you get five, zero, six.",
+      "instruction": "A band of ten or more carries left",
+      "working": "4 | 10 | 6 → 506",
+      "audio": "audio/s4.mp3",
+      "seconds": 8.222
+    },
+    {
+      "step_id": "s5",
+      "narration": "[warm] Each band is just a digit product. Twenty-three times twenty-two, five hundred and six.",
+      "instruction": "Each band is a digit product",
+      "working": "23 × 22 = 506",
+      "audio": "audio/s5.mp3",
+      "seconds": 5.986
+    }
+  ],
+  "total_seconds": 34.586,
+  "nulls": []
+}

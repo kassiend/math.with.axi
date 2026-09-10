@@ -1,0 +1,94 @@
+{
+  "lesson_id": "reverse-percentage-recover-original-price",
+  "counter": 5,
+  "intro": {
+    "narration": "[excited] Eighty percent off — sixty-eight pounds. [pause] What was it before?",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.68
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "narration": "[curious] You know the sale price. [pause] You want the ticket price.",
+      "instruction": "Undo a discount",
+      "working": "80% off → £68. Before?",
+      "audio": "audio/s1.mp3",
+      "seconds": 5.2
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "narration": "[confident] Eighty off means you keep twenty percent. [pause] Divide by that.",
+      "instruction": "Divide by what you keep",
+      "working": "100 − 80 = 20% → ÷ 0.2",
+      "audio": "audio/s2.mp3",
+      "seconds": 5.84
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "narration": "[excited] Dividing by zero point two is times five. Sixty-eight times five is three hundred and forty.",
+      "instruction": "Divide, don't add back",
+      "working": "68 ÷ 0.2 = 68 × 5 = 340",
+      "audio": "audio/s3.mp3",
+      "seconds": 8.16
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "narration": "[confident] Three hundred and forty pounds. [pause] Take eighty percent off — sixty-eight.",
+      "instruction": "That's the ticket price",
+      "working": "£340 − 80% = £68 ✓",
+      "audio": "audio/s4.mp3",
+      "seconds": 7.2
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "narration": "[thoughtful] One catch: a hundred percent off. [pause] You keep nothing, so there is nothing to divide by.",
+      "instruction": "100% off can't be undone",
+      "working": "keep = 0 → £0 ÷ 0 ✗",
+      "audio": "audio/s5.mp3",
+      "seconds": 8.64
+    }
+  ],
+  "total_seconds": 42.02,
+  "timing": {
+    "audio_seconds": 40.72,
+    "intro_seconds": 5.68,
+    "steps_seconds": 35.04,
+    "transitions_seconds": 1.3,
+    "ceiling_seconds": 60,
+    "headroom_seconds": 17.98,
+    "note": "Every 'seconds' value is the ffprobe measurement printed by core/tools/elevenlabs.mjs, used verbatim. total_seconds = measured audio (40.72) + the ~1.3 s of hand-off, card-in and cross-fade transitions. Each step holds for exactly its clip length; no clip is stretched or compressed."
+  },
+  "voice": {
+    "model_id": "eleven_v3",
+    "voice_settings": { "stability": 0.45, "similarity_boost": 0.8, "style": 0.35 },
+    "clips": "one request per step plus one for the intro, cached by hash of (text, voice, model, settings); the pre-recorded assets/audio/start_audio/* greetings are not used"
+  },
+  "plan_fidelity": {
+    "changed": [],
+    "note": "Display copy is the plan's instruction and working lines used as-is, character for character, including the ✓ and ✗ glyphs and the U+2212 minus signs. No number, formula, applicability condition, carry case, step order or counter was altered. The narration paraphrases only; it never states a number the plan does not state."
+  },
+  "nulls": [
+    {
+      "field": "intro.prerecorded_greeting",
+      "reason": "Not used by design: §5.4 of the brief requires the lesson intro to be generated with the rest of the narration so the post is one performance in one voice."
+    },
+    {
+      "field": "narration.applicability_full_statement",
+      "reason": "The spoken script does not read the plan's full applicability clause (all real P > 0, all 0 ≤ d < 100, exactness, the S·(1 + d/100) < P failure bound). It is far too long for a 60 s post, and abridging it in speech would weaken a condition the Verifier checks in full. The audible lesson carries the rule, the worked example and the d = 100 caveat; the unspoken conditions are neither contradicted nor implied to be absent."
+    },
+    {
+      "field": "narration.carry_case_second_failure_mode",
+      "reason": "carry_case names two failures: d = 100 (division by zero, the information is gone) and the common wrong move of adding the discount back (68 × 1.8 = £122.40). Only the first is spoken, on card s5, because it is the one the plan gave a card to. The second is carried by step s3's own instruction line, 'Divide, don't add back', used as-is; the £122.40 figure appears on no card in the plan and was not added to one here."
+    },
+    {
+      "field": "narration.extension_to_markup_and_stacked_discounts",
+      "reason": "Nothing is said about stripping VAT (÷ 1.2) or about undoing two stacked discounts. The plan explicitly declines to assert either (nulls[0] and nulls[1]); mentioning them in narration would assert them by implication."
+    }
+  ],
+  "tooling_note": "Clips were produced by core/tools/elevenlabs.mjs say() via its module API (driver: tts-driver.mjs in this run directory). The documented CLI form exits 0 with no output on this host because the file's `import.meta.url === file://${process.argv[1]}` guard never matches a Windows argv path — the same guard failure the planner recorded for ledger.mjs and sampling.mjs. No HTTP was hand-rolled and no credential was read, printed or written by this agent."
+}

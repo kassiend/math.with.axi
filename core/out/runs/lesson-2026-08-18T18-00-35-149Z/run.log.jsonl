@@ -1,0 +1,6 @@
+{"t":"2026-08-18T18:11:13.072Z","event":"run.start","lesson_id":"reverse-percentage-recover-original-price","counter":5,"seed":1925913411}
+{"t":"2026-08-18T18:11:14.327Z","event":"crosscheck","agreed":true,"generator":"340","verifier":"340"}
+{"t":"2026-08-18T18:11:14.327Z","event":"timeline","total_frames":1274,"total_seconds":42.467,"steps":["s1:5.2s","s2:5.84s","s3:8.16s","s4:7.2s","s5:8.64s"]}
+{"t":"2026-08-18T18:11:14.329Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-08-18T18:17:34.284Z","event":"capture.done","frames":1274}
+{"t":"2026-08-18T18:22:17.284Z","event":"done","video":"output\\posts\\lessons\\reverse-percentage-recover-original-price.mp4","seconds":42.467}
