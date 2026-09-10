@@ -109,7 +109,9 @@ export async function fetchFile(entry, outFile) {
 }
 
 // ---------------------------------------------------------------------------
-if (import.meta.url === `file://${process.argv[1]}`) {
+// `file://${process.argv[1]}` never matches on Windows: argv[1] is a C:\ path while
+// import.meta.url is file:///c:/... . Every CLI below silently no-opped and exited 0.
+if (import.meta.main) {
   const argv = process.argv.slice(2);
   const flag = (n) => { const i = argv.indexOf(`--${n}`); return i === -1 ? undefined : argv[i + 1]; };
   try {

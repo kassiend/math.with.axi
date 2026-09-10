@@ -114,7 +114,9 @@ export function remove(storyId, { file = STORIES_LEDGER } = {}) {
 //   node core/pipeline/lib/stories-ledger.mjs candidates '<subject>' '<angle>' '<area>'
 //   node core/pipeline/lib/stories-ledger.mjs list
 // ---------------------------------------------------------------------------
-if (import.meta.url === `file://${process.argv[1]}`) {
+// `file://${process.argv[1]}` never matches on Windows: argv[1] is a C:\ path while
+// import.meta.url is file:///c:/... . Every CLI below silently no-opped and exited 0.
+if (import.meta.main) {
   const [cmd, a, b, c] = process.argv.slice(2);
   if (cmd === 'candidates') {
     if (!a) { console.error('usage: candidates <subject_slug> <angle_slug> <area>'); process.exit(2); }
