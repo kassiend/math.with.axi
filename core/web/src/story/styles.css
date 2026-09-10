@@ -31,19 +31,26 @@ html, body {
      shrink-to-fits into half the card, and the fit probe's 500px measurement becomes a lie. */
 }
 
+/* The ∫ the mascot walks out of. Positioned by its own centre in the scene, so the layout
+   constant is a centre rather than a corner and the glyph resizes without moving. */
+.mascot-portal { position: absolute; display: block; pointer-events: none; }
+
 /* The visual slot. Overflow hidden so a sourced image fills it without spilling past the radius. */
 .visual { position: absolute; overflow: hidden; background: #F4F5F7; }
 .visual-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .visual-formula,
-.visual-shape {
+.visual-shape,
+.visual-plot {
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
   background: #FFFFFF;
 }
+/* Size is set inline from a measurement; this is the fallback if that never ran. */
 .visual-formula { font-size: 46px; color: #1E76C3; }
 .visual-formula .katex { font-size: 1em; color: inherit; }
 .visual-shape svg { width: 100%; height: 100%; }
+.visual-plot svg { width: 100%; height: 100%; display: block; }
 
 .display {
   position: absolute; left: 50%; transform: translateX(-50%);

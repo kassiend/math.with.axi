@@ -103,6 +103,23 @@ export function stepAt(frame: number, t: LessonTimeline): LessonStepPhase | null
 }
 
 /**
+ * How much of a step's span a diagram takes to build itself. The remainder holds the finished
+ * state, which is the part the viewer actually reads.
+ *
+ * A lesson diagram gets the whole step rather than the story format's fixed 1.5 s: here the build
+ * IS the teaching — the lines going down one at a time is the method — so it has to advance with
+ * the sentence explaining it, not race ahead and wait.
+ */
+export const VISUAL_BUILD_SHARE = 0.85;
+
+export function visualBuild(frame: number, t: LessonTimeline): number {
+  const step = stepAt(frame, t);
+  if (!step) return 0;
+  const span = Math.max(1, step.end - step.start);
+  return clamp01((frame - step.start) / (span * VISUAL_BUILD_SHARE));
+}
+
+/**
  * Body opacity: fades in at the head of a step and out at its tail, so the text swaps while the
  * card is empty rather than cutting mid-glyph. During the closing hold the last step stays solid.
  */

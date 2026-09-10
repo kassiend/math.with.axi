@@ -9,7 +9,7 @@
  * and the display text has to get shorter. Shrinking further or letting it spill are both defects
  * the viewer sees, and either is worse than not shipping the post.
  */
-import { BODY } from './layout';
+import { BODY, BODY_WITH_VISUAL } from './layout';
 
 export interface LineFit {
   fits: boolean;
@@ -21,7 +21,13 @@ export interface LineFit {
 
 interface Spec { fontSize: number; maxLines: number; lineHeightRatio: number }
 
-export function fitLine(text: string, spec: Spec, maxWidth = BODY.maxWidth): LineFit {
+export function fitLine(
+  text: string,
+  spec: Spec,
+  maxWidth = BODY.maxWidth,
+  floor = BODY.minFontSize,
+  step = BODY.fitStep,
+): LineFit {
   const probe = document.createElement('div');
   probe.style.cssText = [
     'position:absolute', 'visibility:hidden', 'left:-99999px', 'top:0',
@@ -32,7 +38,7 @@ export function fitLine(text: string, spec: Spec, maxWidth = BODY.maxWidth): Lin
 
   try {
     let last: LineFit | null = null;
-    for (let size = spec.fontSize; size >= BODY.minFontSize; size -= BODY.fitStep) {
+    for (let size = spec.fontSize; size >= floor; size -= step) {
       const lineHeight = Math.round(size * spec.lineHeightRatio);
       probe.style.fontSize = `${size}px`;
       probe.style.lineHeight = `${lineHeight}px`;
@@ -46,12 +52,12 @@ export function fitLine(text: string, spec: Spec, maxWidth = BODY.maxWidth): Lin
     }
     return {
       fits: false,
-      fontSize: BODY.minFontSize,
+      fontSize: floor,
       lines: last?.lines ?? 0,
       height: last?.height ?? 0,
       reason:
         `"${text.slice(0, 48)}${text.length > 48 ? '…' : ''}" needs ${last?.lines} lines at the ` +
-        `${BODY.minFontSize}px floor but only ${spec.maxLines} are allowed — shorten the display text`,
+        `${floor}px floor but only ${spec.maxLines} are allowed — shorten the display text`,
     };
   } finally {
     probe.remove();
@@ -62,12 +68,17 @@ export function fitLine(text: string, spec: Spec, maxWidth = BODY.maxWidth): Lin
  * Fit every step up front, before the capture starts. One pass, so the sizes cannot vary between
  * frames, and a failure is known before a single frame is written.
  */
-export function fitSteps(steps: Array<{ instruction: string; working: string }>) {
-  const results = steps.map((s, i) => ({
-    index: i,
-    instruction: fitLine(s.instruction, BODY.instruction),
-    working: fitLine(s.working, BODY.working),
-  }));
+export function fitSteps(steps: Array<{ instruction: string; working: string; visual?: unknown }>) {
+  const results = steps.map((s, i) => {
+    // A step with a diagram gets the compact top-anchored body, which is tighter and holds the
+    // working line to one line — otherwise the text grows down into the slot the diagram needs.
+    const body = s.visual ? BODY_WITH_VISUAL : BODY;
+    return {
+      index: i,
+      instruction: fitLine(s.instruction, body.instruction, body.maxWidth, body.minFontSize, body.fitStep),
+      working: fitLine(s.working, body.working, body.maxWidth, body.minFontSize, body.fitStep),
+    };
+  });
   const bad = results.filter((r) => !r.instruction.fits || !r.working.fits);
   return {
     fits: bad.length === 0,

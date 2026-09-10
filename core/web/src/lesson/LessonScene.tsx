@@ -9,16 +9,19 @@
  * pressure, and putting a countdown on one would tell the viewer to rush the thing they came to
  * understand.
  */
-import { BODY, CARD, FOOTER, STEP_FADE, TITLE } from './layout';
+import { BODY, BODY_WITH_VISUAL, CARD, FOOTER, STEP_FADE, TITLE, VISUAL } from './layout';
 import type { LineFit } from './fit';
+import { LessonVisual, type LessonVisualSpec } from './visuals';
 import {
-  BLUR_PX, LessonTimeline, bodyOpacity, easeOutCubic, lerp, progress, stepAt,
+  BLUR_PX, LessonTimeline, bodyOpacity, easeOutCubic, lerp, progress, stepAt, visualBuild,
 } from '../../../shared/lesson-timeline';
 
 export interface LessonStepContent {
   step_id: string;
   instruction: string;
   working: string;
+  /** A step with a diagram re-anchors its text to the top of the card and hands the rest over. */
+  visual?: LessonVisualSpec | null;
 }
 
 export interface LessonSceneProps {
@@ -71,27 +74,41 @@ function Card(props: LessonSceneProps) {
         {props.title}
       </div>
 
-      {content && fit && (
-        <div className="body" style={{
-          top: `${BODY.centreY - CARD.y}px`,
-          width: `${BODY.maxWidth}px`,
-          gap: `${BODY.gap}px`,
+      {content && fit && (() => {
+        const spec = content.visual ?? null;
+        const body = spec ? BODY_WITH_VISUAL : BODY;
+        return (
+          <div className={spec ? 'body top' : 'body'} style={{
+            top: `${(spec ? BODY_WITH_VISUAL.top : BODY.centreY) - CARD.y}px`,
+            width: `${body.maxWidth}px`,
+            gap: `${body.gap}px`,
+            opacity,
+          }}>
+            <div className="line instruction" style={{
+              fontSize: `${fit.instruction.fontSize}px`,
+              lineHeight: `${Math.round(fit.instruction.fontSize * body.instruction.lineHeightRatio)}px`,
+              color: body.instruction.colour,
+            }}>
+              {content.instruction}
+            </div>
+            <div className="line working" style={{
+              fontSize: `${fit.working.fontSize}px`,
+              lineHeight: `${Math.round(fit.working.fontSize * body.working.lineHeightRatio)}px`,
+              color: body.working.colour,
+            }}>
+              {content.working}
+            </div>
+          </div>
+        );
+      })()}
+
+      {content?.visual && (
+        <div className="visual" style={{
+          left: `${VISUAL.x - CARD.x}px`, top: `${VISUAL.y - CARD.y}px`,
+          width: `${VISUAL.w}px`, height: `${VISUAL.h}px`,
           opacity,
         }}>
-          <div className="line instruction" style={{
-            fontSize: `${fit.instruction.fontSize}px`,
-            lineHeight: `${Math.round(fit.instruction.fontSize * BODY.instruction.lineHeightRatio)}px`,
-            color: BODY.instruction.colour,
-          }}>
-            {content.instruction}
-          </div>
-          <div className="line working" style={{
-            fontSize: `${fit.working.fontSize}px`,
-            lineHeight: `${Math.round(fit.working.fontSize * BODY.working.lineHeightRatio)}px`,
-            color: BODY.working.colour,
-          }}>
-            {content.working}
-          </div>
+          <LessonVisual spec={content.visual} build={visualBuild(frame, timeline)} />
         </div>
       )}
 

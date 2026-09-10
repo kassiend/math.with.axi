@@ -81,3 +81,17 @@ html, body {
 
 /* The mascot is a fixed part of the card now, not something that flies in. */
 .footer-mascot { position: absolute; object-fit: contain; }
+
+/* A step that carries a diagram anchors its text to the top of the card instead of centring it,
+   and the diagram takes the space below. */
+.body.top { transform: translateX(-50%); }
+
+.visual {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.visual svg { display: block; }

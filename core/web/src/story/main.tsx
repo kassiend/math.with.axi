@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import katex from 'katex';
 import { StoryScene, type StoryBeatContent } from './StoryScene';
-import { fitStory } from './fit';
+import { fitStory, measureFormula } from './fit';
 import { buildStoryTimeline } from '../../../shared/story-timeline';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
@@ -53,6 +53,19 @@ if (!payload) {
     payload.mascot,
   );
 
+  // One step of a stepped beat. A formula step is typeset here, exactly like a whole-beat formula;
+  // a plot/anim/shape step passes its spec straight through. `weight` defaults to 1 so an
+  // unweighted list divides the beat evenly.
+  const buildStep = (s: any) => ({
+    visual: s.visual ?? 'none',
+    image: s.image ?? null,
+    formulaHtml: s.formula_latex ? typeset(s.formula_latex) : null,
+    shapeSvg: s.shape_svg ?? null,
+    plot: s.plot ?? null,
+    anim: s.anim ?? null,
+    weight: typeof s.weight === 'number' && s.weight > 0 ? s.weight : 1,
+  });
+
   const beats: StoryBeatContent[] = (payload.beats ?? []).map((b: any) => ({
     beat: b.beat,
     display: b.display ?? '',
@@ -60,32 +73,57 @@ if (!payload) {
     image: b.image ?? null,
     formulaHtml: b.formula_latex ? typeset(b.formula_latex) : null,
     shapeSvg: b.shape_svg ?? null,
+    plot: b.plot ?? null,
+    anim: b.anim ?? null,
+    steps: Array.isArray(b.steps) && b.steps.length ? b.steps.map(buildStep) : null,
   }));
 
-  document.fonts.ready.then(() => {
-    const fit = fitStory(payload.title ?? '', beats.map((b) => b.display));
-    window.__axiFit = fit;
-    if (!fit.fits) {
-      fatal(`text does not fit: ${JSON.stringify(fit.problems)}`);
-      return;
-    }
+  // KaTeX loads its faces lazily, on first use, so document.fonts.ready can settle before they
+  // have been asked for at all. A formula beat would then be screenshotted in a fallback face —
+  // intermittently, and only on whichever machine loses the race. Ask for them explicitly.
+  document.fonts.ready
+    .then(() => Promise.all([
+      document.fonts.load('100px KaTeX_Size2'),
+      document.fonts.load('100px KaTeX_Main'),
+    ]))
+    .then(() => {
+      const formulaFits = beats.map((b) => {
+        // A formula step needs the same slot-fit measurement as a whole-beat formula, or it
+        // overflows and is clipped exactly the way the mechanism formula was.
+        for (const s of b.steps ?? []) {
+          if (s.formulaHtml) s.formulaFontSize = measureFormula(s.formulaHtml).fontSize;
+        }
+        if (!b.formulaHtml) return null;
+        const m = measureFormula(b.formulaHtml);
+        b.formulaFontSize = m.fontSize;
+        return m;
+      });
 
-    window.__axiFrameCount = timeline.totalFrames;
-    window.__axiSeek = (frame: number) => {
-      flushSync(() => root.render(
-        <StoryScene
-          frame={frame}
-          timeline={timeline}
-          background={payload.background}
-          title={payload.title}
-          beats={beats}
-          titleFit={fit.titleFit}
-          displayFits={fit.displayFits}
-        />,
-      ));
-    };
+      const fit = fitStory(payload.title ?? '', beats.map((b) => b.display));
+      // Recorded into the capture manifest: a formula silently set to a third of its size is
+      // something to be able to see after the fact, not only in the finished frame.
+      window.__axiFit = { ...fit, formulaFits };
+      if (!fit.fits) {
+        fatal(`text does not fit: ${JSON.stringify(fit.problems)}`);
+        return;
+      }
 
-    window.__axiSeek(0);
-    window.__axiReady = true;
-  });
+      window.__axiFrameCount = timeline.totalFrames;
+      window.__axiSeek = (frame: number) => {
+        flushSync(() => root.render(
+          <StoryScene
+            frame={frame}
+            timeline={timeline}
+            background={payload.background}
+            title={payload.title}
+            beats={beats}
+            titleFit={fit.titleFit}
+            displayFits={fit.displayFits}
+          />,
+        ));
+      };
+
+      window.__axiSeek(0);
+      window.__axiReady = true;
+    });
 }
