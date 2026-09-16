@@ -65,6 +65,15 @@ npm exec --yes -- ui-ux-pro-max-cli init --ai claude
 npm exec --yes -- skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"
 ```
 
+Content skills (MIT, from [Ootto-AI/claude-content-skills](https://github.com/Ootto-AI/claude-content-skills)) —
+the study → hook → script → build → caption chain that `axi-content-generator` runs:
+
+```bash
+npm exec --yes -- skills add Ootto-AI/claude-content-skills \
+  --skill reel-analyzer --skill going-viral --skill viral-hook-writer --skill reel-scripter \
+  --skill reel-builder --skill on-screen-text-writer --skill caption-and-hashtags
+```
+
 > `npx <pkg>` resolves to `npm` on this machine and fails with "Unknown command". Use
 > `npm exec --yes -- <pkg>` for anything not already in `node_modules`.
 
@@ -191,6 +200,33 @@ domain of elementary mathematics.
 - **Visual design is scaffold-grade.** `web/src/styles.css` is a placeholder. The installed design
   skills are the tools for the real thing.
 - **No publishing stage.** The pipeline produces a file. Getting it onto Instagram is manual.
+  Until it exists, a task's answer cannot be posted as the first comment, so the on-platform loop
+  for tasks stays open — the ask on the card ("Answer in the comments") is the payoff for now.
+
+---
+
+## Motion rules — every format
+
+Written after grading the first renders with `axi-content-generator` (C- overall: one unchanged
+card held for 13–21 s, blank frames at every swap, a hook that was a title, no ask). The rules
+are enforced in `shared/motion.ts` and the three scenes, not in prompts:
+
+1. **Frame 0 is the hook.** The card is opaque on frame 0 with the problem already on it. No
+   fade from nothing, no mascot wave, no title card.
+2. **Text is built, not pasted.** Every line lands token by token inside its own narration; a
+   story's `formula_steps` land one derivation line at a time.
+   **And the mechanism is drawn.** A lesson's working line is glyphs: the ones that survive from
+   the previous step slide to their new places (`92` splits into `9 _ 2`; the `11` travels), the
+   new ones land in orange and settle. `shared/motion.ts#matchGlyphs`.
+3. **Swaps cross-fade.** The outgoing state drifts out while the incoming rises in — there is
+   never a frame with an empty card.
+4. **Nothing is ever still.** The background drifts 6 % over the post; images push in; the task
+   readout ticks; the mascot is the walking take, not a still.
+5. **A visible finish line.** Lesson progress dots; the task seconds readout and colour shift at
+   75 %.
+6. **End on one ask.** `outro` / `ask` — spoken where the narrator wrote one, shown always. A
+   task's ask grows into the payoff when the timer ends.
+7. **Motion has a sound.** `assets/audio/sfx/pop.wav` on every step and beat boundary.
 
 ---
 
@@ -230,10 +266,14 @@ npm run worker               # run forever, firing daily at WORKER_DAILY_AT
 
 Run it from the repository root or from `core/` — the root `package.json` just delegates.
 
-Each task video is followed by a **separate message with the answer** and the trick behind it.
-Separate rather than in the caption: a caption travels with the file if it is forwarded, and a
-task post that carries its own answer is spoiled. Lessons get no answer note — the answer is the
-whole point of the video.
+Each video is followed by **the copy to paste**, as tap-to-copy blocks, one message per platform:
+the Instagram caption and first comment, the TikTok caption, the YouTube title, description and
+tags, and the alt text. `axi-caption-writer` writes them from the verified payload (nothing the
+payload does not say); if it fails, plain copy is built from the payload so the day still ships.
+
+A task's answer and the one-line trick appear **only inside the first-comment blocks**, never in
+the caption or the file's own caption: a caption travels with the file if it is forwarded, and a
+task post that carries its own answer is spoiled. Post the video, then paste the first comment.
 
 Configuration lives in `.env` at the repository root — see `.env.example`. Nothing is passed on
 the command line, so no secret ends up in shell history or in `ps`.
