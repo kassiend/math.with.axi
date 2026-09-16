@@ -2,43 +2,82 @@
   "runId": "lesson-multiply-by-11-two-digit",
   "capture": {
     "publicPath": "captures/lesson-multiply-by-11-two-digit",
-    "frames": 1080,
+    "frames": 864,
     "fps": 30,
     "width": 1080,
     "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 770.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 743
+    },
+    "resume": {
+      "start": 743,
+      "end": 864
+    },
+    "pauseFrame": 180
   },
   "audio": {
     "clips": [
       {
         "id": "intro",
         "src": "audio/lesson-multiply-by-11-two-digit/intro.mp3",
-        "from": 12,
-        "durationInFrames": 180
+        "from": 0,
+        "durationInFrames": 167
       },
       {
         "id": "s1",
         "src": "audio/lesson-multiply-by-11-two-digit/s1.mp3",
-        "from": 192,
-        "durationInFrames": 187
+        "from": 167,
+        "durationInFrames": 89
       },
       {
         "id": "s2",
         "src": "audio/lesson-multiply-by-11-two-digit/s2.mp3",
-        "from": 379,
-        "durationInFrames": 235
+        "from": 256,
+        "durationInFrames": 179
       },
       {
         "id": "s3",
         "src": "audio/lesson-multiply-by-11-two-digit/s3.mp3",
-        "from": 614,
-        "durationInFrames": 223
+        "from": 435,
+        "durationInFrames": 185
       },
       {
         "id": "s4",
         "src": "audio/lesson-multiply-by-11-two-digit/s4.mp3",
-        "from": 837,
-        "durationInFrames": 228
+        "from": 620,
+        "durationInFrames": 160
+      },
+      {
+        "id": "outro",
+        "src": "audio/lesson-multiply-by-11-two-digit/outro.mp3",
+        "from": 780,
+        "durationInFrames": 72
       }
     ]
+  },
+  "sfx": {
+    "src": "audio/lesson-multiply-by-11-two-digit/pop.wav",
+    "frames": [
+      167,
+      256,
+      435,
+      620,
+      780
+    ],
+    "volume": 0.45
   }
 }

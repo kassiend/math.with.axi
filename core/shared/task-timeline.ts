@@ -16,9 +16,13 @@ export const FPS = 30;
 export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
-/** The card scales in from centre; short, because the puzzle should be readable immediately. */
-export const CARD_IN_FRAMES = 12;
-export const HOLD_FRAMES = 15;
+/**
+ * The card is opaque from frame 0 and only settles from a slightly smaller scale. Frame 0 is the
+ * thumbnail and the first thing a thumb sees; a card fading in from nothing wastes it.
+ */
+export const CARD_IN_FRAMES = 8;
+/** Long enough for the closing ask to grow in and be read. */
+export const HOLD_FRAMES = 45;
 
 /** Background blur. Constant from frame 0 — there is no sharp phase to ramp from any more. */
 export const BLUR_PX = 14;

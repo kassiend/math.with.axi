@@ -3,12 +3,12 @@
   "width": 1080,
   "height": 1920,
   "fps": 30,
-  "frames": 1227,
+  "frames": 1253,
   "fit": {
     "fits": true,
-    "fontSize": 56,
-    "width": 139,
-    "height": 71
+    "fontSize": 96,
+    "width": 238,
+    "height": 120
   },
   "files": [
     "frame-00000.png",
@@ -1237,7 +1237,33 @@
     "frame-01223.png",
     "frame-01224.png",
     "frame-01225.png",
-    "frame-01226.png"
+    "frame-01226.png",
+    "frame-01227.png",
+    "frame-01228.png",
+    "frame-01229.png",
+    "frame-01230.png",
+    "frame-01231.png",
+    "frame-01232.png",
+    "frame-01233.png",
+    "frame-01234.png",
+    "frame-01235.png",
+    "frame-01236.png",
+    "frame-01237.png",
+    "frame-01238.png",
+    "frame-01239.png",
+    "frame-01240.png",
+    "frame-01241.png",
+    "frame-01242.png",
+    "frame-01243.png",
+    "frame-01244.png",
+    "frame-01245.png",
+    "frame-01246.png",
+    "frame-01247.png",
+    "frame-01248.png",
+    "frame-01249.png",
+    "frame-01250.png",
+    "frame-01251.png",
+    "frame-01252.png"
   ],
-  "dir": "/Users/kassiend_/Desktop/math.push/core/video/public/captures/task-power-rewrite-from-2x-equals-3"
+  "dir": "/Users/kassiend_/Desktop/work/math.push/core/video/public/captures/task-power-rewrite-from-2x-equals-3"
 }

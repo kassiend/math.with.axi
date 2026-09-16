@@ -13,6 +13,7 @@ import http from 'node:http';
 import path from 'node:path';
 import { chromium } from 'playwright';
 import { CORE } from '../lib/paths.mjs';
+import { shoot } from './screenshot.mjs';
 
 export const DESIGN_W = 720;
 export const DESIGN_H = 1280;
@@ -88,7 +89,7 @@ export async function captureLesson(run, lesson, opts = {}) {
       await page.evaluate((frame) => window.__axiSeek(frame), f);
       await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => r())));
       const name = `frame-${String(f).padStart(5, '0')}.png`;
-      await page.screenshot({ path: path.join(outDir, name), animations: 'disabled' });
+      await shoot(page, path.join(outDir, name));
       manifest.files.push(name);
       if (opts.onProgress && (f % 50 === 0 || f === frames - 1)) {
         opts.onProgress(f + 1, frames, Date.now() - started);

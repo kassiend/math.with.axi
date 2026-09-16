@@ -185,6 +185,20 @@ Rules that matter:
 - Useful tags for this format: `[excited]`, `[curious]`, `[confident]`, `[warm]`, `[thoughtful]`,
   `[whispers]` for an aside. Avoid the comedic ones — this is a teacher, not a bit.
 
+**The intro must not re-pose the problem step 1 poses.** Reviewed in the first render: the intro
+asked "how do you solve ninety-two times eleven in your head?", then step 1 said "Ninety-two
+times eleven. Looks tricky" — thirteen seconds on one problem, said twice. The intro opens a
+gap (*why* this is worth thirty seconds); step 1 starts the method. If step 1's plan says
+`pose`, its narration is one short phrase, not a restatement.
+
+**The intro also has an on-screen line**, `intro.display`, at most six words: the claim that
+lands under the problem at ~1.2 s while the voice is still talking. `In your head. No
+calculator.` — a promise or a gap, never the title of the method.
+
+**The outro is one ask**, `outro`: one sentence spoken, one short line shown. Save, share, or try
+it on their own number — one action, not a menu. A post that ends on the answer and cuts asks
+for nothing and gets it.
+
 ### 3.2 Display script — on screen, minimal
 
 What the viewer *reads*. **Minimum information, maximum practical application.** The card is not
@@ -223,7 +237,8 @@ plan; regenerating an unchanged line burns quota for nothing.
 ```jsonc
 {
   "intro": {
-    "narration": "[excited] Heey — how do you solve 23 times 11 in your head? [pause] Watch this.",
+    "narration": "[excited] Heey, twenty-three times eleven, in your head, faster than a calculator. Watch.",
+    "display": "In your head. No calculator.",   // <= 6 words, lands under the problem at ~1.2 s
     "audio": "audio/intro.mp3",
     "seconds": 4.12
   },
@@ -237,6 +252,12 @@ plan; regenerating an unchanged line burns quota for nothing.
       "seconds": 3.44
     }
   ],
+  "outro": {                                     // the ask. Optional but expected.
+    "narration": "[warm] Save this, and try it on your own number.",
+    "display": "Save this. Try it on yours.",     // one line, <= 8 words
+    "audio": "audio/outro.mp3",
+    "seconds": 2.6
+  },
   "total_seconds": 26.9,
   "nulls": []
 }
@@ -287,8 +308,9 @@ Identical to the task card — same component, same numbers:
 |---|---|
 | card | x 54, y 120, w 612, h 1050, radius 40, border 5 px `#000000`, fill `#FFFFFF` |
 | background | random from `assets/images/bg/`, `object-fit: cover`, blurred 14 px from the hand-off on |
-| mascot still | x 174, y 997, w 86, h 132 |
-| wordmark | `math with Axi`, Inter SemiBold 36 px, `#000000`, left x = 324, baseline y = 1074 |
+| mascot | the story's keyed walking take (`assets/video/10s.mp4`, geometry from `tools/story-mascot.mjs`), composited by Remotion, at rest in the band x 310, y 790, w 100, h 155. He walks in, reads while the lesson runs (frozen frame), and walks off as it ends. The footer still is gone — a still is not a character. |
+| wordmark | `math with Axi`, Inter SemiBold 36 px, `#000000`, centred on x = 360, baseline y = 1074 |
+| progress | one 12 px dot per step, 14 px apart, centred on (360, 310); `#1E76C3` done, `#D9DEE5` pending |
 
 ### 5.2 Title — the series counter
 
@@ -297,14 +319,31 @@ Identical to the task card — same component, same numbers:
 **N is read from the ledger, never invented**: one more than the highest counter already shipped.
 It appears on **every** step of the lesson, unchanged — it identifies the post, not the step.
 
-### 5.3 Step body
+### 5.3 Hook layout, step body, ask
 
-Two lines, centred as a group on **y = 561**, centred on x = 360, max width 500.
+**Hook layout** (phase B). The first step's `working` is the hero: ExtraBold up to **96 px**
+(auto-fit to 56, max 2 lines), `#1E76C3`, centred on y = 540, built token by token so the last
+token lands by frame 36. `intro.display` then lands under it, ExtraBold 42 px (fit to 30, max 2
+lines), `#000000`, centred on y = 690. Motion, then lock, then claim.
+
+**Step body.** Two lines, centred as a group on **y = 561**, centred on x = 360, max width 500.
+
+**The working line is drawn, not swapped.** Each character is its own glyph. At a step boundary
+the glyphs that also existed in the previous step (longest common subsequence over characters)
+SLIDE from where they were to where they are now, over 14 frames — `92` splits into `9 _ 2`, the
+`11` travels to the end, the two 1s of `11` become the carry-1 and the middle-1 of `9+1|1|2`.
+Glyphs that are new pop in afterwards in `#F26B1D` and settle to the working blue over 30
+frames, staggered so they have all landed within the first 45 % of the step (at most 40 frames).
+The instruction line waits for the slide (frame 10 of the step) and then builds at 3 frames per
+token — motion first, then the words for it. Between the hook layout and step 1 the same rule
+applies: the large problem shrinks into its body position.
+
+A pop (`assets/audio/sfx/pop.wav`, −7 dB) marks each step boundary and the ask.
 
 | line | colour | weight | size | measured band |
 |---|---|---|---|---|
 | instruction | `#000000` | ExtraBold 800 | 50 px | y 494–532 |
-| working | `#1E76C3` | ExtraBold 800 | 52 px | y 591–628 |
+| working | `#1E76C3` | ExtraBold 800 | 60 px | y 591–628 |
 
 Gap between the two blocks: 59 px. Each line auto-fits **down to 34 px** in 2 px steps if it wraps
 past its allowance — instruction max 2 lines, working max 3. **If either still does not fit at
@@ -314,21 +353,29 @@ past its allowance — instruction max 2 lines, working max 3. **If either still
 > `step1/3.png` because its text wraps to two lines. The sizes above are the spec; auto-fit
 > handles the wrapping case.
 
+**Ask** (phase D). `outro.display`, Inter SemiBold 34 px (fit to 26, one line), `#5B6470`,
+centred on y = 745, under the last step, which stays on screen. Fallback when the narrator wrote
+none: `Save this. Try it on your own number.`
+
 ### 5.4 Timeline — 30 fps
 
 | phase | frames | what happens |
 |---|---|---|
-| **A** card in | 12 | Card scales 0.85 → 1.00 and fades in from centre over the blurred background, already showing **step 1**. |
-| **B** hook | length of the intro clip | The spoken hook plays *over step 1*, so the viewer reads the problem while hearing why it matters. |
-| **C** steps | Σ clip durations | Each step holds for exactly its audio clip's measured length. Cross-fade 8 frames between steps; title and footer never move. |
-| **D** hold | 15 frames | Last step stays readable. Cut. |
+| **A** card in | 8 | Card is **opaque from frame 0** and settles from scale 0.96. Frame 0 is the thumbnail; the first token of the problem is already on it. |
+| **B** hook | length of the intro clip, from frame 0 | The hook layout: the problem built large, then `intro.display` lands at ~1.2 s. The spoken hook plays over it. |
+| **C** steps | Σ clip durations | Each step holds for exactly its audio clip's measured length and is built token by token inside it. An 8-frame **cross-fade** at every boundary — the outgoing state drifts up and out while the incoming rises in; there is never a frame with an empty card. Title, progress row and wordmark never move; the progress row fills one dot per step. |
+| **D** outro | length of the outro clip, or 45 silent frames | The last step stays; the ask builds under it. |
+| **E** hold | 12 frames | Cut. |
+
+The blurred background drifts 6 % over the whole post. Nothing on the card is ever fully still.
 
 **There is NO mascot intro.** The lesson opens on the card. A mascot waving does not earn the
 opening seconds of a short-form post — the question does, and the first three seconds are the
-whole of retention. The mascot still sits in the card footer, where it always ended up anyway.
+whole of retention. The mascot walks into his band under the working during the hook, reads
+while the lesson runs, and leaves as it ends.
 
 **The hook survives as audio.** It is still the first thing heard, still written to catch someone
-in three seconds; it simply plays over the first step instead of over a wave.
+in three seconds; it plays over the hook layout rather than over a wave.
 
 **No stopwatch, no hurry overlay.** Those belong to the task format; a lesson has no time pressure
 and adding one would tell the viewer to rush the one thing they should not.

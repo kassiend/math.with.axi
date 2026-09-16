@@ -9,3 +9,14 @@
 {"t":"2026-08-17T11:44:49.479Z","event":"picks","background":"bg2.jpeg"}
 {"t":"2026-08-17T11:48:19.528Z","event":"capture.done","frames":920}
 {"t":"2026-08-17T11:50:02.998Z","event":"done","video":"output/posts/lessons/square-two-digit-ending-in-5.mp4","seconds":30.667}
+{"t":"2026-09-11T08:32:37.522Z","event":"run.start","lesson_id":"square-two-digit-ending-in-5","counter":1,"seed":998281121}
+{"t":"2026-09-11T08:32:38.064Z","event":"crosscheck","agreed":true,"generator":"9025","verifier":"9025"}
+{"t":"2026-09-11T08:32:38.065Z","event":"timeline","total_frames":722,"total_seconds":24.067,"steps":["s1:5.153s","s2:5.74s","s3:5.749s"],"outro":"2.413s"}
+{"t":"2026-09-11T08:32:38.067Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-11T08:32:38.067Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-09-11T08:32:49.761Z","event":"run.start","lesson_id":"square-two-digit-ending-in-5","counter":1,"seed":998281121}
+{"t":"2026-09-11T08:32:50.230Z","event":"crosscheck","agreed":true,"generator":"9025","verifier":"9025"}
+{"t":"2026-09-11T08:32:50.230Z","event":"timeline","total_frames":722,"total_seconds":24.067,"steps":["s1:5.153s","s2:5.74s","s3:5.749s"],"outro":"2.413s"}
+{"t":"2026-09-11T08:32:50.231Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-11T08:34:52.676Z","event":"capture.done","frames":722}
+{"t":"2026-09-11T08:35:46.330Z","event":"done","video":"output/posts/lessons/square-two-digit-ending-in-5.mp4","seconds":24.067}

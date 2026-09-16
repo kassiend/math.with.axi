@@ -5,7 +5,7 @@
  * and the text has to get shorter. Shrinking past the floor or letting it spill are both defects
  * the viewer sees.
  */
-import { DISPLAY, FIT_STEP, TITLE } from './layout';
+import { ASK, DISPLAY, FIT_STEP, TITLE } from './layout';
 
 export interface LineFit {
   fits: boolean;
@@ -44,12 +44,14 @@ function fit(text: string, spec: Spec, weight: number): LineFit {
   }
 }
 
-export function fitStory(title: string, displays: string[]) {
+export function fitStory(title: string, displays: string[], ask: string) {
   const titleFit = fit(title, TITLE, 800);
   const displayFits = displays.map((d) => fit(d, DISPLAY, 800));
+  const askFit = fit(ask, ASK, 600);
   const problems = [
     ...(titleFit.fits ? [] : [{ where: 'title', reason: titleFit.reason }]),
     ...displayFits.flatMap((f, i) => (f.fits ? [] : [{ where: `beat ${i}`, reason: f.reason }])),
+    ...(askFit.fits ? [] : [{ where: 'ask', reason: askFit.reason }]),
   ];
-  return { fits: problems.length === 0, titleFit, displayFits, problems };
+  return { fits: problems.length === 0, titleFit, displayFits, askFit, problems };
 }

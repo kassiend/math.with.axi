@@ -51,19 +51,28 @@ html, body {
   letter-spacing: -0.01em;
 }
 
-/* Centred on BODY.centreY rather than pinned, so the group stays level when either line wraps. */
-.body {
+/* One body state — the hero, or a step. Two may be on the card at once during a cross-fade. */
+.layer { position: absolute; inset: 0; }
+
+/* A line of tokens. Positioned by its top edge; the tokens wrap inside the content width exactly
+   as the fit probe measured them, because the probe used the same width, weight and size. */
+.line {
   position: absolute;
   left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-left: -250px;   /* half of BODY.maxWidth */
   text-align: center;
+  letter-spacing: -0.01em;
+  white-space: normal;
 }
 
-.line { font-weight: 800; letter-spacing: -0.01em; }
+/* Each token is transformed on its own so it can pop in. inline-block so the transform applies;
+   the trailing space in the text node keeps the wrapping identical to a plain string. */
+.tok { display: inline-block; white-space: nowrap; transform-origin: center bottom; }
+/* A glyph of a working line — transformed on its own so it can slide between steps. */
+.g { display: inline-block; transform-origin: center center; }
+
+.progress { position: absolute; display: flex; }
+.dot { display: block; border-radius: 50%; }
 
 .wordmark {
   position: absolute;
@@ -79,5 +88,5 @@ html, body {
   background: #7f1d1d; color: #fff; font-size: 32px; font-weight: 600;
 }
 
-/* The mascot is a fixed part of the card now, not something that flies in. */
-.footer-mascot { position: absolute; object-fit: contain; }
+/* With the animated mascot in its own band, the wordmark sits alone and is centred. */
+.wordmark.centred { left: 50%; transform: translateX(-50%); }

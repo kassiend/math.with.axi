@@ -21,14 +21,20 @@ export interface FitResult {
 }
 
 /**
- * @param html   pre-rendered KaTeX markup, or plain text
- * @param boxPx  side of the square the text must fit inside (STATEMENT.safeBox)
+ * @param html      pre-rendered KaTeX markup, or plain text
+ * @param boxPx     width the text must fit inside (STATEMENT.safeBox)
+ * @param heightPx  height it must fit inside — the box less the readout band
  */
-export function fitStatement(html: string, boxPx = STATEMENT.safeBox): FitResult {
+export function fitStatement(
+  html: string, boxPx = STATEMENT.safeBox, heightPx = STATEMENT.safeHeight,
+  /** Plain text may wrap to a second line, which usually buys a much larger size. KaTeX never wraps. */
+  wrap = false,
+): FitResult {
   const probe = document.createElement('div');
   probe.style.cssText = [
     'position:absolute', 'visibility:hidden', 'left:-99999px', 'top:0',
-    'white-space:nowrap', 'font-weight:700', 'line-height:1.25',
+    wrap ? `white-space:normal;width:${Math.round(boxPx)}px;text-align:center` : 'white-space:nowrap',
+    'font-weight:700', 'line-height:1.25',
   ].join(';');
   probe.className = 'statement-probe';
   document.body.appendChild(probe);
@@ -38,9 +44,11 @@ export function fitStatement(html: string, boxPx = STATEMENT.safeBox): FitResult
     for (let size = STATEMENT.maxFont; size >= STATEMENT.minFont; size -= STATEMENT.step) {
       probe.style.fontSize = `${size}px`;
       probe.innerHTML = html;
-      const w = probe.offsetWidth;
+      // Wrapped text fills the width; what matters then is the height and that no single word
+      // overflows, which scrollWidth reports.
+      const w = wrap ? probe.scrollWidth : probe.offsetWidth;
       const h = probe.offsetHeight;
-      if (w <= boxPx && h <= boxPx) {
+      if (w <= boxPx + 0.5 && h <= heightPx) {
         best = { fits: true, fontSize: size, width: w, height: h };
         break;
       }
@@ -53,7 +61,7 @@ export function fitStatement(html: string, boxPx = STATEMENT.safeBox): FitResult
       width: best?.width ?? 0,
       height: best?.height ?? 0,
       reason:
-        `statement does not fit the ${Math.round(boxPx)}px safe box at the ${STATEMENT.minFont}px floor ` +
+        `statement does not fit the ${Math.round(boxPx)}x${Math.round(heightPx)}px safe box at the ${STATEMENT.minFont}px floor ` +
         `(measured ${best?.width}x${best?.height}) — shorten it or split it across two lines`,
     };
   } finally {

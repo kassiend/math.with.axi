@@ -25,7 +25,8 @@ import * as ledger from './lib/ledger.mjs';
 import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
 import { resolveBin, runTool, isWindows } from './lib/platform.mjs';
-import { buildLessonTimeline, FPS } from '../shared/lesson-timeline.ts';
+import { buildLessonTimeline, FPS, MASCOT_REST } from '../shared/lesson-timeline.ts';
+import { mascotBoxAt, mascotPhases } from '../shared/mascot-phases.ts';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -69,13 +70,18 @@ async function main() {
   if (!cross.agreed) return close(run, plan, 'failed', 'verification', cross.failures);
 
   // ---- 3. Timeline + ceiling ---------------------------------------------
+  // The outro is optional: an older narration has none, and the page then shows the ask
+  // silently for a short hold rather than ending on a cut.
+  const outroSeconds = narration.outro?.audio ? (narration.outro.seconds ?? null) : null;
   const timeline = buildLessonTimeline(
     narration.intro.seconds,
     narration.steps.map((s) => ({ stepId: s.step_id, seconds: s.seconds })),
+    outroSeconds,
   );
   log(run, 'timeline', {
     total_frames: timeline.totalFrames, total_seconds: timeline.totalSeconds,
     steps: timeline.steps.map((s) => `${s.stepId}:${s.seconds}s`),
+    outro: timeline.outro.silent ? 'silent' : `${outroSeconds}s`,
   });
 
   // ---- RENDER GATE, condition 2 ------------------------------------------
@@ -93,6 +99,11 @@ async function main() {
     title: `Math tricks #${counter}`,
     background: path.basename(picks.background),
     intro_seconds: narration.intro.seconds,
+    outro_seconds: outroSeconds,
+    // The narrator's on-screen line for the hook and its closing ask. Both are display copy, not
+    // mathematics, and the page has a fallback for each.
+    hook_display: narration.intro.display ?? null,
+    ask: narration.outro?.display ?? null,
     steps: plan.steps.map((s, i) => ({
       step_id: s.step_id,
       instruction: s.instruction,
@@ -133,7 +144,9 @@ async function main() {
       publicPath: shot.publicPath, frames: shot.frames, fps: shot.fps,
       width: shot.width, height: shot.height,
     },
+    mascot: mascotProps(timeline),
     audio,
+    sfx: stageSfx(run, [...timeline.steps.map((s) => s.start), timeline.outro.start]),
   };
 
   const propsFile = path.join(runDir, 'remotion.props.json');
@@ -202,8 +215,9 @@ function pickAssets() {
 
 /**
  * Stage the narration under video/public and place each clip on the timeline.
- * The hook plays over the first step, then that step's own line follows it. Later steps start
- * when their step does. Nothing is stretched — the step lengths came from these very durations.
+ * The hook plays over the hero layout from frame 0; each step's line starts when its step does;
+ * the outro plays over the ask. Nothing is stretched — the phase lengths came from these very
+ * durations.
  */
 function stageAudio(run, narration, timeline) {
   const dir = path.join(PUBLIC, 'audio', run.id);
@@ -226,17 +240,53 @@ function stageAudio(run, narration, timeline) {
 
   narration.steps.forEach((s, i) => {
     const phase = timeline.steps[i];
-    // Step 0 shares its phase with the hook, so its own line starts where the hook ends.
-    const from = i === 0 ? timeline.hook.end : phase.start;
     clips.push({
       id: s.step_id,
       src: copy(s.audio, `${s.step_id}.mp3`),
-      from,
+      from: phase.start,
       durationInFrames: Math.max(1, Math.round(s.seconds * FPS)),
     });
   });
 
+  if (!timeline.outro.silent) {
+    clips.push({
+      id: 'outro',
+      src: copy(narration.outro.audio, 'outro.mp3'),
+      from: timeline.outro.start,
+      durationInFrames: timeline.outro.end - timeline.outro.start,
+    });
+  }
+
   return { clips };
+}
+
+/**
+ * The walking take, placed in the band the lesson layout reserves. The geometry file is written
+ * by tools/story-mascot.mjs; without it the lesson renders with no mascot rather than a broken
+ * one, and says so in the log.
+ */
+function mascotProps(timeline) {
+  const geomFile = path.join(PUBLIC, 'mascot', 'story-mascot.json');
+  if (!fs.existsSync(geomFile)) {
+    console.warn(`  no ${path.relative(CORE, geomFile)} — run "node tools/story-mascot.mjs"; rendering without the mascot`);
+    return null;
+  }
+  const geom = JSON.parse(fs.readFileSync(geomFile, 'utf8'));
+  return {
+    src: geom.source,
+    box: mascotBoxAt(geom, MASCOT_REST),
+    ...mascotPhases(timeline.totalFrames, FPS, geom),
+  };
+}
+
+/** The pop that marks each step landing. Staged under public/ like the narration. */
+function stageSfx(run, frames) {
+  const src = path.join(ASSETS, 'audio', 'sfx', 'pop.wav');
+  if (!fs.existsSync(src)) return null;
+  const dir = path.join(PUBLIC, 'audio', run.id);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.copyFileSync(src, path.join(dir, 'pop.wav'));
+  return { src: `audio/${run.id}/pop.wav`, frames, volume: 0.45 };
 }
 
 function hashSeed(s) {

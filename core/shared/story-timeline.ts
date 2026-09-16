@@ -11,15 +11,21 @@ export const FPS = 30;
 export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
-export const CARD_IN_FRAMES = 12;
-export const HOLD_FRAMES = 15;
+/** The card is opaque from frame 0 and only settles in scale — frame 0 is the thumbnail. */
+export const CARD_IN_FRAMES = 8;
+/** Long enough for the ask to be read after the payoff line lands. */
+export const HOLD_FRAMES = 36;
 export const BLUR_PX = 14;
 
 /** Reels and TikTok's short-form surface both take 90 s comfortably. */
 export const MAX_FRAMES = 90 * FPS;
 
-/** Cross-fade at beat boundaries, so text swaps while the card is empty rather than mid-glyph. */
-export const BEAT_FADE = { in: 6, out: 4 };
+/**
+ * Cross-fade at beat boundaries: the outgoing beat drifts up and out while the incoming one rises
+ * in, over this many frames. There is never a frame with an empty card — the first renders had a
+ * ten-frame blank at every swap, and a blank card is a scroll point.
+ */
+export const BEAT_FADE = 8;
 
 export interface Phase { start: number; end: number }
 
@@ -29,24 +35,17 @@ export interface StoryBeatPhase extends Phase {
   seconds: number;
 }
 
-/** A span of SOURCE frames as tools/story-mascot.mjs writes it. */
-export interface SourceSpan { from: number; to: number }
-
-/** Measured from the clip by tools/story-mascot.mjs, in SOURCE frames at its own fps. */
-export interface MascotGeometry {
-  source: string;
-  source_fps: number;
-  source_frames: number;
-  pause_at_seconds: number;
-  phases: { play: SourceSpan; freeze: SourceSpan; resume: SourceSpan };
-  seconds: { play: number; resume: number };
-  box: { left: number; top: number; width: number; height: number };
-}
+// Extension on purpose: this module is loaded by Node (the orchestrator) as well as by Vite, and
+// Node's ESM loader does not guess extensions.
+import { mascotPhases, type MascotGeometry, type MascotPhases } from './mascot-phases.ts';
+export type { MascotGeometry, SourceSpan } from './mascot-phases.ts';
 
 export interface StoryTimeline {
   fps: number;
   cardIn: Phase;
   beats: StoryBeatPhase[];
+  /** The spoken ask, when the narrator wrote one; a silent hold otherwise. */
+  outro: Phase & { silent: boolean };
   hold: Phase;
   totalFrames: number;
   totalSeconds: number;
@@ -57,54 +56,45 @@ export interface StoryTimeline {
    * video ends. No loop — a looped hold reads as a stutter, and a frozen frame reads as someone
    * standing still, which is what he is doing.
    */
-  mascot: {
-    play: Phase;
-    freeze: Phase;
-    resume: Phase;
-    /** The composition frame the take is paused on, and where the resume seeks to. */
-    pauseFrame: number;
-  };
+  mascot: MascotPhases;
 }
 
 export interface BeatInput { beat: string; seconds: number }
 
-export function buildStoryTimeline(beats: BeatInput[], mascot: MascotGeometry): StoryTimeline {
+export function buildStoryTimeline(
+  beats: BeatInput[], mascot: MascotGeometry, outroSeconds: number | null = null,
+): StoryTimeline {
   const cardIn = { start: 0, end: CARD_IN_FRAMES };
 
   const phases: StoryBeatPhase[] = [];
-  let cursor = cardIn.end;
+  // Beats start at frame 0 — the card is already there.
+  let cursor = 0;
   beats.forEach((b, index) => {
     const frames = Math.max(1, Math.round(b.seconds * FPS));
     phases.push({ index, beat: b.beat, seconds: b.seconds, start: cursor, end: cursor + frames });
     cursor += frames;
   });
 
+  // The ask has landed under the payoff line by now; a spoken outro plays over it, and the hold
+  // is what remains after it.
+  const silent = outroSeconds == null || outroSeconds <= 0;
+  const outroFrames = silent ? 0 : Math.max(1, Math.round(outroSeconds * FPS));
+  const outro = { start: cursor, end: cursor + outroFrames, silent };
+  cursor = outro.end;
+
   const hold = { start: cursor, end: cursor + HOLD_FRAMES };
   const totalFrames = hold.end;
-
-  // Source frames are at the clip's own rate; composition frames are at FPS. Convert once.
-  const toComp = (srcFrames: number) => Math.round((srcFrames / mascot.source_fps) * FPS);
-  const pauseFrame = toComp(mascot.phases.play.to);
-  const resumeFrames = toComp(mascot.phases.resume.to - mascot.phases.resume.from);
-
-  // The resume is anchored to the END of the video, so he clears the frame as it finishes. If the
-  // story is too short to fit both halves, the freeze collapses rather than the exit being cut.
-  const resumeStart = Math.max(pauseFrame, totalFrames - resumeFrames);
 
   return {
     fps: FPS,
     cardIn,
     beats: phases,
+    outro,
     hold,
     totalFrames,
     totalSeconds: Number((totalFrames / FPS).toFixed(3)),
     overCeiling: totalFrames > MAX_FRAMES,
-    mascot: {
-      play: { start: 0, end: Math.min(pauseFrame, resumeStart) },
-      freeze: { start: Math.min(pauseFrame, resumeStart), end: resumeStart },
-      resume: { start: resumeStart, end: totalFrames },
-      pauseFrame,
-    },
+    mascot: mascotPhases(totalFrames, FPS, mascot),
   };
 }
 
@@ -116,16 +106,6 @@ export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 export function beatAt(frame: number, t: StoryTimeline): StoryBeatPhase | null {
   return t.beats.find((b) => frame >= b.start && frame < b.end)
-      ?? (frame >= t.hold.start ? t.beats[t.beats.length - 1] ?? null : null);
+      ?? (frame >= t.outro.start ? t.beats[t.beats.length - 1] ?? null : null);
 }
 
-/** Fades in at the head of a beat and out at its tail; solid through the closing hold. */
-export function beatOpacity(frame: number, t: StoryTimeline): number {
-  if (frame >= t.hold.start) return 1;
-  const b = beatAt(frame, t);
-  if (!b) return 0;
-  return Math.min(
-    clamp01((frame - b.start) / Math.max(1, BEAT_FADE.in)),
-    clamp01((b.end - frame) / Math.max(1, BEAT_FADE.out)),
-  );
-}

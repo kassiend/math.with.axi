@@ -59,18 +59,34 @@ html, body {
 
 .ring { position: absolute; overflow: visible; }
 
-/* Glow on the accent only. Applied via filter on the element rather than an SVG filter so it
-   rasterises identically in every captured frame. */
-.ring-accent { filter: drop-shadow(0 0 18px rgba(30, 118, 195, 0.45)); }
+/* Glow on the accent only, set inline so it follows the accent colour. A CSS filter rather than
+   an SVG filter so it rasterises identically in every captured frame. */
 
 .statement {
   position: absolute;
-  transform: translate(-50%, -50%);
+  /* The transform is set inline — it carries the pop-in scale as well as the centring. */
+  transform-origin: center center;
   font-weight: 700;
   white-space: nowrap;
   text-align: center;
   line-height: 1.25;
 }
+
+.readout {
+  position: absolute;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transform-origin: center center;
+}
+
+.cta {
+  position: absolute;
+  left: 50%;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.statement.wraps { white-space: normal; }
 
 /* KaTeX inherits the fitted size and colour rather than imposing its own. */
 .statement .katex { font-size: 1em; color: inherit; }

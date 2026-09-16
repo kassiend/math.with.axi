@@ -7,12 +7,14 @@ import { flushSync } from 'react-dom';
 import katex from 'katex';
 import { StoryScene, type StoryBeatContent } from './StoryScene';
 import { fitStory } from './fit';
+import { ASK } from './layout';
 import { buildStoryTimeline } from '../../../shared/story-timeline';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/800.css';
 import 'katex/dist/katex.min.css';
 import './styles.css';
+import { fontsLoaded } from '../fonts';
 
 declare global {
   interface Window {
@@ -51,6 +53,7 @@ if (!payload) {
   const timeline = buildStoryTimeline(
     (payload.beats ?? []).map((b: any) => ({ beat: b.beat, seconds: b.seconds })),
     payload.mascot,
+    payload.outro_seconds ?? null,
   );
 
   const beats: StoryBeatContent[] = (payload.beats ?? []).map((b: any) => ({
@@ -59,11 +62,16 @@ if (!payload) {
     visual: b.visual ?? 'none',
     image: b.image ?? null,
     formulaHtml: b.formula_latex ? typeset(b.formula_latex) : null,
+    formulaStepsHtml: Array.isArray(b.formula_steps) && b.formula_steps.length
+      ? b.formula_steps.map((l: string) => typeset(l))
+      : null,
     shapeSvg: b.shape_svg ?? null,
   }));
 
-  document.fonts.ready.then(() => {
-    const fit = fitStory(payload.title ?? '', beats.map((b) => b.display));
+  const ask: string = payload.ask || ASK.fallback;
+
+  fontsLoaded().then(() => {
+    const fit = fitStory(payload.title ?? '', beats.map((b) => b.display), ask);
     window.__axiFit = fit;
     if (!fit.fits) {
       fatal(`text does not fit: ${JSON.stringify(fit.problems)}`);
@@ -79,8 +87,10 @@ if (!payload) {
           background={payload.background}
           title={payload.title}
           beats={beats}
+          ask={ask}
           titleFit={fit.titleFit}
           displayFits={fit.displayFits}
+          askFit={fit.askFit}
         />,
       ));
     };

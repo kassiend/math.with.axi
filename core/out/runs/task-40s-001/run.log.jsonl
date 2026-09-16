@@ -10,3 +10,9 @@
 {"t":"2026-08-17T12:53:30.841Z","event":"run.start","task_id":"denest-9-plus-4-sqrt-5","duration_s":40,"seed":-1950632397}
 {"t":"2026-08-17T12:53:30.842Z","event":"gate.closed","status":"rejected","stage":"dedup","problems":[{"duplicate":true,"task_id":"denest-9-plus-4-sqrt-5","duration_s":40}]}
 {"t":"2026-08-17T12:54:42.929Z","event":"run.start","task_id":"denest-9-plus-4-sqrt-5","duration_s":40,"seed":-1950632397}
+{"t":"2026-09-11T08:46:13.744Z","event":"run.start","task_id":"denest-9-plus-4-sqrt-5","duration_s":40,"seed":-1950632397}
+{"t":"2026-09-11T08:46:13.744Z","event":"dedup.skipped","reason":"rerender of an existing post"}
+{"t":"2026-09-11T08:46:14.304Z","event":"crosscheck","agreed":true,"generator":"2 + sqrt(5)","verifier":"2 + sqrt(5)"}
+{"t":"2026-09-11T08:46:14.362Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_greetings1.mp3","mid_audio":"hurry3.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":1.645688,"total_frames":1253,"hurry_enter":735}
+{"t":"2026-09-11T08:50:09.486Z","event":"capture.done","frames":1253,"font_size":54}
+{"t":"2026-09-11T08:51:17.036Z","event":"done","video":"output/posts/tasks/40s/denest-9-plus-4-sqrt-5.mp4"}

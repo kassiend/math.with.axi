@@ -12,7 +12,9 @@
  * video ends. Freezing rather than looping matters — a looped hold reads as a stutter, while a
  * held frame reads as what he is actually doing, which is standing still and reading.
  */
-import { AbsoluteFill, Audio, Freeze, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Audio, Img, Sequence, staticFile, useCurrentFrame } from 'remotion';
+import { MascotTake } from './MascotTake';
+import { Sfx, type SfxProps } from './Sfx';
 
 const DESIGN_W = 720;
 const DESIGN_H = 1280;
@@ -32,6 +34,8 @@ export type StoryVideoProps = {
     pauseFrame: number;
   };
   audio: { clips: Array<{ id: string; src: string; from: number; durationInFrames: number }> };
+  /** A pop at each beat boundary and at the ask. */
+  sfx: null | SfxProps;
 };
 
 export const storyVideoDefaults: StoryVideoProps = {
@@ -39,9 +43,10 @@ export const storyVideoDefaults: StoryVideoProps = {
   capture: { publicPath: '', frames: 1, fps: 30, width: 1080, height: 1920 },
   mascot: null,
   audio: { clips: [] },
+  sfx: null,
 };
 
-export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio }) => {
+export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio, sfx }) => {
   const frame = useCurrentFrame();
   const scale = capture.width / DESIGN_W;
 
@@ -55,13 +60,7 @@ export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio }
         transform: `scale(${scale})`, transformOrigin: 'top left',
         width: DESIGN_W, height: DESIGN_H,
       }}>
-        {mascot && (
-          <>
-            <MascotSpan span={mascot.play} src={mascot.src} box={mascot.box} />
-            <MascotSpan span={mascot.freeze} src={mascot.src} box={mascot.box} freezeAt={mascot.pauseFrame} />
-            <MascotSpan span={mascot.resume} src={mascot.src} box={mascot.box} trimBefore={mascot.pauseFrame} />
-          </>
-        )}
+        {mascot && <MascotTake {...mascot} src={staticFile(mascot.src)} />}
       </AbsoluteFill>
 
       {audio.clips.map((c) => (
@@ -69,42 +68,8 @@ export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio }
           <Audio src={staticFile(c.src)} />
         </Sequence>
       ))}
+      {sfx && <Sfx {...sfx} />}
     </AbsoluteFill>
-  );
-};
-
-/**
- * One span of the mascot take.
- *
- * The Sequence positions it on the composition timeline; `trimBefore` seeks into the clip;
- * `freezeAt` holds a single frame. Without the Sequence the video reads absolute composition time
- * and every span would show the wrong moment.
- */
-const MascotSpan: React.FC<{
-  span: Span; src: string;
-  box: { left: number; top: number; width: number; height: number };
-  trimBefore?: number;
-  freezeAt?: number;
-}> = ({ span, src, box, trimBefore, freezeAt }) => {
-  const duration = span.end - span.start;
-  if (duration <= 0) return null;
-
-  const video = (
-    <OffthreadVideo
-      src={staticFile(src)}
-      transparent
-      muted
-      trimBefore={trimBefore}
-      style={{ position: 'absolute', ...box, objectFit: 'fill' }}
-    />
-  );
-
-  return (
-    <Sequence from={span.start} durationInFrames={duration}>
-      <AbsoluteFill>
-        {freezeAt != null ? <Freeze frame={freezeAt}>{video}</Freeze> : video}
-      </AbsoluteFill>
-    </Sequence>
   );
 };
 

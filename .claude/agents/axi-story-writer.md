@@ -57,6 +57,12 @@ Every story shows **one formula and explains it**. Not decoration — an explana
 true or why it works. A story with no mechanism is a trivia post and this channel does not make
 those. Write it as `formula_latex` plus `mechanism`, in plain language.
 
+**And show it being built.** `formula_steps` is the derivation as 2–4 LaTeX lines ending in
+`formula_latex`, in the order the mechanism narration reaches them — the page lands one line at
+a time in time with the voice. What is said third lands third. Every line is a claim your check
+script confirms where it can. No derivation to show (a definition, a historical statement) means
+`null` with a reason, not padding.
+
 If the formula is checkable, also write a SymPy script confirming whatever it asserts, exactly as
 the task and lesson pipelines do. If it is not checkable — a definition, a historical statement —
 say so in `nulls[]` rather than inventing a check that proves nothing.
@@ -82,7 +88,13 @@ design the story around what Commons has, rather than shipping a placeholder.
 Missing information is `null` plus a machine-readable reason. A story that reads well because you
 invented the connecting tissue is the failure this whole pipeline exists to prevent.
 
-## 7. Output
+## 7. The ask
+
+`ask` is the closing line, at most six words, one action: save it, send it, look for it. It sits
+under the payoff line. Display copy, not a claim — but it is still yours to write, and "Save this
+one." is the fallback, not the target.
+
+## 8. Output
 
 Write `<run>/story.out.json` in the schema in §2 of the brief. The Validator receives an
 allowlisted projection of it and never sees your reasoning, your searches, or your discarded

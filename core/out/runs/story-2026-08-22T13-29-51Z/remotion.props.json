@@ -2,7 +2,7 @@
   "runId": "story-napkin-ring-height-only",
   "capture": {
     "publicPath": "captures/story-napkin-ring-height-only",
-    "frames": 1375,
+    "frames": 1475,
     "fps": 30,
     "width": 1080,
     "height": 1920
@@ -21,11 +21,11 @@
     },
     "freeze": {
       "start": 180,
-      "end": 1254
+      "end": 1354
     },
     "resume": {
-      "start": 1254,
-      "end": 1375
+      "start": 1354,
+      "end": 1475
     },
     "pauseFrame": 180
   },
@@ -34,27 +34,43 @@
       {
         "id": "hook",
         "src": "audio/story-napkin-ring-height-only/hook.mp3",
-        "from": 12,
+        "from": 0,
         "durationInFrames": 238
       },
       {
         "id": "turn",
         "src": "audio/story-napkin-ring-height-only/turn.mp3",
-        "from": 250,
+        "from": 238,
         "durationInFrames": 252
       },
       {
         "id": "mechanism",
         "src": "audio/story-napkin-ring-height-only/mechanism.mp3",
-        "from": 502,
+        "from": 490,
         "durationInFrames": 638
       },
       {
         "id": "payoff",
         "src": "audio/story-napkin-ring-height-only/payoff.mp3",
-        "from": 1140,
+        "from": 1128,
         "durationInFrames": 220
+      },
+      {
+        "id": "outro",
+        "src": "audio/story-napkin-ring-height-only/outro.mp3",
+        "from": 1348,
+        "durationInFrames": 91
       }
     ]
+  },
+  "sfx": {
+    "src": "audio/story-napkin-ring-height-only/pop.wav",
+    "frames": [
+      238,
+      490,
+      1128,
+      1439
+    ],
+    "volume": 0.45
   }
 }

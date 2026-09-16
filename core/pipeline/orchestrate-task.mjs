@@ -33,14 +33,13 @@ const has = (n) => argv.includes(`--${n}`);
 
 const PUBLIC = path.join(CORE, 'video', 'public');
 /**
- * dumdum is excluded: its alpha deliberately includes a translucent sheet of formulas behind the
- * subject, which over the white card reads as a smudge rather than a sticker. Every other clip is
- * a clean cut-out. See docs/mascot-keying.md.
+ * The hurry sticker is the white rabbit with the stopwatch — the one clip in assets/video/hurry/
+ * that is ABOUT time. The others (a capybara, a chihuahua, popcat, a witch cat) are memes with no
+ * connection to the post, and a second off-brand character in the frame reads as a different
+ * channel. They stay on disk; they are not in the pool. dumdum is additionally unusable: its alpha
+ * carries a translucent sheet of formulas that reads as a smudge over the white card.
  */
-const HURRY_POOL = [
-  'hurry-hurry.webm', 'hurry-hurry5.webm', 'hurry-hurry6.webm',
-  'hurry-papapa.webm', 'hurry-witchcat.webm',
-];
+const HURRY_POOL = ['hurry-hurry.webm'];
 
 // ---------------------------------------------------------------------------
 

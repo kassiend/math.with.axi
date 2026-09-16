@@ -45,4 +45,38 @@ export const DISPLAY = {
   colour: '#1E76C3',
 };
 
+/** The closing ask: one small line under the payoff, on the payoff beat and the hold. */
+export const ASK = {
+  centreY: 1136,
+  fontSize: 28,
+  minFontSize: 22,
+  maxLines: 1,
+  lineHeightRatio: 1.2,
+  maxWidth: CONTENT_WIDTH,
+  colour: '#5B6470',
+  fallback: 'Save this one.',
+};
+
+/**
+ * The mechanism, built line by line. When the writer supplies `formula_steps`, each line pops in
+ * across the first ~80 % of the beat in time with the narration, earlier lines dimming as the
+ * next arrives; the last line is the formula itself and stays bright.
+ */
+export const FORMULA = {
+  fontSize: 46,
+  /** Font size when several lines share the slot. */
+  stackedFontSize: 38,
+  lineGap: 22,
+  dim: 0.45,
+  /** Fraction of the beat by which the last line has landed. */
+  landedBy: 0.8,
+  colour: '#1E76C3',
+  /** The result lands in this and settles to `colour`. */
+  emphasis: '#F26B1D',
+  settleFrames: 36,
+};
+
+/** Slow push-in on a sourced image over its beat. */
+export const IMAGE_DRIFT = 0.08;
+
 export const FIT_STEP = 2;

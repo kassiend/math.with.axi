@@ -11,13 +11,15 @@
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import { LessonScene } from './LessonScene';
-import { fitSteps } from './fit';
+import { fitLesson } from './fit';
+import { ASK } from './layout';
 import { buildLessonTimeline } from '../../../shared/lesson-timeline';
 // Vendored Inter — never the system font, or the capture becomes machine-dependent.
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/800.css';
 import './styles.css';
+import { fontsLoaded } from '../fonts';
 
 declare global {
   interface Window {
@@ -44,15 +46,22 @@ if (!payload) {
   // fabricated frame ships.
   fatal('no lesson payload injected');
 } else {
+  const steps = payload.steps ?? [];
   const timeline = buildLessonTimeline(
     payload.intro_seconds ?? 0,
-    (payload.steps ?? []).map((s: any) => ({ stepId: s.step_id, seconds: s.seconds })),
+    steps.map((s: any) => ({ stepId: s.step_id, seconds: s.seconds })),
+    payload.outro_seconds ?? null,
   );
+
+  // The hook's on-screen line is the narrator's; when it wrote none, the first instruction
+  // stands in. The ask likewise falls back to the layout's default — a post must end on one.
+  const hookDisplay: string = payload.hook_display || steps[0]?.instruction || '';
+  const ask: string = payload.ask || ASK.fallback;
 
   // Fonts must be loaded before measuring, or every line is fitted against a fallback face and
   // the real face overflows the card.
-  document.fonts.ready.then(() => {
-    const fit = fitSteps(payload.steps ?? []);
+  fontsLoaded().then(() => {
+    const fit = fitLesson(steps, hookDisplay, ask);
     window.__axiFit = fit;
 
     if (!fit.fits) {
@@ -68,8 +77,10 @@ if (!payload) {
           timeline={timeline}
           background={payload.background}
           title={payload.title}
-          steps={payload.steps}
-          fits={fit.results}
+          steps={steps}
+          hookDisplay={hookDisplay}
+          ask={ask}
+          fit={fit}
         />,
       ));
     };
