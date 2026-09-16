@@ -18,8 +18,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadConfig, msUntilNext, redacted, writeEnvValue } from './config.mjs';
-import { GateClosed, PRODUCERS } from './generate.mjs';
+import { GateClosed, PRODUCERS, writeCaption } from './generate.mjs';
 import * as tg from './telegram.mjs';
+import { copyMessages, fileCaption } from './copy.mjs';
 import { CORE, PYTHON, ROOT } from '../pipeline/lib/paths.mjs';
 import { NODE_BIN } from '../pipeline/lib/paths.mjs';
 import { checkPrerequisites } from '../pipeline/lib/platform.mjs';
@@ -36,30 +37,14 @@ function log(event, data = {}) {
   console.log(`[${stamp}] ${event}${Object.keys(data).length ? ' ' + JSON.stringify(data) : ''}`);
 }
 
-const CAPTIONS = {
-  lesson: (m) => `Math tricks #${m.counter} — ${m.method}`,
-  task20: (m) => `Daily task · 20s\n${m.statement}`,
-  task40: (m) => `Daily task · 40s\n${m.statement}`,
-};
-
 /**
- * The answer, sent as its own message after the video.
+ * What follows the video: the copy for each platform, as tap-to-copy blocks, and — for a task —
+ * the answer inside the first-comment blocks.
  *
- * Separate rather than in the caption on purpose: the caption travels with the file if it is
- * forwarded or re-uploaded, and a task post that carries its own answer is spoiled. Lessons do
- * not get one — the answer is the whole point of the video.
+ * Separate messages from the file on purpose: a caption travels with the file if it is forwarded
+ * or re-uploaded, and a task post that carries its own answer is spoiled. Lessons and stories get
+ * the same layout without an answer — the answer is the whole point of those videos.
  */
-const ANSWERS = {
-  task20: answerNote,
-  task40: answerNote,
-};
-
-function answerNote(m) {
-  const lines = [`Answer · ${m.durationS}s task`, '', m.statement, `= ${m.answer}`];
-  if (m.solution) lines.push('', m.solution);
-  return lines.join('\n');
-}
-
 // ---------------------------------------------------------------------------
 
 /**
@@ -166,18 +151,20 @@ async function runBatch(cfg) {
       log('post.start', { kind, attempt });
       try {
         const post = await produce({ log: (m) => console.log(m) });
+        const caption = await writeCaption({ kind: post.kind, dir: post.runDir, log: (m) => console.log(m) });
+        log(caption ? 'caption.ready' : 'caption.fallback', { kind });
+
         await tg.sendDocument(cfg.token, cfg.chatId, post.video, {
-          caption: CAPTIONS[kind]?.(post.meta) ?? path.basename(post.video),
+          caption: fileCaption(post.kind, post.meta),
         });
 
-        // The answer follows the video as its own message. If it fails, the post has still been
+        // The copy follows the video as its own messages. If one fails, the post has still been
         // delivered — do not retry the whole generation over a missing follow-up.
-        const note = ANSWERS[kind]?.(post.meta);
-        if (note) {
+        for (const html of copyMessages(post.kind, post.meta, caption)) {
           try {
-            await tg.sendMessage(cfg.token, cfg.chatId, note, { disable_notification: true });
+            await tg.sendMessage(cfg.token, cfg.chatId, html, { parse_mode: 'HTML', disable_notification: true });
           } catch (err) {
-            log('answer.failed', { kind, error: String(err.message).slice(0, 200) });
+            log('copy.failed', { kind, error: String(err.message).slice(0, 200) });
           }
         }
 

@@ -169,7 +169,7 @@ export async function generateTask(durationS, { log = console.log } = {}) {
   if (!fs.existsSync(video)) throw new Error(`orchestrator reported success but ${video} is missing`);
 
   return {
-    kind: `task${durationS}`, video, runDir: dir,
+    kind: 'task', video, runDir: dir,
     meta: {
       id: task.task_id,
       statement: task.statement,
@@ -318,6 +318,57 @@ export async function generateLesson({ log = console.log } = {}) {
     kind: 'lesson', video, runDir: dir,
     meta: { id: plan.lesson_id, method: plan.method_name, counter: plan.counter },
   };
+}
+
+// ---------------------------------------------------------------------------
+// Caption — the words around the video, per platform
+// ---------------------------------------------------------------------------
+
+/**
+ * Runs after the render, never before: copy for a video that failed a gate is wasted, and the
+ * agent must describe what shipped. A failure here does not fail the post — the worker falls
+ * back to plain copy built from the payload (worker/copy.mjs) and says so in the log.
+ */
+export async function writeCaption({ kind, dir, log = console.log }) {
+  const rel = path.relative(ROOT, dir);
+  try {
+    await runAgent({
+      agent: 'axi-caption-writer',
+      cwd: ROOT,
+      allowedTools: ['Read', 'Write', 'Glob', 'Grep'],
+      log,
+      prompt: [
+        `Run directory: ${rel}. Post kind: ${kind}.`,
+        ``,
+        `Read the payload in the run directory (plan.out.json + narration.out.json, task.out.json,`,
+        `or story.out.json — whichever exists) and write ${rel}/caption.out.json in the schema from`,
+        `your brief. Use the caption-and-hashtags skill for the method.`,
+        ``,
+        `Niche: mathematics, short-form, a mascot ("Axi") who teaches one idea per post. Voice:`,
+        `plain, warm, a teacher to one person; no hype words. Handle: math with Axi.`,
+        ``,
+        `Hard rules: nothing the payload does not say; a task's answer ONLY in first_comment;`,
+        `first line under twelve words and never the method's name; one CTA.`,
+      ].join('\n'),
+    });
+  } catch (err) {
+    log(`  caption agent failed: ${String(err.message).slice(0, 200)}`);
+    return null;
+  }
+  const file = path.join(dir, 'caption.out.json');
+  if (!fs.existsSync(file)) { log('  caption agent wrote nothing'); return null; }
+  try {
+    const c = readJson(file);
+    // Minimal shape check; a half-written caption is worse than the fallback.
+    if (!c.instagram?.caption || !c.tiktok?.caption || !c.youtube?.title) {
+      log('  caption.out.json is missing required fields; using fallback copy');
+      return null;
+    }
+    return c;
+  } catch (err) {
+    log(`  caption.out.json unreadable: ${err.message}`);
+    return null;
+  }
 }
 
 function readOutcome(dir) {
