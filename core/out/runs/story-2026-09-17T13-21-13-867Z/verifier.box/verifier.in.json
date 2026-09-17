@@ -1,0 +1,11 @@
+{
+  "claim_id": "sally-clark-independence-fallacy",
+  "title": "The number that jailed a mother",
+  "formula_latex": "P(A \\cap B) = P(A)\\,P(B \\mid A)",
+  "formula_steps": [
+    "P(A \\cap B) = P(A)\\,P(B) \\quad(\\text{if independent})",
+    "\\tfrac{1}{8543}\\cdot\\tfrac{1}{8543} \\approx \\tfrac{1}{73{,}000{,}000}",
+    "P(A \\cap B) = P(A)\\,P(B \\mid A)"
+  ],
+  "mechanism": "Two probabilities multiply as P(A)·P(B) only when the events are independent — when knowing A happened tells you nothing about B. Meadow squared a single-SIDS base rate as though the two deaths were drawn from unrelated families, producing about one in seventy-three million. The general identity is P(A ∩ B) = P(A)·P(B | A); it only collapses to the product when P(B | A) equals P(B). The Royal Statistical Society argued that within one family — for genetic and environmental reasons — P(B | A) is much larger than P(B), so the true joint is orders of magnitude larger than Meadow's number."
+}

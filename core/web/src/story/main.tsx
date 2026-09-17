@@ -71,7 +71,10 @@ if (!payload) {
   const ask: string = payload.ask || ASK.fallback;
 
   fontsLoaded().then(() => {
-    const fit = fitStory(payload.title ?? '', beats.map((b) => b.display), ask);
+    const fit = fitStory(
+      payload.title ?? '', beats.map((b) => b.display), ask,
+      beats.map((b) => b.formulaStepsHtml ?? (b.formulaHtml ? [b.formulaHtml] : [])),
+    );
     window.__axiFit = fit;
     if (!fit.fits) {
       fatal(`text does not fit: ${JSON.stringify(fit.problems)}`);
@@ -91,6 +94,7 @@ if (!payload) {
           titleFit={fit.titleFit}
           displayFits={fit.displayFits}
           askFit={fit.askFit}
+          formulaFits={fit.formulaFits}
         />,
       ));
     };

@@ -182,7 +182,9 @@ When the formula asserts something SymPy can settle, write a check exactly as th
 pipelines do — the orchestrator runs it against an independent one from `axi-verifier`, and any
 disagreement fails the story. The text is not edited to match the code. The script's **last line
 is the JSON report** `{"claim_id": "<story_id>", "computed": "...", "agrees": true}` printed with
-`json.dumps`; the orchestrator reads that line and nothing else.
+`json.dumps`; the orchestrator reads that line and nothing else. For a story both scripts must
+report `agrees: true`; their `computed` strings describe what was checked and are not compared
+to each other (a lesson's numeric result is; a sentence written twice blind never matches).
 
 When it cannot — a definition, a historical statement, a modelling assumption — set
 `check_script` to `null` **with a reason in `nulls[]`**. An invented check that proves nothing is

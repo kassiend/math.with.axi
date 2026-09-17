@@ -1,0 +1,36 @@
+{
+  "kind": "story",
+  "hook": "One number put a mother behind bars.",
+  "instagram": {
+    "caption": "One number put a mother behind bars.\n\nSally Clark lost two infant sons. A paediatrician squared a single base rate and told the jury the odds were 1 in 73 million.\n\nThe Royal Statistical Society wrote to the courts and said the number was wrong — two probabilities only multiply cleanly when events are independent. In this family, they were not.\n\nHer conviction was overturned in 2003. She died four years later.\n\nSave this — and question the numbers.",
+    "first_comment": "#math #statistics #probability #mathshorts #learnmath #probabilitytheory #mathmistakes #statisticseducation #conditionalProbability #sallyclark #prosecutorsFallacy #realworldmath #lawandmath #mathexplained\n\nWhat do you think gets misunderstood most often when statistics show up in a courtroom?"
+  },
+  "tiktok": {
+    "caption": "One number put a mother behind bars. He squared the odds. Save this one. #math #statistics #conditionalProbability #prosecutorsFallacy",
+    "first_comment": null
+  },
+  "youtube": {
+    "title": "The number that jailed a mother",
+    "description": "One number put a mother behind bars.\n\nSally Clark lost two infant sons. A paediatrician squared a single base rate and told the jury the odds were 1 in 73 million. The Royal Statistical Society wrote to the courts and said the number was wrong.\n\nTwo probabilities only multiply cleanly when events are independent. In this family, they were not. Her conviction was overturned in 2003. She died four years later.\n\nSave this if probability ever shows up in a headline.\n\n#math #statistics #conditionalProbability\n#Shorts",
+    "tags": [
+      "math",
+      "statistics",
+      "probability",
+      "conditional probability",
+      "prosecutors fallacy",
+      "sally clark",
+      "mathematical errors",
+      "math shorts",
+      "learn math",
+      "real world math",
+      "law and statistics",
+      "probability theory",
+      "math mistakes",
+      "statistics education",
+      "independence"
+    ],
+    "first_comment": "What do you think gets misunderstood most when statistics show up in a courtroom?"
+  },
+  "alt_text": "A card titled 'The number that jailed a mother.' Axi appears at the top reading. The video shows the exterior of the Old Bailey courthouse and a white panel displaying the formula P(A ∩ B) = P(A)·P(B | A).",
+  "nulls": []
+}

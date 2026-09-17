@@ -26,3 +26,5 @@
 {"t":"2026-09-17T13:21:10.923Z","event":"caption.ready","kind":"task40"}
 {"t":"2026-09-17T13:21:13.866Z","event":"post.delivered","kind":"task40","id":"crt-smallest-mod-5-7","file":"output/posts/tasks/40s/crt-smallest-mod-5-7.mp4"}
 {"t":"2026-09-17T13:21:13.866Z","event":"post.start","kind":"story","attempt":1}
+{"t":"2026-09-17T13:33:34.966Z","event":"post.gate-closed","kind":"story","attempt":1,"stage":"orchestrator"}
+{"t":"2026-09-17T13:33:34.967Z","event":"post.start","kind":"story","attempt":2}

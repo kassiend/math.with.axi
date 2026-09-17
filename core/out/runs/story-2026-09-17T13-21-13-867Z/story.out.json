@@ -1,0 +1,130 @@
+{
+  "story_id": "sally-clark-independence-fallacy",
+  "area": "probability-and-statistics",
+  "subject_slug": "sally-clark",
+  "angle_slug": "prosecutors-fallacy-cot-deaths",
+  "title": "The number that jailed a mother",
+
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "One multiplication put a mother in prison for life.",
+      "display": "One multiplication. Life sentence.",
+      "visual": "image",
+      "image_id": "i1"
+    },
+    {
+      "beat": "turn",
+      "narration": "Sally Clark, a solicitor, lost both of her infant sons in cot deaths, thirteen months apart. At her trial a paediatrician told the jury the odds of that happening naturally were one in seventy-three million. He got that number by squaring.",
+      "display": "1 in 73,000,000. From a square.",
+      "visual": "image",
+      "image_id": "i2"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Two probabilities multiply cleanly only when one event has no effect on the other. A family that has already lost a baby to sudden infant death is not a random family, and the Royal Statistical Society said so in writing. The correct joint uses a conditional. When the chance of a second death, given the first, is bigger than the base rate, the true joint is bigger too, and the seventy-three million evaporates.",
+      "display": "P(A ∩ B) = P(A) · P(B | A)",
+      "visual": "formula"
+    },
+    {
+      "beat": "payoff",
+      "narration": "Her conviction was overturned in 2003. She died four years later. The Royal Statistical Society still cites her trial when it warns courts about the misuse of statistics.",
+      "display": "Independence is a claim. Not a default.",
+      "visual": "image",
+      "image_id": "i2"
+    }
+  ],
+
+  "formula_latex": "P(A \\cap B) = P(A)\\,P(B \\mid A)",
+  "formula_steps": [
+    "P(A \\cap B) = P(A)\\,P(B) \\quad(\\text{if independent})",
+    "\\tfrac{1}{8543}\\cdot\\tfrac{1}{8543} \\approx \\tfrac{1}{73{,}000{,}000}",
+    "P(A \\cap B) = P(A)\\,P(B \\mid A)"
+  ],
+  "mechanism": "Two probabilities multiply as P(A)·P(B) only when the events are independent — when knowing A happened tells you nothing about B. Meadow squared a single-SIDS base rate as though the two deaths were drawn from unrelated families, producing about one in seventy-three million. The general identity is P(A ∩ B) = P(A)·P(B | A); it only collapses to the product when P(B | A) equals P(B). The Royal Statistical Society argued that within one family — for genetic and environmental reasons — P(B | A) is much larger than P(B), so the true joint is orders of magnitude larger than Meadow's number.",
+  "ask": "Question the numbers.",
+  "check_script": "generator.checks/sally-clark-independence-fallacy.py",
+
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "Sally Clark was convicted by a 10–2 majority verdict on 9 November 1999.",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "quote": "Clark was convicted by a 10–2 majority verdict on 9 November 1999,"
+    },
+    {
+      "claim_id": "f2",
+      "claim": "The prosecution paediatrician reached his figure by squaring a single-SIDS base rate.",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "quote": "He had arrived at this figure by squaring his estimate of a chance of 1 in 8500 of an individual SIDS death in similar circumstances."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "The figure quoted at trial was 1 in 73 million, computed as 8543 × 8543.",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "quote": "the probability of two in the same family was around \"1 in 73 million\" (8543 × 8543)."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "In October 2001 the Royal Statistical Society publicly criticised the misuse of statistics in her trial.",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "quote": "In October 2001, the Royal Statistical Society (RSS) issued a public statement expressing its concern at the \"misuse of statistics in the courts\"."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "Her convictions were overturned in January 2003, on her second appeal.",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "quote": "her convictions were overturned at her second appeal in January 2003."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "Sally Clark was found dead in her home on 16 March 2007.",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "quote": "Clark was found dead in her home in Hatfield Peverel in Essex on 16 March 2007."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Her second son, Harry, was found dead on 26 January 1998, aged 8 weeks.",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "quote": "However, he was also found dead on 26 January 1998, aged 8 weeks."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "Squaring a single-SIDS likelihood does not soundly estimate the likelihood of two SIDS deaths in the same family.",
+      "url": "https://en.wikipedia.org/wiki/Prosecutor%27s_fallacy",
+      "quote": "The likelihood of two SIDS deaths in the same family cannot be soundly estimated by squaring the likelihood of a single such death in all otherwise similar families."
+    }
+  ],
+
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i1.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "A single crisp sheet of white A4 paper lying on a dark, polished wooden courtroom bench under a single warm desk lamp. Bold black printed text on the paper reads exactly: '1 in 73,000,000'. No people, no faces, no hands. Shadow of a wooden gavel at the edge of frame. Realistic photograph, 4:3 composition, subject centred with generous margins on all sides, cinematic dim lighting, slight film grain."
+    },
+    {
+      "image_id": "i2",
+      "role": "scene",
+      "source": "commons",
+      "file": "images/i2.jpg",
+      "attribution": "It's No Game — File:The Old Bailey (38551767860).jpg, CC BY 2.0, via Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/wiki/File:The_Old_Bailey_(38551767860).jpg",
+      "prompt": null
+    }
+  ],
+
+  "nulls": [
+    {
+      "field": "images[].portrait",
+      "reason": "No freely-licensed likeness of Sally Clark exists on Wikimedia Commons, and the brief forbids generating a real person's face. The story runs without a portrait."
+    },
+    {
+      "field": "mechanism.exact-P(B|A)-for-SIDS",
+      "reason": "The correct conditional probability P(second SIDS | first SIDS) is an empirical epidemiological quantity, not something SymPy can settle. The check uses a plausible illustrative value (1/100) to verify the direction of the inequality; the narration and formula stop at the qualitative claim that the true joint is larger."
+    }
+  ]
+}

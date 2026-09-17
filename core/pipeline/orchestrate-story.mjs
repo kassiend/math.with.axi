@@ -66,7 +66,9 @@ async function main() {
   if (story.check_script) {
     const gen = path.resolve(runDir, story.check_script);
     const ver = path.join(runDir, 'verifier.box', 'verifier.checks', `${story.story_id}.py`);
-    const cross = await crossCheck(story.story_id, gen, ver);
+    // The story's claim is that the formula holds and the derivation follows; both blind scripts
+    // report that as `agrees`. Their `computed` strings are descriptions and are not compared.
+    const cross = await crossCheck(story.story_id, gen, ver, { compareComputed: false });
     log(run, 'crosscheck', { agreed: cross.agreed, generator: cross.generator.computed, verifier: cross.verifier.computed });
     if (!cross.agreed) return close(run, story, 'failed', 'formula', cross.failures);
   } else {

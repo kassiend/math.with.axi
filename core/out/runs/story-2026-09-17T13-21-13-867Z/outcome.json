@@ -1,0 +1,12 @@
+{
+  "status": "failed",
+  "stage": "formula",
+  "problems": [
+    {
+      "side": "cross",
+      "error": "the two independent scripts computed different values",
+      "generator_computed": "(1/8543)^2 = 1/72982849 (0.023% below the 73,000,000 cited in court); with P(B|A)=1/100 the corrected joint 1/854300 is about 85x larger than Meadow's independent product",
+      "verifier_computed": "chain_rule=True; independence_specialisation=True; arithmetic=True (1/8543^2 = 1/72982849; claimed 1/73000000; ratio=1.000235)"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "sally-clark-independence-fallacy",
+      "script": "verifier.checks/sally-clark-independence-fallacy.py",
+      "computed": "chain_rule=True; independence_specialisation=True; arithmetic=True (1/8543^2 = 1/72982849; claimed 1/73000000; ratio=1.000235)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

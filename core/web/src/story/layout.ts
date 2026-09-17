@@ -66,6 +66,10 @@ export const FORMULA = {
   fontSize: 46,
   /** Font size when several lines share the slot. */
   stackedFontSize: 38,
+  /** Auto-fit floor for the widest line; below this the beat is rejected. */
+  minFontSize: 22,
+  /** Horizontal padding inside the slot the lines must respect. */
+  padding: 18,
   lineGap: 22,
   dim: 0.45,
   /** Fraction of the beat by which the last line has landed. */

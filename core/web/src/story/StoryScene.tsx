@@ -45,6 +45,8 @@ export interface StorySceneProps {
   titleFit: LineFit;
   displayFits: LineFit[];
   askFit: LineFit;
+  /** Fitted font size of each beat's formula stack (unused entries for non-formula beats). */
+  formulaFits: LineFit[];
 }
 
 export function StoryScene(props: StorySceneProps) {
@@ -122,7 +124,7 @@ function BeatLayer(props: StorySceneProps & { phase: StoryTimeline['beats'][numb
         width: `${VISUAL.w}px`, height: `${VISUAL.h}px`,
         borderRadius: `${VISUAL.radius}px`,
       }}>
-        <Visual content={content} frame={frame} phase={phase} />
+        <Visual content={content} frame={frame} phase={phase} fontSize={props.formulaFits[phase.index]?.fontSize} />
       </div>
 
       <DisplayLine frame={frame} start={phase.start} text={content.display} fit={fit} />
@@ -134,8 +136,8 @@ function BeatLayer(props: StorySceneProps & { phase: StoryTimeline['beats'][numb
  * One visual per beat. A missing one renders as nothing rather than as a placeholder — a slot
  * that looks filled when it is not is the view-layer version of a fabricated field.
  */
-function Visual({ content, frame, phase }: {
-  content: StoryBeatContent; frame: number; phase: StoryTimeline['beats'][number];
+function Visual({ content, frame, phase, fontSize }: {
+  content: StoryBeatContent; frame: number; phase: StoryTimeline['beats'][number]; fontSize?: number;
 }) {
   const t = progress(frame, phase);
 
@@ -154,9 +156,9 @@ function Visual({ content, frame, phase }: {
       ? Math.max(8, Math.floor((span * FORMULA.landedBy) / (steps.length - 1)))
       : 0;
     const single = steps.length === 1;
+    const size = fontSize ?? (single ? FORMULA.fontSize : FORMULA.stackedFontSize);
     return (
-      <div className="visual-formula" style={{ gap: `${FORMULA.lineGap}px`,
-                                              fontSize: `${single ? FORMULA.fontSize : FORMULA.stackedFontSize}px` }}>
+      <div className="visual-formula" style={{ gap: `${FORMULA.lineGap}px`, fontSize: `${size}px` }}>
         {steps.map((html, i) => {
           const local = clamp01((frame - phase.start - i * stagger) / 10);
           const e = easeOutBack(local);

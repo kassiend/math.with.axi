@@ -1,0 +1,34 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[somber] One multiplication put a mother in prison for life.",
+      "audio": "audio/hook.mp3",
+      "seconds": 3.336
+    },
+    {
+      "beat": "turn",
+      "narration": "[serious] Sally Clark, a solicitor, lost both of her infant sons in cot deaths, thirteen months apart. At her trial a paediatrician told the jury the odds of that happening naturally were one in seventy-three million. He got that number by squaring.",
+      "audio": "audio/turn.mp3",
+      "seconds": 17.19
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[thoughtful] Two probabilities multiply cleanly only when one event has no effect on the other. A family that has already lost a baby to sudden infant death is not a random family, and the Royal Statistical Society said so in writing. The correct joint uses a conditional. When the chance of a second death, given the first, is bigger than the base rate, the true joint is bigger too, and the seventy-three million evaporates.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 25.929
+    },
+    {
+      "beat": "payoff",
+      "narration": "[somber] Her conviction was overturned in two thousand three. She died four years later. The Royal Statistical Society still cites her trial when it warns courts about the misuse of statistics.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 13.39
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Question the numbers.",
+    "audio": "audio/outro.mp3",
+    "seconds": 1.68
+  },
+  "total_seconds": 61.525
+}

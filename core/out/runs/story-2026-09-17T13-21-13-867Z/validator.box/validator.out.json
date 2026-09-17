@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page: 'Clark was convicted by a 10–2 majority verdict on 9 November 1999, and given the mandatory sentence of life imprisonment.'"
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page. The paediatrician is Roy Meadow; the article confirms he obtained the joint figure by squaring a single-SIDS estimate."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page. Arithmetic sanity check: 8543^2 = 72,982,849 ≈ 73 million."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page; RSS October 2001 statement directly quoted."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page; second-appeal overturn in January 2003 confirmed."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/Sally_Clark",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page. Combined with Christopher's death in December 1996, this also supports the 'thirteen months apart' framing in the turn beat."
+    },
+    {
+      "claim_id": "f8",
+      "url": "https://en.wikipedia.org/wiki/Prosecutor%27s_fallacy",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim on page in the Sally Clark case section; supports the mechanism beat's assertion that squaring is unsound because independence fails within a family."
+    }
+  ],
+  "findings": [],
+  "unverifiable": []
+}

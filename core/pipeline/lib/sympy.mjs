@@ -105,9 +105,14 @@ export async function crossCheck(claimId, generatorScript, verifierScript, opts 
   if (gen.ok && !gen.agrees) failures.push({ side: 'generator', error: 'script disagrees with text' });
   if (ver.ok && !ver.agrees) failures.push({ side: 'verifier', error: 'script disagrees with text' });
 
+  // A lesson or task claims a VALUE, and two blind scripts must produce the same one. A story
+  // claims that a formula HOLDS: both scripts answer a yes/no, and their `computed` is a
+  // description of what they checked, which two blind agents will never phrase identically.
+  // `compareComputed: false` keeps the agreement requirement and drops the string comparison.
   const bothRan = gen.ok && ver.ok;
+  const compareComputed = opts.compareComputed ?? true;
   const sameValue = bothRan && String(gen.computed) === String(ver.computed);
-  if (bothRan && !sameValue) {
+  if (bothRan && compareComputed && !sameValue) {
     failures.push({
       side: 'cross', error: 'the two independent scripts computed different values',
       generator_computed: String(gen.computed), verifier_computed: String(ver.computed),
