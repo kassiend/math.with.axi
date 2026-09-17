@@ -1,0 +1,50 @@
+{
+  "intro": {
+    "narration": "[excited] Any number, any size, and you can tell if four divides it. In one glance.",
+    "display": "Divisible by 4? One glance.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.621
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Take five hundred fifty-two.",
+      "instruction": "Divisible by 4?",
+      "working": "552 ÷ 4 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 2.132
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Here's the move. Only the last two digits matter. Just fifty-two.",
+      "instruction": "Keep the last two digits",
+      "working": "552 → 52",
+      "audio": "audio/s2.mp3",
+      "seconds": 5.604
+    },
+    {
+      "step_id": "s3",
+      "narration": "[thoughtful] Does four go into fifty-two? Yes, four times thirteen. Clean.",
+      "instruction": "Check 4 divides that",
+      "working": "52 = 4 × 13",
+      "audio": "audio/s3.mp3",
+      "seconds": 5.609
+    },
+    {
+      "step_id": "s4",
+      "narration": "[excited] So four divides five hundred fifty-two. Every time. That's it.",
+      "instruction": "So 4 divides 552",
+      "working": "552 = 4 × 138",
+      "audio": "audio/s4.mp3",
+      "seconds": 5.219
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Save this, and try it on any number you like.",
+    "display": "Save this. Try any number.",
+    "audio": "audio/outro.mp3",
+    "seconds": 2.484
+  },
+  "total_seconds": 26.669,
+  "nulls": []
+}

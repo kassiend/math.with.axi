@@ -1,0 +1,17 @@
+{
+  "task_id": "crt-smallest-mod-5-7",
+  "duration_s": 40,
+  "structure_id": "crt-two-congruences-smallest",
+  "categories": ["modular-arithmetic"],
+  "description": "Find the smallest positive integer x.",
+  "description_latex": "Find the smallest positive integer $x$.",
+  "statement": "x ≡ 2 (mod 5)\nx ≡ 3 (mod 7)",
+  "statement_latex": "\\begin{cases} x \\equiv 2 \\pmod{5} \\\\ x \\equiv 3 \\pmod{7} \\end{cases}",
+  "answer": "17",
+  "answer_latex": "17",
+  "solution_sketch": "List integers that are ≡ 3 (mod 7): 3, 10, 17, 24, … Check each against the mod-5 condition: 3 mod 5 = 3, 10 mod 5 = 0, 17 mod 5 = 2 ✓. So x = 17. (Equivalent CRT route: write x = 3 + 7k, need 7k ≡ −1 (mod 5), i.e. 2k ≡ 4, so k ≡ 2, k = 2, x = 17.)",
+  "difficulty_rationale": "Naive route: scan integers 1, 2, 3, … testing both remainders — up to 17 tests, too much bookkeeping under 40 s. Insight: fix the harder modulus (mod 7 → 3, 10, 17, …) and only test that short list against the other congruence. After the insight there are two residue lookups (10 mod 5, 17 mod 5) before the hit. Not a 20 s puzzle because a solver must hold two constraints simultaneously and iterate a candidate sequence while checking the second — a first-look 20 s solver stalls picking which modulus to iterate from.",
+  "steps_expected": 3,
+  "check_script": "generator.checks/crt-smallest-mod-5-7.py",
+  "nulls": []
+}

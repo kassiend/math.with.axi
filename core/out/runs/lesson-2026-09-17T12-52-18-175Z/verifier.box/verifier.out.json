@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "divisibility-by-4-last-two-digits",
+      "detail": "Step s3 shows 52 = 4 × 13, and step s4 jumps to 552 = 4 × 138 without an intermediate line showing how 138 is obtained from the last-two-digit quotient 13 (i.e. 138 = 5·25 + 13, or equivalently 552/4 by direct division). The divisibility conclusion (that 4 divides 552) does follow directly from the rule, and 138 × 4 = 552 is trivially checkable, so the stated final result is correct — but a viewer following only the printed steps sees the quotient 138 asserted rather than derived.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "divisibility-by-4-last-two-digits",
+      "script": "verifier.checks/divisibility-by-4-last-two-digits.py",
+      "computed": "138",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

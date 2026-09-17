@@ -1,0 +1,36 @@
+{
+  "kind": "task",
+  "hook": "Two clues. One number. Can you find it in 40 seconds?",
+  "instagram": {
+    "caption": "Two clues. One number. Can you find it in 40 seconds?\n\nx ≡ 2 (mod 5)\nx ≡ 3 (mod 7)\n\nFind the smallest positive integer x.\n\nDrop your answer in the comments.",
+    "first_comment": "#math #mathematics #puzzle #mathpuzzle #mathchallenge #numbertheory #modularithmetic #learnmath #mathwithAxi #mathshorts #dailymath #mathlovers #brainteaser #mathproblem\n\nx = 17. Trick: anchor on the harder modulus — list 3, 10, 17, … and check each against mod 5. The second candidate hits. What did you get?"
+  },
+  "tiktok": {
+    "caption": "Two clues. One number. Can you find it in 40 seconds? #math #mathpuzzle #numbertheory #mathchallenge #mathwithAxi",
+    "first_comment": "x = 17. Anchor on the harder modulus — list 3, 10, 17, … and check each against mod 5. Second candidate hits. What did you get?"
+  },
+  "youtube": {
+    "title": "Two Clues. One Number. Can You Find x in 40 Seconds?",
+    "description": "Two clues. One number. Can you find it in 40 seconds?\n\nx ≡ 2 (mod 5)\nx ≡ 3 (mod 7)\n\nFind the smallest positive integer x. Drop your answer below.\n\n#math #numbertheory #mathpuzzle\n#Shorts",
+    "tags": [
+      "modular arithmetic",
+      "number theory",
+      "math puzzle",
+      "math challenge",
+      "math shorts",
+      "brain teaser",
+      "math with Axi",
+      "learn math",
+      "mathematics",
+      "daily math",
+      "puzzle",
+      "Chinese remainder theorem",
+      "math problem",
+      "mathematics shorts",
+      "Axi"
+    ],
+    "first_comment": "x = 17. Trick: anchor on the harder modulus — list 3, 10, 17, … and check each against mod 5. The second candidate hits. What did you get?"
+  },
+  "alt_text": "A white card shows two congruences — x ≡ 2 (mod 5) and x ≡ 3 (mod 7) — inside a countdown ring. Axi, the mascot, stands in the footer. Around two-thirds of the way through, a white rabbit with a stopwatch appears in the corner.",
+  "nulls": []
+}

@@ -1,0 +1,23 @@
+{
+  "task_id": "log-6-sum-2-and-3",
+  "duration_s": 20,
+  "structure_id": "log-product-sum-to-one",
+  "categories": [
+    "logarithm"
+  ],
+  "description": null,
+  "statement": "log_6(2) + log_6(3) = ?",
+  "statement_latex": "\\log_{6}\\!2 \\;+\\; \\log_{6}\\!3 \\;=\\; ?",
+  "answer": "1",
+  "answer_latex": "1",
+  "nulls": [
+    {
+      "field": "description",
+      "reason": "Statement is self-contained; fallback headline ('Can you solve it in 20 seconds?') carries the ask."
+    },
+    {
+      "field": "description_latex",
+      "reason": "No description text to typeset."
+    }
+  ]
+}

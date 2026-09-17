@@ -1,0 +1,44 @@
+{
+  "runId": "task-log-6-sum-2-and-3",
+  "capture": {
+    "publicPath": "captures/task-log-6-sum-2-and-3",
+    "frames": 653,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "hurry": {
+    "src": "mascot/hurry-hurry.webm",
+    "enter": 445,
+    "exit": 465,
+    "clipSeconds": 4.033333333333333
+  },
+  "audio": {
+    "start": "audio/task-log-6-sum-2-and-3/start.mp3",
+    "tick": "audio/task-log-6-sum-2-and-3/tick.wav",
+    "tickFrames": [
+      8,
+      38,
+      68,
+      98,
+      128,
+      158,
+      188,
+      218,
+      248,
+      278,
+      308,
+      338,
+      368,
+      398,
+      428,
+      458,
+      488,
+      518,
+      548,
+      578
+    ],
+    "mid": "audio/task-log-6-sum-2-and-3/mid.mp3",
+    "midFrame": 445
+  }
+}

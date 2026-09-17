@@ -1,0 +1,69 @@
+{
+  "lesson_id": "divisibility-by-3-digit-sum",
+  "counter": 8,
+  "area": "divisibility-rules",
+  "concept_slug": "divisibility-by-3-digit-sum",
+  "tags": ["mental-arithmetic", "divisibility", "digit-sum"],
+  "method_name": "Divisible by 3? Add the digits.",
+  "applicability": "any non-negative integer: n is divisible by 3 iff the sum of its base-10 digits is divisible by 3",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Divisible by 3?",
+      "working": "435 ÷ 3 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Add the digits",
+      "working": "4 + 3 + 5 = 12"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "12 splits into 3s",
+      "working": "12 = 3 × 4  ✓"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "So 435 does too",
+      "working": "435 = 3 × 145"
+    }
+  ],
+  "worked_example": {
+    "operands": [435],
+    "result": "435 is divisible by 3; 435 = 3 × 145"
+  },
+  "sampling": {
+    "seed": 793183644,
+    "spec": {
+      "min": 100,
+      "max": 999,
+      "filter": {
+        "min_digits": 3,
+        "max_digits": 3
+      }
+    },
+    "n": 1,
+    "draws": [435],
+    "attempts": 1,
+    "rejections": [],
+    "rejection_rate": 0,
+    "rejection_rate_alarm": false,
+    "presentation_filter_rationale": "The rule works on any non-negative integer; the range 100–999 is a rendering choice so the digit-sum step has three digits to add (a one-digit example is trivial, a five-digit example overflows the card). The filter pins the digit count and constrains nothing about divisibility."
+  },
+  "universality": {
+    "claim": "the digit-sum test is exact: for every non-negative integer n, 3 | n iff 3 | digitsum10(n)",
+    "theorem_id": "base-b-digit-sum-congruence",
+    "mapping": "With b = 10, the whitelisted theorem gives n ≡ digitsum10(n) (mod 9). Since 3 divides 9, reducing mod 3 preserves the congruence: n ≡ digitsum10(n) (mod 3), so 3 | n iff 3 | digitsum10(n)."
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "digit-sum divisibility test for 3 has no counter-example. The rule is universal for non-negative integers by base-b-digit-sum-congruence with b = 10, reduced modulo 3 (a divisor of b − 1 = 9). Verifier is expected to confirm exhaustively over a stated finite domain."
+    }
+  ]
+}

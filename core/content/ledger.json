@@ -35,6 +35,36 @@
       "seconds": 24.067,
       "video": "output/posts/lessons/square-two-digit-ending-in-5.mp4",
       "run_dir": "out/runs/lesson-001"
+    },
+    {
+      "id": "lesson-divisibility-by-3-digit-sum",
+      "concept_slug": "divisibility-by-3-digit-sum",
+      "title": "Divisible by 3?",
+      "tags": [
+        "digit-sum",
+        "divisibility",
+        "mental-arithmetic"
+      ],
+      "status": "failed",
+      "created_at": "2026-09-17T12:20:37.173Z",
+      "failed_at": "verification"
+    },
+    {
+      "id": "lesson-divisibility-by-4-last-two-digits",
+      "concept_slug": "divisibility-by-4-last-two-digits",
+      "title": "Divisible by 4?",
+      "area": "divisibility-rules",
+      "tags": [
+        "digit-rules",
+        "divisibility",
+        "mental-arithmetic"
+      ],
+      "counter": 8,
+      "status": "shipped",
+      "created_at": "2026-09-17T12:57:25.789Z",
+      "seconds": 27.1,
+      "video": "output/posts/lessons/divisibility-by-4-last-two-digits.mp4",
+      "run_dir": "out/runs/lesson-2026-09-17T12-52-18-175Z"
     }
   ]
 }

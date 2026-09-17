@@ -1,0 +1,3 @@
+{"t":"2026-09-17T12:20:37.173Z","event":"run.start","lesson_id":"divisibility-by-3-digit-sum","counter":8,"seed":1614967138}
+{"t":"2026-09-17T12:20:40.259Z","event":"crosscheck","agreed":false,"generator":null,"verifier":"digit_sum(7351)=16, 7351 mod 3 = 1, quotient=2450, divisible=False"}
+{"t":"2026-09-17T12:20:40.259Z","event":"gate.closed","status":"failed","stage":"verification","problems":[{"side":"generator","error":"check output is not JSON: ALL CHECKS PASSED"}]}

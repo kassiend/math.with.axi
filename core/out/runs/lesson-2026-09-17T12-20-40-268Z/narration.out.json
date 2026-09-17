@@ -1,0 +1,50 @@
+{
+  "intro": {
+    "narration": "[excited] Is three thousand nine hundred five divisible by four? Two seconds, no long division.",
+    "display": "No long division.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.925
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Here's our number. Watch this.",
+      "instruction": "Divisible by 4?",
+      "working": "3905 ÷ 4 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 1.756
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] The trick? Only the last two digits matter. So just look at oh five.",
+      "instruction": "Only the last two digits matter",
+      "working": "3905 → 05",
+      "audio": "audio/s2.mp3",
+      "seconds": 5.03
+    },
+    {
+      "step_id": "s3",
+      "narration": "[thoughtful] Divide those by four. Five over four is one, remainder one.",
+      "instruction": "Divide those by 4",
+      "working": "5 ÷ 4 = 1 r 1",
+      "audio": "audio/s3.mp3",
+      "seconds": 4.664
+    },
+    {
+      "step_id": "s4",
+      "narration": "[confident] There's a remainder, so the answer is no.",
+      "instruction": "Remainder, so no",
+      "working": "3905 is not ÷ 4",
+      "audio": "audio/s4.mp3",
+      "seconds": 3.101
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Try it on any big number. Just check the last two.",
+    "display": "Try it on any big number.",
+    "audio": "audio/outro.mp3",
+    "seconds": 3.045
+  },
+  "total_seconds": 23.521,
+  "nulls": []
+}

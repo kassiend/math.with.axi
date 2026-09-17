@@ -1,0 +1,5 @@
+{"t":"2026-09-17T13:05:39.692Z","event":"run.start","task_id":"log-6-sum-2-and-3","duration_s":20,"seed":1660481736}
+{"t":"2026-09-17T13:05:40.900Z","event":"crosscheck","agreed":true,"generator":"1","verifier":"1"}
+{"t":"2026-09-17T13:05:41.027Z","event":"picks","background":"bg2.jpeg","start_audio":"axi_greetings1.mp3","mid_audio":"hurry5.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":0.679125,"total_frames":653,"hurry_enter":445}
+{"t":"2026-09-17T13:07:58.428Z","event":"capture.done","frames":653,"font_size":40}
+{"t":"2026-09-17T13:09:03.032Z","event":"done","video":"output/posts/tasks/20s/log-6-sum-2-and-3.mp4"}

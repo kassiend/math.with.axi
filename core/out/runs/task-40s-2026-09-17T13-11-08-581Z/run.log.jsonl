@@ -1,0 +1,5 @@
+{"t":"2026-09-17T13:13:50.407Z","event":"run.start","task_id":"crt-smallest-mod-5-7","duration_s":40,"seed":1185853295}
+{"t":"2026-09-17T13:13:51.394Z","event":"crosscheck","agreed":true,"generator":"17","verifier":"17"}
+{"t":"2026-09-17T13:13:51.457Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry1.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":0.91425,"total_frames":1253,"hurry_enter":842}
+{"t":"2026-09-17T13:18:14.336Z","event":"capture.done","frames":1253,"font_size":50}
+{"t":"2026-09-17T13:19:42.412Z","event":"done","video":"output/posts/tasks/40s/crt-smallest-mod-5-7.mp4"}

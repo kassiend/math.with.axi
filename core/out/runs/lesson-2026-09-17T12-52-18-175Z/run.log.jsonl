@@ -1,0 +1,6 @@
+{"t":"2026-09-17T12:57:25.789Z","event":"run.start","lesson_id":"divisibility-by-4-last-two-digits","counter":8,"seed":-1631620510}
+{"t":"2026-09-17T12:57:26.292Z","event":"crosscheck","agreed":true,"generator":"138","verifier":"138"}
+{"t":"2026-09-17T12:57:26.293Z","event":"timeline","total_frames":813,"total_seconds":27.1,"steps":["s1:2.132s","s2:5.604s","s3:5.609s","s4:5.219s"],"outro":"2.484s"}
+{"t":"2026-09-17T12:57:26.294Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-17T12:59:45.622Z","event":"capture.done","frames":813}
+{"t":"2026-09-17T13:01:15.973Z","event":"done","video":"output/posts/lessons/divisibility-by-4-last-two-digits.mp4","seconds":27.1}

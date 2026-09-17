@@ -141,6 +141,38 @@
       "video": "output/posts/tasks/40s/power-rewrite-from-2x-equals-3.mp4",
       "run_dir": "out/runs/task-40s-2026-08-22T09-01-45-473Z",
       "statement_norm": "2^x=3"
+    },
+    {
+      "task_id": "log-6-sum-2-and-3",
+      "duration_s": 20,
+      "structure_id": "log-product-sum-to-one",
+      "categories": [
+        "logarithm"
+      ],
+      "statement": "log_6(2) + log_6(3) = ?",
+      "answer": "1",
+      "status": "shipped",
+      "created_at": "2026-09-17T13:05:39.691Z",
+      "seed": 1660481736,
+      "video": "output/posts/tasks/20s/log-6-sum-2-and-3.mp4",
+      "run_dir": "out/runs/task-20s-2026-09-17T13-03-00-193Z",
+      "statement_norm": "log_6(2)+log_6(3)=?"
+    },
+    {
+      "task_id": "crt-smallest-mod-5-7",
+      "duration_s": 40,
+      "structure_id": "crt-two-congruences-smallest",
+      "categories": [
+        "modular-arithmetic"
+      ],
+      "statement": "x ≡ 2 (mod 5)\nx ≡ 3 (mod 7)",
+      "answer": "17",
+      "status": "shipped",
+      "created_at": "2026-09-17T13:13:50.407Z",
+      "seed": 1185853295,
+      "video": "output/posts/tasks/40s/crt-smallest-mod-5-7.mp4",
+      "run_dir": "out/runs/task-40s-2026-09-17T13-11-08-581Z",
+      "statement_norm": "x≡2(mod5)x≡3(mod7)"
     }
   ]
 }
