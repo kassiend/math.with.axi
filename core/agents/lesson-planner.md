@@ -102,6 +102,16 @@ because the Verifier will test it and the whole lesson fails on your guess.
 
 ## 7. Output
 
+Write `<run>/plan.out.json` in the schema in §2.3 of the brief, and the check at
+`<run>/generator.checks/<lesson_id>.py`. **The script's last line must be the JSON report:**
+
+```python
+print(json.dumps({"claim_id": LESSON_ID, "computed": str(result), "agrees": result == expected}))
+```
+
+Nothing after it. The orchestrator reads that line and only that line; `ALL CHECKS PASSED` is not
+a report, and a lesson whose script ends that way fails the cross-check without being rendered.
+
 Write `<run>/plan.out.json` in the schema in §2.3 of the brief. The narrator receives this object
 and nothing else — no commentary, no alternatives you considered, no notes. Whatever the narrator
 needs must be inside the declared fields.

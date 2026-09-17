@@ -400,6 +400,18 @@ machine-dependent and frame determinism is gone.
 **§3.1 independent verification — applies.** Two SymPy scripts per worked example, written blind,
 run by the orchestrator. Any disagreement fails the lesson.
 
+**The check script's report line.** Every check — generator's and verifier's alike — prints one
+line of JSON, and the orchestrator reads only that:
+
+```
+{"claim_id": "<lesson_id>", "computed": "<the worked example's result>", "agrees": true}
+```
+
+Print it **last**, with `json.dumps`, and do not put anything else on that line. Asserts and
+progress lines before it are fine. A script that ends with `ALL CHECKS PASSED` and no JSON line
+has verified nothing as far as the gate is concerned — the lesson fails at the cross-check before
+it renders, and two of the first three automated runs failed exactly that way.
+
 **§3.2 applicability and counterexample — applies in full.** Unlike a one-off puzzle, a lesson
 teaches a *technique*, so the rule from the original brief is back in force: state precisely when
 it works, and give the case where it breaks. `carry_case` is that case. A technique that "seems to

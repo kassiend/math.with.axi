@@ -5,6 +5,7 @@
  *   npm run worker -- pair      pair the bot with your account (once)
  *   npm run worker -- status    show configuration and what has shipped
  *   npm run worker -- now       run one batch immediately, then exit
+ *   npm run worker -- now lesson,story   run just those posts, in that order
  *   npm run worker              run forever, firing once a day at WORKER_DAILY_AT
  *
  * Runs unchanged on macOS, Windows and Linux: no cron, no launchd, no Task Scheduler. The
@@ -253,7 +254,13 @@ async function main() {
     return 1;
   }
 
-  if (cmd === 'now') { await runBatch(cfg); return 0; }
+  // `now lesson,story` runs just those, in that order; without the list, WORKER_POSTS.
+  if (cmd === 'now') {
+    const only = process.argv[3];
+    if (only) cfg = { ...cfg, posts: only.split(',').map((s) => s.trim()).filter(Boolean) };
+    await runBatch(cfg);
+    return 0;
+  }
   if (cmd === 'loop') return cmdLoop(cfg);
 
   console.error(`unknown command "${cmd}" — expected: pair | status | now | loop`);

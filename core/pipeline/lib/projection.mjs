@@ -30,6 +30,19 @@ export const LESSON_VISIBLE = Object.freeze([
 ]);
 export const LESSON_DRAW_VISIBLE = Object.freeze(['seed', 'spec', 'draws', 'rejection_rate', 'construction']);
 
+/**
+ * What the story Validator sees: the script and its claimed sources. Not the writer's search
+ * history, discarded angles, image prompts or check script — it opens the URLs blind.
+ */
+export const STORY_VALIDATOR_VISIBLE = Object.freeze([
+  'story_id', 'area', 'subject_slug', 'angle_slug', 'title', 'beats',
+  'formula_latex', 'formula_steps', 'mechanism', 'facts',
+]);
+export const STORY_BEAT_VISIBLE = Object.freeze(['beat', 'narration', 'display']);
+
+/** What the Verifier sees of a story: the formula and the claim about why it holds. */
+export const STORY_VERIFIER_VISIBLE = Object.freeze(['title', 'formula_latex', 'formula_steps', 'mechanism']);
+
 /** Key names that must never reach the Verifier, whatever list they hide behind. */
 export const FORBIDDEN_KEY_PATTERNS = Object.freeze([
   /prompt/i, /rationale/i, /reasoning/i, /chain[_-]?of[_-]?thought/i, /\bdraft\b/i,
@@ -77,6 +90,16 @@ export function projectTask(payload) {
   return assertClean(project(payload, TASK_VISIBLE), 'task');
 }
 
+export function projectStoryForValidator(story) {
+  const out = project(story, STORY_VALIDATOR_VISIBLE);
+  out.beats = (story.beats ?? []).map((b) => project(b, STORY_BEAT_VISIBLE));
+  return assertClean(out, 'story/validator');
+}
+
+export function projectStoryForVerifier(story) {
+  return assertClean({ claim_id: story.story_id, ...project(story, STORY_VERIFIER_VISIBLE) }, 'story/verifier');
+}
+
 export function projectLesson(plan) {
   const out = project(plan, LESSON_VISIBLE);
   if (plan.operand_draw) {
@@ -93,6 +116,14 @@ export function writeVerifierBox(runDir, projected) {
   const box = path.join(runDir, 'verifier.box');
   fs.mkdirSync(path.join(box, 'verifier.checks'), { recursive: true });
   fs.writeFileSync(path.join(box, 'verifier.in.json'), JSON.stringify(projected, null, 2));
+  return box;
+}
+
+/** The Validator's sandbox: one file, the projected script and sources. */
+export function writeValidatorBox(runDir, projected) {
+  const box = path.join(runDir, 'validator.box');
+  fs.mkdirSync(box, { recursive: true });
+  fs.writeFileSync(path.join(box, 'validator.in.json'), JSON.stringify(projected, null, 2));
   return box;
 }
 

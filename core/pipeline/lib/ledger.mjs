@@ -9,6 +9,7 @@
  * it: a few thousand entries of a few hundred bytes is a file, and a file diffs in review.
  */
 import fs from 'node:fs';
+import { envValue } from './env.mjs';
 import path from 'node:path';
 import { LEDGER } from './paths.mjs';
 
@@ -98,11 +99,18 @@ export function findCandidates(conceptSlug, tags, ledger = load()) {
  * actually went out. It identifies a post in a series the audience follows, so it never restarts
  * and never skips — a failed lesson does not consume a number.
  */
+/**
+ * One more than the highest counter shipped — but never below LESSON_COUNTER_START from .env.
+ * The series is also posted by hand, so the ledger can lag the channel; the floor lets the
+ * numbering pick up where the channel actually is, and the ledger continues from there.
+ */
 export function nextCounter(ledger = load()) {
   const used = ledger.entries
     .filter((e) => e.status === 'shipped' && Number.isFinite(e.counter))
     .map((e) => e.counter);
-  return used.length ? Math.max(...used) + 1 : 1;
+  const next = used.length ? Math.max(...used) + 1 : 1;
+  const floor = Number(envValue('LESSON_COUNTER_START'));
+  return Number.isFinite(floor) && floor > next ? floor : next;
 }
 
 /**

@@ -62,7 +62,9 @@ script confirms where it can. No derivation to show (a definition, a historical 
 `null` with a reason, not padding.
 
 If the formula is checkable, also write a SymPy script confirming whatever it asserts, exactly as
-the task and lesson pipelines do. If it is not checkable — a definition, a historical statement —
+the task and lesson pipelines do — ending with the JSON report line
+`print(json.dumps({"claim_id": STORY_ID, "computed": "...", "agrees": True}))`, which is the
+only line the orchestrator reads. If it is not checkable — a definition, a historical statement —
 say so in `nulls[]` rather than inventing a check that proves nothing.
 
 ## 5. Images
