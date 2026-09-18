@@ -1,0 +1,4 @@
+{"t":"2026-09-18T11:12:02.329Z","event":"run.start","task_id":"telescoping-product-through-6","duration_s":20,"seed":1657314592}
+{"t":"2026-09-18T11:12:03.021Z","event":"crosscheck","agreed":true,"generator":"1/6","verifier":"1/6"}
+{"t":"2026-09-18T11:12:03.164Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_greetings5.mp3","mid_audio":"hurry5.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":0.679125,"total_frames":653,"hurry_enter":387}
+{"t":"2026-09-18T11:12:06.747Z","event":"gate.closed","status":"rejected","stage":"statement-does-not-fit","problems":[{"reason":"statement does not fit the 322x262px safe box at the 40px floor (measured 579x53) — shorten it or split it across two lines"}]}

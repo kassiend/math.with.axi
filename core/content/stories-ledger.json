@@ -45,6 +45,72 @@
       ],
       "video": "output/posts/stories/sally-clark-independence-fallacy.mp4",
       "run_dir": "out/runs/story-2026-09-17T13-21-13-867Z"
+    },
+    {
+      "story_id": "kelly-criterion-log-wealth",
+      "area": "financial-mathematics",
+      "subject_slug": "john-kelly-jr",
+      "angle_slug": "kelly-criterion-log-wealth-optimization",
+      "title": "How much to bet",
+      "status": "shipped",
+      "created_at": "2026-09-18T11:29:51.375Z",
+      "seconds": 68.833,
+      "image_credits": [
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "commons",
+          "attribution": "Gottscho-Schleisner Collection — File:Bell Telephone Laboratories, Murray Hill, New Jersey. LOC gsc.5a08396.jpg, Public domain, via Wikimedia Commons"
+        }
+      ],
+      "video": "output/posts/stories/kelly-criterion-log-wealth.mp4",
+      "run_dir": "out/runs/story-2026-09-18T11-18-33-806Z"
+    },
+    {
+      "story_id": "gps-38-microseconds",
+      "area": "math-in-real-life",
+      "subject_slug": "gps-relativistic-correction",
+      "angle_slug": "38-microseconds-per-day",
+      "title": "Einstein in your pocket",
+      "status": "shipped",
+      "created_at": "2026-09-18T11:51:08.920Z",
+      "seconds": 58.133,
+      "image_credits": [
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "commons",
+          "attribution": "NASA — File:GPS Satellite NASA art-iif.jpg, Public domain, via Wikimedia Commons"
+        }
+      ],
+      "video": "output/posts/stories/gps-38-microseconds.mp4",
+      "run_dir": "out/runs/story-2026-09-18T11-42-12-882Z"
+    },
+    {
+      "story_id": "ramanujan-1729-taxicab",
+      "area": "biography",
+      "subject_slug": "srinivasa-ramanujan",
+      "angle_slug": "hardy-1729-taxicab",
+      "title": "Rather a dull number",
+      "status": "shipped",
+      "created_at": "2026-09-18T12:15:12.751Z",
+      "seconds": 61.467,
+      "image_credits": [
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "commons",
+          "attribution": "Konrad Jacobs — File:Srinivasa Ramanujan - OPC - 2 (cleaned).jpg, Public domain, via Wikimedia Commons"
+        }
+      ],
+      "video": "output/posts/stories/ramanujan-1729-taxicab.mp4",
+      "run_dir": "out/runs/story-2026-09-18T12-01-21-807Z"
     }
   ]
 }

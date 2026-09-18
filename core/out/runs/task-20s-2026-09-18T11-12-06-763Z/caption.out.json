@@ -1,0 +1,36 @@
+{
+  "kind": "task",
+  "hook": "Two fractions that look almost the same — but aren't.",
+  "instagram": {
+    "caption": "Two fractions that look almost the same — but aren't.\n\n3/7 or 4/9 — which one is bigger?\n\nThey're close enough that guessing won't settle it.\n\nDrop your answer in the comments.",
+    "first_comment": "The answer is 4/9.\n\nCross-multiply: 3 × 9 = 27, and 4 × 7 = 28. Since 28 is larger, 4/9 is the bigger fraction — one comparison, no common denominators needed.\n\nWhat did you get?\n\n#math #fractions #learnmath #mathshorts #mathtok #mathchallenge #mathpuzzle #fractionmath #quickmath #middleschoolmath #mathteacher #mathstudent #mathwithaxi #comparingfractions #mathematics"
+  },
+  "tiktok": {
+    "caption": "Two fractions that look almost the same — but aren't. Which is bigger? Comment below. #math #fractions #mathchallenge",
+    "first_comment": "The answer is 4/9. Cross-multiply: 3 × 9 = 27, 4 × 7 = 28. Since 28 > 27, 4/9 is bigger. What did you get?"
+  },
+  "youtube": {
+    "title": "3/7 or 4/9 — Which Fraction Is Bigger?",
+    "description": "Two fractions that look almost the same — but aren't.\n\n3/7 or 4/9: which one is bigger? Drop your answer in the comments.\n\n#math #fractions #mathchallenge\n\n#Shorts",
+    "tags": [
+      "math",
+      "fractions",
+      "compare fractions",
+      "fraction comparison",
+      "math challenge",
+      "math puzzle",
+      "learn math",
+      "math shorts",
+      "quick math",
+      "middle school math",
+      "math with axi",
+      "cross multiply",
+      "which fraction is bigger",
+      "mathematics",
+      "comparing fractions"
+    ],
+    "first_comment": "The answer is 4/9. Cross-multiply: 3 × 9 = 27, and 4 × 7 = 28. Since 28 is larger, 4/9 is the bigger fraction — one comparison, no common denominators needed. What did you get?"
+  },
+  "alt_text": "A puzzle card showing '3/7 or 4/9?' inside a countdown ring. Axi the mascot stands in the footer. Around two-thirds through, a white rabbit holding a stopwatch appears as a hurry sticker.",
+  "nulls": []
+}

@@ -1,0 +1,7 @@
+{"t":"2026-09-18T11:51:08.920Z","event":"run.start","story_id":"gps-38-microseconds","area":"math-in-real-life","subject":"gps-relativistic-correction"}
+{"t":"2026-09-18T11:51:08.921Z","event":"validation","checked":8,"findings":0}
+{"t":"2026-09-18T11:51:09.323Z","event":"crosscheck","agreed":true,"generator":"c*(GR+SR) = (299792458 m/s)*(+45.8-7.2 us/day) = 11.57 km/day (source: 11.4 km/day)","verifier":"SR=-7.21 μs/day, GR=45.72 μs/day, net=38.51 μs/day, c·38μs=11.392 km, c·net=11.546 km"}
+{"t":"2026-09-18T11:51:09.324Z","event":"timeline","total_frames":1744,"total_seconds":58.133,"beats":["hook:5.499s","turn:13.026s","mechanism:25.429s","payoff:11.096s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1623},"resume":{"start":1623,"end":1744}}}
+{"t":"2026-09-18T11:51:09.325Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-18T11:57:40.222Z","event":"capture.done","frames":1744}
+{"t":"2026-09-18T11:59:45.446Z","event":"done","video":"output/posts/stories/gps-38-microseconds.mp4","seconds":58.133}

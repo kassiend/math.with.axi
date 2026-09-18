@@ -1,0 +1,51 @@
+{
+  "lesson_id": "difference-of-squares-factoring",
+  "intro": {
+    "narration": "[excited] Fifty-five squared, minus thirty squared, in your head, before you reach for a pen.",
+    "display": "No squaring. No calculator.",
+    "audio": "audio/intro.mp3",
+    "seconds": 4.96
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] It's a difference of squares.",
+      "instruction": "Difference of squares",
+      "working": "55² − 30² = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 1.762
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] The rule. A squared minus B squared equals A plus B, times A minus B.",
+      "instruction": "Sum times difference",
+      "working": "a² − b² = (a+b)(a−b)",
+      "audio": "audio/s2.mp3",
+      "seconds": 6.245
+    },
+    {
+      "step_id": "s3",
+      "narration": "[thoughtful] Add them. Fifty-five plus thirty is eighty-five. Subtract. Fifty-five minus thirty is twenty-five.",
+      "instruction": "Add, then subtract",
+      "working": "(55+30)(55−30) = 85 × 25",
+      "audio": "audio/s3.mp3",
+      "seconds": 8.669
+    },
+    {
+      "step_id": "s4",
+      "narration": "[excited] One multiplication left. Eighty-five times twenty-five is two thousand, one hundred twenty-five.",
+      "instruction": "One multiplication left",
+      "working": "85 × 25 = 2125",
+      "audio": "audio/s4.mp3",
+      "seconds": 6.773
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Save this, and try it on your own two squares.",
+    "display": "Save this. Try your own.",
+    "audio": "audio/outro.mp3",
+    "seconds": 2.8
+  },
+  "total_seconds": 31.209,
+  "nulls": []
+}

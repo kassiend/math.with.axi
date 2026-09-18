@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "larger-fraction-3-7-or-4-9",
+      "script": "verifier.checks/larger-fraction-3-7-or-4-9.py",
+      "computed": "4/9",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Comparison 3/7 vs 4/9: cross-multiply gives 3*9=27 < 4*7=28, so 4/9 > 3/7. Answer 4/9 is exact, in simplest form (gcd(4,9)=1), and unambiguously determined by the statement. Both operands positive, no sign or branch ambiguity."
+}

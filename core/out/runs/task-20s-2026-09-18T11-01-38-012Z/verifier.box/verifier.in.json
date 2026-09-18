@@ -1,0 +1,14 @@
+{
+  "task_id": "next-term-2-3-5-9-17",
+  "duration_s": 20,
+  "structure_id": "next-term-doubling-differences",
+  "categories": [
+    "sequence"
+  ],
+  "description": "Next term?",
+  "statement": "2, 3, 5, 9, 17, ?",
+  "statement_latex": null,
+  "answer": "33",
+  "answer_latex": null,
+  "nulls": []
+}

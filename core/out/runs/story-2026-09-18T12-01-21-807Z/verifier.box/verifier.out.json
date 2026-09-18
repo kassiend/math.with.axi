@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "ramanujan-1729-taxicab",
+      "script": "verifier.checks/ramanujan-1729-taxicab.py",
+      "computed": "{\"1^3+12^3\": 1729, \"9^3+10^3\": 1729, \"smallest_taxicab2\": 1729, \"reps_of_1729\": [[1, 12], [9, 10]]}",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

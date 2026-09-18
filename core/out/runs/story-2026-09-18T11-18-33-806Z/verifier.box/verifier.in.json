@@ -1,0 +1,11 @@
+{
+  "claim_id": "kelly-criterion-log-wealth",
+  "title": "How much to bet",
+  "formula_latex": "f^{*} = \\dfrac{bp - q}{b}",
+  "formula_steps": [
+    "G(f) = p\\,\\log(1 + bf) + q\\,\\log(1 - f)",
+    "G'(f) = \\dfrac{pb}{1 + bf} - \\dfrac{q}{1 - f} = 0",
+    "f^{*} = \\dfrac{bp - q}{b}"
+  ],
+  "mechanism": "Wealth after many independent bets compounds multiplicatively, so the right thing to maximise is the expected logarithm of the wealth multiplier per bet. With win probability p, loss probability q = 1 − p, and net odds b to one, the per-bet growth rate is G(f) = p·log(1 + bf) + q·log(1 − f). Differentiating with respect to f and setting the result to zero gives a single interior optimum, f* = (bp − q)/b. Below it, the log-return is smaller and you leave growth on the table; above it, the −log(1 − f) term punishes losses fast enough to send the bankroll to zero in the long run. The formula is not a preference — it is the unique bet size that maximises long-run geometric growth."
+}

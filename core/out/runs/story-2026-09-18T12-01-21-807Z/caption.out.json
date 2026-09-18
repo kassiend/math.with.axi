@@ -1,0 +1,39 @@
+{
+  "kind": "story",
+  "hook": "Hardy called it dull. He was very wrong.",
+  "instagram": {
+    "caption": "Hardy called it dull. He was very wrong.\n\n1919. Hardy visits Ramanujan in hospital at Putney and mentions his cab number — 1729. Rather a dull one, he says.\n\nRamanujan shakes his head. It is the smallest number you can write as a sum of two cubes in two different ways: 1³ + 12³, and 9³ + 10³. Both land on 1729. Nothing smaller does.\n\nA dull cab, made immortal.\n\nSave this one.",
+    "first_comment": "#math #mathematics #numbertheory #mathhistory #mathematicians #ramanujan #1729 #taxicabnumber #hardyramanujan #mathtok #mathshorts #mathfact #cubenumbers\n\nWhat number has surprised you by hiding something inside it?"
+  },
+  "tiktok": {
+    "caption": "Hardy called it dull. He was very wrong. #math #ramanujan #mathhistory #numbertheory",
+    "first_comment": null
+  },
+  "youtube": {
+    "title": "The Number Hardy Called Dull | math with Axi",
+    "description": "Hardy called it dull. He was very wrong.\n\nIn 1919, Hardy visited Ramanujan in hospital at Putney and mentioned his cab number — 1729. \"Rather a dull one,\" he said.\n\nRamanujan disagreed. 1729 is the smallest number you can write as a sum of two cubes in two different ways: 1³ + 12³ = 9³ + 10³.\n\nA century on, the whole family carries the name: taxicab numbers.\n\nSave this one.\n\n#math #ramanujan #numbertheory\n#Shorts",
+    "tags": [
+      "math",
+      "mathematics",
+      "number theory",
+      "math history",
+      "Ramanujan",
+      "Hardy Ramanujan",
+      "1729",
+      "taxicab number",
+      "math facts",
+      "cube numbers",
+      "history of mathematics",
+      "famous mathematicians",
+      "math shorts"
+    ],
+    "first_comment": "What do you think let Ramanujan see that so fast?"
+  },
+  "alt_text": "A story card titled 'Rather a dull number.' A moody 1919 London street scene shows a black cab at dusk with the number 1729 on its plate. The formula 1³ + 12³ = 9³ + 10³ appears on a white card. Axi reads from the top of the frame.",
+  "nulls": [
+    {
+      "field": "tiktok.first_comment",
+      "reason": "Story posts do not carry a first-comment answer on TikTok; null is the correct value for non-task kinds per schema."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "task_id": "larger-fraction-3-7-or-4-9",
+  "duration_s": 20,
+  "structure_id": "compare-fractions-cross-multiply",
+  "categories": [
+    "fractions"
+  ],
+  "description": "Which is larger?",
+  "statement": "3/7 or 4/9?",
+  "statement_latex": "\\dfrac{3}{7}\\ \\text{or}\\ \\dfrac{4}{9}\\,?",
+  "answer": "4/9",
+  "answer_latex": "\\dfrac{4}{9}",
+  "nulls": []
+}

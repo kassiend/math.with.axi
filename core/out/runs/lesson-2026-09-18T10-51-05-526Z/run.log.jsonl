@@ -1,0 +1,6 @@
+{"t":"2026-09-18T10:56:21.140Z","event":"run.start","lesson_id":"difference-of-squares-factoring","counter":9,"seed":1105089549}
+{"t":"2026-09-18T10:56:21.566Z","event":"crosscheck","agreed":true,"generator":"2125","verifier":"2125"}
+{"t":"2026-09-18T10:56:21.567Z","event":"timeline","total_frames":948,"total_seconds":31.6,"steps":["s1:1.762s","s2:6.245s","s3:8.669s","s4:6.773s"],"outro":"2.8s"}
+{"t":"2026-09-18T10:56:21.569Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-18T10:59:07.015Z","event":"capture.done","frames":948}
+{"t":"2026-09-18T11:00:18.832Z","event":"done","video":"output/posts/lessons/difference-of-squares-factoring.mp4","seconds":31.6}

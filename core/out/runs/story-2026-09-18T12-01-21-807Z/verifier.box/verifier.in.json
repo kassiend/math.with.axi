@@ -1,0 +1,11 @@
+{
+  "claim_id": "ramanujan-1729-taxicab",
+  "title": "Rather a dull number",
+  "formula_latex": "1^3 + 12^3 = 9^3 + 10^3 = 1729",
+  "formula_steps": [
+    "1^3 + 12^3 = 1 + 1728",
+    "9^3 + 10^3 = 729 + 1000",
+    "1^3 + 12^3 = 9^3 + 10^3 = 1729"
+  ],
+  "mechanism": "1729 is the smallest positive integer that can be written as a sum of two positive cubes in two different ways. Compute each pair the long way: 1³ = 1 and 12³ = 1728, which sum to 1729; 9³ = 729 and 10³ = 1000, which also sum to 1729. Checking every smaller n by brute force (for each n, for every i ≥ 1 with 2i³ ≤ n, ask whether n − i³ is itself a cube) turns up no other case with two distinct unordered pairs — so 1729 really is the first. Ramanujan spotted this on the spot; the check_script re-runs the search to prove it."
+}

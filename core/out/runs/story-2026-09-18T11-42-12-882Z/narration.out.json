@@ -1,0 +1,34 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[curious] Your phone's blue dot would drift ten kilometres a day. Every day.",
+      "audio": "audio/hook.mp3",
+      "seconds": 5.499
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] GPS finds you by timing signals from atomic clocks orbiting twenty thousand kilometres overhead. Distance equals the speed of light times the travel time. But those clocks up there don't tick at your rate.",
+      "audio": "audio/turn.mp3",
+      "seconds": 13.026
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[thoughtful] Special relativity says a moving clock runs slow, so each satellite loses about seven microseconds a day. General relativity says a clock in weaker gravity runs fast, so the satellites gain forty-five. Add them, gravity wins by thirty-eight microseconds. Multiply by the speed of light, and thirty-eight microseconds becomes eleven point four kilometres of position.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 25.429
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] So every GPS clock is built to tick slow on the ground, so it lands on your second in orbit. Your morning commute works because we bent engineering for Einstein.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 11.096
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Thank Einstein for the dot.",
+    "audio": "audio/outro.mp3",
+    "seconds": 1.868
+  },
+  "total_seconds": 56.918
+}

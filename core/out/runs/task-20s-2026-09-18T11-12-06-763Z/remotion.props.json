@@ -1,0 +1,44 @@
+{
+  "runId": "task-larger-fraction-3-7-or-4-9",
+  "capture": {
+    "publicPath": "captures/task-larger-fraction-3-7-or-4-9",
+    "frames": 653,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "hurry": {
+    "src": "mascot/hurry-hurry.webm",
+    "enter": 381,
+    "exit": 430,
+    "clipSeconds": 4.033333333333333
+  },
+  "audio": {
+    "start": "audio/task-larger-fraction-3-7-or-4-9/start.mp3",
+    "tick": "audio/task-larger-fraction-3-7-or-4-9/tick.wav",
+    "tickFrames": [
+      8,
+      38,
+      68,
+      98,
+      128,
+      158,
+      188,
+      218,
+      248,
+      278,
+      308,
+      338,
+      368,
+      398,
+      428,
+      458,
+      488,
+      518,
+      548,
+      578
+    ],
+    "mid": "audio/task-larger-fraction-3-7-or-4-9/mid.mp3",
+    "midFrame": 381
+  }
+}

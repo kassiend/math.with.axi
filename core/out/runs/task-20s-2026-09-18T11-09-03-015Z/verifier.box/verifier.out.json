@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "task_id": "telescoping-product-through-6",
+      "script": "verifier.checks/telescoping-product-through-6.py",
+      "computed": "1/6",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Statement (1-1/2)(1-1/3)(1-1/4)(1-1/5)(1-1/6) unambiguously determines a single rational value. Independent SymPy recomputation yields 1/6, matching the stated answer. Numerator 1 and denominator 6 are coprime with positive denominator, so the form is exact and in simplest form. Sign is positive; no branch ambiguity applies (no roots or logarithms)."
+}

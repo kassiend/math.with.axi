@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "kelly-criterion-log-wealth",
+      "script": "verifier.checks/kelly-criterion-log-wealth.py",
+      "computed": "G'(f)=b*p/(b*f + 1) + q/(f - 1); solve G'=0 -> f=[(b*p + p - 1)/b]; claimed f*=(b*p + p - 1)/b; G''(f*) sample=-16/9",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

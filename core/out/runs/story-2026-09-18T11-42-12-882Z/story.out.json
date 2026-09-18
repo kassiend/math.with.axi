@@ -1,0 +1,122 @@
+{
+  "story_id": "gps-38-microseconds",
+  "area": "math-in-real-life",
+  "subject_slug": "gps-relativistic-correction",
+  "angle_slug": "38-microseconds-per-day",
+  "title": "Einstein in your pocket",
+
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[curious] Your phone's blue dot would drift ten kilometres a day. Every day.",
+      "display": "10 km off. Every day.",
+      "visual": "image",
+      "image_id": "i1"
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] GPS finds you by timing signals from atomic clocks orbiting twenty thousand kilometres overhead. Distance equals the speed of light times the travel time. But those clocks up there don't tick at your rate.",
+      "display": "d = c · t",
+      "visual": "image",
+      "image_id": "i2"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[measured] Special relativity says a moving clock runs slow, so each satellite loses about seven microseconds a day. General relativity says a clock in weaker gravity runs fast, so the satellites gain forty-five. Add them, gravity wins by thirty-eight microseconds. Multiply by the speed of light, and thirty-eight microseconds becomes eleven point four kilometres of position.",
+      "display": "Gravity wins by 38 μs.",
+      "visual": "formula"
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] So every GPS clock is built to tick slow on the ground, so it lands on your second in orbit. Your morning commute works because we bent engineering for Einstein.",
+      "display": "Set slow to land right.",
+      "visual": "image",
+      "image_id": "i1"
+    }
+  ],
+
+  "formula_latex": "\\Delta x \\;=\\; c\\,\\Delta t \\;\\approx\\; 11.4~\\text{km/day}",
+  "formula_steps": [
+    "\\Delta t_{\\text{SR}} \\;\\approx\\; -7~\\mu\\text{s/day}",
+    "\\Delta t_{\\text{GR}} \\;\\approx\\; +45~\\mu\\text{s/day}",
+    "\\Delta t \\;=\\; \\Delta t_{\\text{GR}} + \\Delta t_{\\text{SR}} \\;\\approx\\; +38~\\mu\\text{s/day}",
+    "\\Delta x \\;=\\; c\\,\\Delta t \\;\\approx\\; 11.4~\\text{km/day}"
+  ],
+  "mechanism": "A GPS satellite is both moving (~3.9 km/s) and higher up in Earth's gravitational potential than you are. Special relativity slows its onboard atomic clock by roughly 7 microseconds per day; general relativity, dominant at that altitude, speeds it up by about 45 microseconds per day. The net effect is a satellite clock that runs about 38 microseconds fast every day. Because GPS turns time into distance by multiplying the signal's travel time by the speed of light, a timing error of 38 microseconds translates into c times 38 microseconds ≈ 11.4 kilometres of position error per day. The line-by-line derivation lands in the same order the narration reaches it: SR, then GR, then the sum, then the multiplication by c.",
+  "ask": "Thank Einstein for the dot.",
+  "check_script": "generator.checks/gps-38-microseconds.py",
+
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "GPS satellites orbit at an altitude of approximately 20,200 km above Earth's surface.",
+      "url": "https://en.wikipedia.org/wiki/Global_Positioning_System",
+      "quote": "Orbiting at an altitude of approximately 20,200 km (12,600 mi)"
+    },
+    {
+      "claim_id": "f2",
+      "claim": "A GPS receiver computes its distance to a satellite using distance = rate × time, where the rate is the speed of light.",
+      "url": "https://www.gps.gov/trilateration",
+      "quote": "the rate is how fast the radio signal travels, which is equal to the speed of light (299,792,458 meters per second)."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "GPS position is fixed by trilateration on distances from multiple satellites.",
+      "url": "https://www.gps.gov/trilateration",
+      "quote": "Once we have the distance from at least 3 satellites, we can determine a 3 dimensional position on the surface of the earth."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "Special relativity predicts the satellites' onboard atomic clocks fall behind ground clocks by about 7 microseconds per day due to their orbital motion.",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "quote": "Special Relativity predicts that the on-board atomic clocks on the satellites should fall behind clocks on the ground by about 7 microseconds per day"
+    },
+    {
+      "claim_id": "f5",
+      "claim": "General relativity predicts the satellites' clocks get ahead of ground clocks by about 45 microseconds per day due to weaker gravitational potential at altitude.",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "quote": "the clocks in each GPS satellite should get ahead of ground-based clocks by 45 microseconds per day"
+    },
+    {
+      "claim_id": "f6",
+      "claim": "The combined relativistic effect leaves each satellite clock ticking about 38 microseconds per day faster than an identical clock on the ground.",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "quote": "the clocks on-board each satellite should tick faster than identical clocks on the ground by about 38 microseconds per day (45-7=38)"
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Left uncorrected, the relativistic timing offset would drift GPS position by roughly 11.4 kilometres per day.",
+      "url": "https://en.wikipedia.org/wiki/Error_analysis_for_the_Global_Positioning_System",
+      "quote": "Without correction, errors of roughly 11.4 km/day would accumulate in the position."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "Engineers pre-detuned the satellite clocks so that once in orbit they would tick at the correct ground rate.",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "quote": "the onboard clocks were designed to \"tick\" at a slower frequency than ground reference clocks, so that once they were in their proper orbit stations their clocks would appear to tick at about the correct rate as compared to the reference atomic clocks at the GPS ground stations."
+    }
+  ],
+
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i1.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "Overhead flat-vector illustration, 4:3 frame, centred. A large modern smartphone lying on a wooden café table showing a top-down map view. On the map, a bright blue location pin sits over a street; a faded ghost-pin ten kilometres away sits over a river, a dashed grey line connecting them, labelled '≈10 km' in small type. Warm morning light, minimalist muted palette, editorial infographic style, no text on the phone body, no watermark, generous margins around the phone."
+    },
+    {
+      "image_id": "i2",
+      "role": "scene",
+      "source": "commons",
+      "file": "images/i2.jpg",
+      "attribution": "NASA — File:GPS Satellite NASA art-iif.jpg, Public domain, via Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/wiki/File:GPS_Satellite_NASA_art-iif.jpg",
+      "prompt": null
+    }
+  ],
+
+  "nulls": []
+}
