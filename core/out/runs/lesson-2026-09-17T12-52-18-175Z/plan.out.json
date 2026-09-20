@@ -1,0 +1,60 @@
+{
+  "lesson_id": "divisibility-by-4-last-two-digits",
+  "counter": 8,
+  "area": "divisibility-rules",
+  "concept_slug": "divisibility-by-4-last-two-digits",
+  "tags": ["divisibility", "mental-arithmetic", "digit-rules"],
+  "method_name": "Divisible by 4?",
+  "applicability": "any non-negative integer — the rule is universal because 100 is a multiple of 4, so n mod 4 depends only on the last two digits of n",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Divisible by 4?",
+      "working": "552 ÷ 4 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Keep the last two digits",
+      "working": "552 → 52"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Check 4 divides that",
+      "working": "52 = 4 × 13"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "So 4 divides 552",
+      "working": "552 = 4 × 138"
+    }
+  ],
+  "worked_example": {
+    "operands": [552],
+    "divisor": 4,
+    "last_two_digits": 52,
+    "quotient": 138,
+    "result": "138"
+  },
+  "operand_draw": {
+    "seed": 795660225,
+    "spec": {
+      "min": 100,
+      "max": 999,
+      "filter": { "min_digits": 3, "max_digits": 3 }
+    },
+    "n": 1,
+    "draws": [552],
+    "rationale": "Draw one three-digit integer. The presentation filter only pins the rendered width (three digits fits the working line at 60 px without wrapping); it encodes no property of divisibility, so the trick is tested on whatever the seed produces."
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "The last-two-digits rule for 4 has no exception on the integers. Because 100 = 25 × 4, every n satisfies n ≡ (n mod 100) (mod 4), so 4 divides n iff 4 divides the two-digit block. The generator check confirms this equivalence exhaustively for n in [0, 10000], and the Verifier is expected to widen or re-derive it."
+    }
+  ]
+}

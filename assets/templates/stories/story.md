@@ -63,7 +63,12 @@ same isolation boundary as everywhere else, `core/agents/ISOLATION.md`.
   ],
 
   "formula_latex": "e^{i\\pi} + 1 = 0",  // exactly one. Mandatory — see §6
+  "formula_steps": ["string"],           // the derivation, 2-4 LaTeX lines ending in
+                                         // formula_latex, built line by line in time with the
+                                         // mechanism narration. See §6. null + reason if there
+                                         // is genuinely no derivation to show
   "mechanism":     "string",             // why it is true / why it works, plain language
+  "ask":           "Save this one.",     // the closing line, <= 6 words. One action.
   "check_script":  "string | null",      // relative to the run dir; null with a reason if the
                                          // claim is not the kind SymPy can settle
 
@@ -163,9 +168,25 @@ speak, finishes early, and stops listening.
 **One formula, shown and explained.** A story without one is trivia, and this channel does not
 make trivia. `formula_latex` is what appears; `mechanism` is why it is true or why it works.
 
+**Show it being built.** `formula_steps` is the derivation as 2–4 LaTeX lines, the last of which
+is `formula_latex`. The page lands them one at a time across the mechanism beat, in the order
+the narration reaches them, earlier lines dimming as the next arrives. The first render put the
+finished `V = πh³/6` alone on a white card for twenty-one seconds while the voice talked about
+annuli and cancelling R² — none of which was ever on screen. The narration and the lines must
+agree in order: what is said third lands third.
+
+Every line is a claim. When the check script can confirm a step (an equality, a simplification,
+an integral), it does; a derivation with a wrong middle line is a wrong story. When there is no
+derivation to show — a definition, a historical statement — set `formula_steps` to `null` with a
+reason in `nulls[]` rather than padding it with restatements.
+
 When the formula asserts something SymPy can settle, write a check exactly as the task and lesson
 pipelines do — the orchestrator runs it against an independent one from `axi-verifier`, and any
-disagreement fails the story. The text is not edited to match the code.
+disagreement fails the story. The text is not edited to match the code. The script's **last line
+is the JSON report** `{"claim_id": "<story_id>", "computed": "...", "agrees": true}` printed with
+`json.dumps`; the orchestrator reads that line and nothing else. For a story both scripts must
+report `agrees: true`; their `computed` strings describe what was checked and are not compared
+to each other (a lesson's numeric result is; a sentence written twice blind never matches).
 
 **The check's output contract, which bites hardest on story claims.** The orchestrator reads only
 the **last line** of stdout and requires it to be exactly one JSON object:
@@ -296,19 +317,28 @@ Identical to the other two sections — the same component, the same numbers:
 
 | element | band |
 |---|---|
-| mascot | x 328–397 (w 69), y 157–264 (h 107) — centred on x ≈ 360 |
-| title | y 367–407, centred, Inter ExtraBold ≈ 52 px, max 3 lines |
-| image / visual | x 185–535 (w 350), y 520–814 (h 294), rounded corners, centred |
+| mascot | at rest x 310, y 150, w 100, h 155 — larger than the mockup's 69 × 107, at which he was a detail rather than a presence |
+| title | top y 330, centred, Inter ExtraBold 54 px (fit to 34), max 3 lines |
+| image / visual | x 78, y 500, w 564, h 470, radius 32 — nearly the full card width |
+| display line | top y 1002, Inter ExtraBold 44 px (fit to 30), `#1E76C3`, max 2 lines, built token by token as the beat opens |
+| ask | centred on y 1136, Inter SemiBold 28 px (fit to 22), `#5B6470`, one line; appears 24 frames into the payoff beat and stays through the hold. When the narration carries an `outro` clip it plays after the payoff beat, over the ask, and the hold follows it |
 
 The formula, drawn shapes and plots occupy the same band as the image — one visual at a time,
-swapped per beat. A `plot` gets the band at 564 x 470 and builds itself over its first 1.5 s.
+swapped per beat with an 8-frame cross-fade (outgoing drifts up and out while the incoming rises;
+there is never an empty slot). A sourced image drifts in 8 % over its beat; a `formula_steps` stack
+lands one line at a time, the last line by 80 % of the beat, at 38 px (46 px for a single
+line); the last line lands in `#F26B1D` and settles to blue over 36 frames. A `plot` gets the band
+at 564 x 470 and builds itself over its first 1.5 s. A pop (`assets/audio/sfx/pop.wav`) marks each
+beat boundary and the ask. The card is opaque from frame 0 and the blurred background drifts 6 %
+over the post.
 
 A long beat — the mechanism runs past 30 s — should not hold one still picture. Give it `steps`:
 an ordered list of visuals, each weighted by the WORD COUNT of the narration it illustrates, so the
 picture advances with the voice. Steps may be formulas, plots, shapes, or `anim` (computed
-animations: `gcd-subtraction`, `least-squares`, `fourier-build`, `nash-matrix`, `nash-mixing`). See
-the math-visual skill.
-Auto-fit as elsewhere; if it does not fit at the floor, the beat is rejected rather than
+animations: `gcd-subtraction`, `least-squares`, `fourier-build`, `nash-matrix`, `nash-mixing`).
+Steps dissolve into each other at their own seams; the beat's cross-fade handles its head and
+tail. See the math-visual skill.
+Auto-fit as elsewhere; if a line does not fit at the floor, the beat is rejected rather than
 overflowing.
 
 ### 9.3 The mascot — enter, read, leave

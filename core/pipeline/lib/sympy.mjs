@@ -27,11 +27,10 @@ export function pythonAvailable() {
 }
 
 /**
- * Execute one check script. The script prints exactly one JSON line:
+ * Execute one check script. The script prints one JSON report line:
  *   {"claim_id": "...", "computed": "...", "agrees": true|false}
- *
- * Anything else — a crash, a timeout, extra output, unparseable JSON — is an error, not a pass.
- * A check that cannot report is a check that did not happen.
+ * Other lines may surround it. A crash, a timeout, or no report line is an error, not a pass —
+ * a check that cannot report is a check that did not happen.
  */
 export async function runCheck(scriptPath, { timeout = DEFAULT_TIMEOUT_MS, cwd } = {}) {
   if (!pythonAvailable()) {
@@ -53,16 +52,22 @@ export async function runCheck(scriptPath, { timeout = DEFAULT_TIMEOUT_MS, cwd }
       env: { PATH: '/usr/bin:/bin', PYTHONDONTWRITEBYTECODE: '1', PYTHONHASHSEED: '0' },
     });
     const lines = stdout.trim().split('\n').filter(Boolean);
-    const last = lines.at(-1);
-    if (!last) return { ok: false, error: 'check produced no output' };
-    let parsed;
-    try {
-      parsed = JSON.parse(last);
-    } catch {
-      return { ok: false, error: `check output is not JSON: ${last.slice(0, 200)}` };
+    if (!lines.length) return { ok: false, error: 'check produced no output' };
+    // The report is the LAST line that is a JSON object with a boolean "agrees". Scripts print
+    // progress lines before it and, often, a "done" line after it; neither is the report, and
+    // failing a correct check over a trailing "All checks passed." is a format gate, not a
+    // mathematics gate.
+    let parsed = null;
+    for (let i = lines.length - 1; i >= 0 && !parsed; i--) {
+      const line = lines[i].trim();
+      if (!line.startsWith('{')) continue;
+      try {
+        const obj = JSON.parse(line);
+        if (obj && typeof obj.agrees === 'boolean') parsed = obj;
+      } catch { /* not the report line */ }
     }
-    if (typeof parsed.agrees !== 'boolean') {
-      return { ok: false, error: 'check output missing boolean "agrees"' };
+    if (!parsed) {
+      return { ok: false, error: `check printed no JSON report line ({"claim_id","computed","agrees"}); last line: ${lines.at(-1).slice(0, 160)}` };
     }
     return { ok: true, ...parsed, stdout };
   } catch (err) {
@@ -100,9 +105,14 @@ export async function crossCheck(claimId, generatorScript, verifierScript, opts 
   if (gen.ok && !gen.agrees) failures.push({ side: 'generator', error: 'script disagrees with text' });
   if (ver.ok && !ver.agrees) failures.push({ side: 'verifier', error: 'script disagrees with text' });
 
+  // A lesson or task claims a VALUE, and two blind scripts must produce the same one. A story
+  // claims that a formula HOLDS: both scripts answer a yes/no, and their `computed` is a
+  // description of what they checked, which two blind agents will never phrase identically.
+  // `compareComputed: false` keeps the agreement requirement and drops the string comparison.
   const bothRan = gen.ok && ver.ok;
+  const compareComputed = opts.compareComputed ?? true;
   const sameValue = bothRan && String(gen.computed) === String(ver.computed);
-  if (bothRan && !sameValue) {
+  if (bothRan && compareComputed && !sameValue) {
     failures.push({
       side: 'cross', error: 'the two independent scripts computed different values',
       generator_computed: String(gen.computed), verifier_computed: String(ver.computed),

@@ -79,24 +79,6 @@ export const TITLE = {
  */
 export const VISUAL = { x: 78, y: 500, w: 564, h: 470, radius: 32 };
 
-/**
- * The formula slot, as a measured fit rather than a fixed size.
- *
- * `.visual` clips what overflows it, so a formula wider than the slot does not spill — it is
- * silently amputated at both ends, and a half-formula on screen still looks like a formula. The
- * base size is what a short identity gets; anything longer is scaled down until it fits.
- *
- * There is no floor and no rejection here, unlike the text fits. A formula is one object and
- * cannot be broken across lines or shortened by the writer without becoming a different formula,
- * so the only honest response to a long one is to set it smaller.
- */
-export const FORMULA = {
-  fontSize: 46,
-  /** Usable box inside the slot: the full width and height less a 24 px margin each side. */
-  maxWidth: 564 - 48,
-  maxHeight: 470 - 48,
-};
-
 /** The per-beat line, directly under the visual, in the accent colour so the eye lands on it. */
 export const DISPLAY = {
   top: 1002,
@@ -109,5 +91,45 @@ export const DISPLAY = {
   maxWidth: CONTENT_WIDTH,
   colour: '#1E76C3',
 };
+
+/** The closing ask: one small line under the payoff, on the payoff beat and the hold. */
+export const ASK = {
+  centreY: 1136,
+  fontSize: 28,
+  minFontSize: 22,
+  maxLines: 1,
+  /** One line, centred 34 px above the card's bottom edge — so at most that tall. */
+  maxHeight: 34,
+  lineHeightRatio: 1.2,
+  maxWidth: CONTENT_WIDTH,
+  colour: '#5B6470',
+  fallback: 'Save this one.',
+};
+
+/**
+ * The mechanism, built line by line. When the writer supplies `formula_steps`, each line pops in
+ * across the first ~80 % of the beat in time with the narration, earlier lines dimming as the
+ * next arrives; the last line is the formula itself and stays bright.
+ */
+export const FORMULA = {
+  fontSize: 46,
+  /** Font size when several lines share the slot. */
+  stackedFontSize: 38,
+  /** Auto-fit floor for the widest line; below this the beat is rejected. */
+  minFontSize: 22,
+  /** Horizontal padding inside the slot the lines must respect. */
+  padding: 18,
+  lineGap: 22,
+  dim: 0.45,
+  /** Fraction of the beat by which the last line has landed. */
+  landedBy: 0.8,
+  colour: '#1E76C3',
+  /** The result lands in this and settles to `colour`. */
+  emphasis: '#F26B1D',
+  settleFrames: 36,
+};
+
+/** Slow push-in on a sourced image over its beat. */
+export const IMAGE_DRIFT = 0.08;
 
 export const FIT_STEP = 2;

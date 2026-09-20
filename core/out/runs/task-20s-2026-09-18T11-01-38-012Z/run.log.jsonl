@@ -1,0 +1,5 @@
+{"t":"2026-09-18T11:04:45.880Z","event":"run.start","task_id":"next-term-2-3-5-9-17","duration_s":20,"seed":77774719}
+{"t":"2026-09-18T11:04:46.512Z","event":"crosscheck","agreed":true,"generator":"33","verifier":"33"}
+{"t":"2026-09-18T11:04:46.661Z","event":"picks","background":"bg2.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":2.19425,"total_frames":653,"hurry_enter":389}
+{"t":"2026-09-18T11:07:05.898Z","event":"capture.done","frames":653,"font_size":96}
+{"t":"2026-09-18T11:07:53.096Z","event":"done","video":"output/posts/tasks/20s/next-term-2-3-5-9-17.mp4"}

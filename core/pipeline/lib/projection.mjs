@@ -33,22 +33,19 @@ export const LESSON_DRAW_VISIBLE = Object.freeze([
 ]);
 
 /**
- * What the story Validator sees.
- *
- * Narrower than it looks. `check_script` is withheld by FORBIDDEN_KEY_PATTERNS anyway; `images`
- * and `nulls` are withheld deliberately — the Validator's job is to open the URLs in `facts[]`
- * and confirm the quote is there and supports the claim, and knowing which claims the writer
- * already flagged as shaky is precisely the hint that turns checking into agreeing.
- *
- * `beats` crosses stripped down to what is asserted — beat, narration, display. `visual` and
- * `image_id` are production decisions, not claims, and a validator reading them starts reviewing
- * the edit instead of the facts.
+ * What the story Validator sees: the script and its claimed sources. Not the writer's search
+ * history, discarded angles, image prompts or check script — it opens the URLs blind. `images`
+ * and `nulls` are withheld deliberately: knowing which claims the writer already flagged as shaky
+ * is precisely the hint that turns checking into agreeing.
  */
-export const STORY_VISIBLE = Object.freeze([
-  'story_id', 'area', 'subject_slug', 'angle_slug', 'title',
-  'beats', 'formula_latex', 'mechanism', 'facts',
+export const STORY_VALIDATOR_VISIBLE = Object.freeze([
+  'story_id', 'area', 'subject_slug', 'angle_slug', 'title', 'beats',
+  'formula_latex', 'formula_steps', 'mechanism', 'facts',
 ]);
 export const STORY_BEAT_VISIBLE = Object.freeze(['beat', 'narration', 'display']);
+
+/** What the Verifier sees of a story: the formula and the claim about why it holds. */
+export const STORY_VERIFIER_VISIBLE = Object.freeze(['title', 'formula_latex', 'formula_steps', 'mechanism']);
 
 /** Key names that must never reach the Verifier, whatever list they hide behind. */
 export const FORBIDDEN_KEY_PATTERNS = Object.freeze([
@@ -97,6 +94,16 @@ export function projectTask(payload) {
   return assertClean(project(payload, TASK_VISIBLE), 'task');
 }
 
+export function projectStoryForValidator(story) {
+  const out = project(story, STORY_VALIDATOR_VISIBLE);
+  out.beats = (story.beats ?? []).map((b) => project(b, STORY_BEAT_VISIBLE));
+  return assertClean(out, 'story/validator');
+}
+
+export function projectStoryForVerifier(story) {
+  return assertClean({ claim_id: story.story_id, ...project(story, STORY_VERIFIER_VISIBLE) }, 'story/verifier');
+}
+
 export function projectLesson(plan) {
   const out = project(plan, LESSON_VISIBLE);
   // `sampling` is accepted as an alias because planners have written both names — the field was
@@ -110,27 +117,6 @@ export function projectLesson(plan) {
   return assertClean(out, 'lesson');
 }
 
-export function projectStory(story) {
-  const out = project(story, STORY_VISIBLE);
-  if (Array.isArray(out.beats)) {
-    out.beats = out.beats.map((b) => project(b, STORY_BEAT_VISIBLE));
-  }
-  return assertClean(out, 'story');
-}
-
-/**
- * Write the sandbox the story Validator runs in.
- *
- * Same shape as the Verifier's box and for the same reason: the boundary is a directory the agent
- * is pointed at, not an instruction it is asked to honour.
- */
-export function writeValidatorBox(runDir, projected) {
-  const box = path.join(runDir, 'validator.box');
-  fs.mkdirSync(box, { recursive: true });
-  fs.writeFileSync(path.join(box, 'validator.in.json'), JSON.stringify(projected, null, 2));
-  return box;
-}
-
 /**
  * Write the sandbox the Verifier runs in: a directory holding only what it may read. Everything
  * else in the run directory is outside its working tree.
@@ -139,6 +125,14 @@ export function writeVerifierBox(runDir, projected) {
   const box = path.join(runDir, 'verifier.box');
   fs.mkdirSync(path.join(box, 'verifier.checks'), { recursive: true });
   fs.writeFileSync(path.join(box, 'verifier.in.json'), JSON.stringify(projected, null, 2));
+  return box;
+}
+
+/** The Validator's sandbox: one file, the projected script and sources. */
+export function writeValidatorBox(runDir, projected) {
+  const box = path.join(runDir, 'validator.box');
+  fs.mkdirSync(box, { recursive: true });
+  fs.writeFileSync(path.join(box, 'validator.in.json'), JSON.stringify(projected, null, 2));
   return box;
 }
 

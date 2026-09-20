@@ -1,0 +1,7 @@
+{"t":"2026-09-18T12:15:12.751Z","event":"run.start","story_id":"ramanujan-1729-taxicab","area":"biography","subject":"srinivasa-ramanujan"}
+{"t":"2026-09-18T12:15:12.752Z","event":"validation","checked":10,"findings":0}
+{"t":"2026-09-18T12:15:13.312Z","event":"crosscheck","agreed":true,"generator":"1^3+12^3=1729; 9^3+10^3=1729; smallest_n_with_two_cube_reps=1729","verifier":"{\"1^3+12^3\": 1729, \"9^3+10^3\": 1729, \"smallest_taxicab2\": 1729, \"reps_of_1729\": [[1, 12], [9, 10]]}"}
+{"t":"2026-09-18T12:15:13.314Z","event":"timeline","total_frames":1844,"total_seconds":61.467,"beats":["hook:6.074s","turn:14.627s","mechanism:27.84s","payoff:9.752s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1723},"resume":{"start":1723,"end":1844}}}
+{"t":"2026-09-18T12:15:13.315Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-09-18T12:22:10.066Z","event":"capture.done","frames":1844}
+{"t":"2026-09-18T12:24:35.873Z","event":"done","video":"output/posts/stories/ramanujan-1729-taxicab.mp4","seconds":61.467}

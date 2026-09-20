@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/Global_Positioning_System",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Page reads: 'Orbiting at an altitude of approximately 20,200 km (12,600 mi); orbital radius of approximately 26,600 km (16,500 mi)'. The claimed quote is present verbatim."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://www.gps.gov/trilateration",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Page reads: 'In GPS positioning the rate is how fast the radio signal travels, which is equal to the speed of light (299,792,458 meters per second).' The claimed quote is a substring; supports d = c*t."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://www.gps.gov/trilateration",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim match; supports the trilateration claim."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim match for the -7 microseconds/day SR figure."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim match for the +45 microseconds/day GR figure."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim match, including the explicit '(45-7=38)' arithmetic."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/Error_analysis_for_the_Global_Positioning_System",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim match in the 'Combined kinetic and gravitational time dilations' section; supports the 11.4 km/day drift figure used in the formula."
+    },
+    {
+      "claim_id": "f8",
+      "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Match for the pre-detuning of onboard clocks so they tick at the ground reference rate once in orbit; supports the payoff."
+    }
+  ],
+  "findings": [],
+  "unverifiable": []
+}

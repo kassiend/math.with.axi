@@ -1,0 +1,98 @@
+{
+  "story_id": "ramanujan-1729-taxicab",
+  "area": "biography",
+  "subject_slug": "srinivasa-ramanujan",
+  "angle_slug": "hardy-1729-taxicab",
+  "title": "Rather a dull number",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[intrigued] A cab number a mathematician called 'rather dull' turned out to be hiding a secret nobody had spotted.",
+      "display": "1729."
+    },
+    {
+      "beat": "turn",
+      "narration": "In 1919, Srinivasa Ramanujan is bedridden in a hospital at Putney. [gently] His friend G. H. Hardy comes to visit, and mentions the number of his cab. 1729. [dry] Rather a dull one, Hardy says.",
+      "display": "Ramanujan. 1919."
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[quiet] Ramanujan disagrees. It is a very interesting number, he says. It is the smallest positive integer you can write as a sum of two cubes in two different ways. One cubed plus twelve cubed. That's one, plus seventeen twenty-eight. Nine cubed plus ten cubed. Seven hundred twenty-nine, plus one thousand. [emphatic] Both land on seventeen twenty-nine. And nothing smaller does.",
+      "display": "1³ + 12³ = 9³ + 10³"
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] A century on, mathematicians call the whole family taxicab numbers. 1729 is number two on the list. [reflective] A dull cab, made immortal.",
+      "display": "Taxicab numbers."
+    }
+  ],
+  "formula_latex": "1^3 + 12^3 = 9^3 + 10^3 = 1729",
+  "formula_steps": [
+    "1^3 + 12^3 = 1 + 1728",
+    "9^3 + 10^3 = 729 + 1000",
+    "1^3 + 12^3 = 9^3 + 10^3 = 1729"
+  ],
+  "mechanism": "1729 is the smallest positive integer that can be written as a sum of two positive cubes in two different ways. Compute each pair the long way: 1³ = 1 and 12³ = 1728, which sum to 1729; 9³ = 729 and 10³ = 1000, which also sum to 1729. Checking every smaller n by brute force (for each n, for every i ≥ 1 with 2i³ ≤ n, ask whether n − i³ is itself a cube) turns up no other case with two distinct unordered pairs — so 1729 really is the first. Ramanujan spotted this on the spot; the check_script re-runs the search to prove it.",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "Srinivasa Ramanujan was born on 22 December 1887 in Erode, in modern Tamil Nadu.",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "quote": "was born in British-ruled India on 22 December 1887 into a Tamil Brahmin Iyengar family in Erode, in modern Tamil Nadu"
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Ramanujan died in 1920 at the age of 32.",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "quote": "he died in 1920 at the age of 32"
+    },
+    {
+      "claim_id": "f3",
+      "claim": "Ramanujan developed his early mathematical research in isolation.",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "quote": "Ramanujan initially developed his own mathematical research in isolation."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "In 1919 Ramanujan's ill health forced his return to India from England.",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "quote": "In 1919, ill health—now believed to have been hepatic amoebiasis (a complication from episodes of dysentery many years previously)—compelled Ramanujan's return to India, where he died in 1920 at the age of 32."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "Hardy visited Ramanujan at a hospital, and the visit gave rise to the number 1729.",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "quote": "The number 1729 is known as the Hardy–Ramanujan number after a famous visit by Hardy to see Ramanujan at a hospital."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "Hardy recorded that he visited Ramanujan when he was ill at Putney.",
+      "url": "https://en.wikipedia.org/wiki/1729_(number)",
+      "quote": "I remember once going to see him when he was ill at Putney."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Hardy remarked that the taxi's number 1729 seemed to him rather a dull one.",
+      "url": "https://en.wikipedia.org/wiki/1729_(number)",
+      "quote": "the number seemed to me rather a dull one, and that I hoped it was not an unfavourable omen."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "Ramanujan replied that 1729 is the smallest number expressible as the sum of two cubes in two different ways.",
+      "url": "https://en.wikipedia.org/wiki/1729_(number)",
+      "quote": "it is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways"
+    },
+    {
+      "claim_id": "f9",
+      "claim": "The n-th taxicab number Ta(n) is defined as the smallest integer expressible as a sum of two positive integer cubes in n distinct ways.",
+      "url": "https://en.wikipedia.org/wiki/Taxicab_number",
+      "quote": "the smallest integer that can be expressed as a sum of two positive integer cubes in n distinct ways."
+    },
+    {
+      "claim_id": "f10",
+      "claim": "The name 'taxicab number' derives from a conversation ca. 1919 between G. H. Hardy and Srinivasa Ramanujan.",
+      "url": "https://en.wikipedia.org/wiki/Taxicab_number",
+      "quote": "The name is derived from a conversation ca. 1919 involving mathematicians G. H. Hardy and Srinivasa Ramanujan."
+    }
+  ]
+}

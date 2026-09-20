@@ -1,0 +1,34 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[intrigued] One equation from a paper about phone-line noise ended up telling Wall Street how much money to bet on every trade.",
+      "audio": "audio/hook.mp3",
+      "seconds": 7.256
+    },
+    {
+      "beat": "turn",
+      "narration": "[curious] In nineteen fifty-six, John Kelly, a physicist at Bell Labs, was working on a puzzle in information theory. [thoughtful] If a gambler's tip is only sometimes right, what fraction of the bankroll should they wager?",
+      "audio": "audio/turn.mp3",
+      "seconds": 13.574
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[thoughtful] Kelly looked at the wealth as it compounded. Bet a fraction f of the bankroll, win b to one with probability p, lose otherwise. The long-run growth rate per bet is p times log of one plus b f, plus q times log of one minus f. [confident] Take its derivative, set it equal to zero, and one clean answer falls out. f equals b p minus q, divided by b. Bet more than that, you eventually go broke. Bet less, you leave money on the table.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 33.025
+    },
+    {
+      "beat": "payoff",
+      "narration": "[excited] Ed Thorp learned it from Kelly's paper, took it to Vegas, and beat blackjack by card counting. [confident] Then he brought the same formula to Wall Street, and compounded his money at twenty percent a year for twenty-eight years.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 12.845
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Bet like Kelly.",
+    "audio": "audio/outro.mp3",
+    "seconds": 0.93
+  },
+  "total_seconds": 67.63
+}

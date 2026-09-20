@@ -1,0 +1,86 @@
+{
+  "story_id": "kelly-criterion-log-wealth",
+  "area": "financial-mathematics",
+  "subject_slug": "john-kelly-jr",
+  "angle_slug": "kelly-criterion-log-wealth-optimization",
+  "title": "How much to bet",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "One equation from a paper about phone-line noise ended up telling Wall Street how much money to bet on every trade.",
+      "display": "Phone noise → Wall Street."
+    },
+    {
+      "beat": "turn",
+      "narration": "In 1956, John Kelly, a physicist at Bell Labs, was working on a puzzle in information theory. If a gambler's tip is only sometimes right, what fraction of the bankroll should they wager?",
+      "display": "Bell Labs, 1956."
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Kelly looked at the wealth as it compounded. Bet a fraction f of the bankroll, win b to one with probability p, lose otherwise. The long-run growth rate per bet is p times log of one plus b f, plus q times log of one minus f. Take its derivative, set it equal to zero, and one clean answer falls out. f equals b p minus q, divided by b. Bet more than that, you eventually go broke. Bet less, you leave money on the table.",
+      "display": "f* = (bp − q) / b"
+    },
+    {
+      "beat": "payoff",
+      "narration": "Ed Thorp learned it from Kelly's paper, took it to Vegas, and beat blackjack by card counting. Then he brought the same formula to Wall Street, and compounded his money at twenty percent a year for twenty-eight years.",
+      "display": "20% a year, 28 years."
+    }
+  ],
+  "formula_latex": "f^{*} = \\dfrac{bp - q}{b}",
+  "formula_steps": [
+    "G(f) = p\\,\\log(1 + bf) + q\\,\\log(1 - f)",
+    "G'(f) = \\dfrac{pb}{1 + bf} - \\dfrac{q}{1 - f} = 0",
+    "f^{*} = \\dfrac{bp - q}{b}"
+  ],
+  "mechanism": "Wealth after many independent bets compounds multiplicatively, so the right thing to maximise is the expected logarithm of the wealth multiplier per bet. With win probability p, loss probability q = 1 − p, and net odds b to one, the per-bet growth rate is G(f) = p·log(1 + bf) + q·log(1 − f). Differentiating with respect to f and setting the result to zero gives a single interior optimum, f* = (bp − q)/b. Below it, the log-return is smaller and you leave growth on the table; above it, the −log(1 − f) term punishes losses fast enough to send the bankroll to zero in the long run. The formula is not a preference — it is the unique bet size that maximises long-run geometric growth.",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "John Larry Kelly Jr. was an American scientist at Bell Labs.",
+      "url": "https://en.wikipedia.org/wiki/John_Larry_Kelly_Jr.",
+      "quote": "John Larry Kelly Jr. (December 26, 1923 – March 18, 1965), was an American scientist who worked at Bell Labs."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Kelly published \"A New Interpretation of Information Rate\" in 1956 in the Bell System Technical Journal.",
+      "url": "https://en.wikipedia.org/wiki/John_Larry_Kelly_Jr.",
+      "quote": "Kelly, J. L. (1956). \"A New Interpretation of Information Rate\". Bell System Technical Journal. 35 (4): 917–926."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "The Kelly criterion sizes bets by maximising the long-term expected value of the logarithm of wealth.",
+      "url": "https://en.wikipedia.org/wiki/Kelly_criterion",
+      "quote": "a formula for risk allocation with the sizing a sequence of bets by maximizing the long-term expected value of the logarithm of wealth"
+    },
+    {
+      "claim_id": "f4",
+      "claim": "For a simple bet, the Kelly bet is f = p/l − q/g (which reduces to (bp − q)/b when the loss fraction l = 1 and the gain fraction g = b).",
+      "url": "https://en.wikipedia.org/wiki/Kelly_criterion",
+      "quote": "The Kelly bet is: f = p/l − q/g"
+    },
+    {
+      "claim_id": "f5",
+      "claim": "The derivation Kelly gives maximises the expected log-utility u = p·log(1 + fg) + q·log(1 − fl).",
+      "url": "https://en.wikipedia.org/wiki/Kelly_criterion",
+      "quote": "u = p log(1+fg) + q log(1−fl)"
+    },
+    {
+      "claim_id": "f6",
+      "claim": "Ed Thorp used the Kelly criterion, learning about it from Kelly's 1956 paper.",
+      "url": "https://en.wikipedia.org/wiki/Edward_O._Thorp",
+      "quote": "which he learned about from the 1956 paper by Kelly."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Thorp's book Beat the Dealer mathematically proved the house advantage in blackjack could be overcome by card counting.",
+      "url": "https://en.wikipedia.org/wiki/Edward_O._Thorp",
+      "quote": "Thorp is the author of Beat the Dealer, which mathematically proved that the house advantage in blackjack could be overcome by card counting."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "Thorp reported personal investment returns averaging 20% a year over 28.5 years.",
+      "url": "https://en.wikipedia.org/wiki/Edward_O._Thorp",
+      "quote": "In May 1998, Thorp reported that his personal investments yielded an annualized 20 percent rate of return averaged over 28.5 years."
+    }
+  ]
+}

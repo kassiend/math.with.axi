@@ -3,12 +3,12 @@
   "width": 1080,
   "height": 1920,
   "fps": 30,
-  "frames": 627,
+  "frames": 653,
   "fit": {
     "fits": true,
-    "fontSize": 38,
-    "width": 245,
-    "height": 48
+    "fontSize": 88,
+    "width": 322,
+    "height": 220
   },
   "files": [
     "frame-00000.png",
@@ -637,7 +637,33 @@
     "frame-00623.png",
     "frame-00624.png",
     "frame-00625.png",
-    "frame-00626.png"
+    "frame-00626.png",
+    "frame-00627.png",
+    "frame-00628.png",
+    "frame-00629.png",
+    "frame-00630.png",
+    "frame-00631.png",
+    "frame-00632.png",
+    "frame-00633.png",
+    "frame-00634.png",
+    "frame-00635.png",
+    "frame-00636.png",
+    "frame-00637.png",
+    "frame-00638.png",
+    "frame-00639.png",
+    "frame-00640.png",
+    "frame-00641.png",
+    "frame-00642.png",
+    "frame-00643.png",
+    "frame-00644.png",
+    "frame-00645.png",
+    "frame-00646.png",
+    "frame-00647.png",
+    "frame-00648.png",
+    "frame-00649.png",
+    "frame-00650.png",
+    "frame-00651.png",
+    "frame-00652.png"
   ],
-  "dir": "/Users/kassiend_/Desktop/math.push/core/video/public/captures/task-percent-84-of-25"
+  "dir": "/Users/kassiend_/Desktop/work/math.push/core/video/public/captures/task-percent-84-of-25"
 }

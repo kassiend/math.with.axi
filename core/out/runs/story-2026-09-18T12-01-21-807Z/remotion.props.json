@@ -1,0 +1,76 @@
+{
+  "runId": "story-ramanujan-1729-taxicab",
+  "capture": {
+    "publicPath": "captures/story-ramanujan-1729-taxicab",
+    "frames": 1844,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 1723
+    },
+    "resume": {
+      "start": 1723,
+      "end": 1844
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-ramanujan-1729-taxicab/hook.mp3",
+        "from": 0,
+        "durationInFrames": 182
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-ramanujan-1729-taxicab/turn.mp3",
+        "from": 182,
+        "durationInFrames": 439
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-ramanujan-1729-taxicab/mechanism.mp3",
+        "from": 621,
+        "durationInFrames": 835
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-ramanujan-1729-taxicab/payoff.mp3",
+        "from": 1456,
+        "durationInFrames": 293
+      },
+      {
+        "id": "outro",
+        "src": "audio/story-ramanujan-1729-taxicab/outro.mp3",
+        "from": 1749,
+        "durationInFrames": 59
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/story-ramanujan-1729-taxicab/pop.wav",
+    "frames": [
+      182,
+      621,
+      1456,
+      1808
+    ],
+    "volume": 0.45
+  }
+}

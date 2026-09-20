@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "stage": "verification",
+  "problems": [
+    {
+      "side": "generator",
+      "error": "check output is not JSON: ALL CHECKS PASSED"
+    }
+  ]
+}

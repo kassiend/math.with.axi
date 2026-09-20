@@ -1,0 +1,16 @@
+{
+  "task_id": "larger-fraction-3-7-or-4-9",
+  "duration_s": 20,
+  "structure_id": "compare-fractions-cross-multiply",
+  "categories": ["fractions"],
+  "description": "Which is larger?",
+  "description_latex": null,
+  "statement": "3/7 or 4/9?",
+  "statement_latex": "\\dfrac{3}{7}\\ \\text{or}\\ \\dfrac{4}{9}\\,?",
+  "answer": "4/9",
+  "answer_latex": "\\dfrac{4}{9}",
+  "solution_sketch": "Cross-multiply: 3 × 9 = 27 and 4 × 7 = 28. Since 28 > 27, the fraction with numerator 4 (i.e. 4/9) is larger. Equivalently, over common denominator 63 the fractions are 27/63 and 28/63.",
+  "difficulty_rationale": "Naive route is to convert both to a common denominator (LCM 63): 3/7 = 27/63, 4/9 = 28/63 — five distinct multiplications and a comparison, tight in 20 s without paper. The insight is to cross-multiply once: 3·9 vs 4·7, i.e. 27 vs 28 — a single comparison that lands in a few seconds. The values are deliberately close (differ by 1/63) so 'guessing by feel' does not settle it, forcing the reader to actually pick a method.",
+  "check_script": "generator.checks/larger-fraction-3-7-or-4-9.py",
+  "nulls": []
+}

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "gps-38-microseconds",
+      "script": "verifier.checks/gps-38-microseconds.py",
+      "computed": "SR=-7.21 μs/day, GR=45.72 μs/day, net=38.51 μs/day, c·38μs=11.392 km, c·net=11.546 km",
+      "agrees": true,
+      "notes": "Derived v from circular-orbit condition v=sqrt(GM/R_orbit) with WGS-84 GM, R_earth=6371 km, R_orbit=26571 km. STEP1 (SR): Δt/T = -v²/(2c²) → −7.21 μs/day, matches the stated −7. STEP2 (GR): Δt/T = (GM/c²)(1/R_earth − 1/R_orbit) → +45.72 μs/day, matches the stated +45. STEP3: exact algebraic sum of the two previous lines yields +38.51 μs/day, matches +38. STEP4: c · 38 μs = 11.392 km, matches the stated 11.4 km/day. Each line follows from the previous."
+    }
+  ],
+  "unverifiable": []
+}

@@ -20,6 +20,7 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/800.css';
 import 'katex/dist/katex.min.css';
 import './styles.css';
+import { fontsLoaded } from '../fonts';
 
 declare global {
   interface Window {
@@ -58,12 +59,14 @@ if (!payload) {
   const titleIsHtml = Boolean(payload.description_latex);
   const title = titleIsHtml
     ? statementHtml(payload.description ?? '', payload.description_latex)
-    : (payload.description ?? TITLE.fallback);
+    : (payload.description ?? TITLE.fallback(payload.duration_s));
 
   // Fonts must be loaded before measuring, or the fit is computed against a fallback face and
   // the real face overflows the ring.
-  document.fonts.ready.then(() => {
-    const fit = fitStatement(html);
+  fontsLoaded().then(() => {
+    // A plain statement may take two lines if that makes it larger; typeset ones never wrap.
+    const wrap = !payload.statement_latex;
+    const fit = fitStatement(html, undefined, undefined, wrap);
     window.__axiFit = fit;
 
     if (!fit.fits) {
@@ -84,6 +87,7 @@ if (!payload) {
           titleIsHtml={titleIsHtml}
           statementHtml={html}
           statementFontSize={fit.fontSize}
+          statementWraps={wrap}
         />,
       ));
     };

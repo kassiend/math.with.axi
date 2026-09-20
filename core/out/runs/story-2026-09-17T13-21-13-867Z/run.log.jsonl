@@ -1,0 +1,18 @@
+{"t":"2026-09-17T13:33:34.296Z","event":"run.start","story_id":"sally-clark-independence-fallacy","area":"probability-and-statistics","subject":"sally-clark"}
+{"t":"2026-09-17T13:33:34.297Z","event":"validation","checked":8,"findings":0}
+{"t":"2026-09-17T13:33:34.948Z","event":"crosscheck","agreed":false,"generator":"(1/8543)^2 = 1/72982849 (0.023% below the 73,000,000 cited in court); with P(B|A)=1/100 the corrected joint 1/854300 is about 85x larger than Meadow's independent product","verifier":"chain_rule=True; independence_specialisation=True; arithmetic=True (1/8543^2 = 1/72982849; claimed 1/73000000; ratio=1.000235)"}
+{"t":"2026-09-17T13:33:34.949Z","event":"gate.closed","status":"failed","stage":"formula","problems":[{"side":"cross","error":"the two independent scripts computed different values","generator_computed":"(1/8543)^2 = 1/72982849 (0.023% below the 73,000,000 cited in court); with P(B|A)=1/100 the corrected joint 1/854300 is about 85x larger than Meadow's independent product","verifier_computed":"chain_rule=True; independence_specialisation=True; arithmetic=True (1/8543^2 = 1/72982849; claimed 1/73000000; ratio=1.000235)"}]}
+{"t":"2026-09-17T13:34:28.079Z","event":"run.start","story_id":"sally-clark-independence-fallacy","area":"probability-and-statistics","subject":"sally-clark"}
+{"t":"2026-09-17T13:34:28.080Z","event":"validation","checked":8,"findings":0}
+{"t":"2026-09-17T13:34:28.642Z","event":"crosscheck","agreed":true,"generator":"(1/8543)^2 = 1/72982849 (0.023% below the 73,000,000 cited in court); with P(B|A)=1/100 the corrected joint 1/854300 is about 85x larger than Meadow's independent product","verifier":"chain_rule=True; independence_specialisation=True; arithmetic=True (1/8543^2 = 1/72982849; claimed 1/73000000; ratio=1.000235)"}
+{"t":"2026-09-17T13:34:28.643Z","event":"timeline","total_frames":1882,"total_seconds":62.733,"beats":["hook:3.336s","turn:17.19s","mechanism:25.929s","payoff:13.39s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1761},"resume":{"start":1761,"end":1882}}}
+{"t":"2026-09-17T13:34:28.645Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-09-17T13:42:19.212Z","event":"capture.done","frames":1882}
+{"t":"2026-09-17T13:44:52.787Z","event":"done","video":"output/posts/stories/sally-clark-independence-fallacy.mp4","seconds":62.733}
+{"t":"2026-09-17T13:49:12.974Z","event":"run.start","story_id":"sally-clark-independence-fallacy","area":"probability-and-statistics","subject":"sally-clark"}
+{"t":"2026-09-17T13:49:12.974Z","event":"validation","checked":8,"findings":0}
+{"t":"2026-09-17T13:49:13.574Z","event":"crosscheck","agreed":true,"generator":"(1/8543)^2 = 1/72982849 (0.023% below the 73,000,000 cited in court); with P(B|A)=1/100 the corrected joint 1/854300 is about 85x larger than Meadow's independent product","verifier":"chain_rule=True; independence_specialisation=True; arithmetic=True (1/8543^2 = 1/72982849; claimed 1/73000000; ratio=1.000235)"}
+{"t":"2026-09-17T13:49:13.575Z","event":"timeline","total_frames":1882,"total_seconds":62.733,"beats":["hook:3.336s","turn:17.19s","mechanism:25.929s","payoff:13.39s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1761},"resume":{"start":1761,"end":1882}}}
+{"t":"2026-09-17T13:49:13.576Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-17T13:56:33.309Z","event":"capture.done","frames":1882}
+{"t":"2026-09-17T13:58:53.722Z","event":"done","video":"output/posts/stories/sally-clark-independence-fallacy.mp4","seconds":62.733}

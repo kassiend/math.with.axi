@@ -1,0 +1,7 @@
+{"t":"2026-09-18T11:29:51.375Z","event":"run.start","story_id":"kelly-criterion-log-wealth","area":"financial-mathematics","subject":"john-kelly-jr"}
+{"t":"2026-09-18T11:29:51.379Z","event":"validation","checked":8,"findings":3}
+{"t":"2026-09-18T11:29:52.646Z","event":"crosscheck","agreed":true,"generator":"d/df [ p*log(1+b*f) + q*log(1-f) ] = 0 => f* = (b*p - q)/b; symbolic identity holds; worked case p=0.51, b=1 gives f*=0.0200 (matches 2%)","verifier":"G'(f)=b*p/(b*f + 1) + q/(f - 1); solve G'=0 -> f=[(b*p + p - 1)/b]; claimed f*=(b*p + p - 1)/b; G''(f*) sample=-16/9"}
+{"t":"2026-09-18T11:29:52.647Z","event":"timeline","total_frames":2065,"total_seconds":68.833,"beats":["hook:7.256s","turn:13.574s","mechanism:33.025s","payoff:12.845s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1944},"resume":{"start":1944,"end":2065}}}
+{"t":"2026-09-18T11:29:52.649Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-09-18T11:37:50.048Z","event":"capture.done","frames":2065}
+{"t":"2026-09-18T11:40:39.070Z","event":"done","video":"output/posts/stories/kelly-criterion-log-wealth.mp4","seconds":68.833}

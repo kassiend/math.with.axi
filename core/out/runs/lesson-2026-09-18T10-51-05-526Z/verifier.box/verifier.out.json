@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "difference-of-squares-factoring",
+      "script": "verifier.checks/difference-of-squares-factoring.py",
+      "computed": "2125",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "display_steps": "s1..s4 read in order and yield the stated result: 55+30=85, 55−30=25, 85×25=2125; direct check 55²−30² = 3025−900 = 2125 also matches. No step is missing for a viewer.",
+    "operand_draw": "seed 874787576, range [11,99], empty filter — draws (55,30) are not cherry-picked; the identity has no failure cases so a filter could not hide any.",
+    "universality": "Independent SymPy check: expand((a+b)(a−b)) − (a²−b²) reduces to 0 symbolically. Numeric probes over integers (incl. 0, 1, negatives), rationals, floats and complex numbers all agree. Applicability statement (‘polynomial identity over any commutative ring’) is accurate; carry_case: null is justified."
+  }
+}

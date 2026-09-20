@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "divisibility-by-3-digit-sum",
+      "detail": "Step s4 asserts '16 isn't [divisible by 3]' without showing why. The applicability line permits iterating the digit sum (1+6=7, obviously not a multiple of 3), and that iteration would make the final step self-contained rather than relying on the viewer to recognise 16 mod 3 = 1 mentally. Not a mathematical defect; a pedagogical seam.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "divisibility-by-3-digit-sum",
+      "script": "verifier.checks/divisibility-by-3-digit-sum.py",
+      "computed": "digit_sum(7351)=16, 7351 mod 3 = 1, quotient=2450, divisible=False",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "worked_example": "7 + 3 + 5 + 1 = 16 confirmed; 7351 = 3*2450 + 1 confirmed; rule verdict (not divisible) matches direct computation.",
+    "universality_probe": "Rule (iterated base-10 digit sum mod 3) compared against direct n mod 3 for every n in [0, 5000] plus a handful of large samples (10^6, 10^6+1, 10^6+2, 10^9, 10^9+3, 123456789012345). No mismatch. Boundary n=0 checked explicitly (0 is divisible by 3; digit_sum(0)=0).",
+    "theorem_backing": "Payload cites base-b-digit-sum-congruence: n ≡ digit_sum_b(n) (mod b-1). With b=10 this gives mod 9, and since 3 | 9 the congruence descends to mod 3. Hypothesis mapping (non-negative integer, base 10) is correctly stated in the applicability line, so carry_case = null is legitimate.",
+    "operand_provenance": "Payload does not declare a sampling protocol, but nothing about 7351 looks curated to hide failure — the rule has no failing case to hide. Digit sum 16 is a non-trivial non-multiple-of-3, which is a fair demonstration."
+  }
+}

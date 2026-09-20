@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "task_id": "next-term-2-3-5-9-17",
+      "script": "verifier.checks/next-term-2-3-5-9-17.py",
+      "computed": "33",
+      "agrees": true,
+      "note": "First differences 1, 2, 4, 8 form a geometric sequence with ratio 2; next difference 16 gives 17+16=33. Independently confirmed by the closed form a_n = 2^(n-1)+1, which reproduces every given term exactly and yields a_6 = 33. Answer is an exact positive integer, already in simplest form; no sign or branch ambiguity."
+    }
+  ],
+  "unverifiable": []
+}

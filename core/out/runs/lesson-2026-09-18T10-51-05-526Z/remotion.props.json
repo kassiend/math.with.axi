@@ -1,0 +1,83 @@
+{
+  "runId": "lesson-difference-of-squares-factoring",
+  "capture": {
+    "publicPath": "captures/lesson-difference-of-squares-factoring",
+    "frames": 948,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 770.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 827
+    },
+    "resume": {
+      "start": 827,
+      "end": 948
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "intro",
+        "src": "audio/lesson-difference-of-squares-factoring/intro.mp3",
+        "from": 0,
+        "durationInFrames": 149
+      },
+      {
+        "id": "s1",
+        "src": "audio/lesson-difference-of-squares-factoring/s1.mp3",
+        "from": 149,
+        "durationInFrames": 53
+      },
+      {
+        "id": "s2",
+        "src": "audio/lesson-difference-of-squares-factoring/s2.mp3",
+        "from": 202,
+        "durationInFrames": 187
+      },
+      {
+        "id": "s3",
+        "src": "audio/lesson-difference-of-squares-factoring/s3.mp3",
+        "from": 389,
+        "durationInFrames": 260
+      },
+      {
+        "id": "s4",
+        "src": "audio/lesson-difference-of-squares-factoring/s4.mp3",
+        "from": 649,
+        "durationInFrames": 203
+      },
+      {
+        "id": "outro",
+        "src": "audio/lesson-difference-of-squares-factoring/outro.mp3",
+        "from": 852,
+        "durationInFrames": 84
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/lesson-difference-of-squares-factoring/pop.wav",
+    "frames": [
+      149,
+      202,
+      389,
+      649,
+      852
+    ],
+    "volume": 0.45
+  }
+}

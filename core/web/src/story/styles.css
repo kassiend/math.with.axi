@@ -46,16 +46,28 @@ html, body {
   display: flex; align-items: center; justify-content: center;
   background: #FFFFFF;
 }
-/* Size is set inline from a measurement; this is the fallback if that never ran. */
-.visual-formula { font-size: 46px; color: #1E76C3; }
+/* Stacked derivation lines; the font size is set inline (one line vs several). */
+.visual-formula { flex-direction: column; color: #1E76C3; }
 .visual-formula .katex { font-size: 1em; color: inherit; }
+.formula-line { transform-origin: center center; }
+/* KaTeX display mode adds 1em above and below each block; stacked, four lines then overflow the
+   slot and the first and last are clipped. The flex gap is the spacing. */
+.visual-formula .katex-display { margin: 0; }
+.formula-line.final { font-weight: 700; }
 .visual-shape svg { width: 100%; height: 100%; }
+.visual-shape { transform-origin: center center; }
 .visual-plot svg { width: 100%; height: 100%; display: block; }
 
-.display {
-  position: absolute; left: 50%; transform: translateX(-50%);
-  text-align: center; font-weight: 800; letter-spacing: -0.01em;
+/* One beat's visual and line. Two may overlap during a cross-fade. */
+.layer { position: absolute; inset: 0; }
+
+.display, .ask {
+  position: absolute; left: 50%; margin-left: -250px;   /* half of CONTENT_WIDTH */
+  text-align: center; letter-spacing: -0.01em;
 }
+.display { font-weight: 800; }
+.ask { font-weight: 600; }
+.tok { display: inline-block; transform-origin: center bottom; }
 
 .wordmark { position: absolute; font-weight: 600; color: #000000; white-space: nowrap; }
 

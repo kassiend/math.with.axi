@@ -1,0 +1,66 @@
+{
+  "lesson_id": "divisibility-by-7-double-and-subtract",
+  "counter": 8,
+  "area": "divisibility-rules",
+  "concept_slug": "divisibility-by-7-double-and-subtract",
+  "tags": [
+    "mental-arithmetic",
+    "divisibility",
+    "shortcut"
+  ],
+  "method_name": "Divisible by 7?",
+  "applicability": "any positive integer with two or more digits; if the result is still unclear (magnitude ≥ 10), apply the same rule to that result and continue until a small number remains. A number N is divisible by 7 iff, after one such reduction, the result is divisible by 7 (0, 7 or −7 when reduced to a small value).",
+  "carry_case": "1001 — one pass gives 100 − 2·1 = 98, which is not obviously a multiple of 7; the rule must be applied again: 9 − 2·8 = −7, which is divisible by 7, so 1001 is too.",
+  "worked_example": {
+    "operands": [497],
+    "result": "yes — 497 = 71 × 7"
+  },
+  "sampling": {
+    "seed": 791683614,
+    "spec": {
+      "min": 100,
+      "max": 999,
+      "filter": {
+        "min_digits": 3,
+        "max_digits": 3
+      }
+    },
+    "n": 3,
+    "draws": [497, 242, 534],
+    "chosen_index": 0,
+    "rejection_rate": 0
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Divisible by 7?",
+      "working": "497 ÷ 7 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Double the last digit, subtract from the rest",
+      "working": "…a b  →  a − 2b"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Do it on 497",
+      "working": "49 − 2·7 = 35"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "35 is 5 × 7 — yes",
+      "working": "497 = 71 × 7 ✓"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Still unclear? Repeat on the result",
+      "working": "1001 → 98 → 9 − 16 = −7 ✓"
+    }
+  ],
+  "nulls": []
+}

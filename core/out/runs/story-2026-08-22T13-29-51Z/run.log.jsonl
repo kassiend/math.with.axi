@@ -32,3 +32,17 @@
 {"t":"2026-08-22T14:21:05.100Z","event":"picks","background":"bg1.jpeg"}
 {"t":"2026-08-22T14:25:44.468Z","event":"capture.done","frames":1375}
 {"t":"2026-08-22T14:28:01.450Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":45.833}
+{"t":"2026-09-10T20:56:02.601Z","event":"run.start","story_id":"napkin-ring-height-only","area":"topology-and-geometry","subject":"napkin-ring-problem"}
+{"t":"2026-09-10T20:56:02.602Z","event":"validation","checked":4,"findings":0}
+{"t":"2026-09-10T20:56:04.759Z","event":"crosscheck","agreed":true,"generator":"pi*h**3/6","verifier":"pi*h**3/6"}
+{"t":"2026-09-10T20:56:04.761Z","event":"timeline","total_frames":1384,"total_seconds":46.133,"beats":["hook:7.921s","turn:8.409s","mechanism:21.26s","payoff:7.323s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1263},"resume":{"start":1263,"end":1384}}}
+{"t":"2026-09-10T20:56:04.763Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-10T21:09:53.536Z","event":"capture.done","frames":1384}
+{"t":"2026-09-10T21:28:47.568Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":46.133}
+{"t":"2026-09-11T08:19:20.093Z","event":"run.start","story_id":"napkin-ring-height-only","area":"topology-and-geometry","subject":"napkin-ring-problem"}
+{"t":"2026-09-11T08:19:20.094Z","event":"validation","checked":4,"findings":0}
+{"t":"2026-09-11T08:19:20.730Z","event":"crosscheck","agreed":true,"generator":"pi*h**3/6","verifier":"pi*h**3/6"}
+{"t":"2026-09-11T08:19:20.732Z","event":"timeline","total_frames":1475,"total_seconds":49.167,"beats":["hook:7.921s","turn:8.409s","mechanism:21.26s","payoff:7.323s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1354},"resume":{"start":1354,"end":1475}}}
+{"t":"2026-09-11T08:19:20.733Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-09-11T08:28:16.259Z","event":"capture.done","frames":1475}
+{"t":"2026-09-11T08:30:09.111Z","event":"done","video":"output/posts/stories/napkin-ring-height-only.mp4","seconds":49.167}

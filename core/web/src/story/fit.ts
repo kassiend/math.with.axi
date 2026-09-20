@@ -5,7 +5,7 @@
  * and the text has to get shorter. Shrinking past the floor or letting it spill are both defects
  * the viewer sees.
  */
-import { DISPLAY, FIT_STEP, FORMULA, TITLE } from './layout';
+import { ASK, DISPLAY, FIT_STEP, FORMULA, TITLE, VISUAL } from './layout';
 
 export interface LineFit {
   fits: boolean;
@@ -58,47 +58,70 @@ function fit(text: string, spec: Spec, weight: number): LineFit {
 }
 
 /**
- * The font-size at which a typeset formula fits the visual slot, with the numbers behind it —
- * recorded into the capture manifest so a formula that got shrunk is auditable afterwards.
+ * The formula stack must fit the visual slot's width. Measured with the real KaTeX markup at the
+ * stack's font size, stepping down until the widest line fits; below the floor the story is
+ * rejected — a clipped derivation is a wrong derivation on screen.
  *
- * One measurement, not a search: KaTeX scales linearly with font-size, so the ratio between the
- * natural size and the box is the answer. Measured at the base size and scaled down only —
- * a short formula is not blown up to fill the slot, because a huge `E = mc^2` reads as a mistake.
+ * Measured through the card's own `.visual-formula` rules on purpose: KaTeX's CSS sets
+ * `.katex { font-size: 1.21em }` and the card overrides that to 1em, so a bare probe would measure
+ * a formula 21% larger than the one that ships.
  */
-export function measureFormula(html: string) {
+export function fitFormulaLines(htmls: string[], maxWidth: number, startSize: number, floor: number): LineFit {
+  if (!htmls.length) return { fits: true, fontSize: startSize, lines: 0 };
   const probe = document.createElement('div');
-  probe.style.cssText = [
-    'position:absolute', 'visibility:hidden', 'left:-99999px', 'top:0',
-    'white-space:nowrap', `font-size:${FORMULA.fontSize}px`,
-  ].join(';');
-  // The inner .visual-formula is what makes this measurement match what ships. KaTeX's own CSS
-  // sets .katex { font-size: 1.21em }, and the card overrides that to 1em — so a bare probe
-  // measures a formula 21% larger than the one that will be drawn, and the fit shrinks it to
-  // compensate for a size it was never going to be. Measure through the card's own rules.
-  probe.innerHTML =
-    `<div class="visual-formula" style="width:auto;height:auto;display:block;background:none">${html}</div>`;
+  probe.className = 'visual-formula';
+  probe.style.cssText = 'position:absolute;visibility:hidden;left:-99999px;top:0;width:auto;height:auto;display:block;white-space:nowrap';
   document.body.appendChild(probe);
   try {
-    // .katex-html is the span wrapping the typeset content. .katex-display above it is a block
-    // and reports its container's width, not the formula's — measuring that scales by the wrong
-    // ratio and shrinks a formula that already fitted.
-    const el = (probe.querySelector('.katex-html') ?? probe.querySelector('.katex') ?? probe) as HTMLElement;
-    const r = el.getBoundingClientRect();
-    const measured = { width: Math.round(r.width), height: Math.round(r.height) };
-    if (!(r.width > 0) || !(r.height > 0)) return { fontSize: FORMULA.fontSize, measured, scale: 1 };
-    const scale = Math.min(1, FORMULA.maxWidth / r.width, FORMULA.maxHeight / r.height);
-    return { fontSize: Math.max(12, Math.floor(FORMULA.fontSize * scale)), measured, scale: +scale.toFixed(3) };
+    let widest = 0;
+    for (let size = startSize; size >= floor; size -= FIT_STEP) {
+      probe.style.fontSize = `${size}px`;
+      widest = 0;
+      for (const html of htmls) {
+        probe.innerHTML = `<div class="formula-line">${html}</div>`;
+        widest = Math.max(widest, probe.scrollWidth);
+      }
+      if (widest <= maxWidth) return { fits: true, fontSize: size, lines: htmls.length };
+    }
+    return {
+      fits: false, fontSize: floor, lines: htmls.length,
+      reason: `a formula line is ${Math.round(widest)}px wide at the ${floor}px floor; the slot is ${maxWidth}px — shorten the derivation line`,
+    };
   } finally {
     probe.remove();
   }
 }
 
-export function fitStory(title: string, displays: string[]) {
+/** The width a formula line may take inside the slot. */
+export const FORMULA_MAX_WIDTH = VISUAL.w - 2 * FORMULA.padding;
+
+/**
+ * @param formulaLines  per beat, the typeset derivation lines (one entry — the formula itself —
+ *                      when the writer supplied no steps; empty for a non-formula beat)
+ * @param stepFormulas  per beat, the typeset formula of each inner step that carries one, keyed by
+ *                      step index. A formula step needs the same slot fit as a whole-beat formula,
+ *                      or it overflows and is clipped exactly the way the mechanism formula was.
+ */
+export function fitStory(
+  title: string, displays: string[], ask: string, formulaLines: string[][] = [],
+  stepFormulas: Array<Array<{ step: number; html: string }>> = [],
+) {
   const titleFit = fit(title, TITLE, 800);
   const displayFits = displays.map((d) => fit(d, DISPLAY, 800));
+  const askFit = fit(ask, ASK, 600);
+  const formulaFits = formulaLines.map((lines) =>
+    fitFormulaLines(lines, FORMULA_MAX_WIDTH,
+      lines.length === 1 ? FORMULA.fontSize : FORMULA.stackedFontSize, FORMULA.minFontSize));
+  const stepFormulaFits = stepFormulas.map((steps) => steps.map(({ step, html }) => ({
+    step, fit: fitFormulaLines([html], FORMULA_MAX_WIDTH, FORMULA.fontSize, FORMULA.minFontSize),
+  })));
   const problems = [
     ...(titleFit.fits ? [] : [{ where: 'title', reason: titleFit.reason }]),
     ...displayFits.flatMap((f, i) => (f.fits ? [] : [{ where: `beat ${i}`, reason: f.reason }])),
+    ...(askFit.fits ? [] : [{ where: 'ask', reason: askFit.reason }]),
+    ...formulaFits.flatMap((f, i) => (f.fits ? [] : [{ where: `beat ${i} formula`, reason: f.reason }])),
+    ...stepFormulaFits.flatMap((steps, i) => steps.flatMap(({ step, fit: f }) =>
+      (f.fits ? [] : [{ where: `beat ${i} step ${step} formula`, reason: f.reason }]))),
   ];
-  return { fits: problems.length === 0, titleFit, displayFits, problems };
+  return { fits: problems.length === 0, titleFit, displayFits, askFit, formulaFits, stepFormulaFits, problems };
 }

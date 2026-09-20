@@ -66,7 +66,9 @@ async function main() {
   if (story.check_script) {
     const gen = path.resolve(runDir, story.check_script);
     const ver = path.join(runDir, 'verifier.box', 'verifier.checks', `${story.story_id}.py`);
-    const cross = await crossCheck(story.story_id, gen, ver);
+    // The story's claim is that the formula holds and the derivation follows; both blind scripts
+    // report that as `agrees`. Their `computed` strings are descriptions and are not compared.
+    const cross = await crossCheck(story.story_id, gen, ver, { compareComputed: false });
     log(run, 'crosscheck', { agreed: cross.agreed, generator: cross.generator.computed, verifier: cross.verifier.computed });
     if (!cross.agreed) return close(run, story, 'failed', 'formula', cross.failures);
   } else {
@@ -77,9 +79,12 @@ async function main() {
 
   // ---- 3. Timeline -------------------------------------------------------
   const mascotGeom = readJson(path.join(PUBLIC, 'mascot', 'story-mascot.json'), 'story-mascot.json');
+  // A spoken ask is optional; when present the closing hold stretches to fit it.
+  const outroSeconds = narration.outro?.audio ? (narration.outro.seconds ?? null) : null;
   const timeline = buildStoryTimeline(
     narration.beats.map((b) => ({ beat: b.beat, seconds: b.seconds })),
     mascotGeom,
+    outroSeconds,
   );
   log(run, 'timeline', {
     total_frames: timeline.totalFrames, total_seconds: timeline.totalSeconds,
@@ -131,6 +136,9 @@ async function main() {
     title: story.title,
     background,
     mascot: mascotGeom,
+    // The closing ask — display copy, not a claim. The page has a fallback.
+    ask: story.ask ?? null,
+    outro_seconds: outroSeconds,
     beats: story.beats.map((b, i) => ({
       beat: b.beat,
       display: b.display,
@@ -138,6 +146,9 @@ async function main() {
       visual: b.visual ?? 'none',
       image: b.visual === 'image' ? imageForBeat(b) : null,
       formula_latex: b.visual === 'formula' ? (b.formula_latex ?? story.formula_latex) : null,
+      // The derivation, line by line, when the writer supplied it. The page builds it in time
+      // with the narration instead of showing the finished formula for the whole beat.
+      formula_steps: b.visual === 'formula' ? (b.formula_steps ?? story.formula_steps ?? null) : null,
       shape_svg: b.visual === 'shape' ? (b.shape_svg ?? null) : null,
       // The spec goes through as written; the page compiles and samples it. Handing the page an
       // equation rather than a path is the point — a curve computed here would be a second
@@ -188,6 +199,7 @@ async function main() {
       pauseFrame: timeline.mascot.pauseFrame,
     },
     audio,
+    sfx: stageSfx(run, [...timeline.beats.slice(1).map((b) => b.start), timeline.hold.start]),
   };
 
   const propsFile = path.join(runDir, 'remotion.props.json');
@@ -231,6 +243,16 @@ async function main() {
 
 // ---------------------------------------------------------------------------
 
+/** The pop that marks each beat landing. Staged under public/ like the narration. */
+function stageSfx(run, frames) {
+  const src = path.join(ASSETS, 'audio', 'sfx', 'pop.wav');
+  if (!fs.existsSync(src)) return null;
+  const dir = path.join(PUBLIC, 'audio', run.id);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.copyFileSync(src, path.join(dir, 'pop.wav'));
+  return { src: `audio/${run.id}/pop.wav`, frames, volume: 0.45 };
+}
+
 function readJson(file, label) {
   if (!fs.existsSync(file)) { console.error(`missing ${label} at ${file}`); process.exit(1); }
   return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -263,20 +285,25 @@ function stageAudio(run, narration, timeline) {
   const dir = path.join(PUBLIC, 'audio', run.id);
   fs.rmSync(dir, { recursive: true, force: true });
   fs.mkdirSync(dir, { recursive: true });
-  return {
-    clips: narration.beats.map((b, i) => {
-      const src = path.isAbsolute(b.audio) ? b.audio : path.join(run.dir, b.audio);
-      const name = `${b.beat}.mp3`;
-      fs.copyFileSync(src, path.join(dir, name));
-      const phase = timeline.beats[i];
-      return {
-        id: b.beat,
-        src: `audio/${run.id}/${name}`,
-        from: phase.start,
-        durationInFrames: Math.max(1, Math.round(b.seconds * FPS)),
-      };
-    }),
+  const copy = (src, name) => {
+    fs.copyFileSync(path.isAbsolute(src) ? src : path.join(run.dir, src), path.join(dir, name));
+    return `audio/${run.id}/${name}`;
   };
+  const clips = narration.beats.map((b, i) => ({
+    id: b.beat,
+    src: copy(b.audio, `${b.beat}.mp3`),
+    from: timeline.beats[i].start,
+    durationInFrames: Math.max(1, Math.round(b.seconds * FPS)),
+  }));
+  if (!timeline.outro.silent) {
+    clips.push({
+      id: 'outro',
+      src: copy(narration.outro.audio, 'outro.mp3'),
+      from: timeline.outro.start,
+      durationInFrames: timeline.outro.end - timeline.outro.start,
+    });
+  }
+  return { clips };
 }
 
 function log(run, event, data) {

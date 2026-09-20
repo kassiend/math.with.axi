@@ -17,3 +17,9 @@
 {"t":"2026-08-20T17:11:50.702Z","event":"picks","background":"bg2.jpeg","start_audio":"axi_greetings2.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-hurry5.webm","hurry_audio_s":2.115875,"total_frames":627,"hurry_enter":423}
 {"t":"2026-08-20T17:14:01.113Z","event":"capture.done","frames":627,"font_size":34}
 {"t":"2026-08-20T17:15:10.812Z","event":"done","video":"output/posts/tasks/20s/last-digit-3-pow-2026.mp4"}
+{"t":"2026-09-11T08:35:46.664Z","event":"run.start","task_id":"last-digit-3-pow-2026","duration_s":20,"seed":-1174754027}
+{"t":"2026-09-11T08:35:46.665Z","event":"dedup.skipped","reason":"rerender of an existing post"}
+{"t":"2026-09-11T08:35:47.133Z","event":"crosscheck","agreed":true,"generator":"9","verifier":"9"}
+{"t":"2026-09-11T08:35:47.191Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_greetings2.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":2.115875,"total_frames":653,"hurry_enter":419}
+{"t":"2026-09-11T08:37:47.853Z","event":"capture.done","frames":653,"font_size":44}
+{"t":"2026-09-11T08:38:23.717Z","event":"done","video":"output/posts/tasks/20s/last-digit-3-pow-2026.mp4"}

@@ -1,0 +1,35 @@
+{
+  "intro": {
+    "narration": "[excited] What's ninety-five times ninety-five? [pause] Do it in your head.",
+    "audio": "audio/intro.mp3",
+    "seconds": 5.2
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Any number ending in five is fast to square. [pause] Take ninety-five.",
+      "instruction": "Square a number ending in 5",
+      "working": "95² = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 6.32
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Multiply the tens digit, nine, by the next number, ten. [pause] That's ninety.",
+      "instruction": "Tens digit × next number",
+      "working": "9 × 10 = 90",
+      "audio": "audio/s2.mp3",
+      "seconds": 7.04
+    },
+    {
+      "step_id": "s3",
+      "narration": "[excited] Then stick twenty-five on the end. [pause] Ninety-five squared is nine-thousand twenty-five. [warm] Try it on your own number.",
+      "instruction": "Then append 25",
+      "working": "95² = 9025",
+      "audio": "audio/s3.mp3",
+      "seconds": 10.32
+    }
+  ],
+  "total_seconds": 28.88,
+  "nulls": []
+}

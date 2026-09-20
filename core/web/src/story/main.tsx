@@ -6,13 +6,15 @@ import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import katex from 'katex';
 import { StoryScene, type StoryBeatContent } from './StoryScene';
-import { fitStory, measureFormula } from './fit';
+import { fitStory } from './fit';
+import { ASK } from './layout';
 import { buildStoryTimeline } from '../../../shared/story-timeline';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/800.css';
 import 'katex/dist/katex.min.css';
 import './styles.css';
+import { fontsLoaded } from '../fonts';
 
 declare global {
   interface Window {
@@ -51,6 +53,7 @@ if (!payload) {
   const timeline = buildStoryTimeline(
     (payload.beats ?? []).map((b: any) => ({ beat: b.beat, seconds: b.seconds })),
     payload.mascot,
+    payload.outro_seconds ?? null,
   );
 
   // One step of a stepped beat. A formula step is typeset here, exactly like a whole-beat formula;
@@ -72,37 +75,36 @@ if (!payload) {
     visual: b.visual ?? 'none',
     image: b.image ?? null,
     formulaHtml: b.formula_latex ? typeset(b.formula_latex) : null,
+    formulaStepsHtml: Array.isArray(b.formula_steps) && b.formula_steps.length
+      ? b.formula_steps.map((l: string) => typeset(l))
+      : null,
     shapeSvg: b.shape_svg ?? null,
     plot: b.plot ?? null,
     anim: b.anim ?? null,
     steps: Array.isArray(b.steps) && b.steps.length ? b.steps.map(buildStep) : null,
   }));
 
-  // KaTeX loads its faces lazily, on first use, so document.fonts.ready can settle before they
-  // have been asked for at all. A formula beat would then be screenshotted in a fallback face —
-  // intermittently, and only on whichever machine loses the race. Ask for them explicitly.
-  document.fonts.ready
+  const ask: string = payload.ask || ASK.fallback;
+
+  // KaTeX loads its faces lazily, on first use, so the Inter faces being ready says nothing about
+  // them. A formula beat would then be screenshotted in a fallback face — intermittently, and only
+  // on whichever machine loses the race. Ask for them explicitly.
+  fontsLoaded()
     .then(() => Promise.all([
       document.fonts.load('100px KaTeX_Size2'),
       document.fonts.load('100px KaTeX_Main'),
     ]))
     .then(() => {
-      const formulaFits = beats.map((b) => {
-        // A formula step needs the same slot-fit measurement as a whole-beat formula, or it
-        // overflows and is clipped exactly the way the mechanism formula was.
-        for (const s of b.steps ?? []) {
-          if (s.formulaHtml) s.formulaFontSize = measureFormula(s.formulaHtml).fontSize;
-        }
-        if (!b.formulaHtml) return null;
-        const m = measureFormula(b.formulaHtml);
-        b.formulaFontSize = m.fontSize;
-        return m;
+      const fit = fitStory(
+        payload.title ?? '', beats.map((b) => b.display), ask,
+        beats.map((b) => b.formulaStepsHtml ?? (b.formulaHtml ? [b.formulaHtml] : [])),
+        beats.map((b) => (b.steps ?? []).flatMap((st, i) => (st.formulaHtml ? [{ step: i, html: st.formulaHtml }] : []))),
+      );
+      // A formula step is sized by its own fit, exactly like a whole-beat formula.
+      fit.stepFormulaFits.forEach((fits, i) => {
+        for (const { step, fit: f } of fits) beats[i].steps![step].formulaFontSize = f.fontSize;
       });
-
-      const fit = fitStory(payload.title ?? '', beats.map((b) => b.display));
-      // Recorded into the capture manifest: a formula silently set to a third of its size is
-      // something to be able to see after the fact, not only in the finished frame.
-      window.__axiFit = { ...fit, formulaFits };
+      window.__axiFit = fit;
       if (!fit.fits) {
         fatal(`text does not fit: ${JSON.stringify(fit.problems)}`);
         return;
@@ -117,8 +119,11 @@ if (!payload) {
             background={payload.background}
             title={payload.title}
             beats={beats}
+            ask={ask}
             titleFit={fit.titleFit}
             displayFits={fit.displayFits}
+            askFit={fit.askFit}
+            formulaFits={fit.formulaFits}
           />,
         ));
       };

@@ -180,36 +180,50 @@ The card is opaque white, so the background needs no darkening. Blur is applied 
 | line height | 47 px |
 | max width | 500 px |
 | max lines | 3 |
-| fallback | `Answer in the comments` when `description` is null |
+| fallback | `Can you solve it in 20 seconds?` when `description` is null. The headline is the challenge; the ask is a separate line under the ring (§5.4). The first renders opened on "Answer in the comments" as the biggest text on the card — an ask before the viewer knew the question. |
 
-### 5.4 Ring and statement
+### 5.4 Ring, statement, readout, ask
 
 | property | value |
 |---|---|
-| centre | (360, 675) |
-| outer radius | 264 |
-| stroke width | 66 |
-| inner radius | 198 |
+| centre | (360, 660) |
+| outer radius | 270 |
+| stroke width | 26 |
+| inner radius | 244 |
 | track colour | `#D1C5C0` |
-| accent colour | `#1E76C3` |
+| accent colour | `#1E76C3`, warming to `#F26B1D` over 15 frames at 75 % of the countdown — a re-hook with no words |
 | line cap | round |
-| glow | `drop-shadow(0 0 18px rgba(30,118,195,0.45))` on the accent arc only |
+| glow | `drop-shadow(0 0 18px <accent>73)` on the accent arc only, following the accent colour |
 | direction | **countdown** — starts as a full circle, depletes clockwise from 12 o'clock |
 
-> The mockup's track reads `#EFEFEF`, not `#D1C5C0`. The specified value wins; if the render
-> looks wrong against the mockup, that is why.
+> Thinner and wider than the mockup (stroke 66, outer 264). The ring is the clock, not the
+> subject; at 66 px it left a 249 px box for the puzzle, which made the puzzle the smallest thing
+> on screen. The mockup's track reads `#EFEFEF`, not `#D1C5C0`; the specified value wins.
 
-**The statement lives inside the ring and must not touch it.**
+**The statement is the hero. It fills the ring and must not touch it.**
 
-- centred on (360, 675), colour `#1E76C3`, weight 700
-- safe area: a circle of radius **176** (inner radius 198 minus 22 px padding), i.e. an inscribed
-  box of **248 × 248**
-- font size auto-fits downward from 56 px in 2 px steps until the rendered bounding box fits the
-  safe box
-- **if it does not fit at 28 px, the task is rejected** — shorten the statement or pick another
+- centred on (360, 630) — the ring centre raised by half the readout band — colour `#1E76C3`, weight 700
+- safe area: a circle of radius **228** (inner radius 244 minus 16 px padding), i.e. an inscribed
+  box **322 wide**; the height allowance is that box less the 60 px readout band, **262**
+- a plain-text statement may wrap to **two lines** inside the ring when that makes it larger
+  (`84% of 25 = ?` becomes two lines at ~90 px instead of one at 50); a LaTeX statement never wraps
+- font size auto-fits downward from **96 px** in 2 px steps until the rendered bounding box fits
+- **if it does not fit at 40 px, the task is rejected** — shorten the statement or pick another
   puzzle. Do not overflow the ring, do not clip, do not shrink further.
-- keep the plain-text statement under ~22 characters where possible; that is what comfortably
-  fits at a readable size
+- pops in over the first 10 frames from scale 0.8, already most of the way in on frame 0
+- keep the plain-text statement under ~14 characters where possible; that is what fits large
+
+**Readout** — whole seconds left, `12s`, Inter SemiBold 30 px tabular, `#8A94A6` warming with the
+ring, centred on (360, 860). It nudges 8 % on every tick. A number is a finish line; the viewer
+can see how far the payoff is.
+
+**Ask** — `Answer in the comments`, Inter SemiBold 26 px `#5B6470`, centred on (360, 962). One
+line, one action, under the ring rather than over it. When the timer ends it becomes the payoff:
+over 12 frames it grows to 32 px, warms to `#F26B1D` and reads `Time! Answer in the comments ↓`,
+and the readout disappears. The post ends on the thing to do, not on an empty circle.
+
+**Mascot still** — breathes (scale ±2 %, 84-frame period, from the feet). A still that never
+moves reads as a sticker.
 
 ### 5.5 Footer
 
@@ -225,14 +239,16 @@ exactly the image the footer shows.
 
 | property | value |
 |---|---|
-| box | x 224, y 752, w 270, h 270 |
-| source | random clip from `assets/video/hurry/`, **overlaid as-is**, looped if shorter than the audio |
+| box | x 225, y 640, w 270, h 270 — centred in the ring |
+| source | `assets/video/hurry/hurry.webm` — the white rabbit with the stopwatch — **overlaid as-is**, looped if shorter than the audio |
 | enter | scale 0.6 → 1.0, opacity 0 → 1, 11 frames, ease-out |
 | exit | scale 1.0 → 0.6, opacity 1 → 0, 11 frames, ease-in |
 
-`hurry/dumdum.webm` is excluded from the random pool: its alpha deliberately carries a translucent
-sheet of formulas behind the subject, which over the white card reads as a smudge rather than a
-sticker. Usable pool: `hurry.webm`, `hurry5.webm`, `hurry6.webm`, `papapa.webm`, `witchcat.webm`.
+The pool is the rabbit alone. It is the one clip that is *about* time; the others in the folder
+(a capybara, a chihuahua, popcat, a witch cat) are memes with no connection to the post, and a
+second off-brand character in the frame reads as a different channel. `dumdum.webm` is
+additionally unusable: its alpha carries a translucent sheet of formulas that reads as a smudge
+over the white card.
 
 ### 5.7 Alpha — the two rules that keep subjects opaque
 
@@ -285,15 +301,15 @@ machine-dependent, which breaks frame determinism.
 
 | phase | frames | seconds | what happens |
 |---|---|---|---|
-| **A** card in | 0 – 11 | 0.00 – 0.40 | Card scales 0.85 → 1.00 and fades in from centre over the blurred background. Title, ring track and statement are legible almost immediately. A random `assets/audio/start_audio/*.mp3` plays from frame 0. |
-| **B** timer | 12 – 611 | 0.40 – 20.40 | 20.0 s countdown. Accent arc depletes to zero. |
-| **C** hold | 612 – 626 | — | Empty ring, statement still readable. Cut. |
+| **A** card in | 0 – 7 | 0.00 – 0.27 | Card is **opaque from frame 0** and settles from scale 0.96. Frame 0 is the thumbnail; a card fading in from nothing wastes it. Title, ring track and statement are legible on frame 0. A random `assets/audio/start_audio/*.mp3` plays from frame 0. The blurred background drifts 6 % over the whole post so no frame is identical to the last. |
+| **B** timer | 8 – 607 | 0.27 – 20.27 | 20.0 s countdown. Accent arc depletes to zero. |
+| **C** hold | 608 – 652 | — | The ask grows into the payoff (§5.4); statement still readable. Cut. |
 
-**Total: 627 frames, 20.90 s.**
+**Total: 653 frames, 21.77 s.**
 
 ### Ticking
 
-`assets/audio/sfx/tick.wav` at frames **12 + 30k** for k = 0…19 — twenty ticks, one per second of
+`assets/audio/sfx/tick.wav` at frames **8 + 30k** for k = 0…19 — twenty ticks, one per second of
 the countdown. No tick on the final frame.
 
 ### Hurry window
@@ -301,7 +317,7 @@ the countdown. No tick on the final frame.
 Entry frame is drawn from **60–80 % of the timer**, seeded and recorded:
 
 ```
-enter = 12 + round(600 × u),  u ~ Uniform(0.60, 0.80)     
+enter = 8 + round(600 × u),  u ~ Uniform(0.60, 0.80)     
 ```
 
 At `enter`: the hurry overlay scales in (§5.6) **and** a random `assets/audio/mid_audio/*.mp3`

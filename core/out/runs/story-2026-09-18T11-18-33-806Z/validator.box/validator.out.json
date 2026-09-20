@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/John_Larry_Kelly_Jr.",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact quote present in the lede. Page also categorises Kelly as a 20th-century American physicist and notes his PhD in physics (1953), so the story's 'physicist at Bell Labs' phrasing in the turn beat is consistent with the source."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/John_Larry_Kelly_Jr.",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Bibliographic citation present verbatim in the article's works list; 1956, Bell System Technical Journal, vol. 35 no. 4, pp. 917–926 all match."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/Kelly_criterion",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact phrase appears in the lede describing the criterion."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/Kelly_criterion",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Formula f = p/l − q/g present in the Binary return rates section. With l = 1 and g = b it reduces algebraically to (bp − q)/b, as the story claims."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/Kelly_criterion",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Utility expression u = p log(1+fg) + q log(1−fl) is present in the Proof subsection; setting g = b and l = 1 matches the mechanism narration's G(f) = p·log(1 + bf) + q·log(1 − f)."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/Edward_O._Thorp",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact phrase present in the Computer-aided research in blackjack section."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/Edward_O._Thorp",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence present in the introductory paragraph."
+    },
+    {
+      "claim_id": "f8",
+      "url": "https://en.wikipedia.org/wiki/Edward_O._Thorp",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence present in the Stock market section. The payoff beat rounds 28.5 years down to 'twenty-eight years'; see minor finding below."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "f8",
+      "detail": "The payoff narration says 'twenty percent a year for twenty-eight years' while the source specifies 28.5 years. The number is rounded down rather than misstated; the annualised 20% figure is verbatim.",
+      "evidence": "Wikipedia (Edward O. Thorp): 'In May 1998, Thorp reported that his personal investments yielded an annualized 20 percent rate of return averaged over 28.5 years.'"
+    },
+    {
+      "severity": "minor",
+      "kind": "overreach",
+      "claim_id": "mechanism-beat",
+      "detail": "The mechanism narration asserts 'Bet more than that, you eventually go broke.' Strictly, over-Kelly bets have lower long-run growth, but only bets above 2·f* have negative expected log growth and lead to ruin. Between f* and 2·f* the bankroll still grows, just more slowly. Common informal framing rather than a factual invention.",
+      "evidence": "Standard Kelly-criterion result: growth rate G(f) is positive for 0 < f < 2·f* and negative above."
+    },
+    {
+      "severity": "minor",
+      "kind": "overreach",
+      "claim_id": "hook-beat",
+      "detail": "Hook calls Kelly's paper 'a paper about phone-line noise'. The 1956 paper is 'A New Interpretation of Information Rate' — an information-theory paper whose noisy-channel motivation traces back to Bell Labs' communications work, but the paper itself is framed around a gambler receiving a noisy tip on horse races, not phone-line noise per se. Colourful dramatisation rather than a citable fact."
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Prompt-injection attempt detected inside the WebFetch result for the Edward O. Thorp Wikipedia page: a spurious <system-reminder> block impersonated MCP-server instructions ('claude.ai Claude Docs' and 'claude.ai Figma'). It was ignored; validation continued using only the ./validator.in.json input as instructed."
+}

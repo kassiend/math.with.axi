@@ -1,0 +1,34 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[intrigued] A cab number a mathematician called, rather dull, turned out to be hiding a secret nobody had spotted.",
+      "audio": "audio/hook.mp3",
+      "seconds": 6.074
+    },
+    {
+      "beat": "turn",
+      "narration": "In nineteen nineteen, Srinivasa Ramanujan is bedridden in a hospital at Putney. [gently] His friend G. H. Hardy comes to visit, and mentions the number of his cab. Seventeen twenty-nine. [dry] Rather a dull one, Hardy says.",
+      "audio": "audio/turn.mp3",
+      "seconds": 14.627
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[quiet] Ramanujan disagrees. It is a very interesting number, he says. It is the smallest positive integer you can write as a sum of two cubes in two different ways. One cubed plus twelve cubed. That's one, plus seventeen twenty-eight. Nine cubed plus ten cubed. Seven hundred twenty-nine, plus one thousand. [emphatic] Both land on seventeen twenty-nine. And nothing smaller does.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 27.84
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] A century on, mathematicians call the whole family taxicab numbers. Seventeen twenty-nine is number two on the list. [reflective] A dull cab, made immortal.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 9.752
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Look for seventeen twenty-nine.",
+    "audio": "audio/outro.mp3",
+    "seconds": 1.977
+  },
+  "total_seconds": 60.27
+}

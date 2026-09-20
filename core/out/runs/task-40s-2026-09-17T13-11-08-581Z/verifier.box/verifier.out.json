@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "crt-smallest-mod-5-7",
+      "script": "verifier.checks/crt-smallest-mod-5-7.py",
+      "computed": "17",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "judgement": {
+    "unambiguous": true,
+    "exact": true,
+    "simplest_form": true,
+    "sign_branch_ok": true,
+    "notes": "Moduli 5 and 7 are coprime, so CRT gives a unique residue class mod 35. The smallest positive representative is 17: 17 mod 5 = 2 and 17 mod 7 = 3. The previous representative 17 - 35 = -18 is not positive, so 17 is uniquely the smallest positive integer solution. Answer is an exact integer, already in simplest form."
+  }
+}

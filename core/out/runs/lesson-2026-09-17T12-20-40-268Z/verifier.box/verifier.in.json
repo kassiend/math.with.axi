@@ -1,0 +1,66 @@
+{
+  "lesson_id": "lesson-divisibility-by-4-last-two-digits",
+  "counter": 8,
+  "concept_slug": "divisibility-by-4-last-two-digits",
+  "tags": [
+    "divisibility",
+    "mental-arithmetic",
+    "shortcut"
+  ],
+  "method_name": "Divisible by 4?",
+  "applicability": "Every integer. The rule holds because 100 ≡ 0 (mod 4), so N ≡ (N mod 100) (mod 4) for every integer N; single- and two-digit numbers are their own last two digits, and the sign is irrelevant.",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Divisible by 4?",
+      "working": "3905 ÷ 4 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Only the last two digits matter",
+      "working": "3905 → 05"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Divide those by 4",
+      "working": "5 ÷ 4 = 1 r 1"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Remainder, so no",
+      "working": "3905 is not ÷ 4"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      3905
+    ],
+    "result": "not divisible by 4 (last two digits = 5, remainder 1)"
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "The taught rule (a number is divisible by 4 iff its last two digits are) has no exception over the integers: 100 ≡ 0 (mod 4), so N mod 4 = (N mod 100) mod 4 for every integer N. Verified by exhaustive SymPy check over N ∈ [0, 100000] and by the modular identity itself. A caveat exists only for a WRONGER simplification (checking only the last digit), which is not the rule taught here."
+    }
+  ],
+  "operand_draw": {
+    "seed": 793762317,
+    "spec": {
+      "min": 1000,
+      "max": 9999,
+      "filter": {
+        "min_digits": 4,
+        "max_digits": 4
+      }
+    },
+    "draws": [
+      3905
+    ],
+    "rejection_rate": 0
+  }
+}

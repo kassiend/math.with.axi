@@ -1,0 +1,16 @@
+{
+  "task_id": "next-term-2-3-5-9-17",
+  "duration_s": 20,
+  "structure_id": "next-term-doubling-differences",
+  "categories": ["sequence"],
+  "description": "Next term?",
+  "description_latex": null,
+  "statement": "2, 3, 5, 9, 17, ?",
+  "statement_latex": null,
+  "answer": "33",
+  "answer_latex": null,
+  "solution_sketch": "First differences are 1, 2, 4, 8 — they double, so the next difference is 16 and the next term is 17 + 16 = 33. Equivalently the recurrence is a_{n+1} = 2·a_n − 1, giving 2·17 − 1 = 33.",
+  "difficulty_rationale": "Naive route: stare at 2, 3, 5, 9, 17 hunting for a closed form — no small-number sequence jumps out (not primes, since 9 is composite; not squares; not linear or geometric). Insight: take successive differences (1, 2, 4, 8) and notice they double, so the next term is 17 + 16 = 33. The move is findable cold because differencing is the standard first attack on a sequence puzzle and doubling is the first pattern the eye picks up; one clean arithmetic step follows the recognition.",
+  "check_script": "generator.checks/next-term-2-3-5-9-17.py",
+  "nulls": []
+}

@@ -1,0 +1,83 @@
+{
+  "runId": "lesson-divisibility-by-4-last-two-digits",
+  "capture": {
+    "publicPath": "captures/lesson-divisibility-by-4-last-two-digits",
+    "frames": 813,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 770.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 692
+    },
+    "resume": {
+      "start": 692,
+      "end": 813
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "intro",
+        "src": "audio/lesson-divisibility-by-4-last-two-digits/intro.mp3",
+        "from": 0,
+        "durationInFrames": 169
+      },
+      {
+        "id": "s1",
+        "src": "audio/lesson-divisibility-by-4-last-two-digits/s1.mp3",
+        "from": 169,
+        "durationInFrames": 64
+      },
+      {
+        "id": "s2",
+        "src": "audio/lesson-divisibility-by-4-last-two-digits/s2.mp3",
+        "from": 233,
+        "durationInFrames": 168
+      },
+      {
+        "id": "s3",
+        "src": "audio/lesson-divisibility-by-4-last-two-digits/s3.mp3",
+        "from": 401,
+        "durationInFrames": 168
+      },
+      {
+        "id": "s4",
+        "src": "audio/lesson-divisibility-by-4-last-two-digits/s4.mp3",
+        "from": 569,
+        "durationInFrames": 157
+      },
+      {
+        "id": "outro",
+        "src": "audio/lesson-divisibility-by-4-last-two-digits/outro.mp3",
+        "from": 726,
+        "durationInFrames": 75
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/lesson-divisibility-by-4-last-two-digits/pop.wav",
+    "frames": [
+      169,
+      233,
+      401,
+      569,
+      726
+    ],
+    "volume": 0.45
+  }
+}

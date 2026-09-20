@@ -3,39 +3,6 @@
   "note": "Daily-task ledger. Separate from ledger.json: a lesson is deduplicated by mathematical concept, a task by puzzle shape. Rules live in pipeline/lib/tasks-ledger.mjs — exact statement collision blocks outright; structure_id repeated within the last 10 shipped tasks of that duration (or reused across durations) blocks; primary category repeated within the last 3 blocks. structure_id is the load-bearing field: changing operands is not a new task.",
   "entries": [
     {
-      "task_id": "sqrt-12-times-27",
-      "duration_s": 20,
-      "structure_id": "radical-of-product-perfect-square",
-      "categories": [
-        "powers-roots",
-        "arithmetic-shortcut"
-      ],
-      "statement": "√(12 · 27) = ?",
-      "answer": "18",
-      "status": "shipped",
-      "created_at": "2026-08-17T10:36:36.348Z",
-      "seed": 409436602,
-      "video": "output/posts/tasks/20s/sqrt-12-times-27.mp4",
-      "run_dir": "out/runs/task-20s-001",
-      "statement_norm": "√(12*27)=?"
-    },
-    {
-      "task_id": "denest-9-plus-4-sqrt-5",
-      "duration_s": 40,
-      "structure_id": "nested-radical-denest-quadratic-surd",
-      "categories": [
-        "nested-radical"
-      ],
-      "statement": "√(9 + 4√5) = ?",
-      "answer": "2 + √5",
-      "status": "shipped",
-      "created_at": "2026-08-17T12:09:53.405Z",
-      "seed": -1950632397,
-      "video": "output/posts/tasks/40s/denest-9-plus-4-sqrt-5.mp4",
-      "run_dir": "out/runs/task-40s-001",
-      "statement_norm": "√(9+4√5)=?"
-    },
-    {
       "task_id": "sum-first-20-odd-numbers",
       "duration_s": 20,
       "structure_id": "sum-first-n-odd-numbers-square",
@@ -77,38 +44,6 @@
       "created_at": "2026-08-17T13:30:46.388Z",
       "failed_at": "verification",
       "statement_norm": "37*43=?"
-    },
-    {
-      "task_id": "cube-power-sum-x-plus-inv-4",
-      "duration_s": 40,
-      "structure_id": "cube-power-sum-from-linear-reciprocal",
-      "categories": [
-        "system-of-equations"
-      ],
-      "statement": "x + 1/x = 4",
-      "answer": "52",
-      "status": "shipped",
-      "created_at": "2026-08-17T13:33:05.185Z",
-      "seed": -1698965954,
-      "video": "output/posts/tasks/40s/cube-power-sum-x-plus-inv-4.mp4",
-      "run_dir": "out/runs/task-40s-2026-08-17T13-30-46-700Z",
-      "statement_norm": "x+1/x=4"
-    },
-    {
-      "task_id": "last-digit-3-pow-2026",
-      "duration_s": 20,
-      "structure_id": "remainder-cycle-power",
-      "categories": [
-        "divisibility-remainder"
-      ],
-      "statement": "Last digit of 3^2026",
-      "answer": "9",
-      "status": "shipped",
-      "created_at": "2026-08-20T17:11:49.821Z",
-      "seed": -1174754027,
-      "video": "output/posts/tasks/20s/last-digit-3-pow-2026.mp4",
-      "run_dir": "out/runs/task-20s-2026-08-17T13-39-00-216Z",
-      "statement_norm": "lastdigitof3^2026"
     },
     {
       "task_id": "percent-25-more-reverse-drop",
@@ -156,38 +91,6 @@
       "video": "output\\posts\\tasks\\40s\\exp-chain-3x4-4y9-xy.mp4",
       "run_dir": "out\\runs\\task-40s-2026-08-18T11-07-24-164Z",
       "statement_norm": "3^x=4,4^y=9"
-    },
-    {
-      "task_id": "percent-84-of-25",
-      "duration_s": 20,
-      "structure_id": "percent-swap-reversal",
-      "categories": [
-        "percentage"
-      ],
-      "statement": "84% of 25 = ?",
-      "answer": "21",
-      "status": "shipped",
-      "created_at": "2026-08-22T09:06:26.187Z",
-      "seed": -993979329,
-      "video": "output/posts/tasks/20s/percent-84-of-25.mp4",
-      "run_dir": "out/runs/task-20s-2026-08-22T08-59-28-601Z",
-      "statement_norm": "84%of25=?"
-    },
-    {
-      "task_id": "power-rewrite-from-2x-equals-3",
-      "duration_s": 40,
-      "structure_id": "find-linear-combination-of-powers-from-base-value",
-      "categories": [
-        "logarithm-exponent"
-      ],
-      "statement": "2^x = 3",
-      "answer": "36",
-      "status": "shipped",
-      "created_at": "2026-08-22T09:17:16.558Z",
-      "seed": -785301225,
-      "video": "output/posts/tasks/40s/power-rewrite-from-2x-equals-3.mp4",
-      "run_dir": "out/runs/task-40s-2026-08-22T09-01-45-473Z",
-      "statement_norm": "2^x=3"
     },
     {
       "task_id": "telescoping-product-one-minus-inv-square-10",
@@ -268,6 +171,181 @@
       "video": "output\\posts\\tasks\\40s\\last-two-digits-7-pow-2024.mp4",
       "run_dir": "out\\runs\\task-40s-2026-08-25-last-two-digits-7-pow-2024",
       "statement_norm": "7^2024"
+    },
+    {
+      "task_id": "percent-84-of-25",
+      "duration_s": 20,
+      "structure_id": "percent-swap-reversal",
+      "categories": [
+        "percentage"
+      ],
+      "statement": "84% of 25 = ?",
+      "answer": "21",
+      "status": "shipped",
+      "created_at": "2026-09-11T08:16:36.397Z",
+      "seed": -993979329,
+      "video": "output/posts/tasks/20s/percent-84-of-25.mp4",
+      "run_dir": "out/runs/task-20s-2026-08-22T08-59-28-601Z",
+      "statement_norm": "84%of25=?"
+    },
+    {
+      "task_id": "last-digit-3-pow-2026",
+      "duration_s": 20,
+      "structure_id": "remainder-cycle-power",
+      "categories": [
+        "divisibility-remainder"
+      ],
+      "statement": "Last digit of 3^2026",
+      "answer": "9",
+      "status": "shipped",
+      "created_at": "2026-09-11T08:35:46.664Z",
+      "seed": -1174754027,
+      "video": "output/posts/tasks/20s/last-digit-3-pow-2026.mp4",
+      "run_dir": "out/runs/task-20s-2026-08-17T13-39-00-216Z",
+      "statement_norm": "lastdigitof3^2026"
+    },
+    {
+      "task_id": "sqrt-12-times-27",
+      "duration_s": 20,
+      "structure_id": "radical-of-product-perfect-square",
+      "categories": [
+        "powers-roots",
+        "arithmetic-shortcut"
+      ],
+      "statement": "√(12 · 27) = ?",
+      "answer": "18",
+      "status": "shipped",
+      "created_at": "2026-09-11T08:38:24.009Z",
+      "seed": 409436602,
+      "video": "output/posts/tasks/20s/sqrt-12-times-27.mp4",
+      "run_dir": "out/runs/task-20s-001",
+      "statement_norm": "√(12*27)=?"
+    },
+    {
+      "task_id": "cube-power-sum-x-plus-inv-4",
+      "duration_s": 40,
+      "structure_id": "cube-power-sum-from-linear-reciprocal",
+      "categories": [
+        "system-of-equations"
+      ],
+      "statement": "x + 1/x = 4",
+      "answer": "52",
+      "status": "shipped",
+      "created_at": "2026-09-11T08:41:07.813Z",
+      "seed": -1698965954,
+      "video": "output/posts/tasks/40s/cube-power-sum-x-plus-inv-4.mp4",
+      "run_dir": "out/runs/task-40s-2026-08-17T13-30-46-700Z",
+      "statement_norm": "x+1/x=4"
+    },
+    {
+      "task_id": "denest-9-plus-4-sqrt-5",
+      "duration_s": 40,
+      "structure_id": "nested-radical-denest-quadratic-surd",
+      "categories": [
+        "nested-radical"
+      ],
+      "statement": "√(9 + 4√5) = ?",
+      "answer": "2 + √5",
+      "status": "shipped",
+      "created_at": "2026-09-11T08:46:13.743Z",
+      "seed": -1950632397,
+      "video": "output/posts/tasks/40s/denest-9-plus-4-sqrt-5.mp4",
+      "run_dir": "out/runs/task-40s-001",
+      "statement_norm": "√(9+4√5)=?"
+    },
+    {
+      "task_id": "power-rewrite-from-2x-equals-3",
+      "duration_s": 40,
+      "structure_id": "find-linear-combination-of-powers-from-base-value",
+      "categories": [
+        "logarithm-exponent"
+      ],
+      "statement": "2^x = 3",
+      "answer": "36",
+      "status": "shipped",
+      "created_at": "2026-09-11T08:51:17.343Z",
+      "seed": -785301225,
+      "video": "output/posts/tasks/40s/power-rewrite-from-2x-equals-3.mp4",
+      "run_dir": "out/runs/task-40s-2026-08-22T09-01-45-473Z",
+      "statement_norm": "2^x=3"
+    },
+    {
+      "task_id": "log-6-sum-2-and-3",
+      "duration_s": 20,
+      "structure_id": "log-product-sum-to-one",
+      "categories": [
+        "logarithm"
+      ],
+      "statement": "log_6(2) + log_6(3) = ?",
+      "answer": "1",
+      "status": "shipped",
+      "created_at": "2026-09-17T13:05:39.691Z",
+      "seed": 1660481736,
+      "video": "output/posts/tasks/20s/log-6-sum-2-and-3.mp4",
+      "run_dir": "out/runs/task-20s-2026-09-17T13-03-00-193Z",
+      "statement_norm": "log_6(2)+log_6(3)=?"
+    },
+    {
+      "task_id": "crt-smallest-mod-5-7",
+      "duration_s": 40,
+      "structure_id": "crt-two-congruences-smallest",
+      "categories": [
+        "modular-arithmetic"
+      ],
+      "statement": "x ≡ 2 (mod 5)\nx ≡ 3 (mod 7)",
+      "answer": "17",
+      "status": "shipped",
+      "created_at": "2026-09-17T13:13:50.407Z",
+      "seed": 1185853295,
+      "video": "output/posts/tasks/40s/crt-smallest-mod-5-7.mp4",
+      "run_dir": "out/runs/task-40s-2026-09-17T13-11-08-581Z",
+      "statement_norm": "x≡2(mod5)x≡3(mod7)"
+    },
+    {
+      "task_id": "next-term-2-3-5-9-17",
+      "duration_s": 20,
+      "structure_id": "next-term-doubling-differences",
+      "categories": [
+        "sequence"
+      ],
+      "statement": "2, 3, 5, 9, 17, ?",
+      "answer": "33",
+      "status": "shipped",
+      "created_at": "2026-09-18T11:04:45.880Z",
+      "seed": 77774719,
+      "video": "output/posts/tasks/20s/next-term-2-3-5-9-17.mp4",
+      "run_dir": "out/runs/task-20s-2026-09-18T11-01-38-012Z",
+      "statement_norm": "2,3,5,9,17,?"
+    },
+    {
+      "task_id": "telescoping-product-through-6",
+      "duration_s": 20,
+      "structure_id": "telescoping-product-one-minus-recip",
+      "categories": [
+        "fractions"
+      ],
+      "statement": "(1-1/2)(1-1/3)(1-1/4)(1-1/5)(1-1/6)",
+      "answer": "1/6",
+      "status": "rejected",
+      "created_at": "2026-09-18T11:12:02.329Z",
+      "failed_at": "statement-does-not-fit",
+      "statement_norm": "(1-1/2)(1-1/3)(1-1/4)(1-1/5)(1-1/6)"
+    },
+    {
+      "task_id": "larger-fraction-3-7-or-4-9",
+      "duration_s": 20,
+      "structure_id": "compare-fractions-cross-multiply",
+      "categories": [
+        "fractions"
+      ],
+      "statement": "3/7 or 4/9?",
+      "answer": "4/9",
+      "status": "shipped",
+      "created_at": "2026-09-18T11:14:06.547Z",
+      "seed": 1283060070,
+      "video": "output/posts/tasks/20s/larger-fraction-3-7-or-4-9.mp4",
+      "run_dir": "out/runs/task-20s-2026-09-18T11-12-06-763Z",
+      "statement_norm": "3/7or4/9?"
     }
   ]
 }

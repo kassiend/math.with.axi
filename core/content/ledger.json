@@ -3,39 +3,6 @@
   "note": "Topic ledger. Every run appends an entry regardless of outcome. Dedup matches on normalised concept_slug plus tag overlap, never on title string — see pipeline/lib/ledger.mjs. Only status=shipped blocks a future topic; status=failed counts toward MAX_FAILED_ATTEMPTS and closes the slug after three.",
   "entries": [
     {
-      "id": "lesson-square-two-digit-ending-in-5",
-      "concept_slug": "square-two-digit-ending-in-5",
-      "title": "Square a number ending in 5",
-      "tags": [
-        "mental-arithmetic",
-        "shortcut",
-        "squaring"
-      ],
-      "counter": 1,
-      "status": "shipped",
-      "created_at": "2026-08-17T11:44:47.763Z",
-      "seconds": 30.667,
-      "video": "output/posts/lessons/square-two-digit-ending-in-5.mp4",
-      "run_dir": "out/runs/lesson-001"
-    },
-    {
-      "id": "lesson-multiply-by-11-two-digit",
-      "concept_slug": "multiply-by-11-two-digit",
-      "title": "Multiply by 11",
-      "area": null,
-      "tags": [
-        "mental-arithmetic",
-        "multiplication",
-        "shortcut"
-      ],
-      "counter": 2,
-      "status": "shipped",
-      "created_at": "2026-08-20T17:15:53.043Z",
-      "seconds": 36,
-      "video": "output/posts/lessons/multiply-by-11-two-digit.mp4",
-      "run_dir": "out/runs/lesson-2026-08-17T13-07-51-142Z"
-    },
-    {
       "id": "lesson-divisibility-by-7-double-last-digit",
       "concept_slug": "divisibility-by-7-double-last-digit",
       "title": "Test any number for 7",
@@ -257,6 +224,87 @@
       "seconds": 39.533,
       "video": "output\\posts\\lessons\\line-multiplication-crossings-two-digit.mp4",
       "run_dir": "out\\runs\\lesson-2026-08-25T17-09-37-635Z"
+    },
+    {
+      "id": "lesson-multiply-by-11-two-digit",
+      "concept_slug": "multiply-by-11-two-digit",
+      "title": "Multiply by 11",
+      "area": null,
+      "tags": [
+        "mental-arithmetic",
+        "multiplication",
+        "shortcut"
+      ],
+      "counter": 2,
+      "status": "shipped",
+      "created_at": "2026-09-11T08:13:09.813Z",
+      "seconds": 28.8,
+      "video": "output/posts/lessons/multiply-by-11-two-digit.mp4",
+      "run_dir": "out/runs/lesson-2026-08-17T13-07-51-142Z"
+    },
+    {
+      "id": "lesson-square-two-digit-ending-in-5",
+      "concept_slug": "square-two-digit-ending-in-5",
+      "title": "Square a number ending in 5",
+      "area": null,
+      "tags": [
+        "mental-arithmetic",
+        "shortcut",
+        "squaring"
+      ],
+      "counter": 1,
+      "status": "shipped",
+      "created_at": "2026-09-11T08:32:49.761Z",
+      "seconds": 24.067,
+      "video": "output/posts/lessons/square-two-digit-ending-in-5.mp4",
+      "run_dir": "out/runs/lesson-001"
+    },
+    {
+      "id": "lesson-divisibility-by-3-digit-sum",
+      "concept_slug": "divisibility-by-3-digit-sum",
+      "title": "Divisible by 3?",
+      "tags": [
+        "digit-sum",
+        "divisibility",
+        "mental-arithmetic"
+      ],
+      "status": "failed",
+      "created_at": "2026-09-17T12:20:37.173Z",
+      "failed_at": "verification"
+    },
+    {
+      "id": "lesson-divisibility-by-4-last-two-digits",
+      "concept_slug": "divisibility-by-4-last-two-digits",
+      "title": "Divisible by 4?",
+      "area": "divisibility-rules",
+      "tags": [
+        "digit-rules",
+        "divisibility",
+        "mental-arithmetic"
+      ],
+      "counter": 8,
+      "status": "shipped",
+      "created_at": "2026-09-17T12:57:25.789Z",
+      "seconds": 27.1,
+      "video": "output/posts/lessons/divisibility-by-4-last-two-digits.mp4",
+      "run_dir": "out/runs/lesson-2026-09-17T12-52-18-175Z"
+    },
+    {
+      "id": "lesson-difference-of-squares-factoring",
+      "concept_slug": "difference-of-squares-factoring",
+      "title": "Difference of squares",
+      "area": "algebraic-identity",
+      "tags": [
+        "algebraic-identity",
+        "identity",
+        "mental-arithmetic"
+      ],
+      "counter": 9,
+      "status": "shipped",
+      "created_at": "2026-09-18T10:56:21.140Z",
+      "seconds": 31.6,
+      "video": "output/posts/lessons/difference-of-squares-factoring.mp4",
+      "run_dir": "out/runs/lesson-2026-09-18T10-51-05-526Z"
     }
   ]
 }

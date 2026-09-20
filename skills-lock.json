@@ -1,11 +1,53 @@
 {
   "version": 1,
   "skills": {
+    "caption-and-hashtags": {
+      "source": "Ootto-AI/claude-content-skills",
+      "sourceType": "github",
+      "skillPath": "skills/caption-and-hashtags/SKILL.md",
+      "computedHash": "9c407f6596010e6fa0c5c1c011a34453d43640b27b4ce4e2c533af9a234e04ea"
+    },
     "design-taste-frontend": {
       "source": "Leonxlnx/taste-skill",
       "sourceType": "github",
       "skillPath": "skills/taste-skill/SKILL.md",
       "computedHash": "6d838b246d0e35d0b53f4f23f98ba7a1dd561937e64f7d0c7553b0928e376c3e"
+    },
+    "going-viral": {
+      "source": "Ootto-AI/claude-content-skills",
+      "sourceType": "github",
+      "skillPath": "skills/going-viral/SKILL.md",
+      "computedHash": "701ae69bd5267c68186b656c7ae44aa2da29d794d3ac51b284b51f002619d53a"
+    },
+    "on-screen-text-writer": {
+      "source": "Ootto-AI/claude-content-skills",
+      "sourceType": "github",
+      "skillPath": "skills/on-screen-text-writer/SKILL.md",
+      "computedHash": "a59d076a02743f919935eb19e4ec83ee8234d42755e9e8df377a3a23c181a12e"
+    },
+    "reel-analyzer": {
+      "source": "Ootto-AI/claude-content-skills",
+      "sourceType": "github",
+      "skillPath": "skills/reel-analyzer/SKILL.md",
+      "computedHash": "47b6bfe1e258532a0527c4f9a5864e591c8aa64c9803f7fa551b8d9249c1c881"
+    },
+    "reel-builder": {
+      "source": "Ootto-AI/claude-content-skills",
+      "sourceType": "github",
+      "skillPath": "skills/reel-builder/SKILL.md",
+      "computedHash": "6269e54741814b89e4310d9a27b45cdc3c71dd974322b125894dca6a24f5b39e"
+    },
+    "reel-scripter": {
+      "source": "Ootto-AI/claude-content-skills",
+      "sourceType": "github",
+      "skillPath": "skills/reel-scripter/SKILL.md",
+      "computedHash": "7e5a1dba1b9809a53b7fb71953395a95f6e35950bd29dfa7e8edfd1b3fe65aae"
+    },
+    "viral-hook-writer": {
+      "source": "Ootto-AI/claude-content-skills",
+      "sourceType": "github",
+      "skillPath": "skills/viral-hook-writer/SKILL.md",
+      "computedHash": "c8b859a1eaa8277eb323cb43b66f6fa0fdfcb45623079a69d1b2f4a3aafc5cfa"
     }
   }
 }

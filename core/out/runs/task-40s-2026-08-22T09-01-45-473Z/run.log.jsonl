@@ -11,3 +11,9 @@
 {"t":"2026-08-22T09:17:17.106Z","event":"picks","background":"bg.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-papapa.webm","hurry_audio_s":2.19425,"total_frames":1227,"hurry_enter":779}
 {"t":"2026-08-22T09:21:13.494Z","event":"capture.done","frames":1227,"font_size":56}
 {"t":"2026-08-22T09:22:57.737Z","event":"done","video":"output/posts/tasks/40s/power-rewrite-from-2x-equals-3.mp4"}
+{"t":"2026-09-11T08:51:17.343Z","event":"run.start","task_id":"power-rewrite-from-2x-equals-3","duration_s":40,"seed":-785301225}
+{"t":"2026-09-11T08:51:17.344Z","event":"dedup.skipped","reason":"rerender of an existing post"}
+{"t":"2026-09-11T08:51:17.867Z","event":"crosscheck","agreed":true,"generator":"36","verifier":"36"}
+{"t":"2026-09-11T08:51:17.926Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry4.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":2.19425,"total_frames":1253,"hurry_enter":775}
+{"t":"2026-09-11T08:55:05.894Z","event":"capture.done","frames":1253,"font_size":96}
+{"t":"2026-09-11T08:56:15.001Z","event":"done","video":"output/posts/tasks/40s/power-rewrite-from-2x-equals-3.mp4"}

@@ -1,0 +1,76 @@
+{
+  "runId": "story-sally-clark-independence-fallacy",
+  "capture": {
+    "publicPath": "captures/story-sally-clark-independence-fallacy",
+    "frames": 1882,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 1761
+    },
+    "resume": {
+      "start": 1761,
+      "end": 1882
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-sally-clark-independence-fallacy/hook.mp3",
+        "from": 0,
+        "durationInFrames": 100
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-sally-clark-independence-fallacy/turn.mp3",
+        "from": 100,
+        "durationInFrames": 516
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-sally-clark-independence-fallacy/mechanism.mp3",
+        "from": 616,
+        "durationInFrames": 778
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-sally-clark-independence-fallacy/payoff.mp3",
+        "from": 1394,
+        "durationInFrames": 402
+      },
+      {
+        "id": "outro",
+        "src": "audio/story-sally-clark-independence-fallacy/outro.mp3",
+        "from": 1796,
+        "durationInFrames": 50
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/story-sally-clark-independence-fallacy/pop.wav",
+    "frames": [
+      100,
+      616,
+      1394,
+      1846
+    ],
+    "volume": 0.45
+  }
+}

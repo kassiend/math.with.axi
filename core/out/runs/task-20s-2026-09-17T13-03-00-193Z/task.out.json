@@ -1,0 +1,19 @@
+{
+  "task_id": "log-6-sum-2-and-3",
+  "duration_s": 20,
+  "structure_id": "log-product-sum-to-one",
+  "categories": ["logarithm"],
+  "description": null,
+  "description_latex": null,
+  "statement": "log_6(2) + log_6(3) = ?",
+  "statement_latex": "\\log_{6}\\!2 \\;+\\; \\log_{6}\\!3 \\;=\\; ?",
+  "answer": "1",
+  "answer_latex": "1",
+  "solution_sketch": "Use log_b(x) + log_b(y) = log_b(xy). Then log_6(2) + log_6(3) = log_6(6) = 1. The trap is trying to evaluate each logarithm on its own — neither term is nice, but 2·3 lands exactly on the base.",
+  "difficulty_rationale": "Naive route: try to evaluate log_6(2) ≈ 0.387 and log_6(3) ≈ 0.613 — clumsy without a calculator and the near-1 sum only hints at the trick. The insight is the sum-to-product identity plus the observation that 2·3 = 6 (the base itself), collapsing the whole expression to log_6(6) = 1. One identity, one mental multiplication, one recognition — findable cold in under 20 seconds by anyone who has met logarithms, but not a two-second read.",
+  "check_script": "generator.checks/log-6-sum-2-and-3.py",
+  "nulls": [
+    {"field": "description", "reason": "Statement is self-contained; fallback headline ('Can you solve it in 20 seconds?') carries the ask."},
+    {"field": "description_latex", "reason": "No description text to typeset."}
+  ]
+}

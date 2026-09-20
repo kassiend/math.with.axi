@@ -1,0 +1,60 @@
+{
+  "lesson_id": "difference-of-squares-factoring",
+  "counter": 9,
+  "area": "algebraic-identity",
+  "concept_slug": "difference-of-squares-factoring",
+  "tags": ["algebraic-identity", "identity", "mental-arithmetic"],
+  "method_name": "Difference of squares",
+  "applicability": "any two real numbers a, b — the identity a² − b² = (a+b)(a−b) is a polynomial identity that holds over every commutative ring, so it never fails on integers, rationals, reals or complex numbers",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Difference of squares",
+      "working": "55² − 30² = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Sum times difference",
+      "working": "a² − b² = (a+b)(a−b)"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Add, then subtract",
+      "working": "(55+30)(55−30) = 85 × 25"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "One multiplication left",
+      "working": "85 × 25 = 2125"
+    }
+  ],
+  "worked_example": {
+    "operands": [55, 30],
+    "a_plus_b": 85,
+    "a_minus_b": 25,
+    "product": 2125,
+    "result": "2125"
+  },
+  "operand_draw": {
+    "seed": 874787576,
+    "spec": {
+      "min": 11,
+      "max": 99,
+      "filter": {}
+    },
+    "n": 2,
+    "draws": [55, 30],
+    "rationale": "Draw two two-digit integers uniformly. No presentation filter is applied: the identity a² − b² = (a+b)(a−b) is universal, so the trick must work on whatever pair the seed yields. Two-digit range is chosen because the mental-arithmetic transfer targets numbers a viewer actually encounters, and because at that scale the identity saves a real squaring (55² takes work; the factored form uses only 85 × 25)."
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "The identity a² − b² = (a+b)(a−b) is a polynomial identity valid over any commutative ring, so it has no exception on ℤ, ℚ, ℝ or ℂ — there is no input pair for which the simple rule fails. The generator check confirms this symbolically with SymPy (expand of (a+b)(a-b) reduces to a² − b² for symbolic a, b) and exhaustively over a stated finite integer domain."
+    }
+  ]
+}

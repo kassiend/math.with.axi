@@ -1,0 +1,36 @@
+{
+  "kind": "task",
+  "hook": "Neither log is nice on its own. 20 seconds.",
+  "instagram": {
+    "caption": "Neither log is nice on its own. 20 seconds.\n\nlog₆(2) + log₆(3) = ?\n\nEach term alone won't give you a tidy number. But there is one move that makes the whole thing collapse.\n\nDrop your answer in the comments.",
+    "first_comment": "#mathematics #mathproblem #logarithms #learnmath #mathchallenge #mathtok #algebra #highschoolmath #mathlesson #mathminds #mathshorts #brainteaser #mathwithAxi #logarithm\n\nAnswer: 1\n\nTrick: log_b(x) + log_b(y) = log_b(x·y), so log₆(2) + log₆(3) = log₆(6) = 1. The key is spotting that 2×3 = 6 — the base itself.\n\nWhat did you get?"
+  },
+  "tiktok": {
+    "caption": "Two logs, neither one clean — can you solve it in 20 s? #math #logarithms #mathchallenge #learnmath",
+    "first_comment": "Answer: 1. Trick: log₆(2) + log₆(3) = log₆(2×3) = log₆(6) = 1. The product rule works here because 2×3 hits the base exactly. What did you get?"
+  },
+  "youtube": {
+    "title": "Can You Solve log₆(2) + log₆(3) in 20 Seconds?",
+    "description": "Neither log is nice on its own. 20 seconds.\n\nlog₆(2) + log₆(3) = ?\n\nEach term alone won't simplify to a whole number. One small move changes everything.\n\nDrop your answer in the comments.\n\n#math #logarithms #mathematics\n\n#Shorts",
+    "tags": [
+      "logarithm",
+      "log product rule",
+      "math challenge",
+      "math short",
+      "solve logarithm",
+      "log base 6",
+      "math problem",
+      "algebra",
+      "learn math",
+      "math with Axi",
+      "high school math",
+      "logarithm identity",
+      "short math problem",
+      "mathematics",
+      "mental math"
+    ],
+    "first_comment": "Answer: 1 — log₆(2) + log₆(3) = log₆(2×3) = log₆(6) = 1. The trick is the sum-to-product identity, and the key observation is that 2×3 = 6, the base itself. What did you get?"
+  },
+  "alt_text": "A puzzle card showing log₆(2) + log₆(3) = ? inside a countdown ring. Axi, the small mascot, stands in the footer. Around two-thirds through the video a white rabbit with a stopwatch — the hurry sticker — appears on screen.",
+  "nulls": []
+}

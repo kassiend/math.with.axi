@@ -1,0 +1,76 @@
+{
+  "runId": "story-gps-38-microseconds",
+  "capture": {
+    "publicPath": "captures/story-gps-38-microseconds",
+    "frames": 1744,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 1623
+    },
+    "resume": {
+      "start": 1623,
+      "end": 1744
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-gps-38-microseconds/hook.mp3",
+        "from": 0,
+        "durationInFrames": 165
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-gps-38-microseconds/turn.mp3",
+        "from": 165,
+        "durationInFrames": 391
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-gps-38-microseconds/mechanism.mp3",
+        "from": 556,
+        "durationInFrames": 763
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-gps-38-microseconds/payoff.mp3",
+        "from": 1319,
+        "durationInFrames": 333
+      },
+      {
+        "id": "outro",
+        "src": "audio/story-gps-38-microseconds/outro.mp3",
+        "from": 1652,
+        "durationInFrames": 56
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/story-gps-38-microseconds/pop.wav",
+    "frames": [
+      165,
+      556,
+      1319,
+      1708
+    ],
+    "volume": 0.45
+  }
+}

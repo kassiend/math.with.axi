@@ -1,0 +1,15 @@
+{
+  "task_id": "crt-smallest-mod-5-7",
+  "duration_s": 40,
+  "structure_id": "crt-two-congruences-smallest",
+  "categories": [
+    "modular-arithmetic"
+  ],
+  "description": "Find the smallest positive integer x.",
+  "statement": "x ≡ 2 (mod 5)\nx ≡ 3 (mod 7)",
+  "statement_latex": "\\begin{cases} x \\equiv 2 \\pmod{5} \\\\ x \\equiv 3 \\pmod{7} \\end{cases}",
+  "answer": "17",
+  "answer_latex": "17",
+  "steps_expected": 3,
+  "nulls": []
+}

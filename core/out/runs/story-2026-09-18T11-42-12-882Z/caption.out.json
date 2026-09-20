@@ -1,0 +1,36 @@
+{
+  "kind": "story",
+  "hook": "Without Einstein, your GPS drifts 10 km every day.",
+  "instagram": {
+    "caption": "Without Einstein, your GPS drifts 10 km every day.\n\nGPS finds you by timing signals from satellites 20,000 km overhead.\nRelativity makes those clocks drift 38 microseconds a day — that's 11.4 km of position error.\nSo engineers built each one to tick slow on the ground, so it lands right in orbit.\n\nSave this — Einstein earns it.",
+    "first_comment": "When did you last think about Einstein on your morning commute?\n\n#math #physics #science #relativity #gps #spacetime #mathfacts #generalrelativity #specialrelativity #mathwithaxi #appliedmath #timedilation #einsteinfacts #realmathmatters"
+  },
+  "tiktok": {
+    "caption": "Without Einstein, your GPS drifts 10 km every day. Save this. #math #gps #physics #relativity #mathwithaxi",
+    "first_comment": null
+  },
+  "youtube": {
+    "title": "Your Phone Uses Einstein's Relativity Every Day",
+    "description": "Without Einstein, your GPS drifts 10 km every day.\n\nGPS satellites orbit 20,000 km up and time their signals at the speed of light.\nSpecial relativity slows their clocks by 7 microseconds a day; general relativity adds 45 back.\nThe net drift is 38 microseconds — which multiplies out to 11.4 km of position error.\n\nSo engineers built each clock to tick slow on the ground, so it arrives right in orbit.\n\nSave this one.\n\n#gps #relativity\n#Shorts",
+    "tags": [
+      "gps",
+      "relativity",
+      "einstein",
+      "special relativity",
+      "general relativity",
+      "physics",
+      "math",
+      "time dilation",
+      "gravitational time dilation",
+      "atomic clock",
+      "gps satellites",
+      "math with axi",
+      "applied math",
+      "math explained",
+      "physics explained"
+    ],
+    "first_comment": "Which surprised you more — that the clocks drift, or that engineers corrected for it before launch?"
+  },
+  "alt_text": "Story card titled 'Einstein in your pocket.' A smartphone on a café table shows a map with two pins — one correct location and a ghost pin roughly 10 km away, connected by a dashed line labelled '≈10 km.' Formula lines build the relativistic correction step by step: −7 μs/day from special relativity, +45 μs/day from general relativity, net +38 μs/day, then multiplied by the speed of light to give 11.4 km/day of position error. Axi reads at the top of the frame.",
+  "nulls": []
+}

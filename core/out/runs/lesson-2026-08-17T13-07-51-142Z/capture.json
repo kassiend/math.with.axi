@@ -3,7 +3,7 @@
   "width": 1080,
   "height": 1920,
   "fps": 30,
-  "frames": 1080,
+  "frames": 864,
   "fit": {
     "fits": true,
     "results": [
@@ -17,10 +17,61 @@
         },
         "working": {
           "fits": true,
-          "fontSize": 52,
+          "fontSize": 60,
           "lines": 1,
-          "height": 64
-        }
+          "height": 74
+        },
+        "glyphs": [
+          {
+            "ch": "9",
+            "x": 103,
+            "y": 0,
+            "w": 39,
+            "h": 74
+          },
+          {
+            "ch": "2",
+            "x": 142,
+            "y": 0,
+            "w": 38,
+            "h": 74
+          },
+          {
+            "ch": "×",
+            "x": 192,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 245,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 271,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "=",
+            "x": 310,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "?",
+            "x": 363,
+            "y": 0,
+            "w": 34,
+            "h": 74
+          }
+        ]
       },
       {
         "index": 1,
@@ -32,10 +83,82 @@
         },
         "working": {
           "fits": true,
-          "fontSize": 52,
+          "fontSize": 60,
           "lines": 1,
-          "height": 64
-        }
+          "height": 74
+        },
+        "glyphs": [
+          {
+            "ch": "9",
+            "x": 14,
+            "y": 0,
+            "w": 39,
+            "h": 74
+          },
+          {
+            "ch": "_",
+            "x": 66,
+            "y": 0,
+            "w": 28,
+            "h": 74
+          },
+          {
+            "ch": "2",
+            "x": 107,
+            "y": 0,
+            "w": 38,
+            "h": 74
+          },
+          {
+            "ch": "→",
+            "x": 157,
+            "y": 0,
+            "w": 57,
+            "h": 74
+          },
+          {
+            "ch": "9",
+            "x": 226,
+            "y": 0,
+            "w": 39,
+            "h": 74
+          },
+          {
+            "ch": "+",
+            "x": 278,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "2",
+            "x": 331,
+            "y": 0,
+            "w": 38,
+            "h": 74
+          },
+          {
+            "ch": "=",
+            "x": 381,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 434,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 460,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          }
+        ]
       },
       {
         "index": 2,
@@ -47,10 +170,61 @@
         },
         "working": {
           "fits": true,
-          "fontSize": 52,
+          "fontSize": 60,
           "lines": 1,
-          "height": 64
-        }
+          "height": 74
+        },
+        "glyphs": [
+          {
+            "ch": "9",
+            "x": 118,
+            "y": 0,
+            "w": 39,
+            "h": 74
+          },
+          {
+            "ch": "+",
+            "x": 157,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 197,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "|",
+            "x": 236,
+            "y": 0,
+            "w": 23,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 271,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "|",
+            "x": 309,
+            "y": 0,
+            "w": 23,
+            "h": 74
+          },
+          {
+            "ch": "2",
+            "x": 345,
+            "y": 0,
+            "w": 38,
+            "h": 74
+          }
+        ]
       },
       {
         "index": 3,
@@ -62,12 +236,155 @@
         },
         "working": {
           "fits": true,
-          "fontSize": 52,
+          "fontSize": 60,
           "lines": 1,
-          "height": 64
-        }
+          "height": 74
+        },
+        "glyphs": [
+          {
+            "ch": "9",
+            "x": 55,
+            "y": 0,
+            "w": 39,
+            "h": 74
+          },
+          {
+            "ch": "2",
+            "x": 94,
+            "y": 0,
+            "w": 38,
+            "h": 74
+          },
+          {
+            "ch": "×",
+            "x": 144,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 197,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 223,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "=",
+            "x": 262,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 315,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "0",
+            "x": 341,
+            "y": 0,
+            "w": 41,
+            "h": 74
+          },
+          {
+            "ch": "1",
+            "x": 382,
+            "y": 0,
+            "w": 26,
+            "h": 74
+          },
+          {
+            "ch": "2",
+            "x": 407,
+            "y": 0,
+            "w": 38,
+            "h": 74
+          }
+        ]
       }
     ],
+    "hero": {
+      "working": {
+        "fits": true,
+        "fontSize": 96,
+        "lines": 1,
+        "height": 108
+      },
+      "kicker": {
+        "fits": true,
+        "fontSize": 42,
+        "lines": 2,
+        "height": 100
+      },
+      "glyphs": [
+        {
+          "ch": "9",
+          "x": 15,
+          "y": 0,
+          "w": 63,
+          "h": 108
+        },
+        {
+          "ch": "2",
+          "x": 77,
+          "y": 0,
+          "w": 60,
+          "h": 108
+        },
+        {
+          "ch": "×",
+          "x": 158,
+          "y": 0,
+          "w": 65,
+          "h": 108
+        },
+        {
+          "ch": "1",
+          "x": 243,
+          "y": 0,
+          "w": 41,
+          "h": 108
+        },
+        {
+          "ch": "1",
+          "x": 284,
+          "y": 0,
+          "w": 41,
+          "h": 108
+        },
+        {
+          "ch": "=",
+          "x": 346,
+          "y": 0,
+          "w": 65,
+          "h": 108
+        },
+        {
+          "ch": "?",
+          "x": 430,
+          "y": 0,
+          "w": 55,
+          "h": 108
+        }
+      ]
+    },
+    "ask": {
+      "fits": true,
+      "fontSize": 34,
+      "lines": 1,
+      "height": 41
+    },
     "problems": []
   },
   "files": [
@@ -934,223 +1251,7 @@
     "frame-00860.png",
     "frame-00861.png",
     "frame-00862.png",
-    "frame-00863.png",
-    "frame-00864.png",
-    "frame-00865.png",
-    "frame-00866.png",
-    "frame-00867.png",
-    "frame-00868.png",
-    "frame-00869.png",
-    "frame-00870.png",
-    "frame-00871.png",
-    "frame-00872.png",
-    "frame-00873.png",
-    "frame-00874.png",
-    "frame-00875.png",
-    "frame-00876.png",
-    "frame-00877.png",
-    "frame-00878.png",
-    "frame-00879.png",
-    "frame-00880.png",
-    "frame-00881.png",
-    "frame-00882.png",
-    "frame-00883.png",
-    "frame-00884.png",
-    "frame-00885.png",
-    "frame-00886.png",
-    "frame-00887.png",
-    "frame-00888.png",
-    "frame-00889.png",
-    "frame-00890.png",
-    "frame-00891.png",
-    "frame-00892.png",
-    "frame-00893.png",
-    "frame-00894.png",
-    "frame-00895.png",
-    "frame-00896.png",
-    "frame-00897.png",
-    "frame-00898.png",
-    "frame-00899.png",
-    "frame-00900.png",
-    "frame-00901.png",
-    "frame-00902.png",
-    "frame-00903.png",
-    "frame-00904.png",
-    "frame-00905.png",
-    "frame-00906.png",
-    "frame-00907.png",
-    "frame-00908.png",
-    "frame-00909.png",
-    "frame-00910.png",
-    "frame-00911.png",
-    "frame-00912.png",
-    "frame-00913.png",
-    "frame-00914.png",
-    "frame-00915.png",
-    "frame-00916.png",
-    "frame-00917.png",
-    "frame-00918.png",
-    "frame-00919.png",
-    "frame-00920.png",
-    "frame-00921.png",
-    "frame-00922.png",
-    "frame-00923.png",
-    "frame-00924.png",
-    "frame-00925.png",
-    "frame-00926.png",
-    "frame-00927.png",
-    "frame-00928.png",
-    "frame-00929.png",
-    "frame-00930.png",
-    "frame-00931.png",
-    "frame-00932.png",
-    "frame-00933.png",
-    "frame-00934.png",
-    "frame-00935.png",
-    "frame-00936.png",
-    "frame-00937.png",
-    "frame-00938.png",
-    "frame-00939.png",
-    "frame-00940.png",
-    "frame-00941.png",
-    "frame-00942.png",
-    "frame-00943.png",
-    "frame-00944.png",
-    "frame-00945.png",
-    "frame-00946.png",
-    "frame-00947.png",
-    "frame-00948.png",
-    "frame-00949.png",
-    "frame-00950.png",
-    "frame-00951.png",
-    "frame-00952.png",
-    "frame-00953.png",
-    "frame-00954.png",
-    "frame-00955.png",
-    "frame-00956.png",
-    "frame-00957.png",
-    "frame-00958.png",
-    "frame-00959.png",
-    "frame-00960.png",
-    "frame-00961.png",
-    "frame-00962.png",
-    "frame-00963.png",
-    "frame-00964.png",
-    "frame-00965.png",
-    "frame-00966.png",
-    "frame-00967.png",
-    "frame-00968.png",
-    "frame-00969.png",
-    "frame-00970.png",
-    "frame-00971.png",
-    "frame-00972.png",
-    "frame-00973.png",
-    "frame-00974.png",
-    "frame-00975.png",
-    "frame-00976.png",
-    "frame-00977.png",
-    "frame-00978.png",
-    "frame-00979.png",
-    "frame-00980.png",
-    "frame-00981.png",
-    "frame-00982.png",
-    "frame-00983.png",
-    "frame-00984.png",
-    "frame-00985.png",
-    "frame-00986.png",
-    "frame-00987.png",
-    "frame-00988.png",
-    "frame-00989.png",
-    "frame-00990.png",
-    "frame-00991.png",
-    "frame-00992.png",
-    "frame-00993.png",
-    "frame-00994.png",
-    "frame-00995.png",
-    "frame-00996.png",
-    "frame-00997.png",
-    "frame-00998.png",
-    "frame-00999.png",
-    "frame-01000.png",
-    "frame-01001.png",
-    "frame-01002.png",
-    "frame-01003.png",
-    "frame-01004.png",
-    "frame-01005.png",
-    "frame-01006.png",
-    "frame-01007.png",
-    "frame-01008.png",
-    "frame-01009.png",
-    "frame-01010.png",
-    "frame-01011.png",
-    "frame-01012.png",
-    "frame-01013.png",
-    "frame-01014.png",
-    "frame-01015.png",
-    "frame-01016.png",
-    "frame-01017.png",
-    "frame-01018.png",
-    "frame-01019.png",
-    "frame-01020.png",
-    "frame-01021.png",
-    "frame-01022.png",
-    "frame-01023.png",
-    "frame-01024.png",
-    "frame-01025.png",
-    "frame-01026.png",
-    "frame-01027.png",
-    "frame-01028.png",
-    "frame-01029.png",
-    "frame-01030.png",
-    "frame-01031.png",
-    "frame-01032.png",
-    "frame-01033.png",
-    "frame-01034.png",
-    "frame-01035.png",
-    "frame-01036.png",
-    "frame-01037.png",
-    "frame-01038.png",
-    "frame-01039.png",
-    "frame-01040.png",
-    "frame-01041.png",
-    "frame-01042.png",
-    "frame-01043.png",
-    "frame-01044.png",
-    "frame-01045.png",
-    "frame-01046.png",
-    "frame-01047.png",
-    "frame-01048.png",
-    "frame-01049.png",
-    "frame-01050.png",
-    "frame-01051.png",
-    "frame-01052.png",
-    "frame-01053.png",
-    "frame-01054.png",
-    "frame-01055.png",
-    "frame-01056.png",
-    "frame-01057.png",
-    "frame-01058.png",
-    "frame-01059.png",
-    "frame-01060.png",
-    "frame-01061.png",
-    "frame-01062.png",
-    "frame-01063.png",
-    "frame-01064.png",
-    "frame-01065.png",
-    "frame-01066.png",
-    "frame-01067.png",
-    "frame-01068.png",
-    "frame-01069.png",
-    "frame-01070.png",
-    "frame-01071.png",
-    "frame-01072.png",
-    "frame-01073.png",
-    "frame-01074.png",
-    "frame-01075.png",
-    "frame-01076.png",
-    "frame-01077.png",
-    "frame-01078.png",
-    "frame-01079.png"
+    "frame-00863.png"
   ],
-  "dir": "/Users/kassiend_/Desktop/math.push/core/video/public/captures/lesson-multiply-by-11-two-digit"
+  "dir": "/Users/kassiend_/Desktop/work/math.push/core/video/public/captures/lesson-multiply-by-11-two-digit"
 }

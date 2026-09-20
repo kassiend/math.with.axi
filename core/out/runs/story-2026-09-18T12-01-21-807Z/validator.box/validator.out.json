@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote appears verbatim in the Early Life section; supports birth date and Erode/Tamil Nadu."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote appears verbatim in the lead; supports year of death and age 32."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote appears verbatim in the lead; supports the isolation claim."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote appears verbatim in the Illness and Death section; supports 1919 return to India due to ill health."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote appears verbatim in the Hardy–Ramanujan number section; supports hospital visit giving rise to 1729."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/1729_(number)",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Hardy's recollection quoted verbatim; supports 'ill at Putney'."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/1729_(number)",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Hardy's remark quoted verbatim; supports 'rather a dull one' about taxicab number 1729."
+    },
+    {
+      "claim_id": "f8",
+      "url": "https://en.wikipedia.org/wiki/1729_(number)",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Ramanujan's reply quoted verbatim from Hardy's account; supports the mechanism claim."
+    },
+    {
+      "claim_id": "f9",
+      "url": "https://en.wikipedia.org/wiki/Taxicab_number",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Definition quoted verbatim; supports Ta(n) description. Page also lists Ta(2) = 1729, consistent with payoff's 'number two on the list'."
+    },
+    {
+      "claim_id": "f10",
+      "url": "https://en.wikipedia.org/wiki/Taxicab_number",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote appears verbatim in the History and definition section; supports the ca. 1919 Hardy-Ramanujan origin of the name."
+    }
+  ],
+  "findings": [],
+  "unverifiable": []
+}

@@ -13,10 +13,17 @@
  * against `a * b` before it draws. A picture that disagrees with the arithmetic renders as a
  * visible error, never as a plausible-looking diagram.
  */
-import { VISUAL } from './layout';
+import { VISUAL, VISUAL_DRAW } from './layout';
 
-const W = VISUAL.w;   // 500
-const H = VISUAL.h;   // 458
+// The drawing space. The scene scales the whole SVG uniformly into the card's slot, so a diagram
+// is laid out once, here, and never has to know how much room the card gave it.
+const W = VISUAL_DRAW.w;   // 500
+const H = VISUAL_DRAW.h;   // 458
+
+/** Uniform scale from the drawing space to the slot; the SVG is sized to the scaled box. */
+const SCALE = Math.min(VISUAL.w / W, VISUAL.h / H);
+const SVG_W = Math.round(W * SCALE);
+const SVG_H = Math.round(H * SCALE);
 
 const ACCENT = '#1E76C3';
 const INK = '#0B0D12';
@@ -100,7 +107,7 @@ export function validateVisualSpec(spec: unknown): string | null {
  */
 function VisualError({ message }: { message: string }) {
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H}>
+    <svg viewBox={`0 0 ${W} ${H}`} width={SVG_W} height={SVG_H}>
       <rect width={W} height={H} rx={16} fill="#7f1d1d" />
       <text x={20} y={44} fill="#fff" fontSize={22} fontWeight={700}>visual error</text>
       <text x={20} y={78} fill="#fff" fontSize={16}>{message}</text>
@@ -335,7 +342,7 @@ export function LineMultiplication(
   const anyCarry = lattice.carries.some((c) => c > 0);
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H}>
+    <svg viewBox={`0 0 ${W} ${H}`} width={SVG_W} height={SVG_H}>
       {tBands > 0 && cuts.map((x, i) => (
         <line
           key={`cut-${i}`} x1={x} y1={cutTop} x2={x} y2={cutBottom}
@@ -485,7 +492,7 @@ export function MethodCompare({ a, b, progress }: { a: number; b: number; progre
   const dots = [...lattice.nodes].sort((m, n) => m.x - n.x);
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H}>
+    <svg viewBox={`0 0 ${W} ${H}`} width={SVG_W} height={SVG_H}>
       {lattice.aLines.map((line, i) => (
         <DrawnLine
           key={`a-${i}`} seg={segment('a', line.t, lattice.bLines, proj, overhang)}

@@ -2,20 +2,32 @@
   "runId": "lesson-square-two-digit-ending-in-5",
   "capture": {
     "publicPath": "captures/lesson-square-two-digit-ending-in-5",
-    "frames": 920,
+    "frames": 722,
     "fps": 30,
     "width": 1080,
     "height": 1920
   },
-  "intro": {
-    "src": "mascot/mas_chromo.webm",
-    "clipFrames": 152,
+  "mascot": {
+    "src": "mascot/10s.webm",
     "box": {
-      "left": -618.82,
-      "top": 106.87,
-      "width": 1944.47,
-      "height": 1093.77
-    }
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 770.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 601
+    },
+    "resume": {
+      "start": 601,
+      "end": 722
+    },
+    "pauseFrame": 180
   },
   "audio": {
     "clips": [
@@ -23,26 +35,42 @@
         "id": "intro",
         "src": "audio/lesson-square-two-digit-ending-in-5/intro.mp3",
         "from": 0,
-        "durationInFrames": 156
+        "durationInFrames": 139
       },
       {
         "id": "s1",
         "src": "audio/lesson-square-two-digit-ending-in-5/s1.mp3",
-        "from": 194,
-        "durationInFrames": 190
+        "from": 139,
+        "durationInFrames": 155
       },
       {
         "id": "s2",
         "src": "audio/lesson-square-two-digit-ending-in-5/s2.mp3",
-        "from": 384,
-        "durationInFrames": 211
+        "from": 294,
+        "durationInFrames": 172
       },
       {
         "id": "s3",
         "src": "audio/lesson-square-two-digit-ending-in-5/s3.mp3",
-        "from": 595,
-        "durationInFrames": 310
+        "from": 466,
+        "durationInFrames": 172
+      },
+      {
+        "id": "outro",
+        "src": "audio/lesson-square-two-digit-ending-in-5/outro.mp3",
+        "from": 638,
+        "durationInFrames": 72
       }
     ]
+  },
+  "sfx": {
+    "src": "audio/lesson-square-two-digit-ending-in-5/pop.wav",
+    "frames": [
+      139,
+      294,
+      466,
+      638
+    ],
+    "volume": 0.45
   }
 }

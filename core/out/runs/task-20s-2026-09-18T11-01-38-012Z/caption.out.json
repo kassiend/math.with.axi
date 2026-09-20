@@ -1,0 +1,35 @@
+{
+  "kind": "task",
+  "hook": "2, 3, 5, 9, 17 — what comes next?",
+  "instagram": {
+    "caption": "2, 3, 5, 9, 17 — what comes next?\n\nYou have 20 seconds.\n\nDrop your answer in the comments.",
+    "first_comment": "Answer: 33. The differences are 1, 2, 4, 8 — they double each time, so the next difference is 16 and 17 + 16 = 33. What did you get?\n\n#math #mathematics #learnmath #mathpuzzle #mathchallenge #brainteaser #mathfun #mathtok #mathwithaxi #numberpattern #sequencepuzzle #mathshorts #patternrecognition #numbersequence"
+  },
+  "tiktok": {
+    "caption": "2, 3, 5, 9, 17 — what comes next? Drop your answer below 👇 #mathpuzzle #mathchallenge #mathtok #learnmath",
+    "first_comment": "Answer: 33. The differences (1, 2, 4, 8) double each time — add 16 to 17. What did you get?"
+  },
+  "youtube": {
+    "title": "2, 3, 5, 9, 17 — What Comes Next?",
+    "description": "2, 3, 5, 9, 17 — what comes next?\n\nYou have 20 seconds. See if you can spot it before time runs out.\n\nDrop your answer in the comments.\n\n#mathpuzzle #sequence #Shorts",
+    "tags": [
+      "math puzzle",
+      "number sequence",
+      "math challenge",
+      "sequence puzzle",
+      "next term",
+      "math shorts",
+      "learn math",
+      "pattern recognition",
+      "math with axi",
+      "number pattern",
+      "math brain teaser",
+      "doubling sequence",
+      "math for students",
+      "short math video"
+    ],
+    "first_comment": "Answer: 33. The differences between terms are 1, 2, 4, 8 — they double each time, so the next difference is 16 and 17 + 16 = 33. What did you get?"
+  },
+  "alt_text": "A card showing the sequence '2, 3, 5, 9, 17, ?' inside a countdown ring, with Axi standing in the footer. Around two-thirds of the way through the video, a white rabbit holding a stopwatch appears.",
+  "nulls": []
+}

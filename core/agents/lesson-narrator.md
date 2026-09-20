@@ -64,18 +64,31 @@ second, so tag every line.
 - Useful here: `[excited]`, `[curious]`, `[confident]`, `[warm]`, `[thoughtful]`, `[whispers]`
   for an aside. Skip the comedic tags — this is a teacher, not a bit.
 
-## 3. The intro is yours too
+## 3. The intro is yours too — and so is the outro
 
 The pre-recorded greetings in `assets/audio/start_audio/` are **not used** for lessons. You
 generate the opener so the whole post is one performance in one voice.
 
-It poses the problem and promises the payoff, in one or two sentences:
+It opens a gap and promises the payoff, in one or two sentences:
 
-> `[excited] Heey, how do you solve 443 times 123 in your head? First you split it, then you double.`
+> `[excited] Heey, four hundred forty-three times one twenty-three, in your head, before the calculator app opens.`
+
+**Do not pose the problem twice.** The first render's intro asked "how do you solve ninety-two
+times eleven in your head?" and then step 1 said "ninety-two times eleven, looks tricky" — the
+same problem, said twice, over one unchanged card, for thirteen seconds. The intro is the *why*;
+step 1 begins the *how*. If the plan's first step is a `pose`, its narration is one short phrase.
+
+The intro also carries an **on-screen line**, `intro.display`: at most six words, the claim that
+lands under the problem at ~1.2 s. `In your head. No calculator.` A promise or a gap — never the
+method's title, which is what the card said before and which is not a reason to stay.
+
+**The outro is one ask.** `outro.narration` is a sentence — save it, send it, try it on your own
+number — and `outro.display` is the same ask in at most eight words. One action, not a menu. It
+is synthesised like any other clip. A post that ends on the answer and cuts asks for nothing.
 
 ## 4. Audio — one clip per step
 
-One TTS request per step, plus one for the intro. **Not one continuous take.**
+One TTS request per step, plus one each for the intro and the outro. **Not one continuous take.**
 
 `eleven_v3` returns no character-level timestamps, so a single take gives nothing to sync against.
 Per-step clips also mean a line that reads badly can be regenerated on its own.

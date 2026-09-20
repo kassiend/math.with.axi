@@ -1,0 +1,36 @@
+{
+  "kind": "task",
+  "hook": "Can you solve 84% of 25 in your head?",
+  "instagram": {
+    "caption": "Can you solve 84% of 25 in your head?\n\nMost people reach for 25 × 84 and the clock beats them.\nThere is a one-step route — see if you spot it.\n\nDrop your answer in the comments.",
+    "first_comment": "Answer: 21\n\nThe move: a% of b = b% of a. Flip the numbers — 84% of 25 becomes 25% of 84, which is just 84 ÷ 4. Done in one step.\n\nWhat did you get?\n\n#math #mathematics #percentages #mentalmaths #mathchallenge #mathshorts #mathreels #quickmath #numbersense #percentagehack #mathfacts #dailymath #learnmath #mathwithaxi"
+  },
+  "tiktok": {
+    "caption": "Can you solve 84% of 25 in your head? Drop your answer below. #math #percentages #mentalmaths #mathchallenge",
+    "first_comment": "Answer: 21. Flip it — a% of b = b% of a, so 84% of 25 = 25% of 84 = 84 ÷ 4 = 21. What did you get?"
+  },
+  "youtube": {
+    "title": "Can you solve 84% of 25 in your head?",
+    "description": "Can you solve 84% of 25 in your head?\n\nMost people reach for 25 × 84 and the clock runs out.\nThere is a one-step route — see if you can find it.\n\nComment your answer below.\n\n#math #percentages #mentalmaths\n#Shorts",
+    "tags": [
+      "math",
+      "mathematics",
+      "percentages",
+      "mental math",
+      "percent trick",
+      "percent swap",
+      "math challenge",
+      "math shorts",
+      "quick math",
+      "number sense",
+      "math facts",
+      "learn math",
+      "daily math",
+      "math with Axi",
+      "short math"
+    ],
+    "first_comment": "Answer: 21. The move — a% of b = b% of a. Flip it: 84% of 25 = 25% of 84 = 84 ÷ 4 = 21. No long multiplication needed. What did you get?"
+  },
+  "alt_text": "A vertical math card showing '84% of 25 = ?' on a plain background, with a ticking countdown from 20 seconds. Near the end, the mascot Axi rushes in with a hurry animation.",
+  "nulls": []
+}

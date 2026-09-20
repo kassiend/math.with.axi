@@ -1,0 +1,41 @@
+{
+  "kind": "story",
+  "hook": "A paper about phone noise quietly ended up on Wall Street.",
+
+  "instagram": {
+    "caption": "A paper about phone noise quietly ended up on Wall Street.\n\nIn 1956, John Kelly at Bell Labs asked: if a tip is only sometimes right, what fraction of your bankroll should you bet?\n\nHe maximised log-wealth, took the derivative, and got one clean answer: f* = (bp − q) / b. Bet more and you eventually go broke. Bet less and you leave growth on the table.\n\nEd Thorp used it — first in Vegas, then on Wall Street. Twenty percent a year for 28 years.\n\nSave this.",
+    "first_comment": "#math #mathematics #learnmath #financialmath #probabilitytheory #statistics #investing #trading #kellycriterion #edthorp #bellabs #informationtheory #expectedvalue #logwealth #gametheory"
+  },
+
+  "tiktok": {
+    "caption": "A phone-noise paper taught Wall Street how to bet. The math behind it is one line. #math #kellycriterion #investing #bellabs",
+    "first_comment": null
+  },
+
+  "youtube": {
+    "title": "The Equation That Tells You Exactly How Much to Bet",
+    "description": "A paper about phone noise quietly ended up on Wall Street.\n\nIn 1956, John Kelly at Bell Labs asked: if a tip is only sometimes right, what fraction of your bankroll should you wager? He maximised log-wealth, took the derivative, and got f* = (bp − q) / b. Bet more and you go broke. Bet less and you leave growth on the table.\n\nEd Thorp used it — blackjack first, then Wall Street. Twenty percent a year for 28 years.\n\nSave it and share it.\n\n#math #kellycriterion #investing\n#Shorts",
+    "tags": [
+      "math",
+      "mathematics",
+      "kelly criterion",
+      "financial mathematics",
+      "probability",
+      "statistics",
+      "investing",
+      "trading",
+      "ed thorp",
+      "bell labs",
+      "information theory",
+      "expected value",
+      "log wealth",
+      "game theory",
+      "math shorts"
+    ],
+    "first_comment": "Had you come across the Kelly criterion before — or is this new to you?"
+  },
+
+  "alt_text": "White card titled 'How much to bet'. The formula f* = (bp − q) / b is built up in three steps on screen. One beat shows a stack of casino chips beside a vintage slide rule and open ledger; another shows the Bell Labs Murray Hill building where the 1956 paper was written. Axi reads from the top of each card throughout.",
+
+  "nulls": []
+}

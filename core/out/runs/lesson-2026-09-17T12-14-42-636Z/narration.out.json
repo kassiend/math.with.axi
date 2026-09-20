@@ -1,0 +1,50 @@
+{
+  "intro": {
+    "narration": "[excited] Heey, want to know if a number splits by three, without dividing? Watch.",
+    "display": "No division needed.",
+    "audio": "audio/intro.mp3",
+    "seconds": 4.494
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Here's seven-three-five-one. Does three go in?",
+      "instruction": "Divisible by 3?",
+      "working": "7351",
+      "audio": "audio/s1.mp3",
+      "seconds": 3.301
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Just add its digits. Seven plus three plus five plus one.",
+      "instruction": "Add the digits",
+      "working": "7 + 3 + 5 + 1",
+      "audio": "audio/s2.mp3",
+      "seconds": 4.99
+    },
+    {
+      "step_id": "s3",
+      "narration": "[thoughtful] That's sixteen.",
+      "instruction": "Take the sum",
+      "working": "= 16",
+      "audio": "audio/s3.mp3",
+      "seconds": 1.508
+    },
+    {
+      "step_id": "s4",
+      "narration": "[confident] Sixteen doesn't split by three, so seven-three-five-one doesn't either.",
+      "instruction": "16 isn't, so 7351 isn't",
+      "working": "7351 ÷ 3 ✗",
+      "audio": "audio/s4.mp3",
+      "seconds": 4.408
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Try it on any number. That trick works every time.",
+    "display": "Try it on any number.",
+    "audio": "audio/outro.mp3",
+    "seconds": 3.532
+  },
+  "total_seconds": 22.233,
+  "nulls": []
+}

@@ -11,15 +11,21 @@ export const FPS = 30;
 export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
-export const CARD_IN_FRAMES = 12;
-export const HOLD_FRAMES = 15;
+/** The card is opaque from frame 0 and only settles in scale — frame 0 is the thumbnail. */
+export const CARD_IN_FRAMES = 8;
+/** Long enough for the ask to be read after the payoff line lands. */
+export const HOLD_FRAMES = 36;
 export const BLUR_PX = 14;
 
 /** Reels and TikTok's short-form surface both take 90 s comfortably. */
 export const MAX_FRAMES = 90 * FPS;
 
-/** Cross-fade at beat boundaries, so text swaps while the card is empty rather than mid-glyph. */
-export const BEAT_FADE = { in: 6, out: 4 };
+/**
+ * Cross-fade at beat boundaries: the outgoing beat drifts up and out while the incoming one rises
+ * in, over this many frames. There is never a frame with an empty card — the first renders had a
+ * ten-frame blank at every swap, and a blank card is a scroll point.
+ */
+export const BEAT_FADE = 8;
 
 /**
  * How long a drawn visual takes to build itself, in frames.
@@ -38,24 +44,17 @@ export interface StoryBeatPhase extends Phase {
   seconds: number;
 }
 
-/** A span of SOURCE frames as tools/story-mascot.mjs writes it. */
-export interface SourceSpan { from: number; to: number }
-
-/** Measured from the clip by tools/story-mascot.mjs, in SOURCE frames at its own fps. */
-export interface MascotGeometry {
-  source: string;
-  source_fps: number;
-  source_frames: number;
-  pause_at_seconds: number;
-  phases: { play: SourceSpan; freeze: SourceSpan; resume: SourceSpan };
-  seconds: { play: number; resume: number };
-  box: { left: number; top: number; width: number; height: number };
-}
+// Extension on purpose: this module is loaded by Node (the orchestrator) as well as by Vite, and
+// Node's ESM loader does not guess extensions.
+import { mascotPhases, type MascotGeometry, type MascotPhases } from './mascot-phases.ts';
+export type { MascotGeometry, SourceSpan } from './mascot-phases.ts';
 
 export interface StoryTimeline {
   fps: number;
   cardIn: Phase;
   beats: StoryBeatPhase[];
+  /** The spoken ask, when the narrator wrote one; a silent hold otherwise. */
+  outro: Phase & { silent: boolean };
   hold: Phase;
   totalFrames: number;
   totalSeconds: number;
@@ -66,54 +65,45 @@ export interface StoryTimeline {
    * video ends. No loop — a looped hold reads as a stutter, and a frozen frame reads as someone
    * standing still, which is what he is doing.
    */
-  mascot: {
-    play: Phase;
-    freeze: Phase;
-    resume: Phase;
-    /** The composition frame the take is paused on, and where the resume seeks to. */
-    pauseFrame: number;
-  };
+  mascot: MascotPhases;
 }
 
 export interface BeatInput { beat: string; seconds: number }
 
-export function buildStoryTimeline(beats: BeatInput[], mascot: MascotGeometry): StoryTimeline {
+export function buildStoryTimeline(
+  beats: BeatInput[], mascot: MascotGeometry, outroSeconds: number | null = null,
+): StoryTimeline {
   const cardIn = { start: 0, end: CARD_IN_FRAMES };
 
   const phases: StoryBeatPhase[] = [];
-  let cursor = cardIn.end;
+  // Beats start at frame 0 — the card is already there.
+  let cursor = 0;
   beats.forEach((b, index) => {
     const frames = Math.max(1, Math.round(b.seconds * FPS));
     phases.push({ index, beat: b.beat, seconds: b.seconds, start: cursor, end: cursor + frames });
     cursor += frames;
   });
 
+  // The ask has landed under the payoff line by now; a spoken outro plays over it, and the hold
+  // is what remains after it.
+  const silent = outroSeconds == null || outroSeconds <= 0;
+  const outroFrames = silent ? 0 : Math.max(1, Math.round(outroSeconds * FPS));
+  const outro = { start: cursor, end: cursor + outroFrames, silent };
+  cursor = outro.end;
+
   const hold = { start: cursor, end: cursor + HOLD_FRAMES };
   const totalFrames = hold.end;
-
-  // Source frames are at the clip's own rate; composition frames are at FPS. Convert once.
-  const toComp = (srcFrames: number) => Math.round((srcFrames / mascot.source_fps) * FPS);
-  const pauseFrame = toComp(mascot.phases.play.to);
-  const resumeFrames = toComp(mascot.phases.resume.to - mascot.phases.resume.from);
-
-  // The resume is anchored to the END of the video, so he clears the frame as it finishes. If the
-  // story is too short to fit both halves, the freeze collapses rather than the exit being cut.
-  const resumeStart = Math.max(pauseFrame, totalFrames - resumeFrames);
 
   return {
     fps: FPS,
     cardIn,
     beats: phases,
+    outro,
     hold,
     totalFrames,
     totalSeconds: Number((totalFrames / FPS).toFixed(3)),
     overCeiling: totalFrames > MAX_FRAMES,
-    mascot: {
-      play: { start: 0, end: Math.min(pauseFrame, resumeStart) },
-      freeze: { start: Math.min(pauseFrame, resumeStart), end: resumeStart },
-      resume: { start: resumeStart, end: totalFrames },
-      pauseFrame,
-    },
+    mascot: mascotPhases(totalFrames, FPS, mascot),
   };
 }
 
@@ -131,12 +121,12 @@ export function buildStoryTimeline(beats: BeatInput[], mascot: MascotGeometry): 
  * time, which an animation or a draw-on uses to move inside the step. `fade` eases the swap so a
  * step change happens between pictures, not mid-stroke.
  */
-export interface StepState { index: number; count: number; build: number; fade: number }
+export interface StepState extends Phase { index: number; count: number; build: number; fade: number }
 
 export function stepAt(frame: number, beat: Phase, weights: number[]): StepState {
   const count = weights.length;
   if (count <= 1) {
-    return { index: 0, count: Math.max(1, count), build: progress(frame, beat), fade: 1 };
+    return { index: 0, count: Math.max(1, count), build: progress(frame, beat), fade: 1, start: beat.start, end: beat.end };
   }
   const total = weights.reduce((a, w) => a + Math.max(0, w), 0) || count;
   const span = Math.max(1, beat.end - beat.start);
@@ -148,13 +138,18 @@ export function stepAt(frame: number, beat: Phase, weights: number[]): StepState
     if (local < acc + w || i === count - 1) {
       const build = clamp01((local - acc) / Math.max(1e-6, w));
       // Fade in over the first ~12% of a step and out over the last ~8%, so the picture is solid
-      // for the sentence and only dissolves at the seams.
-      const fade = Math.min(clamp01(build / 0.12), clamp01((1 - build) / 0.08));
-      return { index: i, count, build, fade };
+      // for the sentence and only dissolves at the seams. Only at the INTERNAL seams: the beat's
+      // own cross-fade handles its head and tail, and a step that faded there as well would
+      // leave the slot empty for a few frames — a blank card is a scroll point.
+      const fadeIn = i > 0 ? clamp01(build / 0.12) : 1;
+      const fadeOut = i < count - 1 ? clamp01((1 - build) / 0.08) : 1;
+      const start = beat.start + Math.round((acc / total) * span);
+      const end = beat.start + Math.round(((acc + w) / total) * span);
+      return { index: i, count, build, fade: Math.min(fadeIn, fadeOut), start, end };
     }
     acc += w;
   }
-  return { index: count - 1, count, build: 1, fade: 1 };
+  return { index: count - 1, count, build: 1, fade: 1, start: beat.start, end: beat.end };
 }
 
 // --- easing -------------------------------------------------------------------
@@ -165,27 +160,16 @@ export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 export function beatAt(frame: number, t: StoryTimeline): StoryBeatPhase | null {
   return t.beats.find((b) => frame >= b.start && frame < b.end)
-      ?? (frame >= t.hold.start ? t.beats[t.beats.length - 1] ?? null : null);
+      ?? (frame >= t.outro.start ? t.beats[t.beats.length - 1] ?? null : null);
 }
 
 /**
  * How far a drawn visual has built itself, 0 to 1, measured from the start of the beat it belongs
- * to. Holds at 1 once built, and through the closing hold.
+ * to. Holds at 1 once built, and through the outro and the closing hold.
  */
 export function beatBuild(frame: number, t: StoryTimeline): number {
   const b = beatAt(frame, t);
   if (!b) return 0;
-  if (frame >= t.hold.start) return 1;
+  if (frame >= t.outro.start) return 1;
   return clamp01((frame - b.start) / Math.max(1, Math.min(BUILD_FRAMES, b.end - b.start)));
-}
-
-/** Fades in at the head of a beat and out at its tail; solid through the closing hold. */
-export function beatOpacity(frame: number, t: StoryTimeline): number {
-  if (frame >= t.hold.start) return 1;
-  const b = beatAt(frame, t);
-  if (!b) return 0;
-  return Math.min(
-    clamp01((frame - b.start) / Math.max(1, BEAT_FADE.in)),
-    clamp01((b.end - frame) / Math.max(1, BEAT_FADE.out)),
-  );
 }

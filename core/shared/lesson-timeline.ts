@@ -15,18 +15,34 @@ export const FRAME_W = 720;
 export const FRAME_H = 1280;
 
 /**
- * THERE IS NO MASCOT INTRO. The lesson opens on the card with the first step already legible,
- * and the hook narration plays over it. A mascot waving does not earn the opening seconds of a
- * short-form post; the question does. The mascot still stays in the card footer, where it was.
+ * THERE IS NO MASCOT INTRO. The lesson opens on the card with the problem already legible, and
+ * the hook narration plays over it. A mascot waving does not earn the opening seconds of a
+ * short-form post; the question does.
  *
- * The hook still exists as AUDIO — it is the thing that has to catch someone in three seconds.
- * It simply plays over the first step instead of over a wave.
+ * The hook phase is not "step 1 with audio over it" any more. Reviewing the first renders: the
+ * card showed `Multiply by 11 / 92 × 11 = ?` for the six-second hook and then AGAIN for step 1,
+ * which re-posed the same problem — thirteen seconds on one frame. Now the hook has its own
+ * layout: the problem large, built digit by digit, with the spoken hook's on-screen line under
+ * it. Step 1 then arrives as a change.
  */
-export const CARD_IN_FRAMES = 12;
-export const HOLD_FRAMES = 15;
+export const CARD_IN_FRAMES = 8;
+export const HOLD_FRAMES = 12;
+
+/**
+ * When the narrator supplied no outro clip, the closing ask still appears — silently — for this
+ * long. A post that ends on the answer and cuts asks for nothing, and gets it.
+ */
+export const SILENT_OUTRO_FRAMES = 45;
 
 /** Background blur. Constant from frame 0 — there is no sharp phase to ramp from any more. */
 export const BLUR_PX = 14;
+
+/**
+ * Where the animated mascot comes to rest — the story's walking take, composited by Remotion in
+ * the band under the working. Design units. Lives here rather than in the page layout because the
+ * orchestrator needs it too and cannot import the page's modules.
+ */
+export const MASCOT_REST = { x: 310, y: 790, w: 100, h: 155 };
 
 /** Hard ceiling from the brief: one minute. */
 export const MAX_FRAMES = 60 * FPS;
@@ -42,9 +58,11 @@ export interface LessonStepPhase extends Phase {
 export interface LessonTimeline {
   fps: number;
   cardIn: Phase;
-  /** The spoken hook, played over the first step rather than over a mascot. */
+  /** The spoken hook, over the hero layout of the first step's problem. */
   hook: Phase;
   steps: LessonStepPhase[];
+  /** The closing ask. Its own clip when the narrator wrote one, a silent hold otherwise. */
+  outro: Phase & { silent: boolean };
   hold: Phase;
   totalFrames: number;
   totalSeconds: number;
@@ -56,32 +74,38 @@ export interface StepInput { stepId: string; seconds: number }
 /**
  * @param introSeconds  measured duration of the intro narration clip
  * @param steps         measured duration of each step's narration clip, in order
+ * @param outroSeconds  measured duration of the outro clip, or null when there is none
  */
-export function buildLessonTimeline(introSeconds: number, steps: StepInput[]): LessonTimeline {
+export function buildLessonTimeline(
+  introSeconds: number,
+  steps: StepInput[],
+  outroSeconds: number | null = null,
+): LessonTimeline {
   const cardIn = { start: 0, end: CARD_IN_FRAMES };
 
-  // The hook is spoken over the FIRST step, so the viewer reads the problem while hearing why it
-  // is interesting. It is a phase rather than a prepended silence because the audio clip is
-  // separate and has to be placed on the timeline.
+  // The hook starts at frame 0: the card is already there, the problem is already being built.
   const hookFrames = Math.max(1, Math.round(introSeconds * FPS));
-  const hook = { start: cardIn.end, end: cardIn.end + hookFrames };
+  const hook = { start: 0, end: hookFrames };
 
   const phases: LessonStepPhase[] = [];
-  let cursor = hook.start;
+  let cursor = hook.end;
   steps.forEach((s, index) => {
     const frames = Math.max(1, Math.round(s.seconds * FPS));
-    // Step 0 stays on screen for the hook as well as for its own line.
-    const span = index === 0 ? frames + hookFrames : frames;
-    phases.push({ index, stepId: s.stepId, seconds: s.seconds, start: cursor, end: cursor + span });
-    cursor += span;
+    phases.push({ index, stepId: s.stepId, seconds: s.seconds, start: cursor, end: cursor + frames });
+    cursor += frames;
   });
+
+  const silent = outroSeconds == null || outroSeconds <= 0;
+  const outroFrames = silent ? SILENT_OUTRO_FRAMES : Math.max(1, Math.round(outroSeconds * FPS));
+  const outro = { start: cursor, end: cursor + outroFrames, silent };
+  cursor = outro.end;
 
   const hold = { start: cursor, end: cursor + HOLD_FRAMES };
   const totalFrames = hold.end;
 
   return {
     fps: FPS,
-    cardIn, hook, steps: phases, hold,
+    cardIn, hook, steps: phases, outro, hold,
     totalFrames,
     totalSeconds: Number((totalFrames / FPS).toFixed(3)),
     overCeiling: totalFrames > MAX_FRAMES,
@@ -97,9 +121,12 @@ export const progress = (f: number, p: Phase) => clamp01((f - p.start) / Math.ma
 export const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
+export const inHook = (frame: number, t: LessonTimeline) => frame < t.hook.end;
+
+/** The step whose phase contains the frame; the last step through the outro and hold. */
 export function stepAt(frame: number, t: LessonTimeline): LessonStepPhase | null {
   return t.steps.find((s) => frame >= s.start && frame < s.end)
-      ?? (frame >= t.hold.start ? t.steps[t.steps.length - 1] ?? null : null);
+      ?? (frame >= t.outro.start ? t.steps[t.steps.length - 1] ?? null : null);
 }
 
 /**
@@ -108,7 +135,7 @@ export function stepAt(frame: number, t: LessonTimeline): LessonStepPhase | null
  *
  * A lesson diagram gets the whole step rather than the story format's fixed 1.5 s: here the build
  * IS the teaching — the lines going down one at a time is the method — so it has to advance with
- * the sentence explaining it, not race ahead and wait.
+ * the sentence explaining it, not race ahead and wait. Holds at 1 through the outro and hold.
  */
 export const VISUAL_BUILD_SHARE = 0.85;
 
@@ -117,17 +144,4 @@ export function visualBuild(frame: number, t: LessonTimeline): number {
   if (!step) return 0;
   const span = Math.max(1, step.end - step.start);
   return clamp01((frame - step.start) / (span * VISUAL_BUILD_SHARE));
-}
-
-/**
- * Body opacity: fades in at the head of a step and out at its tail, so the text swaps while the
- * card is empty rather than cutting mid-glyph. During the closing hold the last step stays solid.
- */
-export function bodyOpacity(frame: number, t: LessonTimeline, fade: { in: number; out: number }): number {
-  if (frame >= t.hold.start) return 1;
-  const step = stepAt(frame, t);
-  if (!step) return 0;
-  const fadeIn = clamp01((frame - step.start) / Math.max(1, fade.in));
-  const fadeOut = clamp01((step.end - frame) / Math.max(1, fade.out));
-  return Math.min(fadeIn, fadeOut);
 }
