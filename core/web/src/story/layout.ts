@@ -1,86 +1,122 @@
 /**
  * Layout for the story card, in 720x1280 design units.
  *
- * DIFFERENT FROM THE FIRST PASS, which followed story_example.png literally and read as a mostly
- * empty card: a 350x294 picture floating in a 612-wide box, with two thirds of the card white.
- * A story has to hold a scrolling thumb for fifty seconds, and white space does not.
+ * THIRD PASS. The first followed story_example.png (a small picture on a white card); the second
+ * enlarged the picture. Both still read as a slide: white card, blue caption, formula on white.
+ * A story competes with cinematic short-form, so this pass is documentary-cinematic:
  *
- * The visual now fills the card's usable width, the title sits tight above it, and the beat line
- * sits directly under it in the accent colour. Nothing else competes.
+ *   - the image fills the card to its border; the card's radius clips it
+ *   - dark scrims top and bottom carry the type; no white anywhere inside the card
+ *   - one heavy display face (Outfit 800/900) with tight tracking, white on the image
+ *   - one accent, the brand orange, reserved for the number that matters
+ *   - a formula beat dims and blurs the image and stacks the derivation in white on top
+ *
+ * The card, its border and the mascot band are unchanged: the channel's identity is the card, the
+ * story's identity is what fills it.
  */
 export { CARD, FRAME, CARD_PAD, CONTENT_WIDTH } from '../card';
-import { CONTENT_WIDTH } from '../card';
+import { CARD, CARD_PAD, CONTENT_WIDTH } from '../card';
 
-/**
- * Reserved for the mascot clip; nothing is drawn here by the page.
- * Larger than the mockup's 69x107 — at that size he was a detail rather than a presence.
- */
+/** Inner area of the card, inside the border. The image covers exactly this. */
+export const INNER = {
+  x: CARD.x + CARD.border, y: CARD.y + CARD.border,
+  w: CARD.w - 2 * CARD.border, h: CARD.h - 2 * CARD.border,
+  radius: CARD.radius - CARD.border,
+};
+
+/** Reserved for the mascot clip; nothing is drawn here by the page. Over the top scrim. */
 export const MASCOT_BAND = { x: 310, y: 150, w: 100, h: 155 };
 
-/** The story headline. Constant for the whole post — it names the story, not the beat. */
+export const PALETTE = {
+  text: '#FFFFFF',
+  muted: 'rgba(255,255,255,0.72)',
+  accent: '#F26B1D',
+  scrim: '#07090F',
+};
+
+/** Top and bottom gradients that carry the type. Heights in design px. */
+export const SCRIM = { top: 420, bottom: 560, topAlpha: 0.78, bottomAlpha: 0.92 };
+
+/** The story headline: the hook as a line. Left-aligned, under the mascot band. */
 export const TITLE = {
   top: 330,
+  left: CARD.x + CARD_PAD,
+  fontSize: 62,
+  lineHeightRatio: 1.04,
+  maxLines: 3,
+  minFontSize: 40,
+  maxWidth: CONTENT_WIDTH,
+  colour: PALETTE.text,
+  weight: 900,
+};
+
+/**
+ * Optional per-beat number, shown huge in the accent and counted up over the first second of
+ * the beat. "1 in 73,000,000" — the thing a thumb stops for.
+ */
+export const STAT = {
+  centreY: 700,
+  valueSize: 128,
+  valueMin: 64,
+  prefixSize: 40,
+  gap: 8,
+  colour: PALETTE.accent,
+  countFrames: 36,
+  maxWidth: CONTENT_WIDTH,
+};
+
+/** The per-beat line, on the bottom scrim, built token by token. */
+export const DISPLAY = {
+  top: 918,
+  left: CARD.x + CARD_PAD,
   fontSize: 54,
-  lineHeightRatio: 1.16,
+  lineHeightRatio: 1.08,
   maxLines: 3,
   minFontSize: 34,
   maxWidth: CONTENT_WIDTH,
-  colour: '#0B0D12',
+  colour: PALETTE.text,
+  weight: 800,
 };
 
-/**
- * One visual at a time. Nearly the full card width — a picture that fills the frame is the
- * difference between a slide and something worth watching.
- */
-export const VISUAL = { x: 78, y: 500, w: 564, h: 470, radius: 32 };
-
-/** The per-beat line, directly under the visual, in the accent colour so the eye lands on it. */
-export const DISPLAY = {
-  top: 1002,
-  fontSize: 44,
-  lineHeightRatio: 1.22,
-  maxLines: 2,
-  minFontSize: 30,
-  maxWidth: CONTENT_WIDTH,
-  colour: '#1E76C3',
-};
-
-/** The closing ask: one small line under the payoff, on the payoff beat and the hold. */
+/** The closing ask: one small line under the payoff. */
 export const ASK = {
-  centreY: 1136,
+  centreY: 1120,
+  left: CARD.x + CARD_PAD,
   fontSize: 28,
   minFontSize: 22,
   maxLines: 1,
   lineHeightRatio: 1.2,
   maxWidth: CONTENT_WIDTH,
-  colour: '#5B6470',
+  colour: PALETTE.muted,
   fallback: 'Save this one.',
 };
 
+/** Beat progress: a hairline along the bottom edge inside the card. */
+export const PROGRESS = { height: 5, bottomInset: 0, colour: PALETTE.accent, track: 'rgba(255,255,255,0.18)' };
+
 /**
- * The mechanism, built line by line. When the writer supplies `formula_steps`, each line pops in
- * across the first ~80 % of the beat in time with the narration, earlier lines dimming as the
- * next arrives; the last line is the formula itself and stays bright.
+ * The mechanism, built line by line over the dimmed image. `formula_steps` land one at a time
+ * across the first ~80 % of the beat, earlier lines dimming as the next arrives; the last is the
+ * formula and stays bright in the accent.
  */
 export const FORMULA = {
-  fontSize: 46,
-  /** Font size when several lines share the slot. */
-  stackedFontSize: 38,
-  /** Auto-fit floor for the widest line; below this the beat is rejected. */
-  minFontSize: 22,
-  /** Horizontal padding inside the slot the lines must respect. */
-  padding: 18,
-  lineGap: 22,
-  dim: 0.45,
-  /** Fraction of the beat by which the last line has landed. */
+  centreY: 640,
+  fontSize: 56,
+  stackedFontSize: 48,
+  minFontSize: 26,
+  padding: 24,
+  lineGap: 26,
+  dim: 0.42,
   landedBy: 0.8,
-  colour: '#1E76C3',
-  /** The result lands in this and settles to `colour`. */
-  emphasis: '#F26B1D',
+  colour: PALETTE.text,
+  emphasis: PALETTE.accent,
   settleFrames: 36,
+  /** How far the image behind the stack is pushed back. */
+  imageDim: 0.28,
+  imageBlur: 8,
 };
 
-/** Slow push-in on a sourced image over its beat. */
-export const IMAGE_DRIFT = 0.08;
+/** Slow push-in on an image over its beat. */
+export const IMAGE_DRIFT = 0.09;
 
 export const FIT_STEP = 2;

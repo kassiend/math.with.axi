@@ -1,0 +1,41 @@
+{
+  "kind": "story",
+  "hook": "A triangle cuts a square hole — patented 1914.",
+
+  "instagram": {
+    "caption": "A triangle cuts a square hole — patented 1914.\n\nThe bit is a Reuleaux triangle. Measure it any direction: the width never changes. That constant width is what lets it trace a square path inside a floating chuck.\n\nCheck your pocket. UK 20p and 50p coins are the same shape family — Reuleaux heptagons, seven curved sides, still round enough to roll in any slot.\n\nSave this and check your pocket.",
+    "first_comment": "#math #geometry #science #topology #mathfacts #geometryfacts #coolmath #mathtok #ReuleauxTriangle #constantwidth #MathWithAxi #curveofconstantwidth #coinmath #geometrytrivia\n\nDid you check your pocket? What shape did you think those coins were?"
+  },
+
+  "tiktok": {
+    "caption": "A triangle cuts a square hole — patented 1914. Your 20p and 50p are the same idea. Check your pocket. #math #geometry #MathWithAxi #learnontiktok",
+    "first_comment": null
+  },
+
+  "youtube": {
+    "title": "The Triangle Drill That Cuts Square Holes",
+    "description": "A triangle cuts a square hole — patented 1914.\n\nThe bit is a Reuleaux triangle. Measure it any direction: the width never changes. That constant width is what lets it trace a square path.\n\nYour UK 20p and 50p are the same shape family — Reuleaux heptagons, seven curved sides, still round enough to roll.\n\nSave this and check your pocket.\n\n#geometry #ReuleauxTriangle\n#Shorts",
+    "tags": [
+      "reuleaux triangle",
+      "constant width",
+      "square hole drill",
+      "curve of constant width",
+      "20p coin",
+      "50p coin",
+      "Barbier theorem",
+      "geometry",
+      "topology",
+      "math facts",
+      "math with axi",
+      "heptagon coin",
+      "drill bit geometry",
+      "cool math",
+      "shape math"
+    ],
+    "first_comment": "Did you check your pocket? Drop a comment — did you know the 20p and 50p weren't actually round?"
+  },
+
+  "alt_text": "White card with the title 'The drill that cuts squares.' at the top, Axi the mascot reading in the upper corner. Three photographs follow in sequence: a drill press cutting a square hole into a brass plate under a warm lamp; a Reuleaux-triangle drill bit resting in caliper jaws showing equal widths on every side; and two heptagonal UK coins — a 50p and a 20p — on a dark oak table. Between the second and third images, formula lines build from a single arc length up to P = πw.",
+
+  "nulls": []
+}

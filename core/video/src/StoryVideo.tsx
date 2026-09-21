@@ -13,6 +13,7 @@
  * held frame reads as what he is actually doing, which is standing still and reading.
  */
 import { AbsoluteFill, Audio, Img, Sequence, staticFile, useCurrentFrame } from 'remotion';
+import { MusicBed, type MusicBedProps } from './MusicBed';
 import { MascotTake } from './MascotTake';
 import { Sfx, type SfxProps } from './Sfx';
 
@@ -34,8 +35,12 @@ export type StoryVideoProps = {
     pauseFrame: number;
   };
   audio: { clips: Array<{ id: string; src: string; from: number; durationInFrames: number }> };
-  /** A pop at each beat boundary and at the ask. */
+  /** Whooshes and impacts at beat boundaries; see the orchestrator for which lands where. */
   sfx: null | SfxProps;
+  /** Extra one-shot layers (an impact on the stat beat, say). */
+  hits?: SfxProps[];
+  /** The generated music bed, ducked under the narration. */
+  music: null | MusicBedProps;
 };
 
 export const storyVideoDefaults: StoryVideoProps = {
@@ -44,9 +49,11 @@ export const storyVideoDefaults: StoryVideoProps = {
   mascot: null,
   audio: { clips: [] },
   sfx: null,
+  hits: [],
+  music: null,
 };
 
-export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio, sfx }) => {
+export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio, sfx, hits = [], music }) => {
   const frame = useCurrentFrame();
   const scale = capture.width / DESIGN_W;
 
@@ -69,6 +76,8 @@ export const StoryVideo: React.FC<StoryVideoProps> = ({ capture, mascot, audio, 
         </Sequence>
       ))}
       {sfx && <Sfx {...sfx} />}
+      {hits.map((h, i) => <Sfx key={`hit-${i}`} {...h} />)}
+      {music && <MusicBed {...music} />}
     </AbsoluteFill>
   );
 };

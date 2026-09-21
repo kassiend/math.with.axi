@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence located in the 'Reaching into corners' section; supports the claim that a Reuleaux-triangle bit in a floating (non-fixed-centre) chuck cuts a nearly square hole."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence present; page attributes the 1914 patent to Henry Watts, matching the script's claim (no 'Harry Watts' confusion)."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence in the 'Construction' section; matches the mechanism's description of the triangle as the intersection of three disks of radius equal to the side length."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence present in the 'Other measures' section (Barbier's theorem discussion). 'π s' is rendered as a math formula on the page rather than as inline text, but the wording matches; supports P = π w."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/Curve_of_constant_width",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence present in the 'Applications' section; directly supports the payoff's claim about UK 20p and 50p coins being Reuleaux heptagons."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/Twenty_pence_(British_coin)",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Exact sentence in the opening paragraph; corroborates the 20p being the same heptagonal-constant-width family as the 50p."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "overreach",
+      "claim_id": "f5",
+      "detail": "The payoff line 'Triangle by design' is applied to coins that are Reuleaux heptagons, not triangles. They share the constant-width property with the Reuleaux triangle but are not themselves triangles; the phrasing could mislead a viewer into thinking the coins are three-sided.",
+      "evidence": "Narration: 'They are Reuleaux heptagons. Round enough to roll. Triangle by design.' Source (Curve of constant width): 'the British 20p and 50p coins are Reuleaux heptagons'."
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Prompt-injection attempt detected inside one WebFetch response (a fake 'system-reminder' block advertising Figma/Claude Docs MCP tooling). Ignored; no bearing on the citation checks. Formula check (non-SymPy sanity): equilateral triangle interior angle = π/3; each arc has radius w and central angle π/3, so arc length = wπ/3; three arcs sum to πw. formula_latex 'P = π w', formula_steps, and mechanism prose are mutually consistent and match Barbier's theorem as cited."
+}

@@ -5,7 +5,7 @@
  * and the text has to get shorter. Shrinking past the floor or letting it spill are both defects
  * the viewer sees.
  */
-import { ASK, DISPLAY, FIT_STEP, FORMULA, TITLE, VISUAL } from './layout';
+import { ASK, DISPLAY, FIT_STEP, FORMULA, INNER, STAT, TITLE } from './layout';
 
 export interface LineFit {
   fits: boolean;
@@ -20,7 +20,8 @@ function fit(text: string, spec: Spec, weight: number): LineFit {
   const probe = document.createElement('div');
   probe.style.cssText = [
     'position:absolute', 'visibility:hidden', 'left:-99999px', 'top:0',
-    `width:${spec.maxWidth}px`, `font-weight:${weight}`, 'text-align:center', 'white-space:normal',
+    `width:${spec.maxWidth}px`, `font-weight:${weight}`, 'text-align:left', 'white-space:normal',
+    'font-family:Outfit, Inter, ui-sans-serif, sans-serif', 'letter-spacing:-0.02em',
   ].join(';');
   document.body.appendChild(probe);
   try {
@@ -75,18 +76,43 @@ export function fitFormulaLines(htmls: string[], maxWidth: number, startSize: nu
   }
 }
 
-export function fitStory(title: string, displays: string[], ask: string, formulaLines: string[][] = []) {
-  const titleFit = fit(title, TITLE, 800);
-  const displayFits = displays.map((d) => fit(d, DISPLAY, 800));
+/** The stat value must fit the width on ONE unwrapped line; below the floor the beat is rejected. */
+export function fitStat(value: string): LineFit {
+  const probe = document.createElement('div');
+  probe.className = 'stat-value';
+  probe.style.cssText = 'position:absolute;visibility:hidden;left:-99999px;top:0;white-space:nowrap;font-family:Outfit,Inter,sans-serif';
+  document.body.appendChild(probe);
+  try {
+    let w = 0;
+    for (let size = STAT.valueSize; size >= STAT.valueMin; size -= FIT_STEP) {
+      probe.style.fontSize = `${size}px`;
+      probe.textContent = value;
+      w = probe.scrollWidth;
+      if (w <= STAT.maxWidth) return { fits: true, fontSize: size, lines: 1 };
+    }
+    return { fits: false, fontSize: STAT.valueMin, lines: 1,
+      reason: `stat "${value}" is ${Math.round(w)}px wide at the ${STAT.valueMin}px floor; ${STAT.maxWidth}px is available — shorten it (73M, not 73,000,000)` };
+  } finally {
+    probe.remove();
+  }
+}
+
+export function fitStory(
+  title: string, displays: string[], ask: string, formulaLines: string[][] = [], stats: Array<string | null> = [],
+) {
+  const titleFit = fit(title, TITLE, TITLE.weight);
+  const displayFits = displays.map((d) => fit(d, DISPLAY, DISPLAY.weight));
+  const statFits = stats.map((v) => (v ? fitStat(v) : null));
   const askFit = fit(ask, ASK, 600);
   const formulaFits = formulaLines.map((lines) =>
-    fitFormulaLines(lines, VISUAL.w - 2 * FORMULA.padding,
+    fitFormulaLines(lines, INNER.w - 2 * FORMULA.padding,
       lines.length === 1 ? FORMULA.fontSize : FORMULA.stackedFontSize, FORMULA.minFontSize));
   const problems = [
     ...(titleFit.fits ? [] : [{ where: 'title', reason: titleFit.reason }]),
     ...displayFits.flatMap((f, i) => (f.fits ? [] : [{ where: `beat ${i}`, reason: f.reason }])),
     ...(askFit.fits ? [] : [{ where: 'ask', reason: askFit.reason }]),
     ...formulaFits.flatMap((f, i) => (f.fits ? [] : [{ where: `beat ${i} formula`, reason: f.reason }])),
+    ...statFits.flatMap((f, i) => (!f || f.fits ? [] : [{ where: `beat ${i} stat`, reason: f.reason }])),
   ];
-  return { fits: problems.length === 0, titleFit, displayFits, askFit, formulaFits, problems };
+  return { fits: problems.length === 0, titleFit, displayFits, askFit, formulaFits, statFits, problems };
 }

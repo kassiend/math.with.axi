@@ -52,9 +52,15 @@ same isolation boundary as everywhere else, `core/agents/ISOLATION.md`.
   "beats": [                             // four, in this order. See §5
     { "beat": "hook",      "narration": "...", "display": "...",
       "visual": "image|formula|shape|none",
-      "image_id": "i1" },                // REQUIRED when visual is "image" — which image.
-                                         // Omitted, images are handed out in order and a beat
-                                         // may get one that does not match what it says.
+      "image_id": "i1",                  // REQUIRED for every beat but a formula beat: the image
+                                         // that fills the card behind it. A formula beat keeps
+                                         // the previous image, dimmed.
+      "stat": { "prefix": "1 in", "value": "73M", "suffix": null, "count": true } },
+                                         // OPTIONAL: the number the thumb stops for, counted up
+                                         // huge in the accent. value <= 9 characters ("73M",
+                                         // "$1.2B", "38 µs"). One or two beats at most. A
+                                         // quantity counts up from zero; a year does not
+                                         // (detected, or set count:false).
     { "beat": "turn",      "narration": "...", "display": "...", "visual": "image", "image_id": "i2" },
     { "beat": "mechanism", "narration": "...", "display": "...", "visual": "formula" },
     { "beat": "payoff",    "narration": "...", "display": "...", "visual": "image", "image_id": "i1" }
@@ -67,6 +73,8 @@ same isolation boundary as everywhere else, `core/agents/ISOLATION.md`.
                                          // is genuinely no derivation to show
   "mechanism":     "string",             // why it is true / why it works, plain language
   "ask":           "Save this one.",     // the closing line, <= 6 words. One action.
+  "music_prompt":  "string",             // the bed, one sentence: mood, tempo, instruments.
+                                         // Instrumental is added automatically. See §5.5
   "check_script":  "string | null",      // relative to the run dir; null with a reason if the
                                          // claim is not the kind SymPy can settle
 
@@ -116,6 +124,36 @@ used instead and why.
 
 ---
 
+## 3.5 Viral, or it does not ship
+
+The area is assigned; the *subject and angle inside it* are chosen to be shared. Use the
+**going-viral** skill for the strategy and **story-hook** for the opening. Before writing, answer
+in one line each, and put the answers in `viral_read` in the output:
+
+1. **Goal** — SHARE (awe, indignation, "you're being lied to") or SAVE ("I'll need this"). Pick
+   one. A story that wants both gets neither.
+2. **The identity signal** — what does sending this make the sender look like? Smart, early,
+   right, the one who knows the trick. If sending it makes nobody look like anything, change
+   the angle.
+3. **The stat** — one number a viewer can repeat at dinner. `1 in 73,000,000`. `38 microseconds`.
+   `$1,000,000,000`. If the story has one, it goes on the hook or turn beat as `stat`.
+4. **The gap** — what the viewer does not know at 0:03 and cannot leave without.
+
+**Subjects that carry.** Money made or lost, a person jailed or freed, a casino or a lottery
+beaten, a machine or a phone that only works because of the maths, a disaster a number could have
+prevented, a thing everyone believes that is false, a trick the viewer can use tonight. A
+biography carries only when the angle is one of those — nobody shares a birth date.
+
+**Titles are consequences.** `The number that jailed a mother`, not `The prosecutor's fallacy`.
+`Your GPS is wrong by 11 km a day`, not `Relativity in satellites`. Six words or fewer, a thing
+that happened, no names, no dates. The title is the on-screen hook for the whole post; it is on
+every frame.
+
+**The test.** Would a sixteen-year-old send this to a friend with no caption? If the honest
+answer is no, it is a lecture. Change the angle, not the polish.
+
+---
+
 ## 4. Deduplication — subject AND angle
 
 ```bash
@@ -151,6 +189,17 @@ em-dashes as pacing: one `[pause]` was measured producing 2.98 s of silence in a
 Emotion tags yes, one or two per beat; timing comes from punctuation, and the pipeline trims
 anything longer than 0.3 s afterwards.
 
+**Pace.** The first render was slow. Sentences of **three to nine words**. Full stops, not
+commas. No subordinate clauses. The hook beat is under **3 seconds** of speech — one sentence,
+maybe two. The whole story is **35–50 seconds** of speech, never more; the narrator renders at
+tempo 1.12 with pauses cut to 0.15 s, and what is left has to have been tight to begin with.
+Read every beat aloud with a stopwatch before writing it down.
+
+**Display lines are headlines, not formulas.** Five words or fewer, and never a formula in
+words — the mechanism beat's display says what the maths *does* (`One number, squared`), while
+the formula itself is drawn from `formula_steps`. Copying narration onto the card is the worst
+outcome available: the viewer reads faster than you speak, finishes early, and stops listening.
+
 Each beat carries **two texts, and they are not the same text**:
 
 - `narration` — full sentences, spoken. This is what is heard.
@@ -158,6 +207,22 @@ Each beat carries **two texts, and they are not the same text**:
 
 Copying narration onto the card is the worst outcome available: the viewer reads faster than you
 speak, finishes early, and stops listening.
+
+---
+
+### 5.5 Music
+
+Every story has a bed, generated from `music_prompt` at the post's length and ducked under the
+voice. One sentence: **mood, tempo, instruments, and what it must not be.** It follows the
+story, not the area — a jailed mother is not a jaunty bed.
+
+| story | prompt |
+|---|---|
+| a wrongful conviction | `slow cinematic tension, sparse piano over a low string drone, a soft ticking pulse, no melody, documentary underscore` |
+| a casino beaten | `sly, confident mid-tempo groove, muted brass stabs, upright bass, a hint of swing, heist film` |
+| a satellite that would drift | `airy synth pads, slow arpeggio, quiet awe, science documentary, no drums until the last third` |
+
+No vocals is added automatically. Never ask for a known artist or a named track.
 
 ---
 
@@ -216,59 +281,47 @@ Three absolute rules:
 
 ## 8. Images
 
-Two sources, and no third.
+**Every beat except a formula beat has its own image, and it fills the card.** The image is not
+an illustration in a slot any more; it is the frame the story plays in. Generate — do not
+hesitate. The budget exists to be spent on images that make a thumb stop.
 
-**Wikimedia Commons**, through the tool, which refuses anything that is not public domain or
-permissive Creative Commons and returns the attribution the post owes:
+**Gemini generation** is the default:
+
+```bash
+node core/tools/gemini-image.mjs generate "<prompt>" --out <run>/images/i1.png --aspect 9:16
+```
+
+`--aspect 9:16` is mandatory for stories: the card is 612 × 1040 inside its border and covers the
+image with almost no crop at 9:16. A 4:3 or square image loses a third of itself.
+
+**How to prompt.** Cinematic photograph, not illustration, unless the story is about an
+abstraction. One subject, off-centre, dramatic light, shallow depth, a colour the whole story can
+share. Leave the top third and bottom third quiet — the title and the line sit on dark scrims
+there — so the subject lives in the middle band. Name the era and the place. Never text in the
+image; the card supplies the words. Never a face meant to be a real person.
+
+| beat | prompt shape |
+|---|---|
+| hook | the consequence as an object or a scene: an empty cot in a dim room, a courtroom bench under one lamp, a satellite against a black limb of Earth |
+| turn | the person or the thing, without a face if the person is real: hands on a ledger, a chalk board, a lab bench |
+| payoff | where it lives today: a phone on a dashboard at night, a betting slip, a signed paper |
+
+**Wikimedia Commons** for a real person's likeness and for historical photographs, through the
+tool that refuses anything not public domain or permissive CC and returns the attribution owed:
 
 ```bash
 node core/tools/wikimedia.mjs search "Leonhard Euler portrait" --limit 6
-```
-
-NonCommercial and NoDerivatives are rejected outright: the channel is monetisable and the image
-is composited into a derived work, so both would be violated by the use itself.
-
-**Gemini generation**, for diagrams, scenes, objects and eras Commons cannot supply:
-
-```bash
-node core/tools/gemini-image.mjs generate "<prompt>" --out <run>/images/i2.png
 ```
 
 > **A real person's likeness is never generated.** A generated "Euler" is an invented face
 > presented as a historical fact — the visual form of the fabrication §3.3 forbids everywhere
 > else. Real people come from Commons, or the story runs without a portrait.
 
-**Cost.** Each generated image is billed. Published prices, Aug 2026:
-
-| model | per image | note |
-|---|---|---|
-| `imagen-4.0-fast-generate-001` | $0.020 | cheapest; strong on photoreal scenes |
-| `gemini-3.1-flash-lite-image` | $0.0336 | newest cheap tier |
-| `gemini-2.5-flash-image` | $0.039 | good instruction-following, much cheaper |
-| `imagen-4.0-generate-001` | $0.040 | |
-| **`gemini-3-pro-image`** | **$0.134** | **default** — best composition fidelity |
-
-The card shows images at 350 × 294 design px, so resolution above 1K is cropped away unseen. Pro
-is the default for hit-rate rather than pixels: a regeneration costs a full image either way, so
-a model that lands the brief first time is cheaper than its sticker price.
-
-**At this price the image budget is the binding constraint on the section.** Roughly $0.40 a
-story at three images, so a $25 balance is about 62 stories. Generate only what the story
-genuinely needs — two or three — never one per beat, and reach for Commons first every time.
-Check the running total:
-
-```bash
-node core/tools/gemini-image.mjs cost          # spend so far against a $25 budget
-```
-
-Generated images come back **4:3** (1200 × 896 observed). Left unset the model returns landscape
-(1408 × 768), and the card slot is 350 × 294 — `object-fit: cover` would then discard most of the
-frame, so the composition the prompt asked for is not the one that ships. Write prompts for a
-4:3 frame with the subject centred and margins to spare.
-
-Generation may be unavailable — the key is supplied separately and `gemini-image.mjs check`
-reports it. If it is unavailable, say so in `nulls[]` and design around what Commons has. Do not
-ship a placeholder.
+**Cost.** Each generated image is billed (`gemini-3-pro-image`, $0.134; cheaper tiers exist —
+see `core/tools/gemini-image.mjs`). Three images a story, about $0.40. Check the running total
+with `node core/tools/gemini-image.mjs cost`. Generation may be unavailable — the key is supplied
+separately and `gemini-image.mjs check` reports it; if so, say so in `nulls[]` and use Commons.
+Do not ship a placeholder and do not ship a beat with no image.
 
 ---
 
@@ -285,24 +338,28 @@ Identical to the other two sections — the same component, the same numbers:
 | card | x 54, y 120, w 612, h 1050, radius 40, border 5 px `#000000`, fill `#FFFFFF` |
 | background | rotated from `assets/images/bg/`, `object-fit: cover`, blurred 14 px |
 
-### 9.2 Content bands, measured from `story_example.png`
+### 9.2 The card — documentary-cinematic
 
-| element | band |
+The image covers the card's interior (612 × 1040 inside the 5 px border, clipped to the radius)
+and drifts in 9 % over its beat. Dark scrims (`#07090F`) carry the type: top 420 px at 78 %
+fading to clear, bottom 560 px at 92 % fading to clear. Nothing inside the card is white.
+
+| element | spec |
 |---|---|
-| mascot | at rest x 310, y 150, w 100, h 155 — larger than the mockup's 69 × 107, at which he was a detail rather than a presence |
-| title | top y 330, centred, Inter ExtraBold 54 px (fit to 34), max 3 lines |
-| image / visual | x 78, y 500, w 564, h 470, radius 32 — nearly the full card width |
-| display line | top y 1002, Inter ExtraBold 44 px (fit to 30), `#1E76C3`, max 2 lines, built token by token as the beat opens |
-| ask | centred on y 1136, Inter SemiBold 28 px (fit to 22), `#5B6470`, one line; appears 24 frames into the payoff beat and stays through the hold. When the narration carries an `outro` clip it plays after the payoff beat, over the ask, and the hold follows it |
+| mascot | at rest x 310, y 150, w 100, h 155, over the top scrim — Remotion draws it |
+| title | Outfit 900, 62 px (fit to 40), white, tracking −0.03 em, left x 110, top y 330, max 3 lines, on every frame |
+| stat | optional per beat: prefix Outfit 700 40 px white/85 %, value Outfit 900 128 px (fit to 64, one unwrapped line) in `#F26B1D`, counted up from zero over 36 frames, centred on y 700, left-aligned |
+| formula stack | over the image dimmed to 28 % and blurred 8 px: lines in white, the last in `#F26B1D`, 56 px single / 48 px stacked (fit to 26 against 564 px), centred on y 640 |
+| display line | Outfit 800 54 px (fit to 34), white, left x 110, top y 918, max 3 lines, built token by token |
+| ask | Outfit 600 28 px white/72 %, left x 110, centred on y 1120, 24 frames into the payoff beat and through the hold |
+| progress | 5 px hairline along the card's bottom edge, `#F26B1D` over white/18 %, filling across the post |
 
-The formula and drawn shapes occupy the same band as the image — one visual at a time, swapped
-per beat with an 8-frame cross-fade (outgoing drifts up and out while the incoming rises; there
-is never an empty slot). A sourced image drifts in 8 % over its beat; a `formula_steps` stack
-lands one line at a time, the last line by 80 % of the beat, at 38 px (46 px for a single
-line); the last line lands in `#F26B1D` and settles to blue over 36 frames. A pop
-(`assets/audio/sfx/pop.wav`) marks each beat boundary and the ask. The card is opaque from frame 0 and the blurred background drifts 6 % over the post.
-Auto-fit as elsewhere; if a line does not fit at the floor, the beat is rejected rather than
-overflowing.
+Beat changes cross-fade over 8 frames — image and type together; there is never an empty card.
+A formula beat keeps the previous beat's image behind it.
+
+**Audio.** Narration at tempo 1.12 with pauses cut to 0.15 s. A whoosh on every beat change, a
+soft impact where a stat lands, a bell where the formula stack begins, and the music bed from
+`music_prompt` at 50 % ducked to 16 % under speech. SFX live in `assets/audio/sfx/story/`.
 
 ### 9.3 The mascot — enter, read, leave
 

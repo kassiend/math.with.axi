@@ -49,3 +49,7 @@
 {"t":"2026-09-18T12:26:14.704Z","event":"caption.ready","kind":"story"}
 {"t":"2026-09-18T12:26:20.614Z","event":"post.delivered","kind":"story","id":"ramanujan-1729-taxicab","file":"output/posts/stories/ramanujan-1729-taxicab.mp4"}
 {"t":"2026-09-18T12:26:20.615Z","event":"batch.done","ok":6,"failed":0}
+{"t":"2026-09-21T07:39:09.155Z","event":"post.start","kind":"story","attempt":1}
+{"t":"2026-09-21T08:02:06.930Z","event":"caption.ready","kind":"story"}
+{"t":"2026-09-21T08:02:17.971Z","event":"post.delivered","kind":"story","id":"reuleaux-drill-square-holes","file":"output/posts/stories/reuleaux-drill-square-holes.mp4"}
+{"t":"2026-09-21T08:02:17.973Z","event":"batch.done","ok":1,"failed":0}

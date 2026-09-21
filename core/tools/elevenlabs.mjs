@@ -68,7 +68,15 @@ const cacheKey = (text, voice, model, settings) =>
  * Synthesize one clip. Returns its path, measured duration, and whether the cache served it.
  * The duration is measured with ffprobe, never estimated — it becomes the step's on-screen length.
  */
-export async function say(text, outFile, { settings = DEFAULT_SETTINGS, env = loadEnv() } = {}) {
+/**
+ * @param tempo   playback-rate multiplier applied after trimming, pitch preserved (ffmpeg atempo).
+ *                eleven_v3 ignores voice_settings.speed (measured: 5.84 s at 1.0, 5.92 s at 1.15),
+ *                so pace is set here. 1.0 = as synthesised; stories use ~1.12.
+ * @param keepSilence  how much of each internal pause survives trimming, seconds.
+ */
+export async function say(text, outFile, {
+  settings = DEFAULT_SETTINGS, env = loadEnv(), tempo = 1, keepSilence = TRIM_KEEP,
+} = {}) {
   if (!text || !text.trim()) throw new Error('refusing to synthesize empty text');
 
   fs.mkdirSync(CACHE_DIR, { recursive: true });
@@ -102,8 +110,8 @@ export async function say(text, outFile, { settings = DEFAULT_SETTINGS, env = lo
     fs.writeFileSync(cached, buf);
   }
 
-  const wasCached = fs.existsSync(outFile) && fs.readFileSync(outFile).equals(fs.readFileSync(cached));
-  trimSilence(cached, outFile);
+  const wasCached = fs.existsSync(cached);
+  trimSilence(cached, outFile, { keepSilence, tempo });
 
   // Measured AFTER trimming: this duration becomes the beat's on-screen length, so it has to be
   // the length of the file that actually plays.
@@ -125,17 +133,51 @@ export async function say(text, outFile, { settings = DEFAULT_SETTINGS, env = lo
  * Falls back to a plain copy if ffmpeg refuses: a clip with long pauses is worse than one without,
  * but a missing clip is worse than both.
  */
-export function trimSilence(src, dest) {
-  const filter = [
+export function trimSilence(src, dest, { keepSilence = TRIM_KEEP, tempo = 1 } = {}) {
+  const filters = [[
     `silenceremove=start_periods=1:start_silence=0.03:start_threshold=${TRIM_THRESHOLD}`,
-    `stop_periods=-1:stop_duration=${TRIM_ABOVE}:stop_silence=${TRIM_KEEP}:stop_threshold=${TRIM_THRESHOLD}`,
-  ].join(':');
+    `stop_periods=-1:stop_duration=${TRIM_ABOVE}:stop_silence=${keepSilence}:stop_threshold=${TRIM_THRESHOLD}`,
+  ].join(':')];
+  // atempo keeps pitch; it accepts 0.5–2.0 per stage, which is all this will ever need.
+  if (tempo !== 1) filters.push(`atempo=${Math.min(2, Math.max(0.5, tempo)).toFixed(3)}`);
+  const filter = filters.join(',');
   try {
     execFileSync(FFMPEG, ['-y', '-v', 'error', '-i', src, '-af', filter, '-c:a', 'libmp3lame', '-q:a', '2', dest],
       { stdio: ['ignore', 'pipe', 'pipe'] });
   } catch {
     fs.copyFileSync(src, dest);
   }
+}
+
+/**
+ * A music bed from the ElevenLabs Music API. Cached by prompt and length. Instrumental by
+ * contract — the prompt always says so, because a bed with a vocal line fights the narration.
+ */
+export async function music(prompt, seconds, outFile, { env = loadEnv() } = {}) {
+  if (!prompt?.trim()) throw new Error('refusing to generate music from an empty prompt');
+  fs.mkdirSync(CACHE_DIR, { recursive: true });
+  fs.mkdirSync(path.dirname(outFile), { recursive: true });
+  const full = `${prompt.trim()}. Instrumental only, no vocals, no lyrics.`;
+  const ms = Math.round(seconds * 1000);
+  const hash = crypto.createHash('sha256').update(JSON.stringify({ music: full, ms })).digest('hex').slice(0, 32);
+  const cached = path.join(CACHE_DIR, `music-${hash}.mp3`);
+  if (!fs.existsSync(cached)) {
+    const res = await fetch(`${API}/music`, {
+      method: 'POST',
+      headers: { 'xi-api-key': env.key, 'content-type': 'application/json', accept: 'audio/mpeg' },
+      body: JSON.stringify({ prompt: full, music_length_ms: ms }),
+    });
+    if (!res.ok) throw new Error(`ElevenLabs music returned ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (buf.subarray(0, 1).toString() === '{') {
+      throw new Error(`ElevenLabs returned JSON where audio was expected: ${buf.toString('utf8').slice(0, 300)}`);
+    }
+    fs.writeFileSync(cached, buf);
+  }
+  fs.copyFileSync(cached, outFile);
+  const dur = Number(execFileSync(FFPROBE, ['-v', 'error', '-show_entries', 'format=duration',
+    '-of', 'default=noprint_wrappers=1:nokey=1', outFile], { encoding: 'utf8' }).trim());
+  return { file: outFile, seconds: Number(dur.toFixed(3)), hash };
 }
 
 export async function quota(env = loadEnv()) {
@@ -157,11 +199,15 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   try {
     if (argv[0] === 'say') {
       const text = flag('text') ?? fs.readFileSync(flag('text-file'), 'utf8');
-      console.log(JSON.stringify(await say(text, path.resolve(flag('out'))), null, 2));
+      const tempo = flag('tempo') ? Number(flag('tempo')) : 1;
+      const keepSilence = flag('keep-silence') ? Number(flag('keep-silence')) : TRIM_KEEP;
+      console.log(JSON.stringify(await say(text, path.resolve(flag('out')), { tempo, keepSilence }), null, 2));
+    } else if (argv[0] === 'music') {
+      console.log(JSON.stringify(await music(flag('prompt'), Number(flag('seconds') ?? 60), path.resolve(flag('out'))), null, 2));
     } else if (argv[0] === 'quota') {
       console.log(JSON.stringify(await quota(), null, 2));
     } else {
-      console.error('commands: say --text <t> --out <file> | say --text-file <f> --out <file> | quota');
+      console.error('commands: say --text <t> --out <file> [--tempo 1.12] [--keep-silence 0.15] | say --text-file <f> --out <file> | music --prompt <p> --seconds <n> --out <file> | quota');
       process.exit(2);
     }
   } catch (err) {

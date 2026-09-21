@@ -25,6 +25,7 @@ import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
 import { resolveBin, runTool, FFPROBE } from './lib/platform.mjs';
 import { buildStoryTimeline, FPS } from '../shared/story-timeline.ts';
+import { music as generateMusic } from '../tools/elevenlabs.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -137,6 +138,8 @@ async function main() {
       // with the narration instead of showing the finished formula for the whole beat.
       formula_steps: b.visual === 'formula' ? (b.formula_steps ?? story.formula_steps ?? null) : null,
       shape_svg: b.visual === 'shape' ? (b.shape_svg ?? null) : null,
+      // A huge counted-up number for this beat, when the writer gave one.
+      stat: b.stat ?? null,
     })),
   };
 
@@ -176,7 +179,15 @@ async function main() {
       pauseFrame: timeline.mascot.pauseFrame,
     },
     audio,
-    sfx: stageSfx(run, [...timeline.beats.slice(1).map((b) => b.start), timeline.hold.start]),
+    // A whoosh on every beat change; an impact where a stat lands; the bell on the formula.
+    sfx: stageSfx(run, 'whoosh.wav', timeline.beats.slice(1).map((b) => b.start), 0.5),
+    hits: [
+      stageSfx(run, 'impactSoft_heavy_001.wav',
+        timeline.beats.filter((b) => story.beats[b.index]?.stat?.value).map((b) => b.start + 2), 0.6),
+      stageSfx(run, 'impactBell_heavy_000.wav',
+        timeline.beats.filter((b) => story.beats[b.index]?.visual === 'formula').map((b) => b.start + 2), 0.35),
+    ].filter((h) => h && h.frames.length),
+    music: await stageMusic(run, story, narration, timeline),
   };
 
   const propsFile = path.join(runDir, 'remotion.props.json');
@@ -220,14 +231,42 @@ async function main() {
 
 // ---------------------------------------------------------------------------
 
-/** The pop that marks each beat landing. Staged under public/ like the narration. */
-function stageSfx(run, frames) {
-  const src = path.join(ASSETS, 'audio', 'sfx', 'pop.wav');
-  if (!fs.existsSync(src)) return null;
+/** One story SFX from assets/audio/sfx/story/, staged under public/ like the narration. */
+function stageSfx(run, name, frames, volume) {
+  const src = path.join(ASSETS, 'audio', 'sfx', 'story', name);
+  if (!fs.existsSync(src) || !frames.length) return null;
   const dir = path.join(PUBLIC, 'audio', run.id);
   fs.mkdirSync(dir, { recursive: true });
-  fs.copyFileSync(src, path.join(dir, 'pop.wav'));
-  return { src: `audio/${run.id}/pop.wav`, frames, volume: 0.45 };
+  fs.copyFileSync(src, path.join(dir, name));
+  return { src: `audio/${run.id}/${name}`, frames, volume };
+}
+
+/**
+ * The music bed: generated from the writer's `music_prompt` at the post's length (cached by
+ * prompt + length, so a re-render costs nothing), ducked under every narration clip. A story
+ * without a music_prompt renders without a bed rather than with a wrong one.
+ */
+async function stageMusic(run, story, narration, timeline) {
+  const prompt = story.music_prompt;
+  if (!prompt) { log(run, 'music.skipped', { reason: 'no music_prompt in story.out.json' }); return null; }
+  const seconds = Math.ceil(timeline.totalSeconds + 2);
+  const dir = path.join(PUBLIC, 'audio', run.id);
+  fs.mkdirSync(dir, { recursive: true });
+  let file;
+  try {
+    ({ file } = await generateMusic(prompt, seconds, path.join(dir, 'music.mp3')));
+  } catch (err) {
+    log(run, 'music.failed', { error: String(err.message).slice(0, 200) });
+    return null;
+  }
+  // Keep a copy in the run dir so the render is reproducible from it.
+  fs.copyFileSync(file, path.join(run.dir, 'audio', 'music.mp3'));
+  const speech = narration.beats.map((b, i) => ({
+    from: timeline.beats[i].start, to: timeline.beats[i].start + Math.round(b.seconds * FPS),
+  }));
+  if (!timeline.outro.silent) speech.push({ from: timeline.outro.start, to: timeline.outro.end });
+  log(run, 'music.ready', { seconds, prompt: prompt.slice(0, 80) });
+  return { src: `audio/${run.id}/music.mp3`, speech, bed: 0.5, duck: 0.16, rampFrames: 10, totalFrames: timeline.totalFrames };
 }
 
 function readJson(file, label) {

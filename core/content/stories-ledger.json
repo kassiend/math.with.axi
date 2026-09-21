@@ -111,6 +111,32 @@
       ],
       "video": "output/posts/stories/ramanujan-1729-taxicab.mp4",
       "run_dir": "out/runs/story-2026-09-18T12-01-21-807Z"
+    },
+    {
+      "story_id": "reuleaux-drill-square-holes",
+      "area": "topology-and-geometry",
+      "subject_slug": "reuleaux-triangle",
+      "angle_slug": "drill-square-holes",
+      "title": "The drill that cuts squares.",
+      "status": "shipped",
+      "created_at": "2026-09-21T08:03:28.885Z",
+      "seconds": 38.3,
+      "image_credits": [
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "generated",
+          "attribution": null
+        },
+        {
+          "source": "generated",
+          "attribution": null
+        }
+      ],
+      "video": "output/posts/stories/reuleaux-drill-square-holes.mp4",
+      "run_dir": "out/runs/story-2026-09-21T07-39-09-175Z"
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "reuleaux-drill-square-holes",
+      "script": "verifier.checks/reuleaux-drill-square-holes.py",
+      "computed": "pi*w",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

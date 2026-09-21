@@ -1,0 +1,75 @@
+{
+  "story_id": "reuleaux-drill-square-holes",
+  "area": "topology-and-geometry",
+  "subject_slug": "reuleaux-triangle",
+  "angle_slug": "drill-square-holes",
+  "title": "The drill that cuts squares.",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "This drill is cutting a square hole.",
+      "display": "Square hole."
+    },
+    {
+      "beat": "turn",
+      "narration": "The bit is not a circle. It is called a Reuleaux triangle. Every diameter is the same. No matter which way you measure.",
+      "display": "Every diameter matches."
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Start with an equilateral triangle. From each corner sweep one arc. The radius equals the far side. Every arc bulges out that far. Slide a caliper across it. The width never changes. Add the three arc lengths. You get pi times the width.",
+      "display": "One width. Every direction."
+    },
+    {
+      "beat": "payoff",
+      "narration": "Now check your pocket. UK twenty and fifty pence coins. Feel the edges. They are not circles. They are Reuleaux heptagons. Round enough to roll. Triangle by design.",
+      "display": "Coins in disguise."
+    }
+  ],
+  "formula_latex": "P = \\pi\\, w",
+  "formula_steps": [
+    "\\text{width} = w",
+    "\\text{arc length} = w \\cdot \\tfrac{\\pi}{3}",
+    "3 \\cdot \\left( w \\cdot \\tfrac{\\pi}{3} \\right)",
+    "P = \\pi\\, w"
+  ],
+  "mechanism": "A Reuleaux triangle is the intersection of three disks, each of radius w, centred at the vertices of an equilateral triangle of side w. Its boundary is three circular arcs, each of radius w subtending the interior angle of the equilateral triangle, which is pi over three. One arc therefore has length w times pi over three; three of them add to pi times w. Barbier's theorem says the same number describes every curve of constant width w — a circle of diameter w has circumference pi times w as well.",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "A Reuleaux-triangle-shaped bit, mounted in a special floating chuck, drills a nearly square hole.",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "When mounted in a special chuck which allows for the bit not having a fixed centre of rotation, it can drill a hole that is nearly square."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "The square-hole drill was patented by Watts in 1914.",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "Although patented by Henry Watts in 1914, similar drills invented by others were used earlier."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "The Reuleaux triangle is the intersection of three disks centred at the vertices of an equilateral triangle, each with radius equal to the side length.",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "Or, equivalently, it may be constructed as the intersection of three disks centered at the vertices of T, with radius equal to the side length of T."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "The perimeter of a Reuleaux triangle of width s equals pi times s, matching the circumference of a circle of the same width (Barbier's theorem).",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "In particular this perimeter equals the perimeter of the circle with the same width, which is π s"
+    },
+    {
+      "claim_id": "f5",
+      "claim": "British 20p and 50p coins are Reuleaux heptagons — curves of constant width.",
+      "url": "https://en.wikipedia.org/wiki/Curve_of_constant_width",
+      "quote": "For instance the British 20p and 50p coins are Reuleaux heptagons, and the Canadian loonie is a Reuleaux 11-gon."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "The British 20p coin is an equilateral curve heptagon (same shape family as the 50p).",
+      "url": "https://en.wikipedia.org/wiki/Twenty_pence_(British_coin)",
+      "quote": "Like the 50p coin, it is an equilateral curve heptagon."
+    }
+  ]
+}

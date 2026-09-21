@@ -86,7 +86,13 @@ const isImagen = (model) => /^imagen-/i.test(model);
  */
 export const ASPECT_RATIO = '4:3';
 
-export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
+/**
+ * The story card is full-bleed now (612x1040 inside the border, ratio 0.59), so a story image is
+ * generated at 9:16 and covers the card with almost no crop. Lessons and tasks keep 4:3.
+ */
+export const STORY_ASPECT_RATIO = '9:16';
+
+export async function generate(prompt, outFile, { env = loadEnv(), aspect = ASPECT_RATIO } = {}) {
   if (!prompt?.trim()) throw new Error('refusing to generate from an empty prompt');
   if (REAL_PERSON_MARKERS.some((re) => re.test(prompt))) {
     throw new Error(
@@ -104,10 +110,10 @@ export async function generate(prompt, outFile, { env = loadEnv() } = {}) {
     const imagen = isImagen(env.model);
     const url = `${API}/${env.model}:${imagen ? 'predict' : 'generateContent'}?key=${env.key}`;
     const payload = imagen
-      ? { instances: [{ prompt }], parameters: { sampleCount: 1, aspectRatio: ASPECT_RATIO } }
+      ? { instances: [{ prompt }], parameters: { sampleCount: 1, aspectRatio: aspect } }
       : {
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { imageConfig: { aspectRatio: ASPECT_RATIO } },
+          generationConfig: { imageConfig: { aspectRatio: aspect } },
         };
 
     const res = await fetch(url, {
@@ -181,13 +187,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const flag = (n) => { const i = argv.indexOf(`--${n}`); return i === -1 ? undefined : argv[i + 1]; };
   try {
     if (argv[0] === 'generate') {
-      console.log(JSON.stringify(await generate(argv[1] ?? '', path.resolve(flag('out'))), null, 2));
+      const aspect = flag('aspect') ?? ASPECT_RATIO;
+      console.log(JSON.stringify(await generate(argv[1] ?? '', path.resolve(flag('out')), { aspect }), null, 2));
     } else if (argv[0] === 'check') {
       console.log(JSON.stringify({ available: available(), model: available() ? loadEnv().model : null }, null, 2));
     } else if (argv[0] === 'cost') {
       console.log(JSON.stringify(spend(Number(flag('budget') ?? 25)), null, 2));
     } else {
-      console.error('commands: generate <prompt> --out <file> | check | cost [--budget 25]');
+      console.error('commands: generate <prompt> --out <file> [--aspect 9:16] | check | cost [--budget 25]');
       process.exit(2);
     }
   } catch (err) {

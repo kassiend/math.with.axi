@@ -1,0 +1,120 @@
+{
+  "runId": "story-reuleaux-drill-square-holes",
+  "capture": {
+    "publicPath": "captures/story-reuleaux-drill-square-holes",
+    "frames": 1149,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 1028
+    },
+    "resume": {
+      "start": 1028,
+      "end": 1149
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-reuleaux-drill-square-holes/hook.mp3",
+        "from": 0,
+        "durationInFrames": 58
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-reuleaux-drill-square-holes/turn.mp3",
+        "from": 58,
+        "durationInFrames": 197
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-reuleaux-drill-square-holes/mechanism.mp3",
+        "from": 255,
+        "durationInFrames": 460
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-reuleaux-drill-square-holes/payoff.mp3",
+        "from": 715,
+        "durationInFrames": 372
+      },
+      {
+        "id": "outro",
+        "src": "audio/story-reuleaux-drill-square-holes/outro.mp3",
+        "from": 1087,
+        "durationInFrames": 26
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/story-reuleaux-drill-square-holes/whoosh.wav",
+    "frames": [
+      58,
+      255,
+      715
+    ],
+    "volume": 0.5
+  },
+  "hits": [
+    {
+      "src": "audio/story-reuleaux-drill-square-holes/impactSoft_heavy_001.wav",
+      "frames": [
+        2
+      ],
+      "volume": 0.6
+    },
+    {
+      "src": "audio/story-reuleaux-drill-square-holes/impactBell_heavy_000.wav",
+      "frames": [
+        257
+      ],
+      "volume": 0.35
+    }
+  ],
+  "music": {
+    "src": "audio/story-reuleaux-drill-square-holes/music.mp3",
+    "speech": [
+      {
+        "from": 0,
+        "to": 58
+      },
+      {
+        "from": 58,
+        "to": 255
+      },
+      {
+        "from": 255,
+        "to": 715
+      },
+      {
+        "from": 715,
+        "to": 1087
+      },
+      {
+        "from": 1087,
+        "to": 1113
+      }
+    ],
+    "bed": 0.5,
+    "duck": 0.16,
+    "rampFrames": 10,
+    "totalFrames": 1149
+  }
+}

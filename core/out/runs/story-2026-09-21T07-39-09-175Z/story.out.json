@@ -1,0 +1,137 @@
+{
+  "story_id": "reuleaux-drill-square-holes",
+  "area": "topology-and-geometry",
+  "subject_slug": "reuleaux-triangle",
+  "angle_slug": "drill-square-holes",
+  "title": "The drill that cuts squares.",
+
+  "viral_read": {
+    "goal": "SHARE — awe that an ordinary shape does something impossible; the sender looks like they noticed the trick nobody else sees.",
+    "identity_signal": "I spot the hidden geometry inside everyday objects. I know why your coins are the shape they are.",
+    "stat": "Patented in 1914 — a drill bit that carves a square hole from a triangle.",
+    "gap": "How can a triangle have the same width in every direction, and why do UK coin slots still accept coins that are not round?"
+  },
+
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "This drill is cutting a square hole.",
+      "display": "Square hole.",
+      "visual": "image",
+      "image_id": "i1",
+      "stat": { "prefix": "Patented", "value": "1914", "suffix": null }
+    },
+    {
+      "beat": "turn",
+      "narration": "The bit is not a circle. It is called a Reuleaux triangle. Every diameter is the same. No matter which way you measure.",
+      "display": "Every diameter matches.",
+      "visual": "image",
+      "image_id": "i2"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Start with an equilateral triangle. From each corner sweep one arc. The radius equals the far side. Every arc bulges out that far. Slide a caliper across it. The width never changes. Add the three arc lengths. You get pi times the width.",
+      "display": "One width. Every direction.",
+      "visual": "formula"
+    },
+    {
+      "beat": "payoff",
+      "narration": "Now check your pocket. UK twenty and fifty pence coins. Feel the edges. They are not circles. They are Reuleaux heptagons. Round enough to roll. Triangle by design.",
+      "display": "Coins in disguise.",
+      "visual": "image",
+      "image_id": "i3"
+    }
+  ],
+
+  "formula_latex": "P = \\pi\\, w",
+  "formula_steps": [
+    "\\text{width} = w",
+    "\\text{arc length} = w \\cdot \\tfrac{\\pi}{3}",
+    "3 \\cdot \\left( w \\cdot \\tfrac{\\pi}{3} \\right)",
+    "P = \\pi\\, w"
+  ],
+  "mechanism": "A Reuleaux triangle is the intersection of three disks, each of radius w, centred at the vertices of an equilateral triangle of side w. Its boundary is three circular arcs, each of radius w subtending the interior angle of the equilateral triangle, which is pi over three. One arc therefore has length w times pi over three; three of them add to pi times w. Barbier's theorem says the same number describes every curve of constant width w — a circle of diameter w has circumference pi times w as well.",
+  "ask": "Check your pocket.",
+  "music_prompt": "Curious clockwork groove — pizzicato strings and marimba over a soft muted upright bass, mid-tempo, a single muted brass stab where the formula lands, no drums until the payoff, playful documentary bed, no vocals.",
+  "check_script": "generator.checks/reuleaux-drill-square-holes.py",
+
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "A Reuleaux-triangle-shaped bit, mounted in a special floating chuck, drills a nearly square hole.",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "When mounted in a special chuck which allows for the bit not having a fixed centre of rotation, it can drill a hole that is nearly square."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "The square-hole drill was patented by Watts in 1914.",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "Although patented by Henry Watts in 1914, similar drills invented by others were used earlier."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "The Reuleaux triangle is the intersection of three disks centred at the vertices of an equilateral triangle, each with radius equal to the side length.",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "Or, equivalently, it may be constructed as the intersection of three disks centered at the vertices of T, with radius equal to the side length of T."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "The perimeter of a Reuleaux triangle of width s equals pi times s, matching the circumference of a circle of the same width (Barbier's theorem).",
+      "url": "https://en.wikipedia.org/wiki/Reuleaux_triangle",
+      "quote": "In particular this perimeter equals the perimeter of the circle with the same width, which is π s"
+    },
+    {
+      "claim_id": "f5",
+      "claim": "British 20p and 50p coins are Reuleaux heptagons — curves of constant width.",
+      "url": "https://en.wikipedia.org/wiki/Curve_of_constant_width",
+      "quote": "For instance the British 20p and 50p coins are Reuleaux heptagons, and the Canadian loonie is a Reuleaux 11-gon."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "The British 20p coin is an equilateral curve heptagon (same shape family as the 50p).",
+      "url": "https://en.wikipedia.org/wiki/Twenty_pence_(British_coin)",
+      "quote": "Like the 50p coin, it is an equilateral curve heptagon."
+    }
+  ],
+
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i1.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "Cinematic industrial photograph. A vertical drill press in a 1970s machine shop is carving a perfectly square hole into a thick brass plate clamped to a workbench. Curls of golden brass swarf spinning outward, one bare tungsten lamp overhead casting a warm pool of light on the plate, deep shadows filling the room, the square hole razor-sharp under the bit. Subject centred in the middle third of the frame, top third and bottom third quiet with dim shadow. Shallow depth of field, documentary grain, warm amber palette. No people, no faces, no text or numbers anywhere in the frame."
+    },
+    {
+      "image_id": "i2",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i2.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "Macro cinematic photograph. A polished mirror-finish steel drill bit shaped like a Reuleaux triangle rests on a matte black felt cloth on a workbench. A pair of brass Vernier calipers gently touches two opposite edges of the triangle, showing that every diameter matches. Single warm rim light from the upper left carves the three curved sides, deep shadow surrounding. Subject centred in the middle band. Top third and bottom third are pure dark negative space. Shallow depth of field, tactile documentary style, cold steel against warm shadow, no reflections showing any people, no text or numbers anywhere in the frame."
+    },
+    {
+      "image_id": "i3",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i3.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "Cinematic close-up photograph. Two heptagonal United Kingdom coins — a fifty pence and a twenty pence — sitting on a dark oiled oak pub table at night. A single warm pendant lamp glows above just out of frame, catching the curved rim of each coin as a bright gold arc. The seven curved sides visible along each coin. Deep shadow surrounding the coins, subject centred in the middle band, top and bottom third quiet dark wood grain. Shallow depth of field, moody evocative documentary style, no hands, no faces, no other objects, no visible text besides what is naturally embossed on the coins."
+    }
+  ],
+
+  "nulls": [
+    {
+      "field": "beats[0].stat.suffix",
+      "reason": "Stat is a bare year; no unit follows."
+    },
+    {
+      "field": "beats[1].stat",
+      "reason": "The brief limits the story to one or two stats and reserves them for the hook or turn beat; the story has one strong stat (1914) on the hook, and a second would dilute it."
+    }
+  ]
+}

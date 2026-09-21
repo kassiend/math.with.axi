@@ -1,0 +1,46 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[excited] This drill is cutting a square hole.",
+      "audio": "audio/hook.mp3",
+      "seconds": 1.942
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] The bit is not a circle. It is called a Reuleaux triangle. Every diameter is the same. No matter which way you measure.",
+      "audio": "audio/turn.mp3",
+      "seconds": 6.561
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[confident] Start with an equilateral triangle. From each corner sweep one arc. The radius equals the far side. Every arc bulges out that far. Slide a caliper across it. The width never changes. Add the three arc lengths. You get pi times the width.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 15.323
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] Now check your pocket. UK twenty and fifty pence coins. Feel the edges. They are not circles. They are Reuleaux heptagons. Round enough to roll. Triangle by design.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 12.386
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Check your pocket.",
+    "audio": "audio/outro.mp3",
+    "seconds": 0.865
+  },
+  "total_seconds": 37.077,
+  "overruns": [
+    {
+      "beat": "mechanism",
+      "seconds": 15.323,
+      "note": "Over the 12-second per-beat threshold. Narration is a mandated derivation (7 short sentences) delivering the formula P = pi * w; cannot be shortened here without dropping a step. Editor's call."
+    },
+    {
+      "beat": "payoff",
+      "seconds": 12.386,
+      "note": "Just over the 12-second threshold (0.386 s over). Carries the whole payoff — UK 20p/50p coins, tactile check, and the closing beat before the ask. Editor's call."
+    }
+  ]
+}

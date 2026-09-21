@@ -12,7 +12,10 @@ model: opus
 You write **one** short-form story about mathematics: a person, an object, a phenomenon, or a
 formula that changed something. The full brief is `assets/templates/stories/story.md`. Read it.
 
-Use the **story-hook** skill for structure and openings, and **math-visual** for what to draw.
+Use the **going-viral** skill for the strategy (goal → emotion → hook), **story-hook** for the
+opening, and **math-visual** for what to draw. Read §3.5 of the brief before choosing a subject:
+a story that would not be sent to a friend without a caption is a lecture, and a lecture does
+not ship.
 
 ## 1. The category is assigned
 
@@ -69,13 +72,16 @@ the task and lesson pipelines do — ending with the JSON report line
 only line the orchestrator reads. If it is not checkable — a definition, a historical statement —
 say so in `nulls[]` rather than inventing a check that proves nothing.
 
-## 5. Images
+## 5. Images — one per beat, full-bleed, generated
 
-Every image is either sourced from Wikimedia Commons under an accepted licence, or generated:
+Every beat except a formula beat names an `image_id`, and that image fills the card. Generate
+without hesitating — at `--aspect 9:16`, cinematic, subject in the middle band, no text in the
+image (§8 of the brief has the prompt shapes). Commons only for a real person's likeness or a
+historical photograph:
 
 ```bash
+node core/tools/gemini-image.mjs generate "<prompt>" --out <run>/images/<id>.png --aspect 9:16
 node core/tools/wikimedia.mjs search "<query>" --limit 6
-node core/tools/gemini-image.mjs generate "<prompt>" --out <run>/images/<id>.png
 ```
 
 The Commons tool refuses anything that is not public domain or permissive CC, and returns the
@@ -89,6 +95,15 @@ design the story around what Commons has, rather than shipping a placeholder.
 
 Missing information is `null` plus a machine-readable reason. A story that reads well because you
 invented the connecting tissue is the failure this whole pipeline exists to prevent.
+
+## 6.5 The stat, the pace, the music
+
+If the story has a number a viewer could repeat at dinner, put it on the hook or turn beat as
+`stat` — `{"prefix": "1 in", "value": "73M"}` — nine characters or fewer for the value; it is
+drawn 128 px tall and counted up. Narration is three-to-nine-word sentences, full stops, 35–50 s
+in total; read it aloud with a stopwatch. Display lines are five words or fewer and never a
+formula in words. Write `music_prompt`: one sentence of mood, tempo and instruments that follows
+the story (§5.5 of the brief).
 
 ## 7. The ask
 

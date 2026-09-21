@@ -9,7 +9,8 @@
  */
 export const FACES = ['400 40px Inter', '600 40px Inter', '800 40px Inter'];
 
-export async function fontsLoaded(): Promise<void> {
-  await Promise.all(FACES.map((f) => document.fonts.load(f)));
+/** @param extra  further faces a page uses (the story's Outfit weights) */
+export async function fontsLoaded(extra: string[] = []): Promise<void> {
+  await Promise.all([...FACES, ...extra].map((f) => document.fonts.load(f)));
   await document.fonts.ready;
 }

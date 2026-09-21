@@ -1,0 +1,12 @@
+{
+  "claim_id": "reuleaux-drill-square-holes",
+  "title": "The drill that cuts squares.",
+  "formula_latex": "P = \\pi\\, w",
+  "formula_steps": [
+    "\\text{width} = w",
+    "\\text{arc length} = w \\cdot \\tfrac{\\pi}{3}",
+    "3 \\cdot \\left( w \\cdot \\tfrac{\\pi}{3} \\right)",
+    "P = \\pi\\, w"
+  ],
+  "mechanism": "A Reuleaux triangle is the intersection of three disks, each of radius w, centred at the vertices of an equilateral triangle of side w. Its boundary is three circular arcs, each of radius w subtending the interior angle of the equilateral triangle, which is pi over three. One arc therefore has length w times pi over three; three of them add to pi times w. Barbier's theorem says the same number describes every curve of constant width w — a circle of diameter w has circumference pi times w as well."
+}

@@ -1,0 +1,16 @@
+{"t":"2026-09-21T07:48:48.651Z","event":"run.start","story_id":"reuleaux-drill-square-holes","area":"topology-and-geometry","subject":"reuleaux-triangle"}
+{"t":"2026-09-21T07:48:48.653Z","event":"validation","checked":6,"findings":1}
+{"t":"2026-09-21T07:48:49.849Z","event":"crosscheck","agreed":true,"generator":"perimeter = pi*w; area = w**2*(pi - sqrt(3))/2","verifier":"pi*w"}
+{"t":"2026-09-21T07:48:49.850Z","event":"timeline","total_frames":1149,"total_seconds":38.3,"beats":["hook:1.942s","turn:6.561s","mechanism:15.323s","payoff:12.386s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1028},"resume":{"start":1028,"end":1149}}}
+{"t":"2026-09-21T07:48:49.851Z","event":"picks","background":"bg3.jpeg"}
+{"t":"2026-09-21T07:57:15.500Z","event":"capture.done","frames":1149}
+{"t":"2026-09-21T07:57:25.844Z","event":"music.ready","seconds":41,"prompt":"Curious clockwork groove — pizzicato strings and marimba over a soft muted uprig"}
+{"t":"2026-09-21T08:00:02.797Z","event":"done","video":"output/posts/stories/reuleaux-drill-square-holes.mp4","seconds":38.3}
+{"t":"2026-09-21T08:03:28.885Z","event":"run.start","story_id":"reuleaux-drill-square-holes","area":"topology-and-geometry","subject":"reuleaux-triangle"}
+{"t":"2026-09-21T08:03:28.886Z","event":"validation","checked":6,"findings":1}
+{"t":"2026-09-21T08:03:30.465Z","event":"crosscheck","agreed":true,"generator":"perimeter = pi*w; area = w**2*(pi - sqrt(3))/2","verifier":"pi*w"}
+{"t":"2026-09-21T08:03:30.469Z","event":"timeline","total_frames":1149,"total_seconds":38.3,"beats":["hook:1.942s","turn:6.561s","mechanism:15.323s","payoff:12.386s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1028},"resume":{"start":1028,"end":1149}}}
+{"t":"2026-09-21T08:03:30.471Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-09-21T08:12:04.688Z","event":"capture.done","frames":1149}
+{"t":"2026-09-21T08:12:04.846Z","event":"music.ready","seconds":41,"prompt":"Curious clockwork groove — pizzicato strings and marimba over a soft muted uprig"}
+{"t":"2026-09-21T08:14:42.041Z","event":"done","video":"output/posts/stories/reuleaux-drill-square-holes.mp4","seconds":38.3}

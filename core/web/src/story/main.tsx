@@ -12,6 +12,10 @@ import { buildStoryTimeline } from '../../../shared/story-timeline';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/800.css';
+import '@fontsource/outfit/600.css';
+import '@fontsource/outfit/700.css';
+import '@fontsource/outfit/800.css';
+import '@fontsource/outfit/900.css';
 import 'katex/dist/katex.min.css';
 import './styles.css';
 import { fontsLoaded } from '../fonts';
@@ -66,14 +70,16 @@ if (!payload) {
       ? b.formula_steps.map((l: string) => typeset(l))
       : null,
     shapeSvg: b.shape_svg ?? null,
+    stat: b.stat?.value ? { prefix: b.stat.prefix ?? null, value: String(b.stat.value), suffix: b.stat.suffix ?? null, count: b.stat.count ?? null } : null,
   }));
 
   const ask: string = payload.ask || ASK.fallback;
 
-  fontsLoaded().then(() => {
+  fontsLoaded(['600 40px Outfit', '700 40px Outfit', '800 40px Outfit', '900 40px Outfit']).then(() => {
     const fit = fitStory(
       payload.title ?? '', beats.map((b) => b.display), ask,
       beats.map((b) => b.formulaStepsHtml ?? (b.formulaHtml ? [b.formulaHtml] : [])),
+      beats.map((b) => b.stat?.value ?? null),
     );
     window.__axiFit = fit;
     if (!fit.fits) {
@@ -95,6 +101,7 @@ if (!payload) {
           displayFits={fit.displayFits}
           askFit={fit.askFit}
           formulaFits={fit.formulaFits}
+          statFits={fit.statFits}
         />,
       ));
     };
