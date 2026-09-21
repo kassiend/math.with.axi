@@ -1,0 +1,15 @@
+{
+  "task_id": "square-sin15-plus-cos15",
+  "duration_s": 40,
+  "structure_id": "square-of-sin-plus-cos-angle",
+  "categories": [
+    "trigonometric-identity"
+  ],
+  "description": "Find the exact value",
+  "statement": "(\\sin 15^\\circ + \\cos 15^\\circ)^2",
+  "statement_latex": "(\\sin 15^\\circ + \\cos 15^\\circ)^2",
+  "answer": "3/2",
+  "answer_latex": "\\dfrac{3}{2}",
+  "steps_expected": 3,
+  "nulls": []
+}

@@ -1,0 +1,90 @@
+{
+  "lesson_id": "line-multiplication-crossings-two-digit",
+  "counter": 7,
+  "concept_slug": "line-multiplication-lattice",
+  "tags": [
+    "multiplication",
+    "visual-method",
+    "lattice",
+    "place-value",
+    "mental-arithmetic"
+  ],
+  "method_name": "Multiply by drawing lines",
+  "applicability": "Any two two-digit whole numbers whose digits are all non-zero — a zero digit draws no lines, so the diagram cannot show it. Draw each digit as that many parallel lines, cross the two numbers, and each diagonal band of crossings is one place value: hundreds, tens, units. Reading the three band counts straight off as the digits of the answer is valid only when every band count is below 10.",
+  "carry_case": "23 × 22 itself. The bands count 4, 10, 6, and the middle band is not read as a digit 10 — write 0 there and carry 1 into the hundreds band, giving 5 | 0 | 6 = 506, not \"4 10 6\". Any pair whose middle band a1·b0 + a0·b1 reaches 10 does this, e.g. 34 × 25.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Multiply with lines, not tables",
+      "working": "23 × 22 = ?",
+      "visual": null
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Draw each digit as that many lines",
+      "working": "2 | 3 one way, 2 | 2 the other",
+      "visual": {
+        "type": "line-multiplication",
+        "a": 23,
+        "b": 22,
+        "stage": "draw"
+      }
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Count the crossings in each band",
+      "working": "4 | 10 | 6",
+      "visual": {
+        "type": "line-multiplication",
+        "a": 23,
+        "b": 22,
+        "stage": "count"
+      }
+    },
+    {
+      "step_id": "s4",
+      "purpose": "caveat",
+      "instruction": "A band of ten or more carries left",
+      "working": "4 | 10 | 6 → 506",
+      "visual": {
+        "type": "line-multiplication",
+        "a": 23,
+        "b": 22,
+        "stage": "answer"
+      }
+    },
+    {
+      "step_id": "s5",
+      "purpose": "result",
+      "instruction": "Each band is a digit product",
+      "working": "23 × 22 = 506",
+      "visual": {
+        "type": "method-compare",
+        "a": 23,
+        "b": 22
+      }
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      23,
+      22
+    ],
+    "result": "506",
+    "bands": {
+      "hundreds": 4,
+      "tens": 10,
+      "units": 6
+    },
+    "carries": true
+  },
+  "nulls": [
+    {
+      "field": "carry_case.independence_from_worked_example",
+      "reason": "the seeded draw produced 23 × 22, whose middle band is exactly 10, so the drawn worked example is itself a carry case; a second, cleaner pair was not substituted because §3.4 forbids replacing a draw that the method handles correctly"
+    }
+  ]
+}

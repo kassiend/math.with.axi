@@ -113,5 +113,42 @@ export const ASK = {
  */
 export { MASCOT_REST } from '../../../shared/lesson-timeline';
 
+/**
+ * The compact body used when the step carries a diagram: top-anchored, tighter, and with the
+ * working line held to a single line so the text block cannot grow into the slot below it.
+ *
+ * A diagram does not share the card with a centred text block — it needs the middle of the card,
+ * so a step with a visual re-anchors its two lines under the progress row instead of centring them
+ * on y = 561. Both layouts exist rather than one compromise layout because a lesson mixes them:
+ * the rule step is text, the worked step is a picture, and neither should be squeezed to look
+ * like the other. Smaller than the centred body on purpose: there, the two lines ARE the step;
+ * here the diagram is, and an instruction set at the title's weight competes with it.
+ */
+export const BODY_WITH_VISUAL = {
+  /** The progress row's dots end at 316. */
+  top: 336,
+  gap: 16,
+  maxWidth: CONTENT_WIDTH,
+
+  instruction: { colour: '#000000', fontSize: 36, minFontSize: 26, maxLines: 2, lineHeightRatio: 1.24, maxWidth: CONTENT_WIDTH },
+  working: { colour: '#1E76C3', fontSize: 38, minFontSize: 26, maxLines: 1, lineHeightRatio: 1.24, maxWidth: CONTENT_WIDTH },
+};
+
+/**
+ * The diagram slot, used only by steps that carry one.
+ *
+ * Bounds: BODY_WITH_VISUAL's worst case (2 instruction lines + 1 working line at full size)
+ * bottoms out at 489, and the mascot band starts at 790. The slot runs 500-776, clear of both.
+ * Diagrams are drawn in their own DRAW coordinate space and scaled uniformly to fit the slot, so
+ * the registry never has to know what the card around it looks like.
+ *
+ * The ask lands at 745 during the outro, inside this slot. For a visual step the diagram has done
+ * its work by then and fades out under the ask; for a text step nothing is there to move.
+ */
+export const VISUAL = { x: 110, y: 500, w: CONTENT_WIDTH, h: 276 };
+
+/** The coordinate space every registry diagram draws into. */
+export const VISUAL_DRAW = { w: 500, h: 458 };
+
 /** Cross-fade at step boundaries: outgoing drifts up and out while incoming rises in. */
 export const STEP_FADE = 8;

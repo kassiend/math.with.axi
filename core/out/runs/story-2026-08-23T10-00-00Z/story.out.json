@@ -1,0 +1,222 @@
+{
+  "story_id": "euclid-one-line-loop",
+  "area": "biography",
+  "subject_slug": "euclid",
+  "angle_slug": "euclidean-algorithm-oldest-still-running",
+  "title": "Euclid's one-line loop.",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[curious] Nobody is certain who invented it. It still sits inside the cryptography securing the internet. One line long.",
+      "display": "One line. Still running.",
+      "visual": "shape",
+      "shape_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 564 470\" width=\"100%\" height=\"100%\"><rect width=\"564\" height=\"470\" fill=\"#FFFFFF\"/><text x=\"282\" y=\"126\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"31\" font-weight=\"800\" fill=\"#0B0D12\">a</text><rect x=\"42\" y=\"142\" width=\"480\" height=\"58\" fill=\"#FFFFFF\"/><rect x=\"312\" y=\"142\" width=\"210\" height=\"58\" fill=\"#1E76C3\"/><rect x=\"42\" y=\"142\" width=\"480\" height=\"58\" fill=\"none\" stroke=\"#0B0D12\" stroke-width=\"3\"/><line x1=\"312\" y1=\"142\" x2=\"312\" y2=\"200\" stroke=\"#0B0D12\" stroke-width=\"3\"/><text x=\"417\" y=\"181\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"27\" font-weight=\"800\" fill=\"#FFFFFF\">a − b</text><line x1=\"312\" y1=\"200\" x2=\"312\" y2=\"266\" stroke=\"#0B0D12\" stroke-width=\"2\" stroke-dasharray=\"6 6\" stroke-opacity=\"0.45\"/><text x=\"177\" y=\"250\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"31\" font-weight=\"800\" fill=\"#0B0D12\">b</text><rect x=\"42\" y=\"266\" width=\"270\" height=\"58\" fill=\"#FFFFFF\" stroke=\"#0B0D12\" stroke-width=\"3\"/><text x=\"282\" y=\"404\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"26\" font-weight=\"600\" fill=\"#1E76C3\">take the smaller from the larger</text></svg>"
+    },
+    {
+      "beat": "turn",
+      "narration": "[warm] Euclid's Elements. He wrote it down, probably did not invent it, and almost nothing else is known. He lived around three hundred BC. The painting is from about sixteen thirty. Not his face. [thoughtful] His problem: the largest unit measuring two quantities exactly.",
+      "display": "Painted c.1630. Not from life.",
+      "visual": "image",
+      "image_id": "i2"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[thoughtful] Two positive whole numbers, larger first. The greatest common divisor of a and b equals that of a minus b and b. Why? Anything dividing a and b divides a minus b. Anything dividing b and the difference divides their sum, a. Same divisors, both pairs. And larger first is the loop: it picks which number shrinks. Both stay positive, the total keeps dropping, so it must end with the two equal. 1920 and 1080? Six subtractions to 120.",
+      "display": "Larger first. Same divisors.",
+      "visual": "formula",
+      "steps": [
+        {
+          "visual": "formula",
+          "formula_latex": "\\gcd(a,b)=\\gcd(a-b,\\,b),\\quad a>b>0",
+          "weight": 46
+        },
+        {
+          "visual": "anim",
+          "anim": {
+            "type": "gcd-subtraction",
+            "a": 1920,
+            "b": 1080
+          },
+          "weight": 33
+        }
+      ]
+    },
+    {
+      "beat": "payoff",
+      "narration": "[bright] Your browser's padlock leans on an extended version of this loop. And 1080p? 1920 by 1080 is 16 by 9: 120 fits sixteen across, nine down. Next time you see sixteen by nine: a fraction, reduced.",
+      "display": "1920 : 1080 = 16 : 9",
+      "visual": "shape",
+      "shape_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 564 470\" width=\"100%\" height=\"100%\"><rect width=\"564\" height=\"470\" fill=\"#FFFFFF\"/><text x=\"282\" y=\"60\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"30\" font-weight=\"800\" fill=\"#0B0D12\">1920 = 16 × 120</text><g transform=\"translate(42,96)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"30\" fill=\"#1E76C3\"/><line x1=\"30\" y1=\"0\" x2=\"30\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"60\" y1=\"0\" x2=\"60\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"90\" y1=\"0\" x2=\"90\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"120\" y1=\"0\" x2=\"120\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"150\" y1=\"0\" x2=\"150\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"180\" y1=\"0\" x2=\"180\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"210\" y1=\"0\" x2=\"210\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"240\" y1=\"0\" x2=\"240\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"270\" y1=\"0\" x2=\"270\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"300\" y1=\"0\" x2=\"300\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"330\" y1=\"0\" x2=\"330\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"360\" y1=\"0\" x2=\"360\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"390\" y1=\"0\" x2=\"390\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"420\" y1=\"0\" x2=\"420\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"450\" y1=\"0\" x2=\"450\" y2=\"270\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"30\" x2=\"480\" y2=\"30\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"60\" x2=\"480\" y2=\"60\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"90\" x2=\"480\" y2=\"90\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"120\" x2=\"480\" y2=\"120\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"150\" x2=\"480\" y2=\"150\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"180\" x2=\"480\" y2=\"180\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"210\" x2=\"480\" y2=\"210\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><line x1=\"0\" y1=\"240\" x2=\"480\" y2=\"240\" stroke=\"#1E76C3\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"/><rect x=\"0\" y=\"0\" width=\"480\" height=\"270\" fill=\"none\" stroke=\"#0B0D12\" stroke-width=\"3.5\"/></g><text x=\"282\" y=\"412\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"30\" font-weight=\"800\" fill=\"#0B0D12\">1080 = 9 × 120</text><text x=\"282\" y=\"452\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"23\" font-weight=\"600\" fill=\"#1E76C3\">one square = 120 pixels</text></svg>"
+    }
+  ],
+  "formula_latex": "\\gcd(a,b) = \\gcd(a-b,\\,b), \\quad a > b > 0",
+  "mechanism": "The hypothesis a > b > 0 is part of the one line, not a footnote to it, and it is what turns an identity into a loop.\n\nWhy the identity holds. Let d divide both a and b, say a = m*d and b = n*d. Then a - b = (m - n)*d, so d divides a - b, and d therefore divides both entries of the pair (a - b, b). Backwards: if d divides b and divides a - b, then it divides the sum (a - b) + b = a, so d divides both entries of (a, b). The two pairs have the identical SET of common divisors, not merely the same largest one, so their greatest common divisors are equal.\n\nWhy it is a loop. The identity may only be applied to a pair written with the larger entry first, because that is what a > b > 0 demands. So the rule itself, and nothing added to it, selects which of the two numbers is reduced: the larger one. Applying it sends the unordered pair {a, b} to {a - b, b}. Since a > b, a - b >= 1, so both entries are still positive whole numbers and the hypothesis can be met again as long as they differ.\n\nWhy it stops. Each application decreases the sum of the pair by b, and b >= 1, so the sum is a strictly decreasing sequence of integers bounded below by 2. It cannot decrease forever, so after finitely many steps the hypothesis can no longer be met with distinct entries, which happens exactly when the two numbers are equal. At that point the pair is {g, g}, and g divides itself, so g is the greatest common divisor of the original pair.\n\nOutside a > b > 0 nothing here is claimed. At b = 0 the pair never changes; with a negative entry the pair can grow without bound, or halt on a negative value that is not the gcd; with a < b the rule simply does not apply until the pair is rewritten larger-first. The ordering is Euclid's own: Elements VII.1 sets out two UNEQUAL numbers and continually subtracts the less from the greater (f18). The positivity is not a quotation from him but a modern reading of him: David Joyce's commentary on the Book VII definitions says the numbers of Books VII-IX are whole positive numbers, and narrows that to whole positive numbers greater than 1, because Euclid treats the unit, 1, separately from numbers, 2, 3, and so forth (f19, f20). So a > b > 0 is very slightly wider than Euclid's own domain, which on that reading starts at 2. Nothing mathematical turns on the gap - the loop is correct at b = 1 - and the unit does appear inside his procedure rather than among its inputs: VII.1 runs until a unit is left (f21).\n\nOn 1920 and 1080 the loop runs {1920,1080} -> {1080,840} -> {840,240} -> {600,240} -> {360,240} -> {240,120} -> {120,120}: six subtractions to 120, and 1920/120 = 16 while 1080/120 = 9, which is the 16:9 of the 1080p mode.",
+  "check_script": "generator.checks/euclid-one-line-loop.py",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "Almost nothing is known about Euclid's life; the information that exists comes from writers living many centuries after him.",
+      "url": "https://en.wikipedia.org/wiki/Euclid",
+      "quote": "Very little is known of Euclid's life, and most information comes from the scholars Proclus and Pappus of Alexandria many centuries later."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Euclid is generally accepted to have worked in Alexandria and to have lived around 300 BC.",
+      "url": "https://en.wikipedia.org/wiki/Euclid",
+      "quote": "It is now generally accepted that he spent his career in Alexandria and lived around 300 BC, after Plato's students and before Archimedes."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "Independently of Wikipedia, MacTutor also reports that little is known of Euclid's life beyond his teaching at Alexandria.",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/",
+      "quote": "However little is known of Euclid's life except that he taught at Alexandria in Egypt."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "Euclid's Elements, Book VII, Proposition 2 sets exactly the problem of finding the greatest common measure of two given numbers.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII2.html",
+      "quote": "To find the greatest common measure of two given numbers not relatively prime."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "Euclid's own method in that proposition is to continually subtract the smaller number from the larger one.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII2.html",
+      "quote": "continually subtracted from the greater, some number is left which measures the one before it."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "The Euclidean algorithm is one of the oldest algorithms still in common use.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "It is an example of an algorithm, and is one of the oldest algorithms in common use."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Euclid probably did not discover the algorithm; he compiled results from earlier mathematicians in the Elements.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "The algorithm was probably not discovered by Euclid, who compiled results from earlier mathematicians in his Elements."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "Who first came up with the method is not settled; one line of scholarship credits it to Theaetetus instead.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "Claude Brezinski, following remarks by Pappus of Alexandria, credits the algorithm to Theaetetus"
+    },
+    {
+      "claim_id": "f9",
+      "claim": "The greatest common divisor of two numbers is unchanged when the larger number is replaced by its difference with the smaller.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "The Euclidean algorithm is based on the principle that the greatest common divisor of two numbers does not change if the larger number is replaced by its difference with the smaller number."
+    },
+    {
+      "claim_id": "f10",
+      "claim": "The algorithm is part of the cryptographic protocols used to secure internet communications.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "Computations using this algorithm form part of the cryptographic protocols that are used to secure internet communications"
+    },
+    {
+      "claim_id": "f11",
+      "claim": "In RSA, the private exponent is computed with the extended Euclidean algorithm.",
+      "url": "https://en.wikipedia.org/wiki/RSA_cryptosystem",
+      "quote": "can be computed efficiently by using the extended Euclidean algorithm, since"
+    },
+    {
+      "claim_id": "f12",
+      "claim": "The algorithm is used for reducing fractions to their simplest form.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "It is used for reducing fractions to their simplest form and for performing division in modular arithmetic."
+    },
+    {
+      "claim_id": "f13",
+      "claim": "In Book 10 of the Elements the method is stated for lengths, where the answer is the greatest length that measures both of the given lengths evenly.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "The GCD of two lengths a and b corresponds to the greatest length g that measures a and b evenly"
+    },
+    {
+      "claim_id": "f14",
+      "claim": "The 1080p video mode is 1920 pixels across by 1080 pixels down.",
+      "url": "https://en.wikipedia.org/wiki/1080p",
+      "quote": "1,920 pixels displayed across the screen horizontally and 1,080 pixels down the screen vertically"
+    },
+    {
+      "claim_id": "f15",
+      "claim": "The 1080p mode is associated with the 16:9 aspect ratio. The source treats 16:9 as the assumption and the pixel count as what it implies, so the story asserts only that the two describe the same shape, and never that the pixels caused the name.",
+      "url": "https://en.wikipedia.org/wiki/1080p",
+      "quote": "usually assumes a widescreen aspect ratio of 16:9, implying a resolution of 2.1 megapixels."
+    },
+    {
+      "claim_id": "f16",
+      "claim": "Commons dates the painting used in the turn beat to circa 1630 - circa 1635, roughly nineteen centuries after Euclid lived, so it cannot be a likeness taken from life.",
+      "url": "https://commons.wikimedia.org/wiki/File:Jusepe_de_Ribera_-_Euclid_-_2001.26_-_J._Paul_Getty_Museum.jpg",
+      "quote": "between circa 1630 and circa 1635"
+    },
+    {
+      "claim_id": "f18",
+      "claim": "Euclid states the procedure for two unequal numbers, with the less subtracted from the greater, so the ordering hypothesis is his and not a modern addition.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII1.html",
+      "quote": "When two unequal numbers are set out, and the less is continually subtracted in turn from the greater"
+    },
+    {
+      "claim_id": "f19",
+      "claim": "In David Joyce's modern commentary on the Book VII definitions - not in Euclid's own words - the numbers of the arithmetic books are characterised as whole positive numbers greater than 1.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/defVII1.html",
+      "quote": "The numbers in definition 2 are meant to be whole positive numbers greater than 1"
+    },
+    {
+      "claim_id": "f20",
+      "claim": "The same commentary states that Euclid handles the unit, 1, separately from the numbers, so his numbers begin at 2 and the story's domain a > b > 0 is slightly wider than his.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/defVII1.html",
+      "quote": "Euclid treats the unit, 1, separately from numbers, 2, 3, and so forth"
+    },
+    {
+      "claim_id": "f21",
+      "claim": "The unit nevertheless appears inside Euclid's own procedure rather than among its inputs: Proposition VII.1 runs the subtraction until a unit is left.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII1.html",
+      "quote": "until a unit is left, then the original numbers are relatively prime"
+    }
+  ],
+  "images": [
+    {
+      "image_id": "i2",
+      "role": "portrait",
+      "source": "commons",
+      "file": "images/i2.jpg",
+      "attribution": "Jusepe de Ribera — File:Jusepe de Ribera - Euclid - 2001.26 - J. Paul Getty Museum.jpg, Public domain, via Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Jusepe_de_Ribera_-_Euclid_-_2001.26_-_J._Paul_Getty_Museum.jpg",
+      "prompt": null
+    }
+  ],
+  "nulls": [
+    {
+      "field": "images[i2].likeness",
+      "reason": "No likeness of Euclid taken from life is known, and nothing was generated for his face. The turn beat uses the Ribera painting (Commons, public domain, dated there circa 1630 to circa 1635). The script claims only the airtight thing, that it cannot be a likeness of Euclid, rather than that the face is invented: Ribera worked from living sitters, so the face may well be somebody's, just not his."
+    },
+    {
+      "field": "beats.hook.image_id",
+      "reason": "The hook carries a drawn SVG rather than a photograph. It previously used the Oxyrhynchus papyrus of the Elements, which shows Book II Proposition 5, geometry rather than this procedure, so the picture did not depict the thing the story is about. Commons has no still image of the algorithm: every candidate is an animated GIF, which the licence tool rejects on file type. The papyrus was dropped rather than reused decoratively, and its citation was removed with it."
+    },
+    {
+      "field": "beats.payoff.image_id",
+      "reason": "The payoff beat carries a computed SVG (shape_svg) rather than a photograph, so it names no image_id."
+    },
+    {
+      "field": "images[].generated",
+      "reason": "No image was generated and no generation budget was spent. The one photographic visual comes from Commons; the hook and payoff visuals are deterministic inline SVG."
+    },
+    {
+      "field": "facts.discoverer",
+      "reason": "Who first discovered the method is not settled by the sources: Wikipedia says it was probably not Euclid, points at Eudoxus and the Pythagorean school, and records Brezinski crediting Theaetetus. The script therefore says nobody is certain rather than naming anyone."
+    },
+    {
+      "field": "facts.euclid_dates",
+      "reason": "Euclid's birth and death dates are not securely known; Wikipedia states his birthdate is unknown and places him 'around 300 BC'. The narration says 'around three hundred BC' and claims no more."
+    },
+    {
+      "field": "formula_latex.domain",
+      "reason": "The one line is asserted only on a > b > 0 and the story claims nothing outside it. At b = 0 the pair never changes and the loop returns nothing; with a negative entry it can diverge or halt on a value that is not the gcd; with a < b the rule does not apply until the pair is rewritten larger-first. Rather than quietly widen the claim, the hypothesis is printed in the formula, spoken in the narration, enforced by a domain guard in the check script, and matched to Euclid's own restriction (facts f18, f19)."
+    },
+    {
+      "field": "formula_latex.domain.historical_gap",
+      "reason": "a > b > 0 is the domain the mechanism proves and the check script enforces, and it is very slightly wider than Euclid's, whose numbers begin at 2 on Joyce's reading (f19, f20). The formula was left alone rather than narrowed to match: the loop is correct at b = 1, and narrowing it to fit a historical convention would make the mathematics answer to the history. The gap is stated in the mechanism instead of being closed silently."
+    }
+  ]
+}

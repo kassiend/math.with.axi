@@ -1,0 +1,5 @@
+{"t":"2026-08-18T11:12:01.731Z","event":"run.start","task_id":"exp-chain-3x4-4y9-xy","duration_s":40,"seed":60654568}
+{"t":"2026-08-18T11:12:02.327Z","event":"crosscheck","agreed":true,"generator":"2","verifier":"2"}
+{"t":"2026-08-18T11:12:02.357Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_greetings2.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-hurry6.webm","hurry_audio_s":2.115875,"total_frames":1404,"hurry_enter":977}
+{"t":"2026-08-18T11:18:33.383Z","event":"capture.done","frames":1404,"font_size":56}
+{"t":"2026-08-18T11:23:02.834Z","event":"done","video":"output\\posts\\tasks\\40s\\exp-chain-3x4-4y9-xy.mp4"}

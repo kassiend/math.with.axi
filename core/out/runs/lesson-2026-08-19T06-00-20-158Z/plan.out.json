@@ -1,0 +1,70 @@
+{
+  "lesson_id": "estimate-square-root-nearest-square",
+  "counter": 6,
+  "area": "estimation-and-bounding",
+  "concept_slug": "estimate-square-root-nearest-square-linear-correction",
+  "tags": ["estimation", "bounding", "square-root", "mental-arithmetic"],
+  "method_name": "Estimate any square root",
+  "applicability": "Any positive integer n. Write n = a^2 + d where a = round(sqrt(n)) is the NEAREST whole square root, so |d| <= a. Then sqrt(n) ~= a + d/(2a). This estimate is never below sqrt(n) (it is the arithmetic mean of a and n/a, so am-gm gives (a + n/a)/2 >= sqrt(a * n/a) = sqrt(n), equality only when a^2 = n), and it overshoots by less than 1/(8a) - under 0.003 when a = 47. Two decimal places are therefore reliable for any a >= 40.",
+  "carry_case": "Anchoring on a square that is not the nearest one. For n = 2232 with a = 40 instead of 47: 40 + (2232-1600)/80 = 40 + 7.9 = 47.90, which is 0.66 too high, versus 47.24 from a = 47 (true 47.2440). The estimate stays an upper bound, but the two-decimal accuracy is gone as soon as |d| > a.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Estimate a square root",
+      "working": "√2232 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Anchor on the nearest square",
+      "working": "√(a² + d) ≈ a + d ÷ 2a"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Find the anchor and the gap",
+      "working": "47² = 2209 → d = 23"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Divide by 2×47 and add",
+      "working": "√2232 ≈ 47.24 (true 47.2440)"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "A far square loses the decimals",
+      "working": "a = 40: 40 + 632÷80 = 47.9 ✗"
+    }
+  ],
+  "worked_example": {
+    "operands": [2232],
+    "anchor": 47,
+    "gap": 23,
+    "correction": "23 / 94 = 0.2447",
+    "result": "47.24",
+    "exact": "47.244047...",
+    "signed_error": "+0.00064 (high, as the rule guarantees)"
+  },
+  "operand_draw": {
+    "seed": 412825855,
+    "spec": {
+      "min": 1100,
+      "max": 2999,
+      "filter": { "max_digits": 4, "positive_only": true }
+    },
+    "n": 1,
+    "draws": [2232],
+    "declared_before_draw": "Range 1100-2999 chosen so the nearest whole root is two digits and 2a stays a two-digit divisor; filter is rendering width only.",
+    "rejection_rate": 0
+  },
+  "universality_claim": {
+    "claim": "a + d/(2a) is never less than sqrt(n) for any a > 0, n > 0.",
+    "theorem_id": "am-gm",
+    "hypothesis_map": "a + d/(2a) = (a + n/a)/2 with a > 0 and n/a > 0, both non-negative reals, so AM >= GM = sqrt(n).",
+    "finite_check": "Error bound error < 1/(8a) checked exhaustively for n = 2..1000000 with a = round(sqrt(n)); |d| <= a checked on the same domain."
+  },
+  "nulls": []
+}

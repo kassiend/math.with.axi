@@ -142,7 +142,9 @@ export function verifyDraw(record) {
 //        "filter":{"max_digits":4,"nonzero":true}}' --n 3
 //   node core/pipeline/lib/sampling.mjs verify --record '<json>'
 // ---------------------------------------------------------------------------
-if (import.meta.url === `file://${process.argv[1]}`) {
+// `file://${process.argv[1]}` never matches on Windows: argv[1] is a C:\ path while
+// import.meta.url is file:///c:/... . Every CLI below silently no-opped and exited 0.
+if (import.meta.main) {
   const argv = process.argv.slice(2);
   const cmd = argv[0];
   const flag = (name) => {

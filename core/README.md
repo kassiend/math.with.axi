@@ -266,6 +266,21 @@ npm run worker               # run forever, firing daily at WORKER_DAILY_AT
 
 Run it from the repository root or from `core/` — the root `package.json` just delegates.
 
+Three flags narrow a manual run:
+
+```bash
+npm run worker -- now --posts lesson              # just the lesson, not all three
+npm run worker -- now --posts lesson --topic "…"  # and assign its subject by hand
+npm run worker -- now --posts lesson --resume core/out/runs/lesson-…   # continue an interrupted run
+```
+
+`--topic` overrides the area rotation for that run only. The rotation exists to stop an *agent*
+from choosing — asked for "a maths trick" it picks multiplication shortcuts every time — and a
+person asking for a specific lesson is not that failure mode. It does not advance the rotation,
+and the run log records that the subject was assigned rather than drawn. `--resume` skips every
+stage whose output file is already in the run directory, so an interruption after the planner
+does not throw away a good plan and generate a different lesson under the same request.
+
 Each video is followed by **the copy to paste**, as tap-to-copy blocks, one message per platform:
 the Instagram caption and first comment, the TikTok caption, the YouTube title, description and
 tags, and the alt text. `axi-caption-writer` writes them from the verified payload (nothing the

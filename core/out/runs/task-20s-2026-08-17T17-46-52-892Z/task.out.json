@@ -1,0 +1,15 @@
+{
+  "task_id": "single-discount-30-then-20",
+  "duration_s": 20,
+  "structure_id": "successive-discount-single-equivalent",
+  "categories": ["percentage"],
+  "description": "What single discount does the same?",
+  "statement": "30% off, then 20% off",
+  "statement_latex": "30\\%\\text{ off, then }20\\%\\text{ off}",
+  "answer": "44%",
+  "answer_latex": "44\\%",
+  "solution_sketch": "Successive discounts multiply the surviving fraction, they do not add: 0.70 x 0.80 = 0.56, so 56% of the price remains. A single discount of 100% - 56% = 44% has the same effect.",
+  "difficulty_rationale": "The naive route adds the discounts and answers 50%, which is the trap; the careful naive route picks a price like 100, takes 30 off to get 70, then 20% of 70 = 14, giving 56 and 44% off - two subtractions and a percentage of a non-round number. The insight is that only the surviving fractions matter and they multiply: 7 x 8 = 56 remains, so 44 is lost. Reachable cold because 'take 30% off' immediately reads as 'keep 70%', and 0.7 x 0.8 is single-digit multiplication - but the wrong answer is attractive enough that nobody finishes in two seconds.",
+  "check_script": "generator.checks/single-discount-30-then-20.py",
+  "nulls": []
+}

@@ -1,0 +1,14 @@
+{
+  "status": "failed",
+  "stage": "verification",
+  "problems": [
+    {
+      "side": "generator",
+      "error": "check output is not JSON: =============================================================================="
+    },
+    {
+      "side": "verifier",
+      "error": "script disagrees with text"
+    }
+  ]
+}

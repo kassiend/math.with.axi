@@ -24,6 +24,17 @@ const AGENT_TIMEOUT_MS = 25 * 60 * 1000;
 /** Quiet time after the expected file appears before the agent is considered finished. */
 const AGENT_QUIET_MS = 60 * 1000;
 
+/**
+ * A path to hand an agent: ABSOLUTE, with forward slashes.
+ *
+ * These used to be root-relative, which reads better and is correct only while the agent's
+ * working directory is still the root. An agent that runs `cd <run-dir>` in a Bash call and then
+ * writes the root-relative path lands its output at `<run-dir>/core/out/runs/<run-dir>/…` — which
+ * looks to the pipeline exactly like an agent that produced nothing, and costs a whole run to
+ * diagnose. Forward slashes because a backslash inside a prompt is an escape waiting to happen.
+ */
+const agentPath = (...parts) => path.resolve(...parts).split(path.sep).join('/');
+
 export class GateClosed extends Error {
   constructor(stage, detail) { super(`gate closed at ${stage}`); this.stage = stage; this.detail = detail; }
 }
@@ -130,7 +141,7 @@ export async function generateTask(durationS, { log = console.log } = {}) {
     prompt: [
       `Read ${brief} in full — it is your brief for this run.`,
       ``,
-      `Run directory: ${path.relative(ROOT, dir)}`,
+      `Run directory (absolute — use it as given, whatever your shell's cwd is): ${agentPath(dir)}`,
       ``,
       `Produce ONE puzzle with a ${durationS}-second timer.`,
       ``,
@@ -158,8 +169,8 @@ export async function generateTask(durationS, { log = console.log } = {}) {
       `longer — a sequence, a product, a sum with several terms — in "description" as the`,
       `question, with only the compact object in "statement". Plain text may wrap to two lines.`,
       ``,
-      `Write ${path.relative(ROOT, dir)}/task.out.json and`,
-      `${path.relative(ROOT, dir)}/generator.checks/<task_id>.py, run the check with the venv`,
+      `Write ${agentPath(dir)}/task.out.json and`,
+      `${agentPath(dir)}/generator.checks/<task_id>.py, run the check with the venv`,
       `python, and report what it printed.`,
     ].join('\n'),
   });
@@ -174,7 +185,9 @@ export async function generateTask(durationS, { log = console.log } = {}) {
   const box = writeVerifierBox(dir, projected);
   log(`  verifier sees ${Object.keys(projected).length} fields; withheld: ${withheldFrom(task, projected).join(', ')}`);
 
-  await runAgent({
+  if (done(path.join('verifier.box', 'verifier.out.json'))) {
+    log('  verifier.out.json already present — skipping the verifier');
+  } else await runAgent({
     agent: 'axi-verifier',
     cwd: box,
     allowedTools: ['Read', 'Write', 'Bash'],
@@ -226,17 +239,34 @@ export async function generateTask(durationS, { log = console.log } = {}) {
 // Lesson
 // ---------------------------------------------------------------------------
 
-export async function generateLesson({ log = console.log } = {}) {
-  const dir = freshRunDir('lesson');
-  const rel = path.relative(ROOT, dir);
+/**
+ * @param {object} [opts]
+ * @param {string} [opts.topic]  a subject assigned by a person, replacing the rotation for this
+ *   run only. The rotation exists to stop an AGENT converging on multiplication shortcuts, not to
+ *   stop the channel's owner from asking for a specific lesson — but it is an override, so it is
+ *   logged and recorded rather than silently taking the rotation's turn.
+ * @param {string} [opts.resume]  an existing run directory to continue. Each stage is skipped
+ *   when its output file is already there, so a run interrupted after the planner does not pay
+ *   for a second planner — and, more importantly, does not silently discard a good plan and
+ *   generate a different lesson under the same request.
+ */
+export async function generateLesson({ log = console.log, topic = null, resume = null } = {}) {
+  // Resolved against the repository root, not the process cwd: the worker runs from core/ but is
+  // invoked from the root, and every run path this pipeline prints is already root-relative.
+  const dir = resume ? path.resolve(ROOT, resume) : freshRunDir('lesson');
+  const rel = agentPath(dir);
+  if (resume && !fs.existsSync(dir)) throw new Error(`--resume: no such run directory: ${dir}`);
   fs.mkdirSync(path.join(dir, 'audio'), { recursive: true });
-  const area = nextLessonArea();
-  log(`  run dir: ${rel}`);
-  log(`  area assigned: ${area.assigned}  (${area.used} of ${area.poolSize} used)`);
+  const done = (f) => fs.existsSync(path.join(dir, f));
+  const area = topic || resume ? null : nextLessonArea();
+  log(`  run dir: ${path.relative(ROOT, dir)}${resume ? '  (resumed)' : ''}`);
+  if (topic) log(`  topic assigned by hand: ${topic}  (rotation not advanced)`);
+  else if (!resume) log(`  area assigned: ${area.assigned}  (${area.used} of ${area.poolSize} used)`);
 
   const seed = Number(BigInt(Date.now()) % 2147483647n);
 
-  await runAgent({
+  if (done('plan.out.json')) log('  plan.out.json already present — skipping the planner');
+  else await runAgent({
     agent: 'axi-lesson-planner',
     cwd: ROOT,
     allowedTools: ['Read', 'Write', 'Glob', 'Grep', 'Bash'],
@@ -245,18 +275,31 @@ export async function generateLesson({ log = console.log } = {}) {
     prompt: [
       `Read assets/templates/lesson/lesson.md in full — it is the brief.`,
       ``,
-      `Run directory: ${rel}`,
+      `Run directory (absolute — use it as given, whatever your shell's cwd is): ${rel}`,
       ``,
-      `SUBJECT AREA — ASSIGNED, NOT YOURS TO CHOOSE: ${area.assigned}`,
-      ``,
-      `Teach a method from this area, and echo it back in the plan as an "area" field. It is`,
-      `assigned rather than chosen because a free choice converges on multiplication shortcuts and`,
-      `square roots every time, and a channel that only shows those reads as a party trick rather`,
-      `than as teaching. This is the area that has gone longest without use.`,
-      ``,
-      `Only if this area genuinely cannot carry a 30-60 second method lesson, fall back to the`,
-      `first workable one of: ${area.alternatives.join(', ')} — and say which you used and why.`,
-      ``,
+      ...(topic ? [
+        `SUBJECT — ASSIGNED BY THE CHANNEL OWNER, NOT YOURS TO CHOOSE:`,
+        topic,
+        ``,
+        `This overrides the usual area rotation for this run. Echo the area back in the plan as an`,
+        `"area" field anyway, naming the branch of technique this actually belongs to.`,
+        ``,
+        `You still choose the method, the framing and the numbers WITHIN this subject. If the`,
+        `subject as stated cannot carry a 30-60 second method lesson, say so in nulls[] and emit`,
+        `{"status": "no_topic"} rather than teaching something adjacent instead.`,
+        ``,
+      ] : [
+        `SUBJECT AREA — ASSIGNED, NOT YOURS TO CHOOSE: ${area.assigned}`,
+        ``,
+        `Teach a method from this area, and echo it back in the plan as an "area" field. It is`,
+        `assigned rather than chosen because a free choice converges on multiplication shortcuts and`,
+        `square roots every time, and a channel that only shows those reads as a party trick rather`,
+        `than as teaching. This is the area that has gone longest without use.`,
+        ``,
+        `Only if this area genuinely cannot carry a 30-60 second method lesson, fall back to the`,
+        `first workable one of: ${area.alternatives.join(', ')} — and say which you used and why.`,
+        ``,
+      ]),
       `Deduplicate against core/content/ledger.json. Anything already shipped is blocked,`,
       `and so is a paraphrase of it — match on concept, not wording.`,
       ``,
@@ -273,12 +316,27 @@ export async function generateLesson({ log = console.log } = {}) {
       `3 to 5 steps, each with purpose, instruction (black line) and working (blue line). Keep both`,
       `SHORT — the card is notes, not speech.`,
       ``,
-      `Write ${rel}/plan.out.json, then write ${rel}/generator.checks/<lesson_id>.py confirming the`,
-      `worked example and any universality claim. ITS LAST LINE MUST BE THE JSON REPORT, printed`,
-      `with json.dumps and nothing after it:`,
-      `  {"claim_id": "<lesson_id>", "computed": "<worked example result>", "agrees": true}`,
-      `The orchestrator reads only that line; a script ending in "ALL CHECKS PASSED" fails the gate.`,
-      `Run it with core/.venv/bin/python and report what it printed.`,
+      `Section 2.5 of the brief lists the VISUALS a step may carry. The registry is closed: pick a`,
+      `type and its parameters, never write markup or coordinates. A step with a visual gets less`,
+      `room for text and its working line may not wrap, so keep those steps especially short.`,
+      ``,
+      `Write ${rel}/generator.checks/<lesson_id>.py confirming the worked example AND the`,
+      `applicability claim, exhaustively over the stated domain where that domain is finite, and`,
+      `run it with core/.venv/bin/python.`,
+      ``,
+      `Your check is a GATE, not a report. If it prints FAILED, the plan is wrong: fix the plan —`,
+      `usually the applicability boundary or the carry case — and run it again. Only write`,
+      `${rel}/plan.out.json once your own check passes, then report what it printed.`,
+      ``,
+      `OUTPUT CONTRACT — the orchestrator reads only the LAST line your check prints on stdout,`,
+      `and it must be exactly one line of JSON, printed with json.dumps and nothing after it:`,
+      `  {"claim_id": "<lesson_id>", "computed": "<worked example result>", "agrees": true|false}`,
+      `Print as much human-readable detail as you like before it. A check that ends in prose —`,
+      `"ALL CHECKS PASSED", say — cannot be cross-checked against the Verifier's, and the lesson`,
+      `fails the gate over its formatting rather than its mathematics.`,
+      ``,
+      `Watch the boundary in particular. A condition stated as "valid exactly when X" is false if`,
+      `X is sufficient but not necessary; test both directions before writing it down.`,
     ].join('\n'),
   });
 
@@ -287,7 +345,8 @@ export async function generateLesson({ log = console.log } = {}) {
   const plan = readJson(planFile);
   if (plan.status === 'no_topic') throw new GateClosed('dedup', plan);
 
-  await runAgent({
+  if (done('narration.out.json')) log('  narration.out.json already present — skipping the narrator');
+  else await runAgent({
     agent: 'axi-lesson-narrator',
     cwd: ROOT,
     allowedTools: ['Read', 'Write', 'Bash'],
@@ -296,7 +355,7 @@ export async function generateLesson({ log = console.log } = {}) {
     prompt: [
       `Read assets/templates/lesson/lesson.md in full — it is the brief.`,
       ``,
-      `Run directory: ${rel}`,
+      `Run directory (absolute — use it as given, whatever your shell's cwd is): ${rel}`,
       `Read ${rel}/plan.out.json. It is your only input about what is taught. Change no number,`,
       `formula, step order, counter or applicability.`,
       ``,
@@ -330,7 +389,9 @@ export async function generateLesson({ log = console.log } = {}) {
   const box = writeVerifierBox(dir, projected);
   log(`  verifier sees ${Object.keys(projected).length} fields; withheld: ${withheldFrom(plan, projected).join(', ')}`);
 
-  await runAgent({
+  if (done(path.join('verifier.box', 'verifier.out.json'))) {
+    log('  verifier.out.json already present — skipping the verifier');
+  } else await runAgent({
     agent: 'axi-verifier',
     cwd: box,
     allowedTools: ['Read', 'Write', 'Bash'],
@@ -411,8 +472,11 @@ export async function generateStory({ log = console.log } = {}) {
       `formula_steps (2-4 derivation lines ending in the formula, in the order the mechanism`,
       `narration reaches them) plus a check script at generator.checks/<story_id>.py when SymPy`,
       `can settle it; null with a reason when it cannot. The script's LAST LINE is the JSON report`,
-      `{"claim_id": "<story_id>", "computed": "...", "agrees": true} via json.dumps — the`,
-      `orchestrator reads only that line.`,
+      `{"claim_id": "<story_id>", "computed": "<canonical value>", "agrees": true} via json.dumps.`,
+      `"computed" is ONE decisive value in canonical SymPy form (str(sympy.simplify(expr)), or the`,
+      `result of the procedure on the example the story names) — never a sentence. A blind second`,
+      `script must produce the identical string, character for character; section 6 of the brief`,
+      `says how to anchor a claim with no single scalar.`,
       ``,
       `Images go under ${rel}/images/ — Commons via core/tools/wikimedia.mjs with the attribution`,
       `recorded, or generated via core/tools/gemini-image.mjs. Every image-beat names its image_id.`,
@@ -467,8 +531,11 @@ export async function generateStory({ log = console.log } = {}) {
         `into ./verifier.checks/${story.story_id}.py that confirms what the formula asserts and`,
         `that each line of formula_steps follows from the previous. Run it with:`,
         `  ${path.join(CORE, '.venv', process.platform === 'win32' ? 'Scripts\\python.exe' : 'bin/python')}`,
-        `It must print exactly one line of JSON:`,
-        `  {"claim_id": "${story.story_id}", "computed": "...", "agrees": true|false}`,
+        `Its LAST LINE is one line of JSON:`,
+        `  {"claim_id": "${story.story_id}", "computed": "<canonical value>", "agrees": true|false}`,
+        `"computed" is ONE decisive value in canonical SymPy form — str(sympy.simplify(expr)) for a`,
+        `formula, or the result of the procedure on the concrete example the payload names — never`,
+        `a sentence or a test log. The gate passes only if it equals the other script's string.`,
         ``,
         `Write your report to ./verifier.out.json in the schema from your brief.`,
       ].join('\n'),

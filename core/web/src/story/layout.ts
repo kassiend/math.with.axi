@@ -27,6 +27,28 @@ export const INNER = {
 /** Reserved for the mascot clip; nothing is drawn here by the page. Over the top scrim. */
 export const MASCOT_BAND = { x: 310, y: 150, w: 100, h: 155 };
 
+/**
+ * The integral the mascot steps out of. The clip walks him on from the left and off again the
+ * same way; the glyph is simply put where he appears (measured off the keyed clip: he materialises
+ * around x 188–239 and comes to rest in the band). The page draws it, Remotion composites the clip
+ * on top, so he passes IN FRONT of it — that z-order is the whole effect. White on the dark scrim,
+ * held back so it reads as scenery rather than as another line to read.
+ */
+export const MASCOT_PORTAL = {
+  cx: 205,
+  cy: MASCOT_BAND.y + MASCOT_BAND.h / 2,
+  height: 170,
+  colour: '#FFFFFF',
+  opacity: 0.22,
+};
+
+/**
+ * A drawn visual — a plot or a computed animation — sits on a paper panel in the middle band over
+ * the dimmed image. The plot and anim components draw ink on white at 564x470; the panel is that
+ * size, so they are not rescaled.
+ */
+export const PANEL = { w: 564, h: 470, centreY: 690, radius: 28, paper: '#F7F5F0', scale: 0.88 };
+
 export const PALETTE = {
   text: '#FFFFFF',
   muted: 'rgba(255,255,255,0.72)',
@@ -115,6 +137,9 @@ export const FORMULA = {
   imageDim: 0.28,
   imageBlur: 8,
 };
+
+/** The drawn-visual box the plot and animation components size themselves to. Same as PANEL. */
+export const VISUAL = { x: 78, y: 425, w: PANEL.w, h: PANEL.h, radius: PANEL.radius };
 
 /** Slow push-in on an image over its beat. */
 export const IMAGE_DRIFT = 0.09;

@@ -1,0 +1,24 @@
+{
+  "task_id": "percent-42-of-x-is-36",
+  "duration_s": 20,
+  "structure_id": "percent-known-part-rescale-to-other-percent",
+  "categories": [
+    "percentage",
+    "ratio-proportion"
+  ],
+  "description": "What is 70% of x?",
+  "statement": "42% of x = 36",
+  "statement_latex": null,
+  "answer": "60",
+  "answer_latex": null,
+  "nulls": [
+    {
+      "field": "statement_latex",
+      "reason": "plain text renders exactly as intended; no LaTeX-only notation in the statement"
+    },
+    {
+      "field": "answer_latex",
+      "reason": "answer is the plain integer 60; no LaTeX form needed"
+    }
+  ]
+}

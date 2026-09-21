@@ -1,0 +1,60 @@
+{
+  "runId": "story-euclid-one-line-loop",
+  "capture": {
+    "publicPath": "captures/story-euclid-one-line-loop",
+    "frames": 2385,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 2264
+    },
+    "resume": {
+      "start": 2264,
+      "end": 2385
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-euclid-one-line-loop/hook.mp3",
+        "from": 12,
+        "durationInFrames": 235
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-euclid-one-line-loop/turn.mp3",
+        "from": 247,
+        "durationInFrames": 561
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-euclid-one-line-loop/mechanism.mp3",
+        "from": 808,
+        "durationInFrames": 1055
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-euclid-one-line-loop/payoff.mp3",
+        "from": 1863,
+        "durationInFrames": 507
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "status": "failed",
+  "findings": [
+    {
+      "severity": "fatal",
+      "kind": "cherry-picked-operands",
+      "claim_id": "multiply-equidistant-difference-of-squares",
+      "detail": "The declared operand draw does not govern the operands actually used. operand_draw.spec declares min=2, max=9 with filter {max_digits: 1, nonzero: true, positive_only: true} and reports draws [6, 7] at rejection_rate 0. The worked example multiplies 53 x 67. Neither 53 nor 67 lies in [2, 9] and both violate max_digits=1, so the operands cannot have come from the declared draw, and no composition rule mapping draws [6, 7] onto operands [53, 67] is stated anywhere in the payload. The operands were therefore hand-picked, and picked to the single most flattering case: the payload's own applicability text says the method 'is fast rather than merely correct when m is a multiple of 10 or ends in 5', and 53 x 67 was chosen with midpoint exactly 60 and a clean gap of 7. The declared filter is stated in rendering terms (digit count, sign, nonzero) but it demonstrably did not produce the shown operands, so it provides no evidence that the demonstrated case is representative rather than selected. rejection_rate 0 is also inconsistent with a draw that would have had to reject every value outside [2,9] to reach 53 and 67.",
+      "witness": "operands [53, 67] vs declared draws [6, 7] under spec min=2 max=9 max_digits=1"
+    },
+    {
+      "severity": "major",
+      "kind": "false-generalisation",
+      "claim_id": "multiply-equidistant-difference-of-squares",
+      "detail": "The caveat step s5 states the odd-sum repair as 'Odd sum? No middle - shift by one' with working '53 x 68 = 3551 + 53 = 3604'. The rule as displayed does not say WHICH number to add. The correct rule is: after shifting one factor by one, add the OTHER factor (68 = 67 + 1, so add a = 53). A viewer generalising the shown line has no way to know that 53 rather than 67 or 68 is the quantity to add, and the wrong choice gives 3618 or 3619 instead of 3604. The numeric instance is correct; the rule it is meant to teach is underdetermined by what is shown. Note also that the identity is not what fails for odd sums - it still holds over the rationals (60.5^2 - 7.5^2 = 3604). Only the whole-number form fails, which the applicability sentence states correctly but s5 does not.",
+      "witness": "53 x 68: adding 67 gives 3618, adding 68 gives 3619; only adding 53 gives the correct 3604"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "multiply-equidistant-difference-of-squares",
+      "detail": "Display-step gap. Read strictly in order, s3 ends at the unevaluated expression '3600 - 49' and s4 asserts '53 x 67 = 3551'. The subtraction 3600 - 49 = 3551 is never performed on screen; the viewer must do it between the two frames. The arithmetic is correct, but the step a viewer needs is absent. Separately, s2 asserts the midpoint 60 via the diagram '53 <-7- 60 -7-> 67' without ever showing (53 + 67)/2 = 60, so the one operation that decides whether the method even applies (is the sum even?) is never demonstrated.",
+      "witness": "s3 -> s4 transition: '3600 - 49' to '3551'"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "multiply-equidistant-difference-of-squares",
+      "detail": "The payload cites the whitelisted theorem id 'difference-of-squares' with hypothesis mapping a:=m, b:=d. I could not confirm that this id exists in the theorem registry, because reading files outside the payload is outside my permitted scope. This is recorded for completeness only and is not a defect in itself: I verified the mathematical substance independently and symbolically, and the mapping is sound. Under a:=m, b:=d the theorem gives m^2 - d^2 = (m - d)(m + d), and with m = (a+b)/2, d = (a-b)/2 this is exactly b * a. sympy.simplify(((A+B)/2)**2 - ((A-B)/2)**2 - A*B) returns 0 identically, so the universality claim is established for all reals, not merely scanned over a finite range.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "multiply-equidistant-difference-of-squares",
+      "script": "verifier.checks/multiply-equidistant-difference-of-squares.py",
+      "computed": "3551",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim_id": "multiply-equidistant-difference-of-squares.operand_draw.seed",
+      "reason": "Cannot reproduce draws [6, 7] from seed 288346991: the payload names no PRNG algorithm or sampling procedure, so the seed is unfalsifiable as recorded. The declared rejection_rate of 0 is likewise uncheckable. This compounds the fatal provenance finding - since the drawn values do not match the operands used, the draw record cannot be independently confirmed to have happened at all."
+    }
+  ],
+  "verified_correct": {
+    "note": "Recorded so the failure is not mistaken for a mathematical one. The mathematics in this payload is sound; the lesson fails on operand provenance and on an underdetermined caveat rule.",
+    "worked_example": "53 x 67 = 3551 confirmed from scratch; midpoint (53+67)/2 = 60 and half-gap (67-53)/2 = 7 confirmed; 60^2 - 7^2 = 3600 - 49 = 3551 confirmed",
+    "applicability_is_exactly_right": "Exhaustive scan of all 3281 even-sum integer pairs in [-40,40]^2: m and d whole in every case, a*b = m^2 - d^2 in every case, zero violations. Probing just outside the stated domain: all 3280 odd-sum pairs give half-integer m and d, so the even-sum condition is neither too wide nor too narrow - it is precisely the integrality boundary.",
+    "boundary_cases_survive": "Negatives (-5,-3), zero (0,4) and (0,0), one (1,1), equal operands (7,7), and sign-straddling pairs (-3,3), (1,-1), (2,-8) all satisfy the identity with whole m and d. The applicability sentence says 'any two integers' and that is genuinely true - it does not silently assume positivity or distinctness.",
+    "carry_case_is_consistent": "53 x 68 = 3604 confirmed, and 3551 + 53 = 3604 confirmed. Critically, 53 + 68 = 121 is odd, so the stated applicability condition does actually exclude the stated exception case - counterexample and applicability condition agree with each other."
+  }
+}

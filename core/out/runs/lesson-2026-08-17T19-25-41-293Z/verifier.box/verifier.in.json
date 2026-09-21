@@ -1,0 +1,75 @@
+{
+  "lesson_id": "multiply-equidistant-difference-of-squares",
+  "counter": 4,
+  "concept_slug": "multiply-equidistant-difference-of-squares",
+  "tags": [
+    "algebra",
+    "identity",
+    "mental-arithmetic",
+    "multiplication",
+    "shortcut"
+  ],
+  "method_name": "Multiply around the middle",
+  "applicability": "Any two integers a, b whose sum is even (i.e. both odd or both even). Then m = (a+b)/2 and d = (a-b)/2 are whole numbers and a*b = m^2 - d^2 exactly. The identity is the whitelisted theorem difference-of-squares (a^2-b^2=(a-b)(a+b)) read right-to-left with a:=m, b:=d; the extra hypothesis the method adds is that m and d be integers, which is exactly the even-sum condition. It is fast rather than merely correct when m is a multiple of 10 or ends in 5, since then m^2 is one step.",
+  "carry_case": "53 x 68 — the sum 121 is odd, so the midpoint is 60.5 and the half-gap 7.5: the simple whole-number form does not apply. Drop to the even-sum neighbour and adjust: 53 x 67 = 3551, then + 53 = 3604.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Multiply around the middle",
+      "working": "53 × 67 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Find the number in the middle",
+      "working": "53 ←7— 60 —7→ 67"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Square it, take off the gap²",
+      "working": "60² − 7² = 3600 − 49"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "That is the product",
+      "working": "53 × 67 = 3551"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Odd sum? No middle — shift by one",
+      "working": "53 × 68 = 3551 + 53 = 3604"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      53,
+      67
+    ],
+    "result": "3551",
+    "midpoint": 60,
+    "half_gap": 7,
+    "identity": "53 × 67 = 60² − 7² = 3600 − 49 = 3551"
+  },
+  "nulls": [],
+  "operand_draw": {
+    "seed": 288346991,
+    "spec": {
+      "min": 2,
+      "max": 9,
+      "filter": {
+        "max_digits": 1,
+        "nonzero": true,
+        "positive_only": true
+      }
+    },
+    "draws": [
+      6,
+      7
+    ],
+    "rejection_rate": 0
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "intro",
+    "narration": "[excited] Heey — what is eighty-eight percent of seventy-five? [pause] Watch this."
+  },
+  {
+    "id": "s1",
+    "narration": "[curious] That one looks awkward. [pause] It really isn't."
+  },
+  {
+    "id": "s2",
+    "narration": "[confident] Just swap the two numbers. [pause] A percent of B is the same as B percent of A."
+  },
+  {
+    "id": "s3",
+    "narration": "[confident] So do the easy side. Three quarters of eighty-eight."
+  },
+  {
+    "id": "s4",
+    "narration": "[excited] Sixty-six. [pause] Same answer, far less work."
+  },
+  {
+    "id": "s5",
+    "narration": "[thoughtful] Careful — this works for percent of, never percent off. [pause] Eighty-eight percent off seventy-five leaves nine. Flipped, it leaves twenty-two."
+  }
+]

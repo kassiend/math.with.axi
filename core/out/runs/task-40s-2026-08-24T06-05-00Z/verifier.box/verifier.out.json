@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "square-sin15-plus-cos15",
+      "script": "verifier.checks/square-sin15-plus-cos15.py",
+      "computed": "3/2",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

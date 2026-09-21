@@ -1,0 +1,75 @@
+{
+  "lesson_id": "line-multiplication-crossings-two-digit",
+  "counter": 7,
+  "area": "multiplication-shortcut",
+  "concept_slug": "line-multiplication-lattice",
+  "tags": ["multiplication", "visual-method", "lattice", "place-value", "mental-arithmetic"],
+  "method_name": "Multiply by drawing lines",
+  "applicability": "Any two two-digit whole numbers with no zero digit — a zero digit is drawn as no lines at all, which the diagram cannot show. Draw each digit of the first number as that many parallel lines slanting one way, each digit of the second slanting the other, and count the crossings in each diagonal band: left to right the bands are hundreds, tens, units. Reading the three counts straight off as the digits of the answer is valid exactly when the units band and the tens band are each below 10. The leftmost band is not restricted — a count of 10 or more there simply spills into the thousands digit and still reads correctly.",
+  "carry_case": "23 × 22. The bands count 4 | 10 | 6, and '4 10 6' is not the answer: the tens band of 10 leaves 0 in the tens place and carries 1 into the hundreds, giving 506. Any pair whose tens band a1·b0 + a0·b1 reaches 10 breaks the straight read-off, and so does any pair whose units band a0·b0 reaches 10, e.g. 34 × 25. The leftmost band is the exception to the exception: 21 × 51 counts 10 | 7 | 1 and still reads off correctly as 1071.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Multiply without times tables",
+      "working": "12 × 23 = ?",
+      "visual": null
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Draw each digit as that many lines, one number each way",
+      "working": "digit 3 → 3 lines",
+      "visual": { "type": "line-multiplication", "a": 12, "b": 23, "stage": "draw" }
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Count the crossings in each diagonal band",
+      "working": "2 | 7 | 6",
+      "visual": { "type": "line-multiplication", "a": 12, "b": 23, "stage": "count" }
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Each band is the digit product a column would hold",
+      "working": "12 × 23 = 276",
+      "visual": { "type": "method-compare", "a": 12, "b": 23 }
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "A band of 10 or more carries left",
+      "working": "23 × 22 → 4 | 10 | 6 = 506",
+      "visual": null
+    }
+  ],
+  "worked_example": {
+    "operands": [12, 23],
+    "result": "276",
+    "bands": { "hundreds": 2, "tens": 7, "units": 6 },
+    "carries": false
+  },
+  "sampling": {
+    "seed": 971383332,
+    "spec": { "min": 1, "max": 3, "filter": {} },
+    "n": 4,
+    "unit": "one decimal digit per draw, taken in order as a1, a0, b1, b0 — so a = 10·1 + 2 = 12 and b = 10·2 + 3 = 23",
+    "range_rationale": "The range is declared over DIGITS (1..3), not over operands (10..99), because both constraints on this lesson are constraints on the picture and neither is expressible in the sampler's filter API. A zero digit draws no lines, so buildLattice refuses it outright; a large digit puts more dots on the card than a viewer can count on a phone. Digits 1..3 guarantee two-digit operands with no zero digit and cap the diagram at (3+3)×(3+3) = 36 crossings — here it drew 15. Neither constraint touches whether the method works: line multiplication is correct for every digit 0..9, and the exhaustive check in generator.checks confirms that over the full no-zero-digit domain, not over the drawn range.",
+    "draws": [1, 2, 2, 3],
+    "attempts": 4,
+    "rejections": [],
+    "rejection_rate": 0,
+    "rejection_rate_alarm": false
+  },
+  "nulls": [
+    {
+      "field": "steps[].visual for s1 and s5",
+      "reason": "the pose has nothing to draw yet and the caveat is a second pair (23 × 22); the registry's lattice takes one pair per step, so drawing the caveat would need a sixth step and would cost the compare step its room"
+    },
+    {
+      "field": "line-multiplication stage 'answer'",
+      "reason": "unused on purpose — the answer is revealed once, on s4's method-compare, which shows the same band counts with the column products under them; playing stage 'answer' on s3 or a sixth step would print 276 twice and spoil the compare"
+    }
+  ]
+}

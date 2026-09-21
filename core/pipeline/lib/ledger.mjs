@@ -140,7 +140,9 @@ export function record(entry, { file = LEDGER } = {}) {
 //   node core/pipeline/lib/ledger.mjs candidates '<slug>' '<tag,tag,...>'
 //   node core/pipeline/lib/ledger.mjs list
 // ---------------------------------------------------------------------------
-if (import.meta.url === `file://${process.argv[1]}`) {
+// `file://${process.argv[1]}` never matches on Windows: argv[1] is a C:\ path while
+// import.meta.url is file:///c:/... . Every CLI below silently no-opped and exited 0.
+if (import.meta.main) {
   const [cmd, a, b] = process.argv.slice(2);
   if (cmd === 'candidates') {
     if (!a) {

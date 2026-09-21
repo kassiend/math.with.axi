@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "divisibility-by-11-alternating-sum",
+      "detail": "The display steps never state the pass criterion. s2 instructs the viewer to form the alternating sum but does not say what to compare it against; s3 produces the value 9; s4 then announces the verdict 'Not a multiple of 11'. Read in order the steps do arrive at the stated result and every arithmetic transition is correct (8-5+9-3=9; 11*359+9=3958), but the viewer must infer the actual test ('n is divisible by 11 exactly when A(n) is a multiple of 11') because it appears only in the applicability prose, never on screen. The rule is stated in full only obliquely at s5, and s5 is framed as a caveat rather than as the criterion. A viewer who saw a case with A(n)=11 before reaching s5 would have no on-screen basis to judge it. Not a false claim; a gap in the step sequence.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "divisibility-by-11-alternating-sum",
+      "detail": "The direction remark is literally false as worded. Applicability says running the alternation from the left 'only ever flips the sign of A(n)'. In fact the left-to-right alternation equals (-1)^(k-1) * A(n) for a k-digit number, so it flips the sign only when the digit count is EVEN and leaves A(n) completely unchanged when the digit count is ODD. Verified by enumeration over 1..199999. The conclusion the payload draws from this remark - that direction does not affect the yes/no verdict - is nonetheless correct and was confirmed to hold over the same range, so the defect is in the justification, not the claim it supports.",
+      "witness": "209: A(209) = 9-0+2 = 11 from the right, and 2-0+9 = 11 from the left - identical, not sign-flipped (any odd-digit n, e.g. n=1, behaves the same)."
+    },
+    {
+      "severity": "minor",
+      "kind": "unsupported-universality",
+      "claim_id": "divisibility-by-11-alternating-sum",
+      "detail": "The applicability text opens 'Any positive integer n, of any length ... Then n = A(n) (mod 11)', which asserts the congruence universally, and only later narrows the 'exactly when' to 1 <= n <= 999999; nulls[] then states 'No claim is made outside that domain'. Those two sentences contradict each other about scope, and the opening congruence is not backed by a whitelisted theorem (nulls[] correctly notes that base-b-digit-sum-congruence covers mod b-1 = 9, not mod b+1 = 11). Rated minor rather than fatal because the disclosure in nulls[] is accurate and self-aware, the operative 'exactly when' IS properly scoped, and my out-of-domain probes up to 10^50 found no counterexample - so the over-broad opening sentence is imprecise rather than false.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "divisibility-by-11-alternating-sum",
+      "detail": "Operand draw judged sound, with one limit on what I could check. The declared filter (min_digits 4, max_digits 4, positive_only) is expressed purely in rendering terms, contains no divisibility or magnitude condition that could suppress failing cases, and is vacuous over the declared range [1000, 9999] - which makes the declared rejection_rate of 0 exactly what it should be. The draw 3958 lies in range and is NOT divisible by 11; since only 819 of the 9000 candidates are multiples of 11, the draw landed on the ordinary majority case rather than a flattering one, which is the opposite of cherry-picking. What I could not verify: the payload gives seed 280674670 but no PRNG algorithm, so I cannot reproduce the stream and confirm that this seed yields 3958. I record this as a provenance limitation rather than an unverifiable claim, because the payload states no algorithm-specific claim to test and every anti-selection property that is checkable checks out.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "divisibility-by-11-alternating-sum",
+      "script": "verifier.checks/divisibility-by-11-alternating-sum.py",
+      "computed": "not divisible - 3958 = 11 x 359 + 9 (alternating sum 9)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

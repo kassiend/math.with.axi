@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "euclid-one-line-loop",
+      "detail": "Integrality is load-bearing but does not appear in the displayed hypothesis. The line reads a > b > 0, and the story insists 'the hypothesis a > b > 0 is part of the one line, not a footnote to it'. The termination argument, however, needs b >= 1, which follows from b > 0 only for whole numbers; over the reals the same measure gives a sum that decreases forever without ever reaching equality. The prose does supply the missing word in three places ('both entries are still positive whole numbers', 'whole positive numbers', and the appeal to Elements VII-IX), so the assumption is stated, just not in the one line the story asks the viewer to carry away. Severity is minor and not blocking for two reasons: gcd is only defined on the integers, so the function symbol already pins the domain, and no counterexample to the claim as stated can be constructed. Recorded because the restriction is doing real work rather than decorating the statement: my informational check M6 runs the identical loop on the exact reals and finds that {sqrt(2), 1} is still running after 300 steps while {6/5, 11/10} halts, which is Euclid's own incommensurability argument at Elements X.2.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "euclid-one-line-loop",
+      "script": "verifier.checks/euclid-one-line-loop.py",
+      "computed": "M1 identity gcd(a,b)=gcd(a-b,b): 0 counterexamples over all 33670 pairs a>b>0 with a<=260, plus 5 large spot checks up to 10^12+7; common-divisor SETS identical, 0 counterexamples, so the set-equality wording is exactly right and not an overstatement. M2 closure: 67608 orbits walked state by state, 0 states left the set of pairs of positive whole numbers, and 0 states had distinct entries with the hypothesis unmeetable or equal entries with it meetable -- the loop never steps outside its own precondition, and 'can be met again as long as they differ' is exact. M3 measure: the sum decreased on every one of the applications tested and by exactly b each time, 0 violations; the claimed lower bound 2 held at every reachable state and is tight, attained at {1,1}; 0 non-terminating orbits, 0 orbits whose terminal g differed from gcd, longest orbit 1048575 steps at {2^20, 2^20-1}. M4 the payload's own account of the excluded region is accurate: b=0 leaves the pair fixed, {3,-2} and {-6,-4} grow without bound, {-7,-7} halts on -7 which is not gcd 7, and a<b fails the hypothesis. M5 the published trace matches pair for pair including the unordered rewrites: {1920,1080},{1080,840},{840,240},{600,240},{360,240},{240,120},{120,120}, six subtractions, terminal 120, 1920/120=16, 1080/120=9.",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

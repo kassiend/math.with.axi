@@ -1,0 +1,69 @@
+{
+  "lesson_id": "estimate-product-round-to-nearest-ten",
+  "counter": 6,
+  "concept_slug": "estimate-product-round-to-nearest-ten",
+  "tags": [
+    "estimation",
+    "bounding",
+    "mental-arithmetic",
+    "multiplication"
+  ],
+  "method_name": "Estimate a product",
+  "applicability": "Any two positive numbers: round each to the nearest ten and multiply for a one-step estimate. When BOTH numbers round the same way the estimate is a guaranteed bound on that side - both rounded up gives an over-estimate, both rounded down gives an under-estimate.",
+  "carry_case": "When the two numbers round in OPPOSITE directions (one up, one down), the two rounding errors partly cancel: the estimate is usually tighter but can land either above or below the true product, so the 'which side am I on' rule no longer holds. Example: 47 x 43 -> 50 x 40 = 2000, yet the true value is 2021, so the estimate is below the answer even though 47 was rounded up.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Estimate a product",
+      "working": "49 × 48 ≈ ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Round each factor to the nearest ten, then multiply",
+      "working": "a × b ≈ (round a)(round b)"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Round 49 and 48 up to 50, then multiply",
+      "working": "50 × 50 = 2500"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Both rounded up, so 2500 is a ceiling",
+      "working": "49 × 48 = 2352 (2500 is ~6% high)"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Opposite rounding hides the direction",
+      "working": "47 × 43 → 50 × 40 = 2000, but true = 2021"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      49,
+      48
+    ],
+    "result": "2500"
+  },
+  "nulls": [],
+  "operand_draw": {
+    "seed": 20260824,
+    "spec": {
+      "min": 21,
+      "max": 89,
+      "filter": {
+        "max_digits": 2
+      }
+    },
+    "draws": [
+      49,
+      48
+    ],
+    "rejection_rate": 0
+  }
+}

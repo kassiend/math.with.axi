@@ -1,0 +1,82 @@
+{
+  "lesson_id": "divisibility-by-7-double-last-digit",
+  "counter": 3,
+  "area": "divisibility-rules",
+  "concept_slug": "divisibility-by-7-double-last-digit",
+  "tags": ["mental-arithmetic", "divisibility", "number-theory", "shortcut"],
+  "method_name": "Test any number for 7",
+  "applicability": "Every integer n with at least two digits. Write n = 10a + b, where b is the last digit (0-9) and a is the number formed by all the digits in front of it. Then 7 divides n if and only if 7 divides a - 2b. Proof of the equivalence: -2*(10a + b) = -20a - 2b = (a - 2b) - 21a, and 21a is a multiple of 7, so a - 2b and -2n are congruent mod 7; since gcd(2, 7) = 1, one is a multiple of 7 exactly when the other is. The step may be repeated on the new number until it is small enough to judge by sight, and it is valid even when a - 2b is zero or negative (0 counts as divisible; judge a negative result by its absolute value). The rule decides divisibility only.",
+  "carry_case": "The step preserves divisibility but NOT the remainder, and the drawn example shows it: 838 -> 83 - 2*8 = 67, where 67 = 7*9 + 4 but 838 = 7*119 + 5. Reading '4' off 67 as the remainder of 838 is wrong. Second concrete break of the naive form: when a < 2b the result goes negative, e.g. 12 -> 1 - 2*2 = -3; the test still works (-3 is not a multiple of 7, and neither is 12), but only if you allow negative values and judge them by multiples of 7 rather than assuming the subtraction must come out positive. One pass is also not always enough - large numbers need the step repeated until the result is small.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Test any number for 7",
+      "working": "838 ÷ 7 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Cut the last digit, double it, subtract",
+      "working": "10a + b → a − 2b"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Run it on 838",
+      "working": "83 − 2×8 = 67"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Judge what's left",
+      "working": "67 = 7×9 + 4 → 838 not ÷ 7"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Divisibility only, not the remainder",
+      "working": "67 leaves 4, 838 leaves 5"
+    }
+  ],
+  "worked_example": {
+    "operands": [838],
+    "result": "not divisible by 7 (838 = 7×119 + 5; one step gives 67)"
+  },
+  "operand_draw": {
+    "seed": 280081436,
+    "spec": {
+      "min": 100,
+      "max": 999,
+      "filter": {
+        "min_digits": 3,
+        "max_digits": 3,
+        "positive_only": true
+      }
+    },
+    "n": 1,
+    "draws": [838],
+    "attempts": 1,
+    "rejections": [],
+    "rejection_rate": 0,
+    "rejection_rate_alarm": false,
+    "construction": "operand = drawn_value = 838. The method takes a single input; there is no second operand.",
+    "construction_note": "The range [100, 999] was declared before the draw: three digits is the smallest width where the technique earns its keep (one step collapses a 3-digit number to a 2-digit one you can judge by sight) and it fits the 500 px working line at full size. The filter is rendering-only - min_digits/max_digits pin the on-card width and positive_only excludes nothing that [100, 999] already contains, so it is redundant by construction and provably encodes no property of divisibility by 7. Zero rejections. The draw returned 838, which is NOT divisible by 7. Per section 3.4 the draw stands: a divisibility test whose worked example answers 'no' is still a complete demonstration of the method, and 838 additionally exhibits the caveat honestly (838 leaves 5, its reduction 67 leaves 4), so the range and the method agree."
+  },
+  "dedup_check": {
+    "chosen": {
+      "concept_slug": "divisibility-by-7-double-last-digit",
+      "tags_probed": ["divisibility", "mental-arithmetic", "number-theory"],
+      "blocked": [],
+      "candidates": [],
+      "verdict": "No slug collision and no tag-overlap candidates at the required threshold. The two shipped lessons (square-two-digit-ending-in-5, multiply-by-11-two-digit) both compute a product; this lesson computes nothing - it is a residue test. A viewer who watched either would learn a genuinely new mechanism."
+    },
+    "also_probed": [
+      {
+        "concept_slug": "divisibility-by-11-alternating-sum",
+        "rejected_because": "Conceptually adjacent to the shipped 'multiply-by-11' lesson in the viewer's mind - same headline number, and the audience would read it as the 11 trick again rather than as a new mechanism."
+      }
+    ]
+  },
+  "nulls": []
+}

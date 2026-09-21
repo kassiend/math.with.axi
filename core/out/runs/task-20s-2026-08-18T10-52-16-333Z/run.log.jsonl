@@ -1,0 +1,4 @@
+{"t":"2026-08-18T10:55:26.883Z","event":"run.start","task_id":"percent-25-more-reverse-drop","duration_s":20,"seed":-1604050750}
+{"t":"2026-08-18T10:55:27.315Z","event":"crosscheck","agreed":true,"generator":"20%","verifier":"20%"}
+{"t":"2026-08-18T10:55:27.344Z","event":"picks","background":"bg.jpeg","start_audio":"axi_greetings1.mp3","mid_audio":"hurry3.mp3","hurry_clip":"hurry-hurry6.webm","hurry_audio_s":1.645688,"total_frames":804,"hurry_enter":614}
+{"t":"2026-08-18T10:55:28.837Z","event":"gate.closed","status":"rejected","stage":"statement-does-not-fit","problems":[{"reason":"statement does not fit the 249px safe box at the 28px floor (measured 277x35) — shorten it or split it across two lines"}]}

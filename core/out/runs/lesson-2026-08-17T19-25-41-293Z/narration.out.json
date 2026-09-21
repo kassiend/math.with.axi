@@ -1,0 +1,53 @@
+{
+  "lesson_id": "multiply-equidistant-difference-of-squares",
+  "counter": 4,
+  "intro": {
+    "narration": "[excited] Heey — what's fifty-three times sixty-seven? [pause] In your head, in one move.",
+    "audio": "audio/intro.mp3",
+    "seconds": 6.08
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Do not multiply yet. [pause] Look at where these two numbers meet.",
+      "instruction": "Multiply around the middle",
+      "working": "53 × 67 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 5.36
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Both are seven away from sixty. [pause] Sixty is the middle, seven is the gap.",
+      "instruction": "Find the number in the middle",
+      "working": "53 ←7— 60 —7→ 67",
+      "audio": "audio/s2.mp3",
+      "seconds": 6.96
+    },
+    {
+      "step_id": "s3",
+      "narration": "[confident] Square sixty, subtract seven squared. [pause] Thirty-six hundred minus forty-nine.",
+      "instruction": "Square it, take off the gap²",
+      "working": "60² − 7² = 3600 − 49",
+      "audio": "audio/s3.mp3",
+      "seconds": 7.36
+    },
+    {
+      "step_id": "s4",
+      "narration": "[excited] Three thousand five hundred fifty-one. [pause] That is the product.",
+      "instruction": "That is the product",
+      "working": "53 × 67 = 3551",
+      "audio": "audio/s4.mp3",
+      "seconds": 6.4
+    },
+    {
+      "step_id": "s5",
+      "narration": "[thoughtful] Odd sum? [pause] No middle. Shift by one, then add fifty-three back.",
+      "instruction": "Odd sum? No middle — shift by one",
+      "working": "53 × 68 = 3551 + 53 = 3604",
+      "audio": "audio/s5.mp3",
+      "seconds": 6.0
+    }
+  ],
+  "total_seconds": 38.16,
+  "nulls": []
+}

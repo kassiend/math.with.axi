@@ -1,0 +1,40 @@
+{
+  "status": "failed",
+  "findings": [
+    {
+      "severity": "major",
+      "kind": "false-generalisation",
+      "claim_id": "divisibility-by-7-double-last-digit",
+      "detail": "The declared domain is 'Every integer n with at least two digits', which includes negatives, but the prescribed construction only exists for n >= 0. The payload says 'Write n = 10a + b, where b is the last digit (0-9) and a is the number formed by all the digits in front of it'. For n = -83 the digits in front are '8' and the last digit is '3', but 10*8 + 3 = 83 != -83, so the payload's own defining equation has NO digit-reading solution. Of the three readings a viewer can take, one is outright false: carrying the sign onto a gives a = -8, b = 3, so a - 2b = -14, a multiple of 7, declaring -83 divisible by 7 when -83 = 7*(-12) + 1. The iff is only rescued by the floor decomposition a = floor(n/10) = -9, b = n mod 10 = 7, i.e. b = 7 is not a digit of -83 at all - a reading the lesson never states. The mathematics is fixable (restrict to positive n, or say 'test |n|'), but as written the stated applicability condition does not match the stated procedure over part of its own declared domain. Under the floor reading the iff itself holds: verified exhaustively for all n in [-20000, 20000] with |n| >= 10, plus 5000 random n up to 1e18, zero counterexamples.",
+      "witness": "n = -83"
+    },
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "divisibility-by-7-double-last-digit",
+      "detail": "'The step may be repeated on the new number until it is small enough to judge by sight' carries an unstated positivity assumption. For positive n the step strictly shrinks the value (verified: abs(a-2b) < n for every n in [10, 20000]). Over the declared domain, which includes negatives, -21 and -14 are fixed points under the floor decomposition: -21 = 10*(-3) + 9 gives -3 - 18 = -21, so the iteration never shrinks and never terminates. There are no positive fixed points (checked 10..100000). The payload's 'judge a negative result by its absolute value' rule does repair this if applied before each repetition, but the text presents abs-judging as a final-step convenience, not as a precondition for iterating.",
+      "witness": "n = -21 (maps to itself forever); n = -14 likewise"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "divisibility-by-7-double-last-digit",
+      "detail": "Display-step audit. The chain s1->s4 does compute the stated result and the arithmetic is exact: 838 -> a=83, b=8 -> 83 - 2*8 = 67 (s3), 67 = 7*9 + 4 (s4, correct), 838 = 7*119 + 5 (correct). But one link a viewer needs is never shown: nowhere on screen is it stated that the step PRESERVES DIVISIBILITY. s2 writes the rule as '10a + b -> a - 2b', an arrow that reads as 'becomes', not as 'is divisible by 7 exactly when'. s4 then infers '838 not div 7' from a fact about 67, an inference licensed only by the unshown equivalence. s5 makes this actively harder by pointing out the two numbers have DIFFERENT remainders (4 vs 5) without restating why the divisibility verdict nonetheless transfers - the viewer is told the transformation loses information immediately after being asked to trust it. The iff is present in the applicability field but that field is not among the displayed steps.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "divisibility-by-7-double-last-digit",
+      "script": "verifier.checks/divisibility-by-7-double-last-digit.py",
+      "computed": "838 -> a=83, b=8 -> 83-2*8 = 67; 67 mod 7 = 4 != 0 => 838 NOT divisible by 7 (838 = 7*119 + 5)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim_id": "divisibility-by-7-double-last-digit.operand_draw.seed",
+      "reason": "Cannot confirm that seed 280081436 with spec {min:100, max:999} actually produces the draw [838]: the payload names no PRNG algorithm or implementation, so the seed->draw mapping is not reproducible from the payload alone. Everything about the draw that IS checkable passes: the declared filter {min_digits:3, max_digits:3, positive_only:true} is stated purely in rendering terms and is vacuous over the range 100..999 (all 900 members are 3-digit and positive), so it excludes no case and cannot hide a failure; rejection_rate 0 is consistent with a vacuous filter; the method's iff holds for all 900 pool members, so no cherry-picking is possible within the pool; and 838 is not a flattering pick - it is non-divisible, and it is the operand that exposes the remainder trap the lesson then documents. The 20/900 genuinely awkward cases (a < 2b, negative first step, e.g. 106, 107, 108) remain in the pool rather than being filtered out."
+    }
+  ]
+}

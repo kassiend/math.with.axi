@@ -1,0 +1,71 @@
+{
+  "lesson_id": "stacked-discounts-multiply-keepers",
+  "counter": 5,
+  "concept_slug": "stacked-discounts-multiply-keepers",
+  "tags": [
+    "percentage",
+    "discount",
+    "mental-arithmetic",
+    "shortcut"
+  ],
+  "method_name": "Stack two discounts",
+  "applicability": "Any chain of successive percentage discounts applied one after another to the running price. For discounts of a% then b%, with 0 <= a <= 100 and 0 <= b <= 100, the fraction of the price still to pay is the product of the keep-fractions: (1 - a/100)(1 - b/100), so the total discount is a + b - ab/100 percent. This is exact - not an approximation - for every a and b in that range, for any starting price, for any number of stacked discounts (keep multiplying keep-fractions), and in either order, because multiplication commutes. It covers only percentage discounts taken off the running price; a fixed-amount coupon ('10 off') is not a percentage and is outside the rule, and so is a coupon whose terms say it is calculated on the ORIGINAL price rather than on the reduced one.",
+  "carry_case": "Adding the two percentages. The tempting simple rule 'a% off then b% off = (a+b)% off' is wrong whenever both discounts are nonzero, because it misses the -ab/100 term. Concrete break, the drawn example itself: 10% off then 80% off is 82% off, not 90% off - a 100 item goes 100 -> 90 -> 18, and 18 paid means 82 off, while the add rule predicts 10 left. Most memorable break: 50% off then 50% off is not free, it leaves 25% of the price. Adding agrees with the correct rule only when a = 0 or b = 0.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Stack two discounts",
+      "working": "10% off, then 80% off = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Multiply what's left, don't add what's off",
+      "working": "keep 90% × keep 20%"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Multiply the keepers",
+      "working": "0.9 × 0.2 = 0.18"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "Take the rest off 100%",
+      "working": "18% left → 82% off, not 90%"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Never add two discounts",
+      "working": "50% + 50% ≠ free: 0.5 × 0.5 = 25% left"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      10,
+      80
+    ],
+    "result": "18% of the price left, i.e. 82% off (100 → 90 → 18)"
+  },
+  "nulls": [],
+  "operand_draw": {
+    "seed": 342587197,
+    "spec": {
+      "min": 1,
+      "max": 9,
+      "filter": {
+        "max_digits": 1,
+        "nonzero": true,
+        "positive_only": true
+      }
+    },
+    "draws": [
+      1,
+      8
+    ],
+    "rejection_rate": 0
+  }
+}

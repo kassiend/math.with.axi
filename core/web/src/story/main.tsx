@@ -60,6 +60,19 @@ if (!payload) {
     payload.outro_seconds ?? null,
   );
 
+  // One step of a stepped beat. A formula step is typeset here, exactly like a whole-beat formula;
+  // a plot/anim/shape step passes its spec straight through. `weight` defaults to 1 so an
+  // unweighted list divides the beat evenly.
+  const buildStep = (s: any) => ({
+    visual: s.visual ?? 'none',
+    image: s.image ?? null,
+    formulaHtml: s.formula_latex ? typeset(s.formula_latex) : null,
+    shapeSvg: s.shape_svg ?? null,
+    plot: s.plot ?? null,
+    anim: s.anim ?? null,
+    weight: typeof s.weight === 'number' && s.weight > 0 ? s.weight : 1,
+  });
+
   const beats: StoryBeatContent[] = (payload.beats ?? []).map((b: any) => ({
     beat: b.beat,
     display: b.display ?? '',
@@ -71,16 +84,29 @@ if (!payload) {
       : null,
     shapeSvg: b.shape_svg ?? null,
     stat: b.stat?.value ? { prefix: b.stat.prefix ?? null, value: String(b.stat.value), suffix: b.stat.suffix ?? null, count: b.stat.count ?? null } : null,
+    plot: b.plot ?? null,
+    anim: b.anim ?? null,
+    steps: Array.isArray(b.steps) && b.steps.length ? b.steps.map(buildStep) : null,
   }));
 
   const ask: string = payload.ask || ASK.fallback;
 
-  fontsLoaded(['600 40px Outfit', '700 40px Outfit', '800 40px Outfit', '900 40px Outfit']).then(() => {
+  // KaTeX loads its faces lazily, on first use, so the other faces being ready says nothing about
+  // them. A formula beat would then be screenshotted in a fallback face — intermittently, and only
+  // on whichever machine loses the race. Ask for them explicitly.
+  fontsLoaded(['600 40px Outfit', '700 40px Outfit', '800 40px Outfit', '900 40px Outfit'])
+    .then(() => Promise.all([document.fonts.load('100px KaTeX_Size2'), document.fonts.load('100px KaTeX_Main')]))
+    .then(() => {
     const fit = fitStory(
       payload.title ?? '', beats.map((b) => b.display), ask,
       beats.map((b) => b.formulaStepsHtml ?? (b.formulaHtml ? [b.formulaHtml] : [])),
       beats.map((b) => b.stat?.value ?? null),
+      beats.map((b) => (b.steps ?? []).flatMap((st, i) => (st.formulaHtml ? [{ step: i, html: st.formulaHtml }] : []))),
     );
+    // A formula step is sized by its own fit, exactly like a whole-beat formula.
+    fit.stepFormulaFits.forEach((fits, i) => {
+      for (const { step, fit: f } of fits) beats[i].steps![step].formulaFontSize = f.fontSize;
+    });
     window.__axiFit = fit;
     if (!fit.fits) {
       fatal(`text does not fit: ${JSON.stringify(fit.problems)}`);

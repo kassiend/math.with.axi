@@ -16,9 +16,10 @@
  * band the layout reserves (MASCOT_REST). No stopwatch and no hurry overlay — those are the task
  * format's language.
  */
-import { ASK, BODY, CARD, FOOTER, HERO, PROGRESS, STEP_FADE, TITLE } from './layout';
+import { ASK, BODY, BODY_WITH_VISUAL, CARD, FOOTER, HERO, PROGRESS, STEP_FADE, TITLE, VISUAL } from './layout';
 import type { GlyphBox, LessonFit, LineFit } from './fit';
-import { BLUR_PX, LessonTimeline, inHook } from '../../../shared/lesson-timeline';
+import { LessonVisual, type LessonVisualSpec } from './visuals';
+import { BLUR_PX, LessonTimeline, inHook, visualBuild } from '../../../shared/lesson-timeline';
 import {
   backgroundDrift, cardSettle, clamp01, crossfade, lerp, matchGlyphs, mixHex, slideEase,
   staggerFor, tokenPose, tokenize,
@@ -28,6 +29,8 @@ export interface LessonStepContent {
   step_id: string;
   instruction: string;
   working: string;
+  /** A step with a diagram re-anchors its text to the top of the card and hands the rest over. */
+  visual?: LessonVisualSpec | null;
 }
 
 export interface LessonSceneProps {
@@ -174,14 +177,25 @@ function workingStateOf(state: BodyState, props: LessonSceneProps): WorkingState
     };
   }
   const f = fit.results[state.index];
-  const total = f.instruction.height + BODY.gap + f.working.height;
-  const top = BODY.centreY - CARD.y - total / 2;
+  const body = steps[state.index].visual ? BODY_WITH_VISUAL : BODY;
   return {
     text: steps[state.index].working, glyphs: f.glyphs, fontSize: f.working.fontSize,
-    lineHeightRatio: BODY.working.lineHeightRatio,
-    top: top + f.instruction.height + BODY.gap,
+    lineHeightRatio: body.working.lineHeightRatio,
+    top: bodyTop(state.index, props) + f.instruction.height + body.gap,
     start: state.start,
   };
+}
+
+/**
+ * Top of a step's text block, in card coordinates. A text step centres its two lines as a group
+ * on BODY.centreY; a step with a diagram pins them under the progress row and hands the middle
+ * of the card to the slot.
+ */
+function bodyTop(index: number, { steps, fit }: LessonSceneProps): number {
+  const f = fit.results[index];
+  if (steps[index].visual) return BODY_WITH_VISUAL.top - CARD.y;
+  const total = f.instruction.height + BODY.gap + f.working.height;
+  return BODY.centreY - CARD.y - total / 2;
 }
 
 function BodyLayer(props: LessonSceneProps & { state: BodyState; pose: Pose; outgoing?: boolean }) {
@@ -218,22 +232,47 @@ function BodyLayer(props: LessonSceneProps & { state: BodyState; pose: Pose; out
 
   const content = steps[state.index];
   const f = fit.results[state.index];
-  const total = f.instruction.height + BODY.gap + f.working.height;
-  const top = BODY.centreY - CARD.y - total / 2;
+  const body = content.visual ? BODY_WITH_VISUAL : BODY;
+  const top = bodyTop(state.index, props);
 
   return (
     <div className="layer">
       <div className="layer" style={style}>
         {/* The label waits for the digits to finish moving: motion first, then the words for it. */}
         <TokenLine
-          frame={frame} text={content.instruction} fit={f.instruction} colour={BODY.instruction.colour}
-          lineHeightRatio={BODY.instruction.lineHeightRatio} weight={800}
+          frame={frame} text={content.instruction} fit={f.instruction} colour={body.instruction.colour}
+          lineHeightRatio={body.instruction.lineHeightRatio} weight={800}
           top={top} start={state.start + SLIDE_FRAMES - 4} stagger={3}
         />
       </div>
       <WorkingLine frame={frame} cur={cur} prev={prev} next={props.outgoing ? next : null}
-                   colour={BODY.working.colour} budget={Math.min(40, Math.round(span * 0.45))}
+                   colour={body.working.colour} budget={Math.min(40, Math.round(span * 0.45))}
                    fade={pose.opacity} />
+      {content.visual && (
+        <VisualSlot spec={content.visual} frame={frame} timeline={timeline} fade={pose.opacity} />
+      )}
+    </div>
+  );
+}
+
+/**
+ * The diagram of a step that carries one. It builds across the step's own narration
+ * (visualBuild), cross-fades with the layer it belongs to, and — because the closing ask lands
+ * inside the slot — fades out under the ask once the outro begins. By then it has done its work.
+ */
+function VisualSlot({ spec, frame, timeline, fade }: {
+  spec: LessonVisualSpec; frame: number; timeline: LessonTimeline; fade: number;
+}) {
+  const outroFade = 1 - clamp01((frame - timeline.outro.start) / STEP_FADE);
+  const opacity = Math.min(fade, outroFade);
+  if (opacity <= 0) return null;
+  return (
+    <div className="visual" style={{
+      left: `${VISUAL.x - CARD.x}px`, top: `${VISUAL.y - CARD.y}px`,
+      width: `${VISUAL.w}px`, height: `${VISUAL.h}px`,
+      opacity,
+    }}>
+      <LessonVisual spec={spec} build={visualBuild(frame, timeline)} />
     </div>
   );
 }

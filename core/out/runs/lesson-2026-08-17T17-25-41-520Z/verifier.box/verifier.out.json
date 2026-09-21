@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "remainder-mod-9-digit-sum",
+      "detail": "Draw provenance is attested but not bit-reproducible from the payload alone: operand_draw names seed 281147218 but no PRNG algorithm or stream ordering, so I cannot re-derive 6656 from the seed and cannot positively prove the operand was drawn rather than hand-picked. What I could establish independently is decisive against cherry-picking, and I record it here rather than as a verdict-blocking gap: (a) the declared filter (min_digits=4, max_digits=4, positive_only) is expressed purely in rendering terms and is a provable no-op over [1000,9999] - every integer in that range passes it - which corroborates the claimed rejection_rate of 0; (b) the filter does NOT remove the failure mode, since 1000 multiples of 9 survive it and remain drawable, so no divisibility property was smuggled in; (c) the drawn value does not dodge the exception, because the exception (multiples of 9) is presented explicitly at s5 and in carry_case rather than hidden; (d) 6656 lies inside the declared range and its digit sum is 23 >= 10, so it genuinely exercises the second iteration round the rule needs, which is the harder presentation case, not the easier one. If the orchestrator requires seed-to-draw reproducibility, this needs the PRNG spec added to the payload format and should be escalated there rather than charged against this lesson's mathematics.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "remainder-mod-9-digit-sum",
+      "detail": "Membership of the cited theorem id 'base-b-digit-sum-congruence' in core/verify/theorems.json could not be checked, as that file is outside the single input I am permitted to read. This does not leave the universality claim unsupported: I proved the underlying statement independently rather than trusting the citation. The proof is structural, not sampled - 10**i = 1 (mod 9) for all i >= 0 by induction, verified symbolically via the identity 10**(i+1)-1 = 10*(10**i-1)+9 simplifying to 0 in SymPy, plus the base case - which gives n = digitsum(n) (mod 9) for every non-negative n of any length, not merely over a finite window. The hypothesis mapping the payload states (b = 10, b-1 = 9) is the correct instantiation. Only the whitelist bookkeeping is unchecked, not the mathematics.",
+      "witness": null
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "remainder-mod-9-digit-sum",
+      "detail": "Display-order judgement, requested explicitly. Read in order, s1 -> s2 -> s3 -> s4 do produce the stated result with no missing step: s1 poses 6656 / 9, s2 supplies the digit sum 6+6+5+6 = 23, s3's instruction 'Still two digits? Again' both states the iteration rule and applies it to give 2+3 = 5, and s4 declares that 5 is the remainder. The arithmetic of every displayed line is confirmed. Two presentational observations, neither of which blocks a viewer: s4's working line '6656 = 9 x 739 + 5' introduces the quotient 739, which is never derived anywhere in the sequence - it is a confirmation of the answer rather than a step toward it, and the remainder itself already came from s3, so nothing is left dangling, but a viewer who tried to read s4 as a derivation would find an unexplained number. Second, s5's working '999 -> 27 -> 9' compresses the digit sum 9+9+9 = 27 into an arrow rather than showing it, which is legitimate only because s2 already taught that operation. Both are style, not defects.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "remainder-mod-9-digit-sum",
+      "script": "verifier.checks/remainder-mod-9-digit-sum.py",
+      "computed": "5",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

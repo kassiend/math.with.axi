@@ -27,6 +27,9 @@ core/web/public/bg/
 # Build output.
 core/web/dist/
 
+# Axi.exe, rebuilt from desktop/Axi.cs by desktop/build.ps1 in about a second.
+desktop/dist/
+
 # out/renders duplicates output/posts/; out/logs holds debug stills and
 # chroma-key previews; tts-cache is re-synthesised on demand.
 core/out/renders/

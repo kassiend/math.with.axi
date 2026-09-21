@@ -46,6 +46,133 @@
       "statement_norm": "37*43=?"
     },
     {
+      "task_id": "percent-25-more-reverse-drop",
+      "duration_s": 20,
+      "structure_id": "percent-increase-to-decrease-inversion",
+      "categories": [
+        "percentage"
+      ],
+      "statement": "b is 25% more than a",
+      "answer": "20%",
+      "status": "rejected",
+      "created_at": "2026-08-18T10:55:26.883Z",
+      "failed_at": "statement-does-not-fit",
+      "statement_norm": "bis25%morethana"
+    },
+    {
+      "task_id": "percent-42-of-x-is-36",
+      "duration_s": 20,
+      "structure_id": "percent-known-part-rescale-to-other-percent",
+      "categories": [
+        "percentage",
+        "ratio-proportion"
+      ],
+      "statement": "42% of x = 36",
+      "answer": "60",
+      "status": "shipped",
+      "created_at": "2026-08-18T10:59:24.800Z",
+      "seed": -1729413922,
+      "video": "output\\posts\\tasks\\20s\\percent-42-of-x-is-36.mp4",
+      "run_dir": "out\\runs\\task-20s-2026-08-18T10-55-28-853Z",
+      "statement_norm": "42%ofx=36"
+    },
+    {
+      "task_id": "exp-chain-3x4-4y9-xy",
+      "duration_s": 40,
+      "structure_id": "chained-exponent-compose-to-power",
+      "categories": [
+        "logarithm-exponent"
+      ],
+      "statement": "3^x = 4, 4^y = 9",
+      "answer": "2",
+      "status": "shipped",
+      "created_at": "2026-08-18T11:12:01.731Z",
+      "seed": 60654568,
+      "video": "output\\posts\\tasks\\40s\\exp-chain-3x4-4y9-xy.mp4",
+      "run_dir": "out\\runs\\task-40s-2026-08-18T11-07-24-164Z",
+      "statement_norm": "3^x=4,4^y=9"
+    },
+    {
+      "task_id": "telescoping-product-one-minus-inv-square-10",
+      "duration_s": 40,
+      "structure_id": "telescoping-product-one-minus-inverse-square",
+      "categories": [
+        "telescoping"
+      ],
+      "statement": "\\prod_{k=2}^{10}\\left(1-\\frac{1}{k^2}\\right)",
+      "answer": "11/20",
+      "status": "shipped",
+      "created_at": "2026-08-23T19:48:55.881Z",
+      "seed": -1093332241,
+      "video": "output\\posts\\tasks\\40s\\telescoping-product-one-minus-inv-square-10.mp4",
+      "run_dir": "out\\runs\\task-40s-2026-08-24T06-00-00Z",
+      "statement_norm": "\\prod_k=2^10(1-\\frac1k^2)"
+    },
+    {
+      "task_id": "square-sin15-plus-cos15",
+      "duration_s": 40,
+      "structure_id": "square-of-sin-plus-cos-angle",
+      "categories": [
+        "trigonometric-identity"
+      ],
+      "statement": "(\\sin 15^\\circ + \\cos 15^\\circ)^2",
+      "answer": "3/2",
+      "status": "shipped",
+      "created_at": "2026-08-23T19:59:57.788Z",
+      "seed": 490361638,
+      "video": "output\\posts\\tasks\\40s\\square-sin15-plus-cos15.mp4",
+      "run_dir": "out\\runs\\task-40s-2026-08-24T06-05-00Z",
+      "statement_norm": "(\\sin15^\\circ+\\cos15^\\circ)^2"
+    },
+    {
+      "task_id": "eq-sum-cube-find-product",
+      "duration_s": 40,
+      "structure_id": "sum-and-cube-sum-find-product",
+      "categories": [
+        "system-of-equations"
+      ],
+      "statement": "x + y = 5,  x^3 + y^3 = 35",
+      "answer": "6",
+      "status": "shipped",
+      "created_at": "2026-08-25T10:04:28.508Z",
+      "seed": 1839396809,
+      "video": "output\\posts\\tasks\\40s\\eq-sum-cube-find-product.mp4",
+      "run_dir": "out\\runs\\task-40s-2026-08-25-eq-sum-cube-find-product",
+      "statement_norm": "x+y=5,x^3+y^3=35"
+    },
+    {
+      "task_id": "snail-climb-slip-reach-top",
+      "duration_s": 40,
+      "structure_id": "snail-climb-slip-reach-top",
+      "categories": [
+        "functional-pattern"
+      ],
+      "statement": "10 m pole, +3 m by day, -2 m by night",
+      "answer": "8",
+      "status": "shipped",
+      "created_at": "2026-08-25T10:11:43.139Z",
+      "seed": 613478237,
+      "video": "output\\posts\\tasks\\40s\\snail-climb-slip-reach-top.mp4",
+      "run_dir": "out\\runs\\task-40s-2026-08-25-snail-climb-slip-reach-top",
+      "statement_norm": "10mpole,+3mbyday,-2mbynight"
+    },
+    {
+      "task_id": "last-two-digits-7-pow-2024",
+      "duration_s": 40,
+      "structure_id": "last-two-digits-power-order-mod-100",
+      "categories": [
+        "modular-arithmetic"
+      ],
+      "statement": "7^{2024}",
+      "answer": "01",
+      "status": "shipped",
+      "created_at": "2026-08-25T10:12:06.056Z",
+      "seed": -1886554145,
+      "video": "output\\posts\\tasks\\40s\\last-two-digits-7-pow-2024.mp4",
+      "run_dir": "out\\runs\\task-40s-2026-08-25-last-two-digits-7-pow-2024",
+      "statement_norm": "7^2024"
+    },
+    {
       "task_id": "percent-84-of-25",
       "duration_s": 20,
       "structure_id": "percent-swap-reversal",

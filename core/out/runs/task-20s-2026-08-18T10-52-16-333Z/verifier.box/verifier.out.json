@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "unstated-assumption",
+      "claim_id": "percent-25-more-reverse-drop",
+      "detail": "Positivity of a is never stated. The percent value itself is sign-invariant ((b-a)/b = 0.25a/1.25a = 1/5 for every a != 0), so the numeric answer 20% is not at risk, but the framing is: for a < 0, b = 1.25a is algebraically LESS than a, so the premise 'a is less than b' embedded in the question is false; for a = 0 we get b = 0 and the shortfall (b-a)/b is 0/0, undefined. The task is rescued by its own wording rather than by an explicit hypothesis: 'b is 25% MORE than a' can only describe an increase when a > 0, and that reading excludes both bad branches. Recorded as minor because the exclusion is genuine but implicit; an explicit 'a > 0' would close it.",
+      "witness": "a = -4: b = -5, so b < a and 'a is less than b' fails, yet (b-a)/b still equals 1/5. a = 0: b = 0 and (b-a)/b is 0/0."
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "percent-25-more-reverse-drop",
+      "script": "verifier.checks/percent-25-more-reverse-drop.py",
+      "computed": "20%",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "judgement": {
+    "unambiguously_determined": true,
+    "determination_detail": "The statement fixes b = a + (25/100)a = (5/4)a. The question 'by what percent is a less than b' makes b the object of 'less than', hence the base of comparison, giving p = (b-a)/b*100 = 20. The rival base (a) yields 25%, but selecting it would answer 'by what percent is b more than a', which is not the question asked, so the wording does discriminate between the two readings. No third reading is available.",
+    "exact_not_rounded": true,
+    "exactness_detail": "0.25a/1.25a = 1/5 exactly. Computed in sympy.Rational throughout with no float ever formed; the result is a rational number free of the symbol a, so it is exact and scale-invariant rather than a rounded decimal. Confirmed identical at a = 1, 4, 7/3, 1000, 1/7, -2, -9/5.",
+    "simplest_form": true,
+    "simplest_form_detail": "20% is the integer 20 (denominator 1) — no unreduced fraction, no trailing decimal, no percent-of-a-percent. answer_latex '20\\%' matches answer '20%'.",
+    "sign_and_branch": "Sign is positive and correct: a falls short of b, so the shortfall (b-a)/b is positive for a > 0, and 20% is reported as a positive drop, not a negative one. The branch selected is the base-b branch, which is the one the wording demands; the base-a branch (25%) is the classic trap for this inversion structure and was correctly NOT taken. Degenerate branches a = 0 and a < 0 are noted in findings.",
+    "nulls_reviewed": "The single null (statement_latex) is justified on rendering grounds only — a plain English sentence with one percent literal that renders exactly as plain text. This is a presentation-level reason and does not conceal any case where the method would fail, so it is not a cherry-picking vector."
+  }
+}

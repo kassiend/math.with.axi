@@ -1,0 +1,3 @@
+{"t":"2026-08-18T10:52:15.551Z","event":"run.start","lesson_id":"percent-swap-a-of-b-equals-b-of-a","counter":5,"seed":1859273833}
+{"t":"2026-08-18T10:52:16.318Z","event":"crosscheck","agreed":false,"generator":null,"verifier":"3.75"}
+{"t":"2026-08-18T10:52:16.319Z","event":"gate.closed","status":"failed","stage":"verification","problems":[{"side":"generator","error":"check output is not JSON: RESULT: ALL CHECKS PASSED"}]}

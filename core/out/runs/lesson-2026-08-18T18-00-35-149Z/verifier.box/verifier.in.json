@@ -1,0 +1,79 @@
+{
+  "lesson_id": "reverse-percentage-recover-original-price",
+  "counter": 5,
+  "concept_slug": "reverse-percentage-recover-original-price",
+  "tags": [
+    "discount",
+    "mental-arithmetic",
+    "percentage",
+    "reverse-percentage",
+    "shortcut"
+  ],
+  "method_name": "Undo a discount",
+  "applicability": "One single percentage discount of d% taken off one positive ticket price P, where the SALE price S = P·(1 − d/100) is the number you know and P is the number you want. Stated precisely: for every real P > 0 and every d with 0 ≤ d < 100, P = S ÷ (1 − d/100). The divisor 1 − d/100 is the fraction of the price you still pay — call it the keeper — so the rule in words is 'divide the sale price by what you keep', and in the worked example the keeper is 100 − 80 = 20% = 0.2, which makes ÷ 0.2 the same as × 5. This is an exact identity, not an approximation: it is P·k ÷ k = P with k = 1 − d/100, and it is verified here both symbolically for all real P and d < 100 and exhaustively in exact rational arithmetic over the finite domain the draw came from (P = 10t for t in [3,40], d = 10k for k in [1,9]) plus the wider grid d in 0..99, P in 1..500. The condition d < 100 is load-bearing and is exactly what carry_case shows. The rule is stated as division on purpose: the near-universal wrong move is to add the same percentage back onto the sale price, and that is wrong for EVERY d strictly between 0 and 100, because S·(1 + d/100) = P·(1 − d/100)(1 + d/100) = P·(1 − (d/100)²), which is always short of P — by 68 × 1.8 = £122.40 against a true £340 in this example. That failure is also checked exhaustively rather than asserted.",
+  "carry_case": "d = 100 — a 100%-off item, i.e. a giveaway. The keeper is 100 − 100 = 0, so the rule's own instruction, 'divide by what you keep', asks for a division by zero and returns nothing: the sale price is £0 and £0 ÷ 0 is undefined. This is not a technicality that better arithmetic could rescue. At d = 100 the map P → S collapses every price to the same sale price, so a £340 coat and a £5 mug both ring up as £0 and no method whatever can tell them apart — the information is gone, not merely hard to recover. That makes 100% the exact upper edge of the applicability range: the rule is correct for every d in [0, 100) and undefined at d = 100. The second, far more common failure is not an input but a wrong move — adding the discount back on. Add 80% to the £68 sale price and you get 68 × 1.8 = £122.40, not £340, because the 80% is being taken on the shrunken price instead of the ticket price. Both are verified: division by zero and the collapse at d = 100, and the fact that S·(1 + d/100) < P for every single d in 1..99.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Undo a discount",
+      "working": "80% off → £68. Before?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Divide by what you keep",
+      "working": "100 − 80 = 20% → ÷ 0.2"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Divide, don't add back",
+      "working": "68 ÷ 0.2 = 68 × 5 = 340"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "That's the ticket price",
+      "working": "£340 − 80% = £68 ✓"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "100% off can't be undone",
+      "working": "keep = 0 → £0 ÷ 0 ✗"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      68,
+      80
+    ],
+    "result": "340"
+  },
+  "nulls": [
+    {
+      "field": "applicability.markup_and_tax_reversal",
+      "reason": "The lesson claims nothing about undoing a percentage INCREASE (strip 20% VAT by dividing by 1.2). The same 'divide by the multiplier' structure applies with multiplier 1 + d/100, but that case is untested here and the on-card rule literally says 'what you keep', which is meaningless for a price that went up. Asserting it without testing it would be a guess, per §3.3."
+    },
+    {
+      "field": "applicability.stacked_or_repeated_discounts",
+      "reason": "Nothing is claimed about two or more discounts applied in sequence. Undoing those needs division by the PRODUCT of the keepers, and dividing by a single combined percentage is wrong (20% then 10% is not 30% off). That is a different lesson and is not asserted here."
+    },
+    {
+      "field": "applicability.rounded_sale_prices",
+      "reason": "The identity is exact only when S is the exact discounted price. A real shop rounds S to the nearest penny, and then S ÷ keeper recovers P only up to that rounding — e.g. a price rounded down by 1p and a keeper of 0.2 lands the answer 5p low. No bound on that error is claimed here because none was computed; the drawn range was chosen so the worked example needs no rounding at all."
+    },
+    {
+      "field": "applicability.negative_or_zero_prices",
+      "reason": "Claimed for P > 0 only. P = 0 is degenerate (every discount leaves £0, so nothing is recoverable, exactly as in carry_case) and negative prices have no meaning in the discount framing. Neither is asserted."
+    },
+    {
+      "field": "applicability.discounts_above_100_percent",
+      "reason": "d > 100 is not claimed. The keeper would be negative and the algebra would return a negative price; whether any shop framing makes that meaningful was not established, so no condition is stated rather than a wrong one being invented."
+    }
+  ],
+  "operand_draw": {
+    "construction": "Two integers were drawn, both with the run's seed 369640847, and the worked example is derived from them by two declared linear maps fixed before either draw was seen: discount d = 10 × k with k drawn from [1, 9], and ticket price P = 10 × t (pounds) with t drawn from [3, 40]. The draw gave k = 8 and t = 34, hence d = 80% and P = £340, and the sale price shown to the viewer is the forced consequence S = P(1 − d/100) = 340 × 0.2 = £68. No filter was applied to either draw (rejection_rate 0 on both), so nothing was screened out and every value in both ranges was reachable. The ranges are declared for a stated presentational reason and provably not a mathematical one: over multiples of ten in both places the sale price P(1 − d/100) = t(10 − k) is always a whole number of pounds, so no card ever has to show pence. The rule itself is exact for every d in [0, 100) and every P > 0 — the check verifies that over d = 0..99 and P = 1..500 in exact rationals, far outside the drawn range — so the restriction to round tens cannot be hiding a case where the technique fails. Per §3.4 the draw stands as dealt: d = 80 is a clearance-sale discount rather than a typical 20%, and it was kept rather than re-rolled, which is also the reason the caveat number 68 × 1.8 = £122.40 is so far from £340. The carry case d = 100 is deliberately constructed and deliberately outside the declared range [10, 90], because a counterexample is by definition the input that breaks the rule; §3.4 governs the worked example's operands, not the counterexample. Result 340 is reported as a bare integer string of pounds and is computed as 68 / 0.2 in exact rational arithmetic and cross-checked against 340 × 0.2 = 68, not by replaying the cards."
+  }
+}

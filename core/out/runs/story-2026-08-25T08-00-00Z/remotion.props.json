@@ -1,0 +1,60 @@
+{
+  "runId": "story-nash-equilibrium-in-28-pages",
+  "capture": {
+    "publicPath": "captures/story-nash-equilibrium-in-28-pages",
+    "frames": 2553,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 2432
+    },
+    "resume": {
+      "start": 2432,
+      "end": 2553
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-nash-equilibrium-in-28-pages/hook.mp3",
+        "from": 12,
+        "durationInFrames": 290
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-nash-equilibrium-in-28-pages/turn.mp3",
+        "from": 302,
+        "durationInFrames": 622
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-nash-equilibrium-in-28-pages/mechanism.mp3",
+        "from": 924,
+        "durationInFrames": 1043
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-nash-equilibrium-in-28-pages/payoff.mp3",
+        "from": 1967,
+        "durationInFrames": 571
+      }
+    ]
+  }
+}

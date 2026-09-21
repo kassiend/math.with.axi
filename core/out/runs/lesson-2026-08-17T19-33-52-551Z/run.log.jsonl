@@ -1,0 +1,6 @@
+{"t":"2026-08-17T19:46:11.088Z","event":"run.start","lesson_id":"multiply-near-100-complement-base","counter":4,"seed":1210233265}
+{"t":"2026-08-17T19:46:11.735Z","event":"crosscheck","agreed":true,"generator":"8924","verifier":"8924"}
+{"t":"2026-08-17T19:46:11.736Z","event":"timeline","total_frames":1443,"total_seconds":48.1,"steps":["s1:5.52s","s2:5.76s","s3:8.24s","s4:10.32s","s5:10.88s"]}
+{"t":"2026-08-17T19:46:11.737Z","event":"picks","background":"bg3.jpeg"}
+{"t":"2026-08-17T19:52:54.601Z","event":"capture.done","frames":1443}
+{"t":"2026-08-17T19:58:03.240Z","event":"done","video":"output\\posts\\lessons\\multiply-near-100-complement-base.mp4","seconds":48.1}

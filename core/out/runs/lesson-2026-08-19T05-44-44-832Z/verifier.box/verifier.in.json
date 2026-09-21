@@ -1,0 +1,78 @@
+{
+  "lesson_id": "rule-of-72-doubling-time",
+  "counter": 6,
+  "concept_slug": "rule-of-72-doubling-time",
+  "tags": [
+    "bounding",
+    "estimation",
+    "exponential",
+    "growth",
+    "mental-arithmetic"
+  ],
+  "method_name": "The Rule of 72",
+  "applicability": "A quantity that grows by a constant r percent per period, compounded once per period. Its exact doubling time is the t solving (1 + r/100)^t = 2, that is t = ln2 / ln(1 + r/100), which needs a logarithm. The rule replaces that with one division: t is approximately 72 / r. It is claimed ONLY for r in the closed interval [4, 12], and there the claim is a bound, not an equality: across that whole interval |72/r - t| / t is at most 2%. The error is signed and moves monotonically from over-estimate to under-estimate as r rises - at r = 4 the rule says 18.000 against a true 17.673 (+1.85%, the worst over-estimate), it crosses zero near r = 7.85, at the drawn r = 8 it says 9 against a true 9.0065 (-0.07%, the sharpest point in the range), and at r = 12 it says 6.000 against a true 6.1163 (-1.90%, the worst under-estimate). Those two endpoints are the extremes, so the 2% band is tight and cannot be narrowed. This is verified by exhaustive evaluation over the stated finite domain r = 4.0, 4.1, ..., 12.0 in 30-digit precision, not asserted. The numerator 72 is not ln2: 100 x ln2 = 69.3147, which is the right numerator for CONTINUOUS compounding. 72 is deliberately larger, which is what compensates for once-per-period compounding around the middle of this range, and it is the number taught rather than 69 or 70 because 72 divides exactly by 2, 3, 4, 6, 8, 9 and 12 - a presentational property of the numerator, not a mathematical one. Nothing is claimed for r outside [4, 12], for continuous compounding, for decay, or for r <= 0; see nulls.",
+  "carry_case": "r = 50, i.e. 50% growth per period. The rule gives 72 / 50 = 1.44 periods, but the true doubling time is ln2 / ln(1.5) = 1.7095 periods - the estimate is 15.77% too low, nearly eight times the 2% band the rule holds to inside its range, and it is wrong in a direction that flatters the growth. The break is not a cliff at 50; it is a drift that grows without bound as r rises, and 50 is simply far enough out to be undeniable: 20% gives -5.31%, 30% gives -9.16%, 40% gives -12.62%, 100% gives 72/100 = 0.72 periods against a true doubling time of exactly 1 period, which is -28% and visibly absurd since a quantity that grows by 100% has doubled by definition. The cause is that 72/r is a hyperbola fitted to ln2/ln(1 + r/100) near r = 8, and ln(1 + r/100) falls further and further behind r/100 as r grows, so the true time bends above the hyperbola. This is exactly why applicability stops at 12 rather than saying 'any growth rate', and it is verified as a genuine failure of the stated 2% bound, not merely as a different number.",
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "The Rule of 72",
+      "working": "8% a year -> doubles when?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Divide 72 by the rate",
+      "working": "years = 72 / r"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "The rate is 8",
+      "working": "72 / 8 = 9"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "9 years to double",
+      "working": "1.08^9 = 1.999"
+    },
+    {
+      "step_id": "s5",
+      "purpose": "caveat",
+      "instruction": "Big rates break it",
+      "working": "50%: 72/50 = 1.44, true 1.71"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      8
+    ],
+    "result": "9"
+  },
+  "nulls": [
+    {
+      "field": "applicability.rates_outside_4_to_12",
+      "reason": "No bound is claimed for r < 4 or r > 12. The signed error is monotone across the tested grid and clearly keeps growing above 12 (carry_case measures -5.31% at 20, -15.77% at 50, -28% at 100), but no bound over the whole positive line was computed, so none is stated. Below r = 4 the behaviour was not measured at all beyond the endpoint."
+    },
+    {
+      "field": "applicability.continuous_compounding",
+      "reason": "Nothing is claimed for continuously compounded growth. There the doubling time is exactly 100 x ln2 / r = 69.3147 / r, so 72 is the wrong numerator and the error would be a flat +3.88% at every rate rather than the sloped error measured here. That is a different statement with a different constant and it was not tested."
+    },
+    {
+      "field": "applicability.halving_time_under_decay",
+      "reason": "Nothing is claimed for decay, i.e. r% lost per period. Halving time under decay is ln2 / -ln(1 - r/100), which is not the same function reflected, so 72/r is a different approximation there with a different error. Untested, so unstated."
+    },
+    {
+      "field": "carry_case.exact_threshold_rate",
+      "reason": "The precise rate at which the 2% band is first broken is not given. The check evaluates a 0.1-wide grid and the band is intact at every grid point up to and including 12.0, so the true threshold is somewhere above 12.0 but was not located; stating a specific crossing point would be a guess. The carry case is given as r = 50, a rate verified to break the bound by a factor of nearly eight, rather than as the smallest such rate."
+    },
+    {
+      "field": "worked_example.units",
+      "reason": "The example is stated in years because annual growth is the familiar framing, but the method is unit-free: r is per period and the answer is in periods. No claim is made that any particular real-world instrument compounds annually."
+    }
+  ],
+  "operand_draw": {
+    "construction": "One integer was drawn with the run's seed 411890531: the growth rate r, in whole percent. The draw gave r = 8, and every other number on the cards is a forced consequence of it - 72 / 8 = 9 is the estimate, 1.08^9 = 1.999005 is the check, and the true doubling time 9.00647 is what the estimate is measured against. Nothing on any card was chosen after the draw was seen."
+  }
+}

@@ -9,7 +9,7 @@
  * and the display text has to get shorter. Shrinking further or letting it spill are both defects
  * the viewer sees, and either is worse than not shipping the post.
  */
-import { ASK, BODY, HERO } from './layout';
+import { ASK, BODY, BODY_WITH_VISUAL, HERO } from './layout';
 
 export interface LineFit {
   fits: boolean;
@@ -137,21 +137,26 @@ export function measureGlyphs(text: string, fontSize: number, lineHeightRatio: n
  * Fit every line up front, before the capture starts. One pass, so the sizes cannot vary between
  * frames, and a failure is known before a single frame is written.
  *
+ * A step with a diagram is fitted against the compact top-anchored body, which is tighter and
+ * holds the working line to one line — otherwise the text grows down into the slot the diagram
+ * needs.
+ *
  * @param hookDisplay  the on-screen line for the spoken hook (falls back to step 1's instruction)
  * @param ask          the closing ask line
  */
 export function fitLesson(
-  steps: Array<{ instruction: string; working: string }>,
+  steps: Array<{ instruction: string; working: string; visual?: unknown }>,
   hookDisplay: string,
   ask: string,
 ): LessonFit {
   const results = steps.map((s, i) => {
-    const working = fitLine(s.working, BODY.working, undefined, true);
+    const body = s.visual ? BODY_WITH_VISUAL : BODY;
+    const working = fitLine(s.working, body.working, undefined, true);
     return {
       index: i,
-      instruction: fitLine(s.instruction, BODY.instruction),
+      instruction: fitLine(s.instruction, body.instruction),
       working,
-      glyphs: measureGlyphs(s.working, working.fontSize, BODY.working.lineHeightRatio),
+      glyphs: measureGlyphs(s.working, working.fontSize, body.working.lineHeightRatio),
     };
   });
   const heroWorking = fitLine(steps[0]?.working ?? '', HERO.working, undefined, true);

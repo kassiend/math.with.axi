@@ -1,0 +1,20 @@
+{"t":"2026-08-23T16:47:39.053Z","event":"run.start","story_id":"gauss-legendre-least-squares","area":"biography","subject":"carl-friedrich-gauss"}
+{"t":"2026-08-23T16:47:39.054Z","event":"validation","checked":15,"findings":0}
+{"t":"2026-08-23T16:47:45.946Z","event":"crosscheck","agreed":true,"generator":"(1/3, 3/2)","verifier":"(1/3, 3/2)"}
+{"t":"2026-08-23T16:47:45.947Z","event":"timeline","total_frames":2238,"total_seconds":74.6,"beats":["hook:8.77s","turn:21.399s","mechanism:24.023s","payoff:19.511s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2117},"resume":{"start":2117,"end":2238}}}
+{"t":"2026-08-23T16:47:45.949Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-08-23T16:47:45.953Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-23T17:01:54.076Z","event":"run.start","story_id":"gauss-legendre-least-squares","area":"biography","subject":"carl-friedrich-gauss"}
+{"t":"2026-08-23T17:01:54.077Z","event":"validation","checked":15,"findings":0}
+{"t":"2026-08-23T17:02:00.188Z","event":"crosscheck","agreed":true,"generator":"(1/3, 3/2)","verifier":"(1/3, 3/2)"}
+{"t":"2026-08-23T17:02:00.189Z","event":"timeline","total_frames":2238,"total_seconds":74.6,"beats":["hook:8.77s","turn:21.399s","mechanism:24.023s","payoff:19.511s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2117},"resume":{"start":2117,"end":2238}}}
+{"t":"2026-08-23T17:02:00.190Z","event":"picks","background":"bg3.jpeg"}
+{"t":"2026-08-23T17:11:11.456Z","event":"capture.done","frames":2238}
+{"t":"2026-08-23T17:16:57.093Z","event":"done","video":"output\\posts\\stories\\gauss-legendre-least-squares.mp4","seconds":74.6}
+{"t":"2026-08-23T18:13:10.994Z","event":"run.start","story_id":"gauss-legendre-least-squares","area":"biography","subject":"carl-friedrich-gauss"}
+{"t":"2026-08-23T18:13:10.995Z","event":"validation","checked":15,"findings":0}
+{"t":"2026-08-23T18:13:20.475Z","event":"crosscheck","agreed":true,"generator":"(1/3, 3/2)","verifier":"(1/3, 3/2)"}
+{"t":"2026-08-23T18:13:20.476Z","event":"timeline","total_frames":2238,"total_seconds":74.6,"beats":["hook:8.77s","turn:21.399s","mechanism:24.023s","payoff:19.511s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2117},"resume":{"start":2117,"end":2238}}}
+{"t":"2026-08-23T18:13:20.478Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-23T18:27:31.026Z","event":"capture.done","frames":2238}
+{"t":"2026-08-23T18:36:01.499Z","event":"done","video":"output\\posts\\stories\\gauss-legendre-least-squares.mp4","seconds":74.6}

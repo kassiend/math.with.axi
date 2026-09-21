@@ -1,0 +1,153 @@
+{
+  "story_id": "euclid-one-line-loop",
+  "area": "biography",
+  "subject_slug": "euclid",
+  "angle_slug": "euclidean-algorithm-oldest-still-running",
+  "title": "Euclid's one-line loop.",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[curious] Nobody is certain who invented it. It still sits inside the cryptography securing the internet. One line long.",
+      "display": "One line. Still running."
+    },
+    {
+      "beat": "turn",
+      "narration": "[warm] Euclid's Elements. He wrote it down, probably did not invent it, and almost nothing else is known. He lived around three hundred BC. The painting is from about sixteen thirty. Not his face. [thoughtful] His problem: the largest unit measuring two quantities exactly.",
+      "display": "Painted c.1630. Not from life."
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[thoughtful] Two positive whole numbers, larger first. The greatest common divisor of a and b equals that of a minus b and b. Why? Anything dividing a and b divides a minus b. Anything dividing b and the difference divides their sum, a. Same divisors, both pairs. And larger first is the loop: it picks which number shrinks. Both stay positive, the total keeps dropping, so it must end with the two equal. 1920 and 1080? Six subtractions to 120.",
+      "display": "Larger first. Same divisors."
+    },
+    {
+      "beat": "payoff",
+      "narration": "[bright] Your browser's padlock leans on an extended version of this loop. And 1080p? 1920 by 1080 is 16 by 9: 120 fits sixteen across, nine down. Next time you see sixteen by nine: a fraction, reduced.",
+      "display": "1920 : 1080 = 16 : 9"
+    }
+  ],
+  "formula_latex": "\\gcd(a,b) = \\gcd(a-b,\\,b), \\quad a > b > 0",
+  "mechanism": "The hypothesis a > b > 0 is part of the one line, not a footnote to it, and it is what turns an identity into a loop.\n\nWhy the identity holds. Let d divide both a and b, say a = m*d and b = n*d. Then a - b = (m - n)*d, so d divides a - b, and d therefore divides both entries of the pair (a - b, b). Backwards: if d divides b and divides a - b, then it divides the sum (a - b) + b = a, so d divides both entries of (a, b). The two pairs have the identical SET of common divisors, not merely the same largest one, so their greatest common divisors are equal.\n\nWhy it is a loop. The identity may only be applied to a pair written with the larger entry first, because that is what a > b > 0 demands. So the rule itself, and nothing added to it, selects which of the two numbers is reduced: the larger one. Applying it sends the unordered pair {a, b} to {a - b, b}. Since a > b, a - b >= 1, so both entries are still positive whole numbers and the hypothesis can be met again as long as they differ.\n\nWhy it stops. Each application decreases the sum of the pair by b, and b >= 1, so the sum is a strictly decreasing sequence of integers bounded below by 2. It cannot decrease forever, so after finitely many steps the hypothesis can no longer be met with distinct entries, which happens exactly when the two numbers are equal. At that point the pair is {g, g}, and g divides itself, so g is the greatest common divisor of the original pair.\n\nOutside a > b > 0 nothing here is claimed. At b = 0 the pair never changes; with a negative entry the pair can grow without bound, or halt on a negative value that is not the gcd; with a < b the rule simply does not apply until the pair is rewritten larger-first. The ordering is Euclid's own: Elements VII.1 sets out two UNEQUAL numbers and continually subtracts the less from the greater (f18). The positivity is not a quotation from him but a modern reading of him: David Joyce's commentary on the Book VII definitions says the numbers of Books VII-IX are whole positive numbers, and narrows that to whole positive numbers greater than 1, because Euclid treats the unit, 1, separately from numbers, 2, 3, and so forth (f19, f20). So a > b > 0 is very slightly wider than Euclid's own domain, which on that reading starts at 2. Nothing mathematical turns on the gap - the loop is correct at b = 1 - and the unit does appear inside his procedure rather than among its inputs: VII.1 runs until a unit is left (f21).\n\nOn 1920 and 1080 the loop runs {1920,1080} -> {1080,840} -> {840,240} -> {600,240} -> {360,240} -> {240,120} -> {120,120}: six subtractions to 120, and 1920/120 = 16 while 1080/120 = 9, which is the 16:9 of the 1080p mode.",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "Almost nothing is known about Euclid's life; the information that exists comes from writers living many centuries after him.",
+      "url": "https://en.wikipedia.org/wiki/Euclid",
+      "quote": "Very little is known of Euclid's life, and most information comes from the scholars Proclus and Pappus of Alexandria many centuries later."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Euclid is generally accepted to have worked in Alexandria and to have lived around 300 BC.",
+      "url": "https://en.wikipedia.org/wiki/Euclid",
+      "quote": "It is now generally accepted that he spent his career in Alexandria and lived around 300 BC, after Plato's students and before Archimedes."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "Independently of Wikipedia, MacTutor also reports that little is known of Euclid's life beyond his teaching at Alexandria.",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/",
+      "quote": "However little is known of Euclid's life except that he taught at Alexandria in Egypt."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "Euclid's Elements, Book VII, Proposition 2 sets exactly the problem of finding the greatest common measure of two given numbers.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII2.html",
+      "quote": "To find the greatest common measure of two given numbers not relatively prime."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "Euclid's own method in that proposition is to continually subtract the smaller number from the larger one.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII2.html",
+      "quote": "continually subtracted from the greater, some number is left which measures the one before it."
+    },
+    {
+      "claim_id": "f6",
+      "claim": "The Euclidean algorithm is one of the oldest algorithms still in common use.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "It is an example of an algorithm, and is one of the oldest algorithms in common use."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "Euclid probably did not discover the algorithm; he compiled results from earlier mathematicians in the Elements.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "The algorithm was probably not discovered by Euclid, who compiled results from earlier mathematicians in his Elements."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "Who first came up with the method is not settled; one line of scholarship credits it to Theaetetus instead.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "Claude Brezinski, following remarks by Pappus of Alexandria, credits the algorithm to Theaetetus"
+    },
+    {
+      "claim_id": "f9",
+      "claim": "The greatest common divisor of two numbers is unchanged when the larger number is replaced by its difference with the smaller.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "The Euclidean algorithm is based on the principle that the greatest common divisor of two numbers does not change if the larger number is replaced by its difference with the smaller number."
+    },
+    {
+      "claim_id": "f10",
+      "claim": "The algorithm is part of the cryptographic protocols used to secure internet communications.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "Computations using this algorithm form part of the cryptographic protocols that are used to secure internet communications"
+    },
+    {
+      "claim_id": "f11",
+      "claim": "In RSA, the private exponent is computed with the extended Euclidean algorithm.",
+      "url": "https://en.wikipedia.org/wiki/RSA_cryptosystem",
+      "quote": "can be computed efficiently by using the extended Euclidean algorithm, since"
+    },
+    {
+      "claim_id": "f12",
+      "claim": "The algorithm is used for reducing fractions to their simplest form.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "It is used for reducing fractions to their simplest form and for performing division in modular arithmetic."
+    },
+    {
+      "claim_id": "f13",
+      "claim": "In Book 10 of the Elements the method is stated for lengths, where the answer is the greatest length that measures both of the given lengths evenly.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_algorithm",
+      "quote": "The GCD of two lengths a and b corresponds to the greatest length g that measures a and b evenly"
+    },
+    {
+      "claim_id": "f14",
+      "claim": "The 1080p video mode is 1920 pixels across by 1080 pixels down.",
+      "url": "https://en.wikipedia.org/wiki/1080p",
+      "quote": "1,920 pixels displayed across the screen horizontally and 1,080 pixels down the screen vertically"
+    },
+    {
+      "claim_id": "f15",
+      "claim": "The 1080p mode is associated with the 16:9 aspect ratio. The source treats 16:9 as the assumption and the pixel count as what it implies, so the story asserts only that the two describe the same shape, and never that the pixels caused the name.",
+      "url": "https://en.wikipedia.org/wiki/1080p",
+      "quote": "usually assumes a widescreen aspect ratio of 16:9, implying a resolution of 2.1 megapixels."
+    },
+    {
+      "claim_id": "f16",
+      "claim": "Commons dates the painting used in the turn beat to circa 1630 - circa 1635, roughly nineteen centuries after Euclid lived, so it cannot be a likeness taken from life.",
+      "url": "https://commons.wikimedia.org/wiki/File:Jusepe_de_Ribera_-_Euclid_-_2001.26_-_J._Paul_Getty_Museum.jpg",
+      "quote": "between circa 1630 and circa 1635"
+    },
+    {
+      "claim_id": "f18",
+      "claim": "Euclid states the procedure for two unequal numbers, with the less subtracted from the greater, so the ordering hypothesis is his and not a modern addition.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII1.html",
+      "quote": "When two unequal numbers are set out, and the less is continually subtracted in turn from the greater"
+    },
+    {
+      "claim_id": "f19",
+      "claim": "In David Joyce's modern commentary on the Book VII definitions - not in Euclid's own words - the numbers of the arithmetic books are characterised as whole positive numbers greater than 1.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/defVII1.html",
+      "quote": "The numbers in definition 2 are meant to be whole positive numbers greater than 1"
+    },
+    {
+      "claim_id": "f20",
+      "claim": "The same commentary states that Euclid handles the unit, 1, separately from the numbers, so his numbers begin at 2 and the story's domain a > b > 0 is slightly wider than his.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/defVII1.html",
+      "quote": "Euclid treats the unit, 1, separately from numbers, 2, 3, and so forth"
+    },
+    {
+      "claim_id": "f21",
+      "claim": "The unit nevertheless appears inside Euclid's own procedure rather than among its inputs: Proposition VII.1 runs the subtraction until a unit is left.",
+      "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/propVII1.html",
+      "quote": "until a unit is left, then the original numbers are relatively prime"
+    }
+  ]
+}

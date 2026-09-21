@@ -1,0 +1,30 @@
+{"t":"2026-08-23T16:37:16.056Z","event":"run.start","story_id":"euclid-one-line-loop","area":"biography","subject":"euclid"}
+{"t":"2026-08-23T16:37:16.057Z","event":"validation","checked":20,"findings":0}
+{"t":"2026-08-23T16:37:22.260Z","event":"crosscheck","agreed":false,"generator":null,"verifier":"{\"M1_common_divisor_sets_identical\": {\"counterexamples\": 0, \"holds\": true}, \"M1_identity_on_a_gt_b_gt_0\": {\"counterexamples\": 0, \"domain\": \"all a>b>0 with a<=260 (33670 pairs)\", \"holds\": true}, \"M1_large_input_spot_checks\": {\"failures\": 0, \"holds\": true}, \"M2_closure_never_leaves_positive_integer_pairs\": {\"holds\": true, \"orbits_tested\": 67608, \"violations\": 0}, \"M2_hypothesis_re_satisfiable_iff_entries_differ\": {\"holds\": true, \"violations\": 0}, \"M3_sum_bounded_below_by_2\": {\"bound_tight\": true, \"holds\": true, \"min_reachable_sum\": 2}, \"M3_sum_strictly_decreases_by_exactly_b_every_application\": {\"holds\": true, \"violations\": 0}, \"M3_terminates_and_terminal_g_equals_gcd\": {\"at\": [1048576, 1048575], \"holds\": true, \"max_steps_seen\": 1048575, \"nonterminating_orbits\": 0, \"wrong_terminal_orbits\": 0}, \"M4_excluded_region_described_correctly\": {\"a_lt_b_rule_does_not_apply\": true, \"b_eq_0_pair_never_changes\": true, \"holds\": true, \"negative_can_grow_unbounded\": true, \"negative_can_halt_on_non_gcd\": true}, \"M5_published_trace_1920_1080\": {\"holds\": true, \"ratio\": \"16:9\", \"subtractions\": 6, \"terminal\": 120, \"trace_matches_exactly\": true}, \"M6_integrality_is_load_bearing_informational\": {\"affects_agrees\": false, \"irrational_ratio_sqrt2_over_1\": \"still-running\", \"rational_ratio_6_over_5\": \"halted\", \"restriction_does_real_work\": true, \"steps_before_giving_up\": 300}}"}
+{"t":"2026-08-23T16:46:46.912Z","event":"run.start","story_id":"euclid-one-line-loop","area":"biography","subject":"euclid"}
+{"t":"2026-08-23T16:46:46.913Z","event":"validation","checked":20,"findings":0}
+{"t":"2026-08-23T16:46:53.051Z","event":"crosscheck","agreed":true,"generator":"120","verifier":"120"}
+{"t":"2026-08-23T16:46:53.052Z","event":"timeline","total_frames":2385,"total_seconds":79.5,"beats":["hook:7.833s","turn:18.698s","mechanism:35.176s","payoff:16.906s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2264},"resume":{"start":2264,"end":2385}}}
+{"t":"2026-08-23T16:46:53.053Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-08-23T16:46:53.054Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-23T16:48:04.449Z","event":"run.start","story_id":"euclid-one-line-loop","area":"biography","subject":"euclid"}
+{"t":"2026-08-23T16:48:04.450Z","event":"validation","checked":20,"findings":0}
+{"t":"2026-08-23T16:48:10.669Z","event":"crosscheck","agreed":true,"generator":"120","verifier":"120"}
+{"t":"2026-08-23T16:48:10.670Z","event":"timeline","total_frames":2385,"total_seconds":79.5,"beats":["hook:7.833s","turn:18.698s","mechanism:35.176s","payoff:16.906s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2264},"resume":{"start":2264,"end":2385}}}
+{"t":"2026-08-23T16:48:10.671Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-08-23T16:55:46.918Z","event":"capture.done","frames":2385}
+{"t":"2026-08-23T17:01:22.780Z","event":"done","video":"output\\posts\\stories\\euclid-one-line-loop.mp4","seconds":79.5}
+{"t":"2026-08-23T17:33:36.958Z","event":"run.start","story_id":"euclid-one-line-loop","area":"biography","subject":"euclid"}
+{"t":"2026-08-23T17:33:36.958Z","event":"validation","checked":20,"findings":0}
+{"t":"2026-08-23T17:33:42.939Z","event":"crosscheck","agreed":true,"generator":"120","verifier":"120"}
+{"t":"2026-08-23T17:33:42.940Z","event":"timeline","total_frames":2385,"total_seconds":79.5,"beats":["hook:7.833s","turn:18.698s","mechanism:35.176s","payoff:16.906s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2264},"resume":{"start":2264,"end":2385}}}
+{"t":"2026-08-23T17:33:42.941Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-23T17:43:21.287Z","event":"capture.done","frames":2385}
+{"t":"2026-08-23T17:51:29.386Z","event":"done","video":"output\\posts\\stories\\euclid-one-line-loop.mp4","seconds":79.5}
+{"t":"2026-08-23T17:53:40.288Z","event":"run.start","story_id":"euclid-one-line-loop","area":"biography","subject":"euclid"}
+{"t":"2026-08-23T17:53:40.289Z","event":"validation","checked":20,"findings":0}
+{"t":"2026-08-23T17:53:49.345Z","event":"crosscheck","agreed":true,"generator":"120","verifier":"120"}
+{"t":"2026-08-23T17:53:49.346Z","event":"timeline","total_frames":2385,"total_seconds":79.5,"beats":["hook:7.833s","turn:18.698s","mechanism:35.176s","payoff:16.906s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2264},"resume":{"start":2264,"end":2385}}}
+{"t":"2026-08-23T17:53:49.348Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-23T18:05:05.731Z","event":"capture.done","frames":2385}
+{"t":"2026-08-23T18:13:10.577Z","event":"done","video":"output\\posts\\stories\\euclid-one-line-loop.mp4","seconds":79.5}

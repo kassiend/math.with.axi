@@ -1,0 +1,50 @@
+[
+  {
+    "id": "intro",
+    "file": "audio/intro.mp3",
+    "seconds": 4.4,
+    "chars": 68,
+    "cached": false,
+    "hash": "fe871dbfdcd8871e73732c578cf8f012"
+  },
+  {
+    "id": "s1",
+    "file": "audio/s1.mp3",
+    "seconds": 6.48,
+    "chars": 84,
+    "cached": false,
+    "hash": "2fb49f51a225442eaa13d805d50c4d4e"
+  },
+  {
+    "id": "s2",
+    "file": "audio/s2.mp3",
+    "seconds": 6.72,
+    "chars": 93,
+    "cached": false,
+    "hash": "500e547d45a12933a00ff4423671edf0"
+  },
+  {
+    "id": "s3",
+    "file": "audio/s3.mp3",
+    "seconds": 6.8,
+    "chars": 68,
+    "cached": false,
+    "hash": "21b2b1527077c1b7b3c7aa7e24e0ae24"
+  },
+  {
+    "id": "s4",
+    "file": "audio/s4.mp3",
+    "seconds": 9.36,
+    "chars": 96,
+    "cached": false,
+    "hash": "fa8c7fc12cbcc73a859c0ca9751fcb7b"
+  },
+  {
+    "id": "s5",
+    "file": "audio/s5.mp3",
+    "seconds": 11.92,
+    "chars": 153,
+    "cached": false,
+    "hash": "16ae9b897ef112e39b8198f5e78867fc"
+  }
+]

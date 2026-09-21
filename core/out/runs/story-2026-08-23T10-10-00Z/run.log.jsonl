@@ -1,0 +1,13 @@
+{"t":"2026-08-23T16:53:05.774Z","event":"run.start","story_id":"hilbert-space-infinite-pythagoras","area":"biography","subject":"david-hilbert"}
+{"t":"2026-08-23T16:53:05.775Z","event":"validation","checked":23,"findings":1}
+{"t":"2026-08-23T16:53:19.441Z","event":"crosscheck","agreed":true,"generator":"2*pi**3/3","verifier":"2*pi**3/3"}
+{"t":"2026-08-23T16:53:19.442Z","event":"timeline","total_frames":2369,"total_seconds":78.967,"beats":["hook:10.189s","turn:15.46s","mechanism:33.023s","payoff:19.35s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2248},"resume":{"start":2248,"end":2369}}}
+{"t":"2026-08-23T16:53:19.443Z","event":"picks","background":"bg2.jpeg"}
+{"t":"2026-08-23T16:53:19.445Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-23T18:36:01.936Z","event":"run.start","story_id":"hilbert-space-infinite-pythagoras","area":"biography","subject":"david-hilbert"}
+{"t":"2026-08-23T18:36:01.937Z","event":"validation","checked":23,"findings":1}
+{"t":"2026-08-23T18:36:21.371Z","event":"crosscheck","agreed":true,"generator":"2*pi**3/3","verifier":"2*pi**3/3"}
+{"t":"2026-08-23T18:36:21.372Z","event":"timeline","total_frames":2369,"total_seconds":78.967,"beats":["hook:10.189s","turn:15.46s","mechanism:33.023s","payoff:19.35s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":2248},"resume":{"start":2248,"end":2369}}}
+{"t":"2026-08-23T18:36:21.374Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-08-23T18:49:56.819Z","event":"capture.done","frames":2369}
+{"t":"2026-08-23T18:58:39.135Z","event":"done","video":"output\\posts\\stories\\hilbert-space-infinite-pythagoras.mp4","seconds":78.967}

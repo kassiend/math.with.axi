@@ -28,11 +28,15 @@ export const LESSON_VISIBLE = Object.freeze([
   'lesson_id', 'counter', 'concept_slug', 'tags', 'method_name',
   'applicability', 'carry_case', 'steps', 'worked_example', 'nulls',
 ]);
-export const LESSON_DRAW_VISIBLE = Object.freeze(['seed', 'spec', 'draws', 'rejection_rate', 'construction']);
+export const LESSON_DRAW_VISIBLE = Object.freeze([
+  'seed', 'spec', 'draws', 'rejection_rate', 'construction', 'n', 'unit', 'rejections',
+]);
 
 /**
  * What the story Validator sees: the script and its claimed sources. Not the writer's search
- * history, discarded angles, image prompts or check script — it opens the URLs blind.
+ * history, discarded angles, image prompts or check script — it opens the URLs blind. `images`
+ * and `nulls` are withheld deliberately: knowing which claims the writer already flagged as shaky
+ * is precisely the hint that turns checking into agreeing.
  */
 export const STORY_VALIDATOR_VISIBLE = Object.freeze([
   'story_id', 'area', 'subject_slug', 'angle_slug', 'title', 'beats',
@@ -102,8 +106,13 @@ export function projectStoryForVerifier(story) {
 
 export function projectLesson(plan) {
   const out = project(plan, LESSON_VISIBLE);
-  if (plan.operand_draw) {
-    out.operand_draw = project(plan.operand_draw, LESSON_DRAW_VISIBLE);
+  // `sampling` is accepted as an alias because planners have written both names — the field was
+  // required by section 3.4 long before the plan schema named it. Getting this wrong is not a
+  // cosmetic drift: the draw silently fails to cross, the Verifier reports operand provenance as
+  // unverifiable, and the lesson fails a gate for a fact it was actually given.
+  const drawn = plan.operand_draw ?? plan.sampling;
+  if (drawn) {
+    out.operand_draw = project(drawn, LESSON_DRAW_VISIBLE);
   }
   return assertClean(out, 'lesson');
 }

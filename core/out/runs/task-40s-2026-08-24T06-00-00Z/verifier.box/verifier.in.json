@@ -1,0 +1,15 @@
+{
+  "task_id": "telescoping-product-one-minus-inv-square-10",
+  "duration_s": 40,
+  "structure_id": "telescoping-product-one-minus-inverse-square",
+  "categories": [
+    "telescoping"
+  ],
+  "description": "Evaluate the product",
+  "statement": "\\prod_{k=2}^{10}\\left(1-\\frac{1}{k^2}\\right)",
+  "statement_latex": "\\prod_{k=2}^{10}\\left(1-\\frac{1}{k^2}\\right)",
+  "answer": "11/20",
+  "answer_latex": "\\dfrac{11}{20}",
+  "steps_expected": 3,
+  "nulls": []
+}

@@ -1,0 +1,16 @@
+{
+  "task_id": "exp-chain-3x4-4y9-xy",
+  "duration_s": 40,
+  "structure_id": "chained-exponent-compose-to-power",
+  "categories": ["logarithm-exponent"],
+  "description": "Find the value of xy",
+  "statement": "3^x = 4, 4^y = 9",
+  "statement_latex": "\\begin{aligned} 3^{x} &= 4 \\\\ 4^{y} &= 9 \\end{aligned}",
+  "answer": "2",
+  "answer_latex": "2",
+  "solution_sketch": "Raise the first equation to the power y: (3^x)^y = 4^y, so 3^{xy} = 4^y. The second equation says 4^y = 9, hence 3^{xy} = 9 = 3^2, and equating exponents on the same base gives xy = 2. Equivalently, x = log_3 4 and y = log_4 9, so xy = log_3 4 · log_4 9 = log_3 9 = 2 by the chain rule for logarithms.",
+  "difficulty_rationale": "The naive route is to take logs of both givens, get x = log_3(4) ≈ 1.262 and y = log_4(9) ≈ 1.585, and multiply — decimal work no one can do in the head, and it lands on 2.0000 without ever showing why. The insight is that the 4 produced by the first equation is exactly the base of the second, so the two can be composed: raise 3^x = 4 to the power y. After that there are three cheap steps — (3^x)^y = 3^{xy}, substitute 4^y = 9, then read 9 = 3^2 and equate exponents. Twenty seconds is not enough because the composition is not visible in the statement: a solver must first notice the shared 4 linking the two lines, and the natural first move (solving for x and y separately) is a dead end that has to be abandoned before the real route is even attempted.",
+  "steps_expected": 3,
+  "check_script": "generator.checks/exp-chain-3x4-4y9-xy.py",
+  "nulls": []
+}

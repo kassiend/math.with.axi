@@ -1,0 +1,55 @@
+{
+  "runId": "task-percent-42-of-x-is-36",
+  "capture": {
+    "publicPath": "captures/task-percent-42-of-x-is-36",
+    "frames": 804,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "intro": {
+    "src": "mascot/mas_chromo.webm",
+    "endFrame": 151,
+    "playbackRate": 1,
+    "box": {
+      "left": -618.82,
+      "top": 106.87,
+      "width": 1944.47,
+      "height": 1093.77
+    }
+  },
+  "hurry": {
+    "src": "mascot/hurry-witchcat.webm",
+    "enter": 574,
+    "exit": 594,
+    "clipSeconds": 5.1
+  },
+  "audio": {
+    "start": "audio/task-percent-42-of-x-is-36/start.mp3",
+    "tick": "audio/task-percent-42-of-x-is-36/tick.wav",
+    "tickFrames": [
+      189,
+      219,
+      249,
+      279,
+      309,
+      339,
+      369,
+      399,
+      429,
+      459,
+      489,
+      519,
+      549,
+      579,
+      609,
+      639,
+      669,
+      699,
+      729,
+      759
+    ],
+    "mid": "audio/task-percent-42-of-x-is-36/mid.mp3",
+    "midFrame": 574
+  }
+}

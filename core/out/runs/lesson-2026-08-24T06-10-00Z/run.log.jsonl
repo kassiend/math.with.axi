@@ -1,0 +1,11 @@
+{"t":"2026-08-23T19:56:51.811Z","event":"run.start","lesson_id":"estimate-product-round-to-nearest-ten","counter":6,"seed":2052460200}
+{"t":"2026-08-23T19:56:52.565Z","event":"crosscheck","agreed":true,"generator":"2500","verifier":"2500"}
+{"t":"2026-08-23T19:56:52.565Z","event":"timeline","total_frames":1268,"total_seconds":42.267,"steps":["s1:3.463s","s2:3.913s","s3:7.07s","s4:8.08s","s5:12.19s"]}
+{"t":"2026-08-23T19:56:52.568Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-08-23T19:56:52.569Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-23T19:57:04.796Z","event":"run.start","lesson_id":"estimate-product-round-to-nearest-ten","counter":6,"seed":2052460200}
+{"t":"2026-08-23T19:57:05.537Z","event":"crosscheck","agreed":true,"generator":"2500","verifier":"2500"}
+{"t":"2026-08-23T19:57:05.537Z","event":"timeline","total_frames":1268,"total_seconds":42.267,"steps":["s1:3.463s","s2:3.913s","s3:7.07s","s4:8.08s","s5:12.19s"]}
+{"t":"2026-08-23T19:57:05.539Z","event":"picks","background":"bg1.jpeg"}
+{"t":"2026-08-23T20:02:14.253Z","event":"capture.done","frames":1268}
+{"t":"2026-08-23T20:06:54.689Z","event":"done","video":"output\\posts\\lessons\\estimate-product-round-to-nearest-ten.mp4","seconds":42.267}

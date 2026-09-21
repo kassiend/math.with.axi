@@ -1,0 +1,9 @@
+{"t":"2026-08-25T10:04:19.690Z","event":"run.start","task_id":"eq-sum-cube-find-product","duration_s":40,"seed":1839396809}
+{"t":"2026-08-25T10:04:20.167Z","event":"crosscheck","agreed":true,"generator":"6","verifier":"6"}
+{"t":"2026-08-25T10:04:20.202Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry3.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":1.645688,"total_frames":1227,"hurry_enter":948}
+{"t":"2026-08-25T10:04:20.203Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-25T10:04:28.508Z","event":"run.start","task_id":"eq-sum-cube-find-product","duration_s":40,"seed":1839396809}
+{"t":"2026-08-25T10:04:28.997Z","event":"crosscheck","agreed":true,"generator":"6","verifier":"6"}
+{"t":"2026-08-25T10:04:29.023Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry3.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":1.645688,"total_frames":1227,"hurry_enter":948}
+{"t":"2026-08-25T10:08:11.545Z","event":"capture.done","frames":1227,"font_size":50}
+{"t":"2026-08-25T10:11:32.573Z","event":"done","video":"output\\posts\\tasks\\40s\\eq-sum-cube-find-product.mp4"}

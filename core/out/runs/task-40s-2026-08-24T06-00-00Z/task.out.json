@@ -1,0 +1,19 @@
+{
+  "task_id": "telescoping-product-one-minus-inv-square-10",
+  "duration_s": 40,
+  "structure_id": "telescoping-product-one-minus-inverse-square",
+  "categories": [
+    "telescoping"
+  ],
+  "description": "Evaluate the product",
+  "description_latex": "\\text{Evaluate the product}",
+  "statement": "\\prod_{k=2}^{10}\\left(1-\\frac{1}{k^2}\\right)",
+  "statement_latex": "\\prod_{k=2}^{10}\\left(1-\\frac{1}{k^2}\\right)",
+  "answer": "11/20",
+  "answer_latex": "\\dfrac{11}{20}",
+  "solution_sketch": "Factor each term: 1 - 1/k^2 = (k-1)(k+1)/k^2. The product splits into two telescoping chains, prod (k-1)/k = 1/10 and prod (k+1)/k = 11/2. Their product is (1/10)(11/2) = 11/20. In general prod_{k=2}^{n}(1-1/k^2) = (n+1)/(2n); here n=10 gives 11/20.",
+  "difficulty_rationale": "Naive route: compute nine fractions 3/4, 8/9, 15/16, ... and multiply them, punishing without paper. Insight: each factor is (k-1)(k+1)/k^2, so numerators and denominators cancel across neighbours. After the insight there are still real steps: recognise the two telescoping chains, evaluate their surviving ends (1/10 and 11/2), and multiply. More than a single 20s move but under 40s.",
+  "steps_expected": 3,
+  "check_script": "core/out/runs/task-40s-2026-08-24T06-00-00Z/generator.checks/telescoping-product-one-minus-inv-square-10.py",
+  "nulls": []
+}

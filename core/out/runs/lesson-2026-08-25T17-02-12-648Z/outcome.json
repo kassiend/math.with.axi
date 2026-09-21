@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "stage": "verification",
+  "problems": [
+    {
+      "side": "generator",
+      "error": "check failed: Command failed: C:\\Users\\User\\Desktop\\math.with.axi\\math.with.axi\\core\\.venv\\Scripts\\python.exe C:\\Users\\User\\Desktop\\math.with.axi\\math.with.axi\\core\\out\\runs\\lesson-2026-08-25T17-02-12-648Z\\generator.checks\\line-multiplication-crossings-two-digit.py\n"
+    }
+  ]
+}

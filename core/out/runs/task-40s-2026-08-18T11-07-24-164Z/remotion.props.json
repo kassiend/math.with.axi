@@ -1,0 +1,75 @@
+{
+  "runId": "task-exp-chain-3x4-4y9-xy",
+  "capture": {
+    "publicPath": "captures/task-exp-chain-3x4-4y9-xy",
+    "frames": 1404,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "intro": {
+    "src": "mascot/mas_chromo.webm",
+    "endFrame": 151,
+    "playbackRate": 1,
+    "box": {
+      "left": -618.82,
+      "top": 106.87,
+      "width": 1944.47,
+      "height": 1093.77
+    }
+  },
+  "hurry": {
+    "src": "mascot/hurry-hurry6.webm",
+    "enter": 977,
+    "exit": 1040,
+    "clipSeconds": 2.4
+  },
+  "audio": {
+    "start": "audio/task-exp-chain-3x4-4y9-xy/start.mp3",
+    "tick": "audio/task-exp-chain-3x4-4y9-xy/tick.wav",
+    "tickFrames": [
+      189,
+      219,
+      249,
+      279,
+      309,
+      339,
+      369,
+      399,
+      429,
+      459,
+      489,
+      519,
+      549,
+      579,
+      609,
+      639,
+      669,
+      699,
+      729,
+      759,
+      789,
+      819,
+      849,
+      879,
+      909,
+      939,
+      969,
+      999,
+      1029,
+      1059,
+      1089,
+      1119,
+      1149,
+      1179,
+      1209,
+      1239,
+      1269,
+      1299,
+      1329,
+      1359
+    ],
+    "mid": "audio/task-exp-chain-3x4-4y9-xy/mid.mp3",
+    "midFrame": 977
+  }
+}

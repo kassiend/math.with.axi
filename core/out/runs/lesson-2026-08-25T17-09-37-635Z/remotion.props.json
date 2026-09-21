@@ -1,0 +1,50 @@
+{
+  "runId": "lesson-line-multiplication-crossings-two-digit",
+  "capture": {
+    "publicPath": "captures/lesson-line-multiplication-crossings-two-digit",
+    "frames": 1186,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "intro",
+        "src": "audio/lesson-line-multiplication-crossings-two-digit/intro.mp3",
+        "from": 12,
+        "durationInFrames": 151
+      },
+      {
+        "id": "s1",
+        "src": "audio/lesson-line-multiplication-crossings-two-digit/s1.mp3",
+        "from": 163,
+        "durationInFrames": 161
+      },
+      {
+        "id": "s2",
+        "src": "audio/lesson-line-multiplication-crossings-two-digit/s2.mp3",
+        "from": 324,
+        "durationInFrames": 177
+      },
+      {
+        "id": "s3",
+        "src": "audio/lesson-line-multiplication-crossings-two-digit/s3.mp3",
+        "from": 501,
+        "durationInFrames": 183
+      },
+      {
+        "id": "s4",
+        "src": "audio/lesson-line-multiplication-crossings-two-digit/s4.mp3",
+        "from": 684,
+        "durationInFrames": 161
+      },
+      {
+        "id": "s5",
+        "src": "audio/lesson-line-multiplication-crossings-two-digit/s5.mp3",
+        "from": 845,
+        "durationInFrames": 326
+      }
+    ]
+  }
+}

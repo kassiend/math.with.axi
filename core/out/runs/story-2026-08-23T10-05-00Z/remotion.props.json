@@ -1,0 +1,60 @@
+{
+  "runId": "story-gauss-legendre-least-squares",
+  "capture": {
+    "publicPath": "captures/story-gauss-legendre-least-squares",
+    "frames": 2238,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 2117
+    },
+    "resume": {
+      "start": 2117,
+      "end": 2238
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-gauss-legendre-least-squares/hook.mp3",
+        "from": 12,
+        "durationInFrames": 263
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-gauss-legendre-least-squares/turn.mp3",
+        "from": 275,
+        "durationInFrames": 642
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-gauss-legendre-least-squares/mechanism.mp3",
+        "from": 917,
+        "durationInFrames": 721
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-gauss-legendre-least-squares/payoff.mp3",
+        "from": 1638,
+        "durationInFrames": 585
+      }
+    ]
+  }
+}

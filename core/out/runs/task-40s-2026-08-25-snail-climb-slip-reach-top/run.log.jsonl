@@ -1,0 +1,13 @@
+{"t":"2026-08-25T10:04:20.529Z","event":"run.start","task_id":"snail-climb-slip-reach-top","duration_s":40,"seed":613478237}
+{"t":"2026-08-25T10:04:20.576Z","event":"crosscheck","agreed":true,"generator":"8","verifier":"8"}
+{"t":"2026-08-25T10:04:20.612Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-papapa.webm","hurry_audio_s":2.115875,"total_frames":1227,"hurry_enter":865}
+{"t":"2026-08-25T10:04:20.612Z","event":"dry-run","note":"gates passed; capture and render skipped"}
+{"t":"2026-08-25T10:05:22.140Z","event":"run.start","task_id":"snail-climb-slip-reach-top","duration_s":40,"seed":613478237}
+{"t":"2026-08-25T10:05:22.197Z","event":"crosscheck","agreed":true,"generator":"8","verifier":"8"}
+{"t":"2026-08-25T10:05:22.226Z","event":"picks","background":"bg1.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-papapa.webm","hurry_audio_s":2.115875,"total_frames":1227,"hurry_enter":865}
+{"t":"2026-08-25T10:09:10.237Z","event":"capture.done","frames":1227,"font_size":42}
+{"t":"2026-08-25T10:11:43.139Z","event":"run.start","task_id":"snail-climb-slip-reach-top","duration_s":40,"seed":613478237}
+{"t":"2026-08-25T10:11:43.188Z","event":"crosscheck","agreed":true,"generator":"8","verifier":"8"}
+{"t":"2026-08-25T10:11:43.217Z","event":"picks","background":"bg2.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry2.mp3","hurry_clip":"hurry-papapa.webm","hurry_audio_s":2.115875,"total_frames":1227,"hurry_enter":865}
+{"t":"2026-08-25T10:15:43.507Z","event":"capture.done","frames":1227,"font_size":52}
+{"t":"2026-08-25T10:18:36.580Z","event":"done","video":"output\\posts\\tasks\\40s\\snail-climb-slip-reach-top.mp4"}

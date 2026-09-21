@@ -67,9 +67,9 @@ async function main() {
   if (story.check_script) {
     const gen = path.resolve(runDir, story.check_script);
     const ver = path.join(runDir, 'verifier.box', 'verifier.checks', `${story.story_id}.py`);
-    // The story's claim is that the formula holds and the derivation follows; both blind scripts
-    // report that as `agrees`. Their `computed` strings are descriptions and are not compared.
-    const cross = await crossCheck(story.story_id, gen, ver, { compareComputed: false });
+    // Both blind scripts must converge on the same canonical `computed` string (the brief, §6,
+    // says how: a SymPy-canonical value, or a canonical worked instance for a procedure).
+    const cross = await crossCheck(story.story_id, gen, ver);
     log(run, 'crosscheck', { agreed: cross.agreed, generator: cross.generator.computed, verifier: cross.verifier.computed });
     if (!cross.agreed) return close(run, story, 'failed', 'formula', cross.failures);
   } else {
@@ -120,6 +120,19 @@ async function main() {
     return imageSrc[imageIds[imageCursor++ % imageIds.length]];
   };
 
+  /**
+   * A step inside a beat needs the same two resolutions the beat itself gets, and for the same
+   * reason: the page is handed a FILE PATH and a LATEX STRING, never an image id or an implicit
+   * fallback. Passing steps through untouched left `visual: "image"` steps holding an `image_id`
+   * the page does not read, and `visual: "formula"` steps holding nothing at all — both of which
+   * render as an empty slot, silently, in the middle of a beat that is otherwise fine.
+   */
+  const resolveStep = (s) => ({
+    ...s,
+    image: s.visual === 'image' ? imageForBeat(s) : null,
+    formula_latex: s.visual === 'formula' ? (s.formula_latex ?? story.formula_latex) : null,
+  });
+
   const payload = {
     title: story.title,
     background,
@@ -140,6 +153,16 @@ async function main() {
       shape_svg: b.visual === 'shape' ? (b.shape_svg ?? null) : null,
       // A huge counted-up number for this beat, when the writer gave one.
       stat: b.stat ?? null,
+      // The spec goes through as written; the page compiles and samples it. Handing the page an
+      // equation rather than a path is the point — a curve computed here would be a second
+      // implementation of the sampler, and the two would drift.
+      plot: b.visual === 'plot' ? (b.plot ?? null) : null,
+      anim: b.visual === 'anim' ? (b.anim ?? null) : null,
+      // A long beat may carry a word-weighted sequence of visuals instead of one. The timing and
+      // the drawing stay the page's; only the two things the page cannot look up — which file an
+      // image id names, and the story's formula when a step does not carry its own — are resolved
+      // here, exactly as they are for a whole beat.
+      steps: Array.isArray(b.steps) ? b.steps.map(resolveStep) : null,
     })),
   };
 

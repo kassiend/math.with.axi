@@ -97,15 +97,26 @@ export function fitStat(value: string): LineFit {
   }
 }
 
+/** The width a formula line may take over the image. */
+export const FORMULA_MAX_WIDTH = INNER.w - 2 * FORMULA.padding;
+
+/**
+ * @param stepFormulas  per beat, the typeset formula of each inner step that carries one, keyed by
+ *                      step index. A formula step needs the same fit as a whole-beat formula.
+ */
 export function fitStory(
   title: string, displays: string[], ask: string, formulaLines: string[][] = [], stats: Array<string | null> = [],
+  stepFormulas: Array<Array<{ step: number; html: string }>> = [],
 ) {
   const titleFit = fit(title, TITLE, TITLE.weight);
   const displayFits = displays.map((d) => fit(d, DISPLAY, DISPLAY.weight));
   const statFits = stats.map((v) => (v ? fitStat(v) : null));
+  const stepFormulaFits = stepFormulas.map((steps) => steps.map(({ step, html }) => ({
+    step, fit: fitFormulaLines([html], FORMULA_MAX_WIDTH, FORMULA.fontSize, FORMULA.minFontSize),
+  })));
   const askFit = fit(ask, ASK, 600);
   const formulaFits = formulaLines.map((lines) =>
-    fitFormulaLines(lines, INNER.w - 2 * FORMULA.padding,
+    fitFormulaLines(lines, FORMULA_MAX_WIDTH,
       lines.length === 1 ? FORMULA.fontSize : FORMULA.stackedFontSize, FORMULA.minFontSize));
   const problems = [
     ...(titleFit.fits ? [] : [{ where: 'title', reason: titleFit.reason }]),
@@ -113,6 +124,8 @@ export function fitStory(
     ...(askFit.fits ? [] : [{ where: 'ask', reason: askFit.reason }]),
     ...formulaFits.flatMap((f, i) => (f.fits ? [] : [{ where: `beat ${i} formula`, reason: f.reason }])),
     ...statFits.flatMap((f, i) => (!f || f.fits ? [] : [{ where: `beat ${i} stat`, reason: f.reason }])),
+    ...stepFormulaFits.flatMap((steps, i) => steps.flatMap(({ step, fit: f }) =>
+      (f.fits ? [] : [{ where: `beat ${i} step ${step} formula`, reason: f.reason }]))),
   ];
-  return { fits: problems.length === 0, titleFit, displayFits, askFit, formulaFits, statFits, problems };
+  return { fits: problems.length === 0, titleFit, displayFits, askFit, formulaFits, statFits, stepFormulaFits, problems };
 }

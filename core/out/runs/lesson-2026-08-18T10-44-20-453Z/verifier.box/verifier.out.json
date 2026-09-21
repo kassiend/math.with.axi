@@ -1,0 +1,42 @@
+{
+  "status": "failed",
+  "findings": [
+    {
+      "severity": "fatal",
+      "kind": "cherry-picked-operands",
+      "claim_id": "percent-swap-a-of-b-equals-b-of-a",
+      "detail": "The declared operand_draw does not produce the worked example, so the provenance record is false. The draw block declares spec {min: 2, max: 9, filter: {nonzero, positive_only, max_digits: 1}}, draws [3, 5] and rejection_rate 0. The worked example uses operands [3, 125]. The value 125 is not among the draws, lies outside the declared range 2..9, and violates the declared max_digits=1 filter (3 digits). The drawn value 5 is never used anywhere in the lesson. A spec bounded at 2..9 with max_digits=1 is incapable in principle of ever yielding 125, so this is not a transcription slip in the draws array; the operand_draw block cannot be the source of the example. rejection_rate 0 additionally asserts that nothing was filtered out, which is inconsistent with an out-of-spec operand appearing in the result. The whole purpose of the operand_draw block is to certify that the demonstration operand was not hand-selected, and here it certifies nothing: 125 was hand-picked. Note that the picked value is exactly the one that flatters the method (125% decomposes as 100% + 25%, against a single-digit partner), which is the signature of a chosen showcase rather than a sampled one. Mitigating but not exculpatory: because the underlying identity is universally true (verified symbolically below), the hand-picking conceals no case where the method fails; the defect is a false provenance claim, not a hidden mathematical failure.",
+      "witness": "worked_example.operands = [3, 125]; operand_draw.draws = [3, 5]; spec range 2..9, max_digits 1, rejection_rate 0"
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "percent-swap-a-of-b-equals-b-of-a",
+      "detail": "Step s3 ('125% of 3 = 3 + 0.75') compresses two moves a viewer needs. The decomposition 125% = 100% + 25%, which is where the terms 3 and 0.75 come from, is never stated; the reader must reverse-engineer that 3 is 100% of 3 and 0.75 is 25% of 3. The final addition 3 + 0.75 = 3.75 is also left implicit, being completed only by the bare assertion in s4. The steps do read in order to the stated result and no step is arithmetically wrong, so this is presentational rather than a broken derivation.",
+      "witness": "s3: \"125% of 3 = 3 + 0.75\" -> s4: \"3% of 125 = 3.75\""
+    },
+    {
+      "severity": "minor",
+      "kind": "unsupported-universality",
+      "claim_id": "percent-swap-a-of-b-equals-b-of-a",
+      "detail": "The applicability text makes an explicit universality claim ('exactly, for every pair' of real a and b) but cites no whitelisted theorem id to discharge it. The stated domain is the reals, so no exhaustive finite SymPy enumeration could establish it either. I discharged the claim independently by symbolic proof over real symbols: simplify(a*b/100 - b*a/100) == 0, together with confirmation that a% of b really is a*b/100 as the payload asserts. The claim is therefore true and now supported, but it arrived unsupported.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "percent-swap-a-of-b-equals-b-of-a",
+      "script": "verifier.checks/percent-swap-a-of-b-equals-b-of-a.py",
+      "computed": "3.75",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "mathematics": "All mathematical content verifies. 3% of 125 = 15/4 = 3.75 exactly, matching worked_example.result. Step s3's claim 125% of 3 = 3 + 3/4 is exact. The identity a% of b = b% of a was proved symbolically over real a, b rather than merely sampled.",
+    "boundary_probing": "carry_case is non-null, but the applicability text still asserts no exception for 'of' over all reals, so I attacked that claim directly. Probed zero (0,0), (0,5), (5,0); unity (1,1); negatives (-3,125), (3,-125), (-3,-125); non-integer rationals (1/3, 7/11); irrationals (-22/7, pi) and (sqrt(2), e); extreme magnitudes (10^12, 10^-12); the declared draw-range endpoints (2,9), (2,2), (9,9); and points just outside that range (1,10), (0,1). Added a 4000-case randomised sweep over exact rationals with negative and fractional values, no floating point anywhere. Zero failures. The universality claim for 'of' survives every probe and is in fact a consequence of commutativity of multiplication, so it holds in any commutative ring, not merely the reals.",
+    "carry_case_consistency": "The counterexample is genuine and is consistent with the applicability condition. The applicability explicitly scopes the method to 'of' and excludes 'off'; the carry_case exhibits exactly an 'off' pair. Verified 20% off 50 = 40 and 50% off 20 = 10, so the two differ and the caveat really does bite. The sharper claim 'a% off b = b% off a only when a = b' is exactly right: solving pct_off(a,b) = pct_off(b,a) yields the solution set {b: a} and nothing else, since the difference simplifies to exactly (b - a), giving a true iff rather than a one-directional condition. I also confirmed the 'of' swap still holds on the very pair (20, 50) used for the 'off' caveat, so the caveat cannot be misread as an exception to the main rule.",
+    "operand_judgement": "Was the operand drawn rather than hand-picked? The first operand (3) matches the draw; the second (125) was hand-picked and is out of spec on three independent counts. See the fatal finding.",
+    "process": "verifier.in.json was the only payload file read. The generator's script was not read at any point, before or after writing mine; my script was derived solely from the applicability text, the steps and the worked example, and no disagreement arose that would have warranted consulting it."
+  }
+}

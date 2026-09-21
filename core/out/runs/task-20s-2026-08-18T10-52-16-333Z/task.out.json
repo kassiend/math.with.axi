@@ -1,0 +1,20 @@
+{
+  "task_id": "percent-25-more-reverse-drop",
+  "duration_s": 20,
+  "structure_id": "percent-increase-to-decrease-inversion",
+  "categories": ["percentage"],
+  "description": "By what percent is a less than b?",
+  "statement": "b is 25% more than a",
+  "statement_latex": null,
+  "answer": "20%",
+  "answer_latex": "20\\%",
+  "solution_sketch": "Take a = 100, so b = 125. The gap is 25, but 'a less than b' measures that gap against b, not a: 25/125 = 1/5 = 20%. Algebraically b = 1.25a gives a = 0.8b, i.e. a is 20% less than b.",
+  "difficulty_rationale": "The naive route answers 25% — the reader assumes a percentage increase and the matching decrease are the same number, because the same gap of 25 is in front of them. The insight is that a percent is always relative to its base, and the base switches when the comparison is reversed; once that lands, substituting a = 100 gives 125 and 25/125 = 1/5 in one step. It is reachable cold because picking 100 is the reflex move for any percentage question, and 25/125 needs no written work. It cannot be finished in two seconds, because the first answer that arrives is the wrong one and the reader has to notice why.",
+  "check_script": "generator.checks/percent-25-more-reverse-drop.py",
+  "nulls": [
+    {
+      "field": "statement_latex",
+      "reason": "statement is a plain English sentence with one percent literal; the plain-text form renders exactly, so no LaTeX form exists to supply"
+    }
+  ]
+}

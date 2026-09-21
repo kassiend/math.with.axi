@@ -51,18 +51,26 @@ same isolation boundary as everywhere else, `core/agents/ISOLATION.md`.
 
   "beats": [                             // four, in this order. See §5
     { "beat": "hook",      "narration": "...", "display": "...",
-      "visual": "image|formula|shape|none",
-      "image_id": "i1",                  // REQUIRED for every beat but a formula beat: the image
-                                         // that fills the card behind it. A formula beat keeps
-                                         // the previous image, dimmed.
-      "stat": { "prefix": "1 in", "value": "73M", "suffix": null, "count": true } },
+      "visual": "image|formula|shape|plot|anim|none",
+      "image_id": "i1",                  // REQUIRED for every beat but a formula/plot/anim beat:
+                                         // the image that fills the card behind it. Those three
+                                         // keep the previous image, dimmed, under a panel.
+      "stat": { "prefix": "1 in", "value": "73M", "suffix": null, "count": true },
                                          // OPTIONAL: the number the thumb stops for, counted up
                                          // huge in the accent. value <= 9 characters ("73M",
                                          // "$1.2B", "38 µs"). One or two beats at most. A
                                          // quantity counts up from zero; a year does not
                                          // (detected, or set count:false).
+      "steps": [ { "visual": "plot", "plot": { }, "weight": 12 }, ... ] },
+                                         // OPTIONAL, for a long beat: an ordered list of visuals
+                                         // (formula / plot / anim / image / shape), each weighted
+                                         // by the WORD COUNT of the narration it illustrates, so
+                                         // the picture advances with the voice. See §9.2 and the
+                                         // math-visual skill for plot and anim specs.
     { "beat": "turn",      "narration": "...", "display": "...", "visual": "image", "image_id": "i2" },
     { "beat": "mechanism", "narration": "...", "display": "...", "visual": "formula" },
+                                         // or "plot" plus a `plot` object — a curve computed from
+                                         // its equation and built on screen. See math-visual.
     { "beat": "payoff",    "narration": "...", "display": "...", "visual": "image", "image_id": "i1" }
   ],
 
@@ -247,9 +255,33 @@ When the formula asserts something SymPy can settle, write a check exactly as th
 pipelines do — the orchestrator runs it against an independent one from `axi-verifier`, and any
 disagreement fails the story. The text is not edited to match the code. The script's **last line
 is the JSON report** `{"claim_id": "<story_id>", "computed": "...", "agrees": true}` printed with
-`json.dumps`; the orchestrator reads that line and nothing else. For a story both scripts must
-report `agrees: true`; their `computed` strings describe what was checked and are not compared
-to each other (a lesson's numeric result is; a sentence written twice blind never matches).
+`json.dumps`; the orchestrator reads that line and nothing else.
+
+**The check's output contract, which bites hardest on story claims.** The orchestrator reads the
+**last JSON line** of stdout and requires it to be exactly one JSON object:
+
+```
+{"claim_id": "...", "computed": "<canonical value string>", "agrees": true}
+```
+
+and it passes the formula gate only when the generator's `computed` string **equals** the
+verifier's, character for character. Print nothing after that line; do not pretty-print it across
+several lines (the last line would then be a bare `}`); do not emit only human "OK" lines.
+
+`computed` is a single decisive value, not a test log. For a formula that reduces to an
+expression, it is that expression in canonical SymPy form (the napkin-ring story emitted
+`pi*h**3/6` from both scripts). For a claim with no single scalar — an identity, a procedure, an
+optimisation — anchor it on a **canonical worked instance** and emit the SymPy-canonical string of
+that instance's decisive result, so two blind scripts converge on the same characters:
+
+- an identity or procedure → run it on the concrete example the story's own text names, and emit
+  that result (e.g. the Euclid loop on 1920 and 1080 emits `120`);
+- an optimisation → evaluate the closed-form optimum on one fixed dataset named in the check
+  itself, and emit the coefficients (e.g. the least-squares fit to `x=(1,2,3), y=(2,3,5)` emits
+  `(1/3, 3/2)`).
+
+The rich, per-script assertions still belong in the script — they are each script's own thorough
+check — but they go to stderr or to earlier stdout lines, never into `computed`.
 
 When it cannot — a definition, a historical statement, a modelling assumption — set
 `check_script` to `null` **with a reason in `nulls[]`**. An invented check that proves nothing is
@@ -355,7 +387,17 @@ fading to clear, bottom 560 px at 92 % fading to clear. Nothing inside the card 
 | progress | 5 px hairline along the card's bottom edge, `#F26B1D` over white/18 %, filling across the post |
 
 Beat changes cross-fade over 8 frames — image and type together; there is never an empty card.
-A formula beat keeps the previous beat's image behind it.
+A formula, plot or anim beat keeps the previous beat's image behind it, dimmed to 28 % and
+blurred. A `plot` or `anim` draws on a paper panel (564 × 470, `#F7F5F0`, centred on y 660) over
+that image and builds itself over its first 1.5 s; a formula stacks straight onto the image.
+
+A long beat — a mechanism past ~15 s — should not hold one still picture. Give it `steps`: an
+ordered list of visuals, each weighted by the WORD COUNT of the narration it illustrates, so the
+picture advances with the voice. Steps may be formulas, plots, shapes, images or `anim` (computed
+animations: `gcd-subtraction`, `least-squares`, `fourier-build`, `nash-matrix`, `nash-mixing`).
+Steps dissolve into each other at their own seams; the beat's cross-fade handles its head and
+tail. See the math-visual skill. Auto-fit as elsewhere; a line that does not fit at the floor
+rejects the beat rather than overflowing.
 
 **Audio.** Narration at tempo 1.12 with pauses cut to 0.15 s. A whoosh on every beat change, a
 soft impact where a stat lands, a bell where the formula stack begins, and the music bed from
@@ -387,8 +429,28 @@ Rendered at the **mockup size**, not full-bleed: ~69 × 107 design px in the mas
 Free, with a hard ceiling of **90 seconds** — the practical limit shared by Reels and TikTok's
 short-form surface. The narration decides the length; the Editor cuts only if it overruns.
 
-Below ~35 s the mechanism beat cannot breathe. Below **10 s** the post is impossible: the mascot
-alone needs 6 s to enter and 4 s to leave.
+The target is **35–50 seconds of speech** (§5, Pace) — the whole post lands at 40–55 s with
+the card-in, the ask and the hold. Below **10 s** the post is impossible: the mascot alone needs
+6 s to enter and 4 s to leave. There is no floor on an individual beat.
+
+**Write to a word budget, because the ceiling is enforced after the audio is paid for.** The
+orchestrator builds the timeline from the measured clip lengths and only then checks 90 s, so a
+script that runs long closes as `blocked / over-90s-ceiling` having already spent the ElevenLabs
+characters.
+
+Measured on this voice and model: **2.27 words per second** as synthesised, counting narration
+with the emotion tags stripped; the narrator then plays every clip at tempo 1.12 and cuts pauses
+to 0.15 s, so the delivered rate is about **2.6 words per second**.
+
+| target | clean words |
+|---|---|
+| 35 s of speech | 90 |
+| **45 s, the sane target** | **115** |
+| 50 s, the top | 130 |
+| 90 s, the hard ceiling | 235 — never |
+
+Do not estimate at some other rate: two drafts written at an assumed 2.6 words/s *before* the
+tempo pass both came out over the ceiling.
 
 ### 9.5 Fonts
 

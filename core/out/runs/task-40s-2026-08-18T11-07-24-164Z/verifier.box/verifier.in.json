@@ -1,0 +1,15 @@
+{
+  "task_id": "exp-chain-3x4-4y9-xy",
+  "duration_s": 40,
+  "structure_id": "chained-exponent-compose-to-power",
+  "categories": [
+    "logarithm-exponent"
+  ],
+  "description": "Find the value of xy",
+  "statement": "3^x = 4, 4^y = 9",
+  "statement_latex": "\\begin{aligned} 3^{x} &= 4 \\\\ 4^{y} &= 9 \\end{aligned}",
+  "answer": "2",
+  "answer_latex": "2",
+  "steps_expected": 3,
+  "nulls": []
+}

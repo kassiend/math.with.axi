@@ -90,3 +90,14 @@ html, body {
 
 /* With the animated mascot in its own band, the wordmark sits alone and is centred. */
 .wordmark.centred { left: 50%; transform: translateX(-50%); }
+
+/* The diagram slot of a step that carries one. The drawing is scaled uniformly to fit. */
+.visual {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.visual svg { display: block; }

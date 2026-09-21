@@ -1,0 +1,9 @@
+{
+  "status": "rejected",
+  "stage": "statement-does-not-fit",
+  "problems": [
+    {
+      "reason": "statement does not fit the 249px safe box at the 28px floor (measured 277x35) — shorten it or split it across two lines"
+    }
+  ]
+}

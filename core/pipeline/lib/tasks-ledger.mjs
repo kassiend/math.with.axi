@@ -181,7 +181,9 @@ export function remove(taskId, { file = TASKS_LEDGER } = {}) {
 //   node core/pipeline/lib/tasks-ledger.mjs statement '47^2 - 43^2'
 //   node core/pipeline/lib/tasks-ledger.mjs list [20|40]
 // ---------------------------------------------------------------------------
-if (import.meta.url === `file://${process.argv[1]}`) {
+// `file://${process.argv[1]}` never matches on Windows: argv[1] is a C:\ path while
+// import.meta.url is file:///c:/... . Every CLI below silently no-opped and exited 0.
+if (import.meta.main) {
   const [cmd, a, b, c] = process.argv.slice(2);
   if (cmd === 'candidates') {
     if (!a) { console.error('usage: candidates <structure_id> <categories,csv> <20|40>'); process.exit(2); }

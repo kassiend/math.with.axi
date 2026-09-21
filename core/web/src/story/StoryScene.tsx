@@ -14,11 +14,15 @@
  *   - the story ends on an ask under the payoff line; a hairline shows how far along it is
  */
 import {
-  ASK, CARD, DISPLAY, FORMULA, IMAGE_DRIFT, INNER, PALETTE, PROGRESS, SCRIM, STAT, TITLE,
+  ASK, CARD, DISPLAY, FORMULA, IMAGE_DRIFT, INNER, MASCOT_PORTAL, PALETTE, PANEL, PROGRESS, SCRIM, STAT, TITLE,
 } from './layout';
 import type { LineFit } from './fit';
+import { INTEGRAL_GLYPH } from './integral-glyph';
+import { Plot } from '../plot/Plot';
+import type { PlotSpec } from '../plot/geometry';
+import { FourierBuild, GcdSubtraction, LeastSquaresFit, NashMatrix, NashMixing } from './anim';
 import {
-  BEAT_FADE, BLUR_PX, StoryTimeline, beatAt, progress,
+  BEAT_FADE, BLUR_PX, Phase, StoryTimeline, beatAt, beatBuild, progress, stepAt,
 } from '../../../shared/story-timeline';
 import {
   backgroundDrift, breathe, cardSettle, clamp01, crossfade, easeInOutSine, easeOutBack,
@@ -30,17 +34,43 @@ export interface StoryStat { prefix?: string | null; value: string; suffix?: str
 /** A bare four-digit 1000–2199 is a year; a year is a name, not a quantity, and never counts up. */
 const looksLikeYear = (v: string) => /^\d{4}$/.test(v.trim()) && Number(v) >= 1000 && Number(v) < 2200;
 
-export interface StoryBeatContent {
-  beat: string;
-  display: string;
-  /** What fills the visual slot for this beat. */
-  visual: 'image' | 'formula' | 'shape' | 'none';
+/** A computed animation the scene draws in the panel, chosen by `type`. */
+export type AnimSpec =
+  | { type: 'gcd-subtraction'; a: number; b: number }
+  | { type: 'least-squares' }
+  | { type: 'fourier-build' }
+  | { type: 'nash-matrix' }
+  | { type: 'nash-mixing' };
+
+/** Anything that can fill the frame — for a whole beat or for one step inside it. */
+export interface VisualNode {
+  visual: 'image' | 'formula' | 'shape' | 'plot' | 'anim' | 'none';
   image?: string | null;       // path relative to the page; the image behind this beat
   formulaHtml?: string | null; // pre-rendered KaTeX, when visual === 'formula'
   /** Pre-rendered KaTeX per derivation line; the last is the formula. Optional. */
   formulaStepsHtml?: string[] | null;
+  formulaFontSize?: number;    // measured so the formula fits instead of being clipped
   shapeSvg?: string | null;    // inline SVG markup, when visual === 'shape'
+  plot?: PlotSpec | null;      // a curve to compute and draw, when visual === 'plot'
+  anim?: AnimSpec | null;      // a computed animation, when visual === 'anim'
+}
+
+/**
+ * One step of a beat's visual. `weight` is the word count of the narration this step illustrates,
+ * so the picture advances with the voice — see stepAt in the timeline.
+ */
+export interface StepContent extends VisualNode { weight: number }
+
+export interface StoryBeatContent extends VisualNode {
+  beat: string;
+  display: string;
   stat?: StoryStat | null;
+  /**
+   * A long beat can carry an ordered sequence of visuals instead of one. When present, the
+   * beat's own `visual` is ignored and the scene shows the step whose word-weighted slice covers
+   * the frame.
+   */
+  steps?: StepContent[] | null;
 }
 
 export interface StorySceneProps {
@@ -83,6 +113,17 @@ function imageFor(beats: StoryBeatContent[], index: number): string | null {
   return null;
 }
 
+/** Which node is showing for a beat at this frame — the beat itself, or one of its steps. */
+function activeNode(content: StoryBeatContent, phase: BeatPhase, frame: number, timeline: StoryTimeline) {
+  const steps = content.steps?.length ? content.steps : null;
+  if (!steps) return { node: content as VisualNode, slot: phase as Phase, build: beatBuild(frame, timeline), fade: 1, stepIndex: -1 };
+  const st = stepAt(frame, phase, steps.map((s) => s.weight));
+  return { node: steps[st.index], slot: { start: st.start, end: st.end } as Phase, build: st.build, fade: st.fade, stepIndex: st.index };
+}
+
+/** A node that is drawn over the image rather than being the image. */
+const isPanel = (n: VisualNode) => n.visual === 'formula' || n.visual === 'plot' || n.visual === 'anim';
+
 function Card(props: StorySceneProps) {
   const { frame, timeline } = props;
   const { scale } = cardSettle(frame, timeline.cardIn.end);
@@ -114,7 +155,9 @@ function Card(props: StorySceneProps) {
         background: `linear-gradient(0deg, rgba(7,9,15,${SCRIM.bottomAlpha}) 0%, rgba(7,9,15,0.7) 40%, rgba(7,9,15,0) 100%)`,
       }} />
 
-      {/* The mascot band stays empty — Remotion draws the clip over it. */}
+      {/* The mascot band itself stays empty — Remotion draws the clip over it. The ∫ beside it
+          is the page's, and the clip passes in front of it on the way in and on the way out. */}
+      <MascotPortal />
 
       <div className="story-title" style={{
         top: `${TITLE.top - CARD.y}px`, left: `${TITLE.left - CARD.x}px`,
@@ -140,18 +183,20 @@ function Card(props: StorySceneProps) {
 }
 
 interface Pose { opacity: number; translateY: number }
-type Phase = StoryTimeline['beats'][number];
+type BeatPhase = StoryTimeline['beats'][number];
 
-/** The image behind a beat: full-bleed, drifting; pushed back and blurred under a formula. */
-function ImageLayer(props: StorySceneProps & { phase: Phase; opacity: number }) {
-  const { frame, phase, beats, opacity } = props;
+/** The image behind a beat: full-bleed, drifting; pushed back and blurred under a panel. */
+function ImageLayer(props: StorySceneProps & { phase: BeatPhase; opacity: number }) {
+  const { frame, phase, beats, opacity, timeline } = props;
   const content = beats[phase.index];
-  const src = imageFor(beats, phase.index);
+  const { node, slot } = activeNode(content, phase, frame, timeline);
+  // A step with its own image shows it; otherwise the beat's, or the nearest earlier one.
+  const src = (node !== content && node.image) ? node.image : imageFor(beats, phase.index);
   const t = progress(frame, phase);
-  const isFormula = content.visual === 'formula';
-  // A formula beat pushes the image back over its first half-second; the stack lands on top.
-  const dim = isFormula ? easeOutCubic(clamp01((frame - phase.start) / 15)) : 0;
-  const scale = 1 + IMAGE_DRIFT * easeInOutSine(t) + (isFormula ? 0.04 * dim : 0);
+  const panel = isPanel(node);
+  // A panel pushes the image back over its first half-second; the stack lands on top.
+  const dim = panel ? easeOutCubic(clamp01((frame - slot.start) / 15)) : 0;
+  const scale = 1 + IMAGE_DRIFT * easeInOutSine(t) + (panel ? 0.04 * dim : 0);
 
   return (
     <div className="image-layer" style={{
@@ -163,32 +208,85 @@ function ImageLayer(props: StorySceneProps & { phase: Phase; opacity: number }) 
           filter: dim > 0 ? `brightness(${lerp(1, FORMULA.imageDim, dim).toFixed(3)}) blur(${(FORMULA.imageBlur * dim).toFixed(1)}px)` : undefined,
         }} />
       )}
-      {content.visual === 'shape' && content.shapeSvg && (
+      {node.visual === 'shape' && node.shapeSvg && (
         <div className="visual-shape" style={{ transform: `scale(${(1 + 0.03 * easeInOutSine(t)).toFixed(4)})` }}
-             dangerouslySetInnerHTML={{ __html: content.shapeSvg }} />
+             dangerouslySetInnerHTML={{ __html: node.shapeSvg }} />
       )}
     </div>
   );
 }
 
-/** Everything typographic for a beat: the stat, the formula stack, the display line. */
-function TextLayer(props: StorySceneProps & { phase: Phase; pose: Pose }) {
-  const { frame, phase, pose, beats } = props;
+/**
+ * The ∫ the mascot walks out of, sized from its ink height alone. The card is opaque from frame 0,
+ * and so is this: scenery arriving on its own schedule reads as a mistake. On the dark scrim it is
+ * white, held back.
+ */
+function MascotPortal() {
+  const h = MASCOT_PORTAL.height;
+  const w = h * INTEGRAL_GLYPH.aspect;
+  return (
+    <svg
+      className="mascot-portal"
+      viewBox={`0 0 ${INTEGRAL_GLYPH.viewBoxWidth} ${INTEGRAL_GLYPH.viewBoxHeight}`}
+      width={w} height={h} preserveAspectRatio="none"
+      style={{
+        left: `${MASCOT_PORTAL.cx - CARD.x - w / 2}px`,
+        top: `${MASCOT_PORTAL.cy - CARD.y - h / 2}px`,
+        opacity: MASCOT_PORTAL.opacity,
+      }}
+    >
+      <path d={INTEGRAL_GLYPH.path} fill={MASCOT_PORTAL.colour} />
+    </svg>
+  );
+}
+
+/** Everything typographic for a beat: the stat, the panel (formula / plot / anim), the display line. */
+function TextLayer(props: StorySceneProps & { phase: BeatPhase; pose: Pose }) {
+  const { frame, phase, pose, beats, timeline } = props;
   const content = beats[phase.index];
   const fit = props.displayFits[phase.index];
   const style = { opacity: pose.opacity, transform: `translateY(${pose.translateY.toFixed(2)}px)` };
+  const { node, slot, build, fade, stepIndex } = activeNode(content, phase, frame, timeline);
+  const formulaSize = stepIndex >= 0
+    ? node.formulaFontSize
+    : (props.formulaFits[phase.index]?.fontSize ?? node.formulaFontSize);
 
   return (
     <div className="layer" style={style}>
       {content.stat && props.statFits[phase.index] && (
         <Stat frame={frame} phase={phase} stat={content.stat} fontSize={props.statFits[phase.index]!.fontSize} />
       )}
-      {content.visual === 'formula' && (
-        <FormulaStack frame={frame} phase={phase} content={content} fontSize={props.formulaFits[phase.index]?.fontSize} />
+      {node.visual === 'formula' && (
+        <div className="layer" style={{ opacity: fade }}>
+          <FormulaStack frame={frame} phase={slot} node={node} fontSize={formulaSize} />
+        </div>
+      )}
+      {(node.visual === 'plot' || node.visual === 'anim') && (
+        <div className="panel" style={{
+          opacity: fade, top: `${PANEL.centreY - CARD.y - PANEL.h / 2}px`,
+          left: `${(CARD.w - PANEL.w) / 2}px`, width: `${PANEL.w}px`, height: `${PANEL.h}px`,
+          borderRadius: `${PANEL.radius}px`,
+          // Drawn at their native 564x470 and scaled as a whole, so nothing inside re-flows.
+          transform: `scale(${PANEL.scale})`, transformOrigin: 'center center',
+        }}>
+          {node.visual === 'plot' && node.plot && <Plot spec={node.plot} progress={build} />}
+          {node.visual === 'anim' && node.anim && <Anim spec={node.anim} progress={build} />}
+        </div>
       )}
       <DisplayLine frame={frame} start={phase.start} text={content.display} fit={fit} />
     </div>
   );
+}
+
+/** Maps an AnimSpec to its computed component. */
+function Anim({ spec, progress }: { spec: AnimSpec; progress: number }) {
+  switch (spec.type) {
+    case 'gcd-subtraction': return <GcdSubtraction a={spec.a} b={spec.b} progress={progress} />;
+    case 'least-squares':   return <LeastSquaresFit progress={progress} />;
+    case 'fourier-build':   return <FourierBuild progress={progress} />;
+    case 'nash-matrix':     return <NashMatrix progress={progress} />;
+    case 'nash-mixing':     return <NashMixing progress={progress} />;
+  }
 }
 
 /** Digits count up from zero over the first second; non-digit characters stay put. */
@@ -202,7 +300,7 @@ function countUp(value: string, t: number): string {
   return value.replace(/[0-9]/g, () => s[k++] ?? '0');
 }
 
-function Stat({ frame, phase, stat, fontSize }: { frame: number; phase: Phase; stat: StoryStat; fontSize: number }) {
+function Stat({ frame, phase, stat, fontSize }: { frame: number; phase: BeatPhase; stat: StoryStat; fontSize: number }) {
   const counts = stat.count ?? !looksLikeYear(stat.value);
   const t = counts ? clamp01((frame - phase.start) / STAT.countFrames) : 1;
   const pop = easeOutBack(clamp01((frame - phase.start) / 10));
@@ -221,10 +319,10 @@ function Stat({ frame, phase, stat, fontSize }: { frame: number; phase: Phase; s
   );
 }
 
-function FormulaStack({ frame, phase, content, fontSize }: {
-  frame: number; phase: Phase; content: StoryBeatContent; fontSize?: number;
+function FormulaStack({ frame, phase, node, fontSize }: {
+  frame: number; phase: Phase; node: VisualNode; fontSize?: number;
 }) {
-  const steps = content.formulaStepsHtml?.length ? content.formulaStepsHtml : (content.formulaHtml ? [content.formulaHtml] : []);
+  const steps = node.formulaStepsHtml?.length ? node.formulaStepsHtml : (node.formulaHtml ? [node.formulaHtml] : []);
   if (!steps.length) return null;
   const span = phase.end - phase.start;
   const stagger = steps.length > 1 ? Math.max(8, Math.floor((span * FORMULA.landedBy) / (steps.length - 1))) : 0;

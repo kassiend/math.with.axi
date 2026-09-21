@@ -1,0 +1,3 @@
+{"t":"2026-08-19T06:09:29.147Z","event":"run.start","lesson_id":"estimate-square-root-nearest-square","counter":6,"seed":996786220}
+{"t":"2026-08-19T06:09:30.209Z","event":"crosscheck","agreed":false,"generator":null,"verifier":"47.24"}
+{"t":"2026-08-19T06:09:30.210Z","event":"gate.closed","status":"failed","stage":"verification","problems":[{"side":"generator","error":"check output is not JSON: RESULT: ALL CHECKS PASSED"},{"side":"verifier","error":"script disagrees with text"}]}

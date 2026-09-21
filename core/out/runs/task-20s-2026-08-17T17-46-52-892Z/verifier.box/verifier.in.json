@@ -1,0 +1,14 @@
+{
+  "task_id": "single-discount-30-then-20",
+  "duration_s": 20,
+  "structure_id": "successive-discount-single-equivalent",
+  "categories": [
+    "percentage"
+  ],
+  "description": "What single discount does the same?",
+  "statement": "30% off, then 20% off",
+  "statement_latex": "30\\%\\text{ off, then }20\\%\\text{ off}",
+  "answer": "44%",
+  "answer_latex": "44\\%",
+  "nulls": []
+}

@@ -119,7 +119,9 @@ export function checkScope(payload, { theorems = loadTheorems() } = {}) {
 }
 
 // CLI: node core/pipeline/lib/theorems.mjs list
-if (import.meta.url === `file://${process.argv[1]}`) {
+// `file://${process.argv[1]}` never matches on Windows: argv[1] is a C:\ path while
+// import.meta.url is file:///c:/... . Every CLI below silently no-opped and exited 0.
+if (import.meta.main) {
   if (process.argv[2] === 'list') {
     for (const t of loadTheorems().values()) console.log(`${t.id}\t${t.name}`);
   } else {

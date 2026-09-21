@@ -1,0 +1,29 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[curious] A film about a mathematician won Best Picture. In one scene, he explains his own big idea. [surprised] The math in it is wrong.",
+      "audio": "audio/hook.mp3",
+      "seconds": 9.658
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] In the scene, the friends agree that nobody approaches the blonde. But if they all stay away, your best move is to go for her. [surprised] One man breaks it and the deal collapses. [curious] The real Nash proved something stronger. Princeton, nineteen fifty. Twenty-eight pages. It shared a Nobel in nineteen ninety-four.",
+      "audio": "audio/turn.mp3",
+      "seconds": 20.737
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[curious] Here is the actual definition. Look at everyone's choice at once. If nobody can do better by changing their own move alone, that is an equilibrium. [thoughtful] Two prisoners. Both silent, one year each. Talk while he stays quiet, you walk. Both talk, two years. Talking beats silence either way. So both talk. [surprised] Stable, and worse for both. Some games have no such point. So Nash let players randomise. Then one always exists.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 34.753
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] Traffic routing. Auction design. Wireless networks. All hunting the same point: where nobody gains by moving alone. [surprised] Study real penalty kicks and the pros already mix almost exactly as the theory predicts. [thoughtful] So when a bad outcome looks like stupidity, look again.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 19.044
+    }
+  ],
+  "total_seconds": 84.192
+}

@@ -1,0 +1,204 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200, verbatim in the 'In popular culture' material. Supports exactly what the hook says and no more: the film won Best Picture. It does NOT say Crowe won an Oscar, and the narration does not claim he did — checked against the same page's separate sentence 'Crowe was nominated for the Academy Award for Best Actor at the 74th Academy Awards', which is a nomination, not a win."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "HTTP 200. Pedagogy in Action / SERC (Carleton College), authored by Dirk Mateer, Penn State, 2010. The quote establishes that the bar scene is where the FILM places the insight — which is all the story claims. It is not offered as biography, and the story does not present it as such."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. The page's own words, in capitals in the source: the scene is NOT a Nash equilibrium. It directly carries the hook's 'the math in it is wrong'; the sentence immediately before it in the source reads 'the economic explanation in the bar scene is wrong!', so the claim sits on the source's assertion rather than beside it."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. This is FILM DIALOGUE quoted by the source, and it is used that way: the story paraphrases it as what the scene proposes. Nothing is attributed to the real John Nash anywhere in the script — checked every beat for that."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://serc.carleton.edu/sp/library/media/examples/example2.html",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim including the source's own grammatical slips ('each of the friends best strategy', 'what their friends is doing'), which is what a verbatim quote requires. It supports the turn's two sentences precisely: the best reply to everyone staying away is to go, and one defection ends the arrangement. The following sentence in the source, 'as soon as one guy decides to go after the blonde, the agreement not to pursue her falls apart', carries the second half."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. Both numbers the turn says — 1950, twenty-eight pages — are in this one sentence, so neither is a reconstruction. 'Noncooperative games' is the source's own word for the subject."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. Places the equilibrium work at Princeton, which is the only thing the word 'Princeton' does in the narration."
+    },
+    {
+      "claim_id": "f8",
+      "url": "https://en.wikipedia.org/wiki/John_Forbes_Nash_Jr.",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. Year, prize and the two co-laureates are all in the sentence, which is why the narration says 'shared a Nobel' rather than 'won the Nobel'. Also checked that the story does not compute an elapsed number of years from 1950; it states both years and stops."
+    },
+    {
+      "claim_id": "f9",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim in the History section. Establishes the limit — zero-sum only — that makes 'stronger' meaningful. Not used in the narration directly; it backs the mechanism's framing."
+    },
+    {
+      "claim_id": "f10",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. This is the load-bearing sentence for the turn's 'proved something stronger': the source itself says 'far more generally than von Neumann'. Without it the comparative would have been the writer's own."
+    },
+    {
+      "claim_id": "f11",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim from the lead, em dashes and all. It is the definition the card typesets and the definition the mechanism speaks. Checked the two against each other clause by clause: 'no individual player can increase their own expected payoff' = the >= in the formula; 'while the other players keep theirs unchanged' = the sigma*_{-i} held fixed on both sides. The narration's 'changing their own move alone' is the same restriction in spoken words."
+    },
+    {
+      "claim_id": "f12",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim, inside the block-quoted 'typical contemporary version' the page reproduces from Poundstone. One year each if neither testifies — the narration's 'both silent, one year each'."
+    },
+    {
+      "claim_id": "f13",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim, same block quote. Free versus three years — the narration's 'talk while he stays quiet, you walk'. The three-year figure is the one the animation shows as 3."
+    },
+    {
+      "claim_id": "f14",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim, same block quote. Two years each — the narration's 'both talk, two years' and the animation's lit cell. All four cells of the matrix are therefore sourced numbers, not invented ones."
+    },
+    {
+      "claim_id": "f15",
+      "url": "https://en.wikipedia.org/wiki/Prisoner%27s_dilemma",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim from the lead. It supports the exact pairing the story needs — rational for each, yet worse for both — which is the sentence 'Stable, and worse for both'. Note that the source says 'defecting is rational for each agent', which is the dominance the check proves independently, so text and script agree here rather than one leaning on the other."
+    },
+    {
+      "claim_id": "f16",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. Establishes existence of a finite game with no pure equilibrium, which is all 'some games have no such point' asserts. The story's own penalty-kick example is verified to have that property by the SymPy check rather than by this citation; the citation is what licenses the general statement."
+    },
+    {
+      "claim_id": "f17",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim, including the parenthesis that pure strategies are a subset of mixed ones — which matters, because it is why the existence theorem's 'at least one mixed equilibrium' also covers the prisoner's dilemma, whose equilibrium is pure. The story shows both kinds and the definition must span them."
+    },
+    {
+      "claim_id": "f18",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim including the internal quotation marks around the paper title. This is the second line of the card, word for word in content: any game with a finite set of actions, at least one mixed equilibrium must exist. The card writes the hypothesis as 'finitely many actions'; the source says 'a finite set of actions'. Same condition. The finitely-many-PLAYERS half is not in this sentence but is standard and is stated in the mechanism as part of the definition of the game, not asserted as a citation."
+    },
+    {
+      "claim_id": "f19",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim, both sentences. Kakutani in 1950, Brouwer in 1951, exactly as the mechanism states. This claim appears only in the mechanism field; no narration line mentions fixed points, so nothing on screen depends on it."
+    },
+    {
+      "claim_id": "f20",
+      "url": "https://en.wikipedia.org/wiki/Nash_equilibrium",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim, the full applications sentence. All four items the payoff names are inside it: traffic flow, auctions, penalty kicks in football, wireless communications. Checked the payoff for anything the sentence does not carry — 'auction design' against 'how to organize auctions' is the same thing in fewer words; no fifth application is claimed."
+    },
+    {
+      "claim_id": "f21",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim, three consecutive sentences from the 'Real-life data' section. They license the STRUCTURE of the animation's example matrix — two options each, scoring likelier when the choices differ, asymmetric because of the stronger leg — and the payload says so explicitly. They do NOT license the four percentages, and the payload does not claim they do: both animation panels carry the words 'example odds' on screen and no narration line states a percentage. Checked the rendered frames for a number presented as data; there is none."
+    },
+    {
+      "claim_id": "f22",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. The payoff's strongest line rests on this and stays inside it: 'do not deviate significantly from the prediction of a Nash equilibrium' becomes 'already mix almost exactly as the theory predicts'. No effect size, no study, no author and no year is claimed, because the sentence gives none."
+    },
+    {
+      "claim_id": "f23",
+      "url": "https://en.wikipedia.org/wiki/Matching_pennies",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim. The indifference condition, which is what the second animation's crossing point draws and what the SymPy check asserts at the equilibrium (both of the kicker's actions pay 34/65 against the keeper's mix). Text, picture and script all state the same fact and were checked against each other."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "f3",
+      "detail": "Not a defect; recorded so the strength of the hook's claim is on the record. The 'the math is wrong' assertion rests on a teaching resource (SERC / Pedagogy in Action, Dirk Mateer, Penn State), not on a peer-reviewed paper. I read the argument independently rather than taking the page's word for it: in the arrangement the scene proposes, every man stays away from the blonde, so for any one of them the payoff to switching is whatever going alone to the blonde is worth, unopposed — strictly better than the alternative the scene offers him. That is a profitable unilateral deviation, so the profile fails the definition in f11 by inspection. The citation and the mathematics agree, and the mathematics does not depend on the citation."
+    },
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "f21",
+      "detail": "Not a defect; the boundary is worth stating because it is the one place a viewer could read a number as data. The four percentages in the penalty-kick animation (20 / 90 / 80 / 20) are the story's own example. The source supports their shape, not their size. Two guards are in place and I confirmed both: the on-screen captions say 'example odds' in each of the animation's two panels, and no line of narration states any of the four numbers. The equilibrium 6/13 that follows from them is therefore a fact about the example — which is exactly how the mechanism field describes it — and is kept separate from f22, the sourced claim about what real players do."
+    }
+  ],
+  "unverifiable": []
+}
