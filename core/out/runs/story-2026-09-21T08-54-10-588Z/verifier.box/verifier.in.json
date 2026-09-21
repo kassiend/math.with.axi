@@ -1,0 +1,11 @@
+{
+  "claim_id": "gaussian-copula-broke-wall-street",
+  "title": "The formula that broke Wall Street",
+  "formula_latex": "C_{\\rho}(u,v) = \\Phi_2\\!\\left(\\Phi^{-1}(u),\\, \\Phi^{-1}(v);\\, \\rho\\right)",
+  "formula_steps": [
+    "u = F_A(t_A),\\ \\ v = F_B(t_B)",
+    "x = \\Phi^{-1}(u),\\ \\ y = \\Phi^{-1}(v)",
+    "C_{\\rho}(u,v) = \\Phi_2\\!\\left(\\Phi^{-1}(u),\\, \\Phi^{-1}(v);\\, \\rho\\right)"
+  ],
+  "mechanism": "Two mortgages, A and B. Each defaults with some probability, so u = F_A(t) and v = F_B(t) are just numbers on (0, 1). Feed each through the inverse normal Phi^{-1} to map them onto the real line: x and y are the bell-curve coordinates of those default probabilities. The Gaussian copula reads the joint probability off the standard bivariate normal with correlation rho — one number that decides how tied the two defaults are. Fit rho on calm years and it looks small: independence-ish, safe to bundle. But rho is fragile. In a housing collapse every mortgage defaults for the same reason at once, and the real dependence in the tail rushes toward one — a state the fitted rho never priced."
+}

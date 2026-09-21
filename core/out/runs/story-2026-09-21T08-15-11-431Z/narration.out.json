@@ -1,0 +1,38 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[excited] One wheel. One night. Millions gone.",
+      "audio": "audio/hook.mp3",
+      "seconds": 3.271
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] Monte Carlo, August nineteen thirteen. Black hit twenty-six times in a row. [whispers] The room started chasing red. They said red was due.",
+      "audio": "audio/turn.mp3",
+      "seconds": 8.955
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[confident] The wheel has no memory. Ask the odds of black on spin twenty-seven. Divide the chance of twenty-seven blacks by the twenty-six that already fell. The powers cancel. Eighteen over thirty-seven remains. Same as spin one. Every bet against black chased a number that had already come true.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 17.552
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] That fallacy still fires. Slot pulls. Coin flips. Your brain sees a pattern. The wheel does not.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 6.555
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Bet on the maths.",
+    "audio": "audio/outro.mp3",
+    "seconds": 1.423
+  },
+  "total_seconds": 37.756,
+  "notes": [
+    "mechanism beat is 17.552 s — over the 12 s per-beat flag threshold, but within the §5 mechanism band (12–40 s); no slow-down applied and total is 37.756 s, comfortably under the 90 s ceiling.",
+    "Numbers spelled out for TTS: 1913 → 'nineteen thirteen'; 26/27 → 'twenty-six/twenty-seven'; 18/37 → 'eighteen over thirty-seven'. No claim, formula, or count changed from story.out.json."
+  ]
+}

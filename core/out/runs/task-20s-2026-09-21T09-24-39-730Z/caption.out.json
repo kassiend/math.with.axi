@@ -1,0 +1,35 @@
+{
+  "kind": "task",
+  "hook": "Today is Wednesday. What day lands 100 days from now?",
+  "instagram": {
+    "caption": "Today is Wednesday. What day lands 100 days from now?\n\nYou have 20 seconds.\n\nDrop your answer in the comments.",
+    "first_comment": "Answer: Friday. Weekdays repeat every 7, so only the remainder matters: 100 ÷ 7 = 14 remainder 2. Count two days past Wednesday — Thursday, Friday. What did you get?\n\n#math #mathematics #learnmath #mathpuzzle #mathchallenge #brainteaser #mathtok #mathwithaxi #weekdaymath #calendarmath #clockcalendar #mathshorts #mod7 #dayofweek #mathfun"
+  },
+  "tiktok": {
+    "caption": "Today is Wednesday. What day lands 100 days from now? Drop your answer 👇 #mathpuzzle #mathchallenge #mathtok #learnmath",
+    "first_comment": "Answer: Friday. 100 ÷ 7 leaves remainder 2 — move two days past Wednesday: Thursday, Friday. What did you get?"
+  },
+  "youtube": {
+    "title": "Today Is Wednesday — What Day Is It 100 Days From Now?",
+    "description": "Today is Wednesday. What day lands 100 days from now?\n\nYou have 20 seconds to figure it out.\n\nDrop your answer in the comments.\n\n#mathpuzzle #calendar #Shorts",
+    "tags": [
+      "math puzzle",
+      "math challenge",
+      "calendar math",
+      "weekday math",
+      "day of the week",
+      "modular arithmetic",
+      "clock calendar",
+      "math with axi",
+      "math shorts",
+      "learn math",
+      "brain teaser",
+      "math for students",
+      "short math video",
+      "math trick"
+    ],
+    "first_comment": "Answer: Friday. Weekdays repeat every 7 days, so only the remainder of 100 ÷ 7 matters. Since 98 = 14 × 7, the remainder is 2. Count two days past Wednesday — Thursday, Friday. What did you get?"
+  },
+  "alt_text": "A card showing 'Today is Wednesday. What day will it be 100 days from today?' inside a countdown ring, with Axi standing in the footer. Around two-thirds of the way through the video, a white rabbit holding a stopwatch appears.",
+  "nulls": []
+}

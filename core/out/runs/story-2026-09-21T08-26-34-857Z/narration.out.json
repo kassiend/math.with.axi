@@ -1,0 +1,39 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[excited] They armored the wrong parts of the plane.",
+      "audio": "audio/hook.mp3",
+      "seconds": 2.039
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] Nineteen forty-three. Bombers came back full of holes. Wings, tails, fuselage. Almost nothing on the engines. The Air Force wanted armor where the holes were. [whispers] One statistician said no.",
+      "audio": "audio/turn.mp3",
+      "seconds": 13.131,
+      "over_ceiling": {
+        "limit_seconds": 12,
+        "measured_seconds": 13.131,
+        "note": "Reported per narrator brief: beat exceeds 12 s soft cap; no tempo change, no line cut — narration text is untouched from story.out.json. Editor may trim if the total needs to move."
+      }
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[confident] Every returning plane took its hits and lived. The planes hit in the engines never came home. So the count you see is filtered by survival. Wald flipped the question. What you see is a hit, given survival. What you want is survival, given a hit. Bayes swaps them. Where no holes come home, no plane comes home. Armor there.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 21.326
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] He tried to save the pilots he could not see. Today we call it survivorship bias. It hides in every five-star review, every winning stock chart, every list of who made it.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 11.316
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Send it to a skeptic.",
+    "audio": "audio/outro.mp3",
+    "seconds": 1.922
+  },
+  "total_seconds": 49.734
+}

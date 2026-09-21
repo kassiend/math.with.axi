@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "telescope-sum-1-over-k-k-plus-1-9",
+      "script": "verifier.checks/telescope-sum-1-over-k-k-plus-1-9.py",
+      "computed": "9/10",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": [
+    "Statement 'S = 1/(1*2) + 1/(2*3) + ... + 1/(9*10)' is unambiguous: nine terms with k running 1..9.",
+    "Answer 9/10 is exact (a rational), not a decimal approximation.",
+    "9/10 is in simplest form: gcd(9,10) = 1.",
+    "Sign is positive, matching the sum of positive terms; no branch ambiguity.",
+    "Independent term-by-term sum (Rational) and independent sympy.summation both yield 9/10."
+  ]
+}

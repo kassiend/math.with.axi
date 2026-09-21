@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "monte-carlo-1913-gamblers-fallacy",
+      "script": "verifier.checks/monte-carlo-1913-gamblers-fallacy.py",
+      "computed": "18/37",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

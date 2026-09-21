@@ -1,0 +1,20 @@
+{
+  "task_id": "telescope-sum-1-over-k-k-plus-1-9",
+  "duration_s": 40,
+  "structure_id": "telescoping-partial-fraction-sum",
+  "categories": [
+    "telescoping"
+  ],
+  "description": "S = 1/(1·2) + 1/(2·3) + … + 1/(9·10). Find S.",
+  "statement": "S = ?",
+  "statement_latex": null,
+  "answer": "9/10",
+  "answer_latex": "\\dfrac{9}{10}",
+  "steps_expected": 2,
+  "nulls": [
+    {
+      "field": "statement_latex",
+      "reason": "statement is short plain text ('S = ?'); the sum itself lives in description/description_latex per the render brief"
+    }
+  ]
+}

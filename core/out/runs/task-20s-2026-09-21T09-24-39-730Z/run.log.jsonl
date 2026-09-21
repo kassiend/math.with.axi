@@ -1,0 +1,5 @@
+{"t":"2026-09-21T09:26:50.546Z","event":"run.start","task_id":"weekday-100-days-after-wednesday","duration_s":20,"seed":1140448140}
+{"t":"2026-09-21T09:26:50.625Z","event":"crosscheck","agreed":true,"generator":"Friday","verifier":"Friday"}
+{"t":"2026-09-21T09:26:50.737Z","event":"picks","background":"bg2.jpeg","start_audio":"axi_greetings2.mp3","mid_audio":"hurry1.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":0.91425,"total_frames":653,"hurry_enter":451}
+{"t":"2026-09-21T09:29:07.405Z","event":"capture.done","frames":653,"font_size":90}
+{"t":"2026-09-21T09:30:06.611Z","event":"done","video":"output/posts/tasks/20s/weekday-100-days-after-wednesday.mp4"}

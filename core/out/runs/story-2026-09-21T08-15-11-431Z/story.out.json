@@ -1,0 +1,138 @@
+{
+  "story_id": "monte-carlo-1913-gamblers-fallacy",
+  "area": "probability-and-statistics",
+  "subject_slug": "monte-carlo-1913-roulette",
+  "angle_slug": "gamblers-fallacy-26-blacks",
+  "title": "Millions burned on 26 spins",
+
+  "viral_read": {
+    "goal": "SHARE — indignation at your own gut: your brain lies about randomness.",
+    "identity_signal": "I know a streak means nothing while a room bets its house on it.",
+    "stat": "1 in 68M — the chance of 26 same-colour spins in a row that the room chased.",
+    "gap": "The wheel has no memory: (18/37)^27 divided by (18/37)^26 collapses to 18/37, and that collapse is what the whole room refused to believe."
+  },
+
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "One wheel. One night. Millions gone.",
+      "display": "One wheel. One night.",
+      "visual": "image",
+      "image_id": "i1",
+      "stat": { "prefix": "1 in", "value": "68M", "suffix": null, "count": true }
+    },
+    {
+      "beat": "turn",
+      "narration": "Monte Carlo, August 1913. Black hit twenty-six times in a row. The room started chasing red. They said red was due.",
+      "display": "26 blacks in a row",
+      "visual": "image",
+      "image_id": "i2"
+    },
+    {
+      "beat": "mechanism",
+      "narration": "The wheel has no memory. Ask the odds of black on spin twenty-seven. Divide the chance of twenty-seven blacks by the twenty-six that already fell. The powers cancel. Eighteen over thirty-seven remains. Same as spin one. Every bet against black chased a number that had already come true.",
+      "display": "The wheel has no memory",
+      "visual": "formula"
+    },
+    {
+      "beat": "payoff",
+      "narration": "That fallacy still fires. Slot pulls. Coin flips. Your brain sees a pattern. The wheel does not.",
+      "display": "Your brain lies about streaks",
+      "visual": "image",
+      "image_id": "i3"
+    }
+  ],
+
+  "formula_latex": "P(B_{27} \\mid B_1 \\cap \\cdots \\cap B_{26}) = \\dfrac{18}{37}",
+  "formula_steps": [
+    "P(B_{27} \\mid B_1 \\cap \\cdots \\cap B_{26}) = \\dfrac{P(B_1 \\cap \\cdots \\cap B_{27})}{P(B_1 \\cap \\cdots \\cap B_{26})}",
+    "= \\dfrac{(18/37)^{27}}{(18/37)^{26}}",
+    "P(B_{27} \\mid B_1 \\cap \\cdots \\cap B_{26}) = \\dfrac{18}{37}"
+  ],
+  "mechanism": "A fair single-zero roulette wheel has 37 pockets, 18 of them black, so each spin lands on black with probability 18/37 independently of every previous spin. By definition, the conditional probability of black on spin 27 given the first 26 spins is P(B1 ∩ … ∩ B27) divided by P(B1 ∩ … ∩ B26). Independence makes each of those a power of 18/37, and the ratio (18/37)^27 / (18/37)^26 collapses to 18/37 — the same odds as the very first spin. The 1-in-68-million number belongs to predicting the whole 26-spin streak in advance, not to the 27th spin after 26 blacks have already landed.",
+  "ask": "Bet on the maths.",
+  "music_prompt": "Late-night documentary tension, sparse suspended piano over a low string drone, a faint muffled roulette ball tick as pulse, no melody and no drums.",
+  "check_script": "generator.checks/monte-carlo-1913-gamblers-fallacy.py",
+
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "On 18 August 1913 the roulette ball at the Monte Carlo Casino fell on black 26 times in a row.",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "quote": "An example of the gambler's fallacy occurred in a game of roulette at the Monte Carlo Casino on August 18, 1913, when the ball fell in black 26 times in a row."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Gamblers that night lost millions of francs betting against black, believing the streak had to break.",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "quote": "Gamblers lost millions of francs betting against black, reasoning incorrectly that the streak was causing an imbalance in the randomness of the wheel, and that it had to be followed by a long streak of red."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "On a single-zero roulette wheel the probability that a sequence of 26 spins comes out either all red or all black is about 1 in 68.4 million.",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "quote": "or around 1 in 68.4 million, assuming the mechanism is unbiased"
+    },
+    {
+      "claim_id": "f4",
+      "claim": "The gambler's fallacy is the belief that an independent, equally probable outcome that has been under-represented becomes more likely on the next trial.",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "quote": "the belief that an independent and equally probable outcome which happened less frequently than expected is more likely to happen in the future (or vice versa)"
+    },
+    {
+      "claim_id": "f5",
+      "claim": "For a fair chance mechanism, successive trials are statistically independent, so past outcomes do not shift the probability of the next one.",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "quote": "The outcomes in different tosses are statistically independent and the probability of getting heads on a single toss is"
+    },
+    {
+      "claim_id": "f6",
+      "claim": "A European single-zero roulette wheel has 37 numbered pockets, 18 of them coloured black.",
+      "url": "https://en.wikipedia.org/wiki/Roulette",
+      "quote": "The pockets of the roulette wheel are numbered from 0 to 36."
+    },
+    {
+      "claim_id": "f7",
+      "claim": "On a European roulette wheel eighteen of the numbered pockets are black.",
+      "url": "https://en.wikipedia.org/wiki/Roulette",
+      "quote": "In number ranges from 1 to 10 and 19 to 28, odd numbers are red and even are black."
+    }
+  ],
+
+  "images": [
+    {
+      "image_id": "i1",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i1.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "Cinematic photograph, close on a European roulette wheel mid-spin inside a dim Belle Époque casino, the ivory ball blurring between numbered pockets, brass fittings catching a single warm lamp, dark felt visible below, deep shadows top and bottom, orange-amber-and-black palette, shallow depth of field, subject centered in the middle band, no faces, no text, no logos, hyperreal 35mm film, 1913 mood"
+    },
+    {
+      "image_id": "i2",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i2.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "One continuous cinematic photograph, portrait 9:16 aspect, an ornate Belle Époque roulette table with a spinning wooden wheel and stacks of gambling chips glowing under a single warm brass lamp, viewed from the side, gilded wall paneling and heavy velvet drapes fade into deep umber shadow above and below, no people visible, no faces, no text, no signage, warm amber and black palette, shallow depth of field, hyperreal 35mm film, Monte Carlo 1913, full-bleed edge to edge single frame not multiple frames"
+    },
+    {
+      "image_id": "i3",
+      "role": "scene",
+      "source": "generated",
+      "file": "images/i3.png",
+      "attribution": null,
+      "source_url": null,
+      "prompt": "Cinematic photograph, a modern smartphone lying face-up on a dark wooden bar, the screen glowing with a spinning roulette wheel graphic, a half-empty glass tumbler beside it catching one warm bar light, deep shadow above and below, moody orange-amber-and-black palette, shallow depth of field, subject centered in the middle band, no text readable on the phone, no logos, hyperreal 35mm film, contemporary night scene"
+    }
+  ],
+
+  "nulls": [
+    {
+      "field": "beats[2].image_id",
+      "reason": "Mechanism is a formula beat; per §5 of the brief it keeps the previous beat's image (i2) dimmed under the derivation."
+    }
+  ]
+}

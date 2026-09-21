@@ -1,0 +1,8 @@
+{"t":"2026-09-21T08:35:56.877Z","event":"run.start","story_id":"wald-armor-where-bullets-arent","area":"probability-and-statistics","subject":"abraham-wald"}
+{"t":"2026-09-21T08:35:56.880Z","event":"validation","checked":5,"findings":4}
+{"t":"2026-09-21T08:35:57.995Z","event":"crosscheck","agreed":true,"generator":"Bayes identity P(S|H)=P(H|S)P(S)/P(H) simplifies to 0: True; with no observed engine hits among survivors, P(S|hit_engine)=0.0","verifier":"P(S|H_R) - P(H_R|S)*P(S)/P(H_R) = 0; chain residual = 0; lim_{P(H_R|S)->0} P(S|H_R) = 0; numeric P(S|H_R) = 9/59 (direct via joint = 9/59)"}
+{"t":"2026-09-21T08:35:57.997Z","event":"timeline","total_frames":1528,"total_seconds":50.933,"beats":["hook:2.039s","turn:13.131s","mechanism:21.326s","payoff:11.316s"],"mascot":{"play":{"start":0,"end":180},"freeze":{"start":180,"end":1407},"resume":{"start":1407,"end":1528}}}
+{"t":"2026-09-21T08:35:58.000Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-09-21T08:48:08.338Z","event":"capture.done","frames":1528}
+{"t":"2026-09-21T08:48:16.977Z","event":"music.ready","seconds":53,"prompt":"Slow cinematic tension, sparse felt piano over a low string drone, distant prope"}
+{"t":"2026-09-21T08:51:57.926Z","event":"done","video":"output/posts/stories/wald-armor-where-bullets-arent.mp4","seconds":50.933}

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "task_id": "weekday-100-days-after-wednesday",
+      "script": "verifier.checks/weekday-100-days-after-wednesday.py",
+      "computed": "Friday",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": "Statement unambiguously specifies today = Wednesday and asks the weekday 100 days hence under the standard 7-day cycle. 100 mod 7 = 2, so Wednesday + 2 = Friday. The stated answer 'Friday' matches; it is an exact categorical value (no rounding applicable) and is in simplest form (standard weekday name)."
+}

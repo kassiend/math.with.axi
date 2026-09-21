@@ -1,0 +1,120 @@
+{
+  "runId": "story-gaussian-copula-broke-wall-street",
+  "capture": {
+    "publicPath": "captures/story-gaussian-copula-broke-wall-street",
+    "frames": 1400,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 1279
+    },
+    "resume": {
+      "start": 1279,
+      "end": 1400
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-gaussian-copula-broke-wall-street/hook.mp3",
+        "from": 0,
+        "durationInFrames": 177
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-gaussian-copula-broke-wall-street/turn.mp3",
+        "from": 177,
+        "durationInFrames": 237
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-gaussian-copula-broke-wall-street/mechanism.mp3",
+        "from": 414,
+        "durationInFrames": 523
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-gaussian-copula-broke-wall-street/payoff.mp3",
+        "from": 937,
+        "durationInFrames": 374
+      },
+      {
+        "id": "outro",
+        "src": "audio/story-gaussian-copula-broke-wall-street/outro.mp3",
+        "from": 1311,
+        "durationInFrames": 53
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/story-gaussian-copula-broke-wall-street/whoosh.wav",
+    "frames": [
+      177,
+      414,
+      937
+    ],
+    "volume": 0.5
+  },
+  "hits": [
+    {
+      "src": "audio/story-gaussian-copula-broke-wall-street/impactSoft_heavy_001.wav",
+      "frames": [
+        2
+      ],
+      "volume": 0.6
+    },
+    {
+      "src": "audio/story-gaussian-copula-broke-wall-street/impactBell_heavy_000.wav",
+      "frames": [
+        416
+      ],
+      "volume": 0.35
+    }
+  ],
+  "music": {
+    "src": "audio/story-gaussian-copula-broke-wall-street/music.mp3",
+    "speech": [
+      {
+        "from": 0,
+        "to": 177
+      },
+      {
+        "from": 177,
+        "to": 414
+      },
+      {
+        "from": 414,
+        "to": 937
+      },
+      {
+        "from": 937,
+        "to": 1311
+      },
+      {
+        "from": 1311,
+        "to": 1364
+      }
+    ],
+    "bed": 0.5,
+    "duck": 0.16,
+    "rampFrames": 10,
+    "totalFrames": 1400
+  }
+}

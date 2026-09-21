@@ -1,0 +1,11 @@
+{
+  "claim_id": "wald-armor-where-bullets-arent",
+  "title": "The planes that didn't come back.",
+  "formula_latex": "P(S \\mid H_R) = \\dfrac{P(H_R \\mid S)\\, P(S)}{P(H_R)}",
+  "formula_steps": [
+    "P(H_R \\mid S)",
+    "P(S \\mid H_R)",
+    "P(S \\mid H_R) = \\dfrac{P(H_R \\mid S)\\, P(S)}{P(H_R)}"
+  ],
+  "mechanism": "Wald noticed that the count of bullet holes on returning planes is not the count of bullet holes on all planes — it is the count conditional on survival. He wanted the reverse: given a plane was hit at region R, what is the chance it survives? Bayes' theorem exchanges the two conditionals. When the observed hit rate at R among survivors is near zero, the posterior survival probability given a hit at R is near zero — so armor belongs there, not where the holes cluster."
+}

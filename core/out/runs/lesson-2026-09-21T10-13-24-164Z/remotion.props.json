@@ -1,0 +1,83 @@
+{
+  "runId": "lesson-percentage-swap-commutativity",
+  "capture": {
+    "publicPath": "captures/lesson-percentage-swap-commutativity",
+    "frames": 924,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 770.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 803
+    },
+    "resume": {
+      "start": 803,
+      "end": 924
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "intro",
+        "src": "audio/lesson-percentage-swap-commutativity/intro.mp3",
+        "from": 0,
+        "durationInFrames": 180
+      },
+      {
+        "id": "s1",
+        "src": "audio/lesson-percentage-swap-commutativity/s1.mp3",
+        "from": 180,
+        "durationInFrames": 38
+      },
+      {
+        "id": "s2",
+        "src": "audio/lesson-percentage-swap-commutativity/s2.mp3",
+        "from": 218,
+        "durationInFrames": 214
+      },
+      {
+        "id": "s3",
+        "src": "audio/lesson-percentage-swap-commutativity/s3.mp3",
+        "from": 432,
+        "durationInFrames": 207
+      },
+      {
+        "id": "s4",
+        "src": "audio/lesson-percentage-swap-commutativity/s4.mp3",
+        "from": 639,
+        "durationInFrames": 199
+      },
+      {
+        "id": "outro",
+        "src": "audio/lesson-percentage-swap-commutativity/outro.mp3",
+        "from": 838,
+        "durationInFrames": 74
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/lesson-percentage-swap-commutativity/pop.wav",
+    "frames": [
+      180,
+      218,
+      432,
+      639,
+      838
+    ],
+    "volume": 0.45
+  }
+}

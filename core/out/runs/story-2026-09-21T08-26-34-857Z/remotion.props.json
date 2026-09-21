@@ -1,0 +1,120 @@
+{
+  "runId": "story-wald-armor-where-bullets-arent",
+  "capture": {
+    "publicPath": "captures/story-wald-armor-where-bullets-arent",
+    "frames": 1528,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "mascot": {
+    "src": "mascot/10s.webm",
+    "box": {
+      "width": 343.65,
+      "height": 193.3,
+      "left": 187.75,
+      "top": 130.13
+    },
+    "play": {
+      "start": 0,
+      "end": 180
+    },
+    "freeze": {
+      "start": 180,
+      "end": 1407
+    },
+    "resume": {
+      "start": 1407,
+      "end": 1528
+    },
+    "pauseFrame": 180
+  },
+  "audio": {
+    "clips": [
+      {
+        "id": "hook",
+        "src": "audio/story-wald-armor-where-bullets-arent/hook.mp3",
+        "from": 0,
+        "durationInFrames": 61
+      },
+      {
+        "id": "turn",
+        "src": "audio/story-wald-armor-where-bullets-arent/turn.mp3",
+        "from": 61,
+        "durationInFrames": 394
+      },
+      {
+        "id": "mechanism",
+        "src": "audio/story-wald-armor-where-bullets-arent/mechanism.mp3",
+        "from": 455,
+        "durationInFrames": 640
+      },
+      {
+        "id": "payoff",
+        "src": "audio/story-wald-armor-where-bullets-arent/payoff.mp3",
+        "from": 1095,
+        "durationInFrames": 339
+      },
+      {
+        "id": "outro",
+        "src": "audio/story-wald-armor-where-bullets-arent/outro.mp3",
+        "from": 1434,
+        "durationInFrames": 58
+      }
+    ]
+  },
+  "sfx": {
+    "src": "audio/story-wald-armor-where-bullets-arent/whoosh.wav",
+    "frames": [
+      61,
+      455,
+      1095
+    ],
+    "volume": 0.5
+  },
+  "hits": [
+    {
+      "src": "audio/story-wald-armor-where-bullets-arent/impactSoft_heavy_001.wav",
+      "frames": [
+        63
+      ],
+      "volume": 0.6
+    },
+    {
+      "src": "audio/story-wald-armor-where-bullets-arent/impactBell_heavy_000.wav",
+      "frames": [
+        457
+      ],
+      "volume": 0.35
+    }
+  ],
+  "music": {
+    "src": "audio/story-wald-armor-where-bullets-arent/music.mp3",
+    "speech": [
+      {
+        "from": 0,
+        "to": 61
+      },
+      {
+        "from": 61,
+        "to": 455
+      },
+      {
+        "from": 455,
+        "to": 1095
+      },
+      {
+        "from": 1095,
+        "to": 1434
+      },
+      {
+        "from": 1434,
+        "to": 1492
+      }
+    ],
+    "bed": 0.5,
+    "duck": 0.16,
+    "rampFrames": 10,
+    "totalFrames": 1528
+  }
+}

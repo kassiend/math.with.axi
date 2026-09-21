@@ -219,6 +219,38 @@
       "video": "output/posts/tasks/20s/larger-fraction-3-7-or-4-9.mp4",
       "run_dir": "out/runs/task-20s-2026-09-18T11-12-06-763Z",
       "statement_norm": "3/7or4/9?"
+    },
+    {
+      "task_id": "weekday-100-days-after-wednesday",
+      "duration_s": 20,
+      "structure_id": "weekday-shift-mod-7",
+      "categories": [
+        "clock-calendar"
+      ],
+      "statement": "Wed + 100 = ?",
+      "answer": "Friday",
+      "status": "shipped",
+      "created_at": "2026-09-21T09:26:50.546Z",
+      "seed": 1140448140,
+      "video": "output/posts/tasks/20s/weekday-100-days-after-wednesday.mp4",
+      "run_dir": "out/runs/task-20s-2026-09-21T09-24-39-730Z",
+      "statement_norm": "wed+100=?"
+    },
+    {
+      "task_id": "telescope-sum-1-over-k-k-plus-1-9",
+      "duration_s": 40,
+      "structure_id": "telescoping-partial-fraction-sum",
+      "categories": [
+        "telescoping"
+      ],
+      "statement": "S = ?",
+      "answer": "9/10",
+      "status": "shipped",
+      "created_at": "2026-09-21T09:34:11.602Z",
+      "seed": -1501063682,
+      "video": "output/posts/tasks/40s/telescope-sum-1-over-k-k-plus-1-9.mp4",
+      "run_dir": "out/runs/task-40s-2026-09-21T09-31-13-185Z",
+      "statement_norm": "s=?"
     }
   ]
 }

@@ -1,0 +1,6 @@
+{"t":"2026-09-21T10:22:59.100Z","event":"run.start","lesson_id":"percentage-swap-commutativity","counter":10,"seed":-896396815}
+{"t":"2026-09-21T10:23:00.067Z","event":"crosscheck","agreed":true,"generator":"4.56","verifier":"4.56"}
+{"t":"2026-09-21T10:23:00.068Z","event":"timeline","total_frames":924,"total_seconds":30.8,"steps":["s1:1.269s","s2:7.119s","s3:6.903s","s4:6.619s"],"outro":"2.478s"}
+{"t":"2026-09-21T10:23:00.072Z","event":"picks","background":"bg.jpeg"}
+{"t":"2026-09-21T10:26:06.280Z","event":"capture.done","frames":924}
+{"t":"2026-09-21T10:28:34.126Z","event":"done","video":"output/posts/lessons/percentage-swap-commutativity.mp4","seconds":30.8}

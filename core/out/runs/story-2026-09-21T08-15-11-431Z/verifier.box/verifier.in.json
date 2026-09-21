@@ -1,0 +1,11 @@
+{
+  "claim_id": "monte-carlo-1913-gamblers-fallacy",
+  "title": "Millions burned on 26 spins",
+  "formula_latex": "P(B_{27} \\mid B_1 \\cap \\cdots \\cap B_{26}) = \\dfrac{18}{37}",
+  "formula_steps": [
+    "P(B_{27} \\mid B_1 \\cap \\cdots \\cap B_{26}) = \\dfrac{P(B_1 \\cap \\cdots \\cap B_{27})}{P(B_1 \\cap \\cdots \\cap B_{26})}",
+    "= \\dfrac{(18/37)^{27}}{(18/37)^{26}}",
+    "P(B_{27} \\mid B_1 \\cap \\cdots \\cap B_{26}) = \\dfrac{18}{37}"
+  ],
+  "mechanism": "A fair single-zero roulette wheel has 37 pockets, 18 of them black, so each spin lands on black with probability 18/37 independently of every previous spin. By definition, the conditional probability of black on spin 27 given the first 26 spins is P(B1 ∩ … ∩ B27) divided by P(B1 ∩ … ∩ B26). Independence makes each of those a power of 18/37, and the ratio (18/37)^27 / (18/37)^26 collapses to 18/37 — the same odds as the very first spin. The 1-in-68-million number belongs to predicting the whole 26-spin streak in advance, not to the 27th spin after 26 blacks have already landed."
+}

@@ -1,0 +1,16 @@
+{
+  "task_id": "weekday-100-days-after-wednesday",
+  "duration_s": 20,
+  "structure_id": "weekday-shift-mod-7",
+  "categories": ["clock-calendar"],
+  "description": "Today is Wednesday. What day of the week will it be 100 days from today?",
+  "description_latex": null,
+  "statement": "Wed + 100 = ?",
+  "statement_latex": null,
+  "answer": "Friday",
+  "answer_latex": null,
+  "solution_sketch": "Weekdays cycle every 7 days, so only 100 mod 7 matters. Since 98 = 14 × 7, we have 100 mod 7 = 2. Advance two weekdays from Wednesday: Thursday, Friday.",
+  "difficulty_rationale": "The naive route tries to count 100 days on fingers and drops a digit. The insight is that 7 × 14 = 98, so 100 days is 14 full weeks plus 2, and the weekday only shifts by that remainder. Once the reader spots the mod-7 idea, Wed + 2 = Fri is one step. Findable cold, not recalled.",
+  "check_script": "generator.checks/weekday-100-days-after-wednesday.py",
+  "nulls": []
+}

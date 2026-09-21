@@ -1,0 +1,2 @@
+{"t":"2026-09-21T08:26:34.810Z","event":"run.start","story_id":"monte-carlo-1913-gamblers-fallacy","area":"probability-and-statistics","subject":"monte-carlo-1913-roulette"}
+{"t":"2026-09-21T08:26:34.813Z","event":"gate.closed","status":"failed","stage":"validation","problems":[{"validator_status":"failed"},{"claim":"f7","url":"https://en.wikipedia.org/wiki/Roulette","reachable":true,"quote_found":true,"supports":false}]}

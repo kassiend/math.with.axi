@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "wald-armor-where-bullets-arent",
+      "script": "verifier.checks/wald-armor-where-bullets-arent.py",
+      "computed": "P(S|H_R) - P(H_R|S)*P(S)/P(H_R) = 0; chain residual = 0; lim_{P(H_R|S)->0} P(S|H_R) = 0; numeric P(S|H_R) = 9/59 (direct via joint = 9/59)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

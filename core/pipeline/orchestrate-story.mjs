@@ -23,7 +23,7 @@ import { crossCheck } from './lib/sympy.mjs';
 import * as stories from './lib/stories-ledger.mjs';
 import { nextBackground, shippedCount } from './lib/rotation.mjs';
 import { ASSETS, CORE, NODE_BIN, ROOT } from './lib/paths.mjs';
-import { resolveBin, runTool, FFPROBE } from './lib/platform.mjs';
+import { resolveBin, runTool, FFMPEG, FFPROBE } from './lib/platform.mjs';
 import { buildStoryTimeline, FPS } from '../shared/story-timeline.ts';
 import { music as generateMusic } from '../tools/elevenlabs.mjs';
 
@@ -289,8 +289,19 @@ function stageImages(run, story) {
   for (const img of story.images ?? []) {
     const abs = path.isAbsolute(img.file) ? img.file : path.join(run.dir, img.file);
     if (!fs.existsSync(abs)) continue;
-    const name = `${img.image_id}${path.extname(abs)}`;
-    fs.copyFileSync(abs, path.join(dir, name));
+    // Scaled once to what the card can show (612x1040 design px at the 1.5x capture = 918x1560)
+    // and re-encoded as JPEG. A 2-3 MB 9:16 PNG composited with a blur on every frame halved the
+    // capture rate; the card cannot show more pixels than this anyway.
+    const name = `${img.image_id}.jpg`;
+    try {
+      execFileSync(FFMPEG, ['-y', '-v', 'error', '-i', abs,
+        '-vf', "scale='if(gt(a,918/1560),-2,918)':'if(gt(a,918/1560),1560,-2)'",
+        '-q:v', '3', path.join(dir, name)], { stdio: ['ignore', 'ignore', 'pipe'] });
+    } catch {
+      fs.copyFileSync(abs, path.join(dir, `${img.image_id}${path.extname(abs)}`));
+      map[img.image_id] = `./story-images/${run.id}/${img.image_id}${path.extname(abs)}`;
+      continue;
+    }
     map[img.image_id] = `./story-images/${run.id}/${name}`;
   }
   return map;

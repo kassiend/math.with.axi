@@ -1,0 +1,19 @@
+{
+  "task_id": "telescope-sum-1-over-k-k-plus-1-9",
+  "duration_s": 40,
+  "structure_id": "telescoping-partial-fraction-sum",
+  "categories": ["telescoping"],
+  "description": "S = 1/(1·2) + 1/(2·3) + … + 1/(9·10). Find S.",
+  "description_latex": "$S = \\dfrac{1}{1\\cdot 2} + \\dfrac{1}{2\\cdot 3} + \\cdots + \\dfrac{1}{9\\cdot 10}$. Find $S$.",
+  "statement": "S = ?",
+  "statement_latex": null,
+  "answer": "9/10",
+  "answer_latex": "\\dfrac{9}{10}",
+  "solution_sketch": "Split each term with partial fractions: 1/(k(k+1)) = 1/k − 1/(k+1). The sum becomes (1 − 1/2) + (1/2 − 1/3) + … + (1/9 − 1/10); everything between the endpoints cancels, leaving 1 − 1/10 = 9/10.",
+  "difficulty_rationale": "The naive route adds nine unlike fractions in the head, which will not finish in a minute let alone forty seconds. The insight is the partial-fraction split 1/(k(k+1)) = 1/k − 1/(k+1); it is not a named identity but is discoverable in the moment once a solver notices that k(k+1) is a product of consecutive integers. After the insight, only two steps remain — see that all interior terms cancel, then compute 1 − 1/10. Twenty seconds is too short to spot the decomposition, verify the cancellation and read off the endpoints; forty is enough without becoming trivial.",
+  "steps_expected": 2,
+  "check_script": "generator.checks/telescope-sum-1-over-k-k-plus-1-9.py",
+  "nulls": [
+    {"field": "statement_latex", "reason": "statement is short plain text ('S = ?'); the sum itself lives in description/description_latex per the render brief"}
+  ]
+}

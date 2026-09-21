@@ -1,0 +1,52 @@
+{
+  "lesson_id": "percentage-swap-commutativity",
+  "counter": 10,
+  "concept_slug": "percentage-swap-commutativity",
+  "tags": [
+    "percentage",
+    "mental-arithmetic",
+    "shortcut"
+  ],
+  "method_name": "Swap the percent",
+  "applicability": "any two real numbers a, b: the identity a% of b = b% of a holds unconditionally because a% of b = (a·b)/100 and multiplication is commutative. Use the swap whenever the flipped form is easier to compute mentally — typically when one of the two numbers is small or round.",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Swap the percent",
+      "working": "6% of 76 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Flip the numbers around the %",
+      "working": "a% of b = b% of a"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "apply",
+      "instruction": "Do the easier side",
+      "working": "6% of 76 = 76% of 6"
+    },
+    {
+      "step_id": "s4",
+      "purpose": "result",
+      "instruction": "76 × 6, shift decimal",
+      "working": "= 4.56"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      6,
+      76
+    ],
+    "result": "4.56"
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "The identity a% of b = b% of a follows from a% of b = (a·b)/100 and commutativity of multiplication in the reals; there is no numeric case where the simple rule fails. Verifier is asked to confirm exhaustively over integers a, b in [0, 100]."
+    }
+  ]
+}

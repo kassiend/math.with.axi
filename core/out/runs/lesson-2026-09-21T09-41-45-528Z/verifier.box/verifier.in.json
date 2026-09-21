@@ -1,0 +1,64 @@
+{
+  "lesson_id": "percent-swap-commutative",
+  "counter": 10,
+  "concept_slug": "percent-swap-commutative",
+  "tags": [
+    "mental-arithmetic",
+    "percentage",
+    "shortcut"
+  ],
+  "method_name": "Flip the percent",
+  "applicability": "Any two positive real numbers a and b: a% of b equals b% of a. Pick whichever side is easier to compute.",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Find 7% of 20",
+      "working": "7% × 20 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Flip: a% of b = b% of a",
+      "working": "7% × 20 = 20% × 7"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "result",
+      "instruction": "20% is one fifth, so 7 ÷ 5",
+      "working": "7% of 20 = 1.4"
+    }
+  ],
+  "worked_example": {
+    "operands": [
+      7,
+      20
+    ],
+    "result": "1.4",
+    "expression": "7% of 20 = 20% of 7 = 1.4"
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "The rule a% of b = b% of a is (a/100)*b = (b/100)*a, i.e. commutativity of multiplication on the reals. There is no input in the stated applicability where the equality fails; the generator check performs an exhaustive symbolic sweep to confirm."
+    }
+  ],
+  "operand_draw": {
+    "seed": 1129827578,
+    "spec": {
+      "min": 2,
+      "max": 50,
+      "filter": {
+        "min_digits": 1,
+        "max_digits": 2,
+        "nonzero": true
+      }
+    },
+    "draws": [
+      20,
+      7
+    ],
+    "rejection_rate": 0
+  }
+}

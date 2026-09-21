@@ -1,0 +1,14 @@
+{
+  "task_id": "weekday-100-days-after-wednesday",
+  "duration_s": 20,
+  "structure_id": "weekday-shift-mod-7",
+  "categories": [
+    "clock-calendar"
+  ],
+  "description": "Today is Wednesday. What day of the week will it be 100 days from today?",
+  "statement": "Wed + 100 = ?",
+  "statement_latex": null,
+  "answer": "Friday",
+  "answer_latex": null,
+  "nulls": []
+}

@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "other",
+      "claim_id": "percentage-swap-commutativity",
+      "detail": "Step s4 reads 'shift decimal' without stating the shift count. A viewer must infer that the two-place shift comes from the '%' being carried through the swap (76 × 6 = 456, then ÷100 = 4.56). The result is correct and reachable from the earlier steps, but a fully explicit lesson would say 'shift two places' or '÷100'. Not fatal because the mechanism is standard mental-arithmetic shorthand and the arithmetic is correct.",
+      "witness": null
+    }
+  ],
+  "checks": [
+    {
+      "claim_id": "percentage-swap-commutativity",
+      "script": "verifier.checks/percentage-swap-commutativity.py",
+      "computed": "4.56",
+      "agrees": true
+    }
+  ],
+  "unverifiable": [],
+  "notes": {
+    "universality_probe": "Independently exhaustively evaluated a% of b vs b% of a over a grid of 16 values including -100, -7, -1, -1/2, 0, 1/3, 1, 2, 7/4, 6, 50, 76, 99, 100, 1000, 31415/10000 (256 ordered pairs). Zero counterexamples. The identity is a direct consequence of the commutativity of real multiplication, which the payload states correctly; no unstated assumption is required beyond 'a, b real'. The null carry_case is therefore justified.",
+    "boundary_probe": "Tested boundary cases (0, 1, negatives, non-integers, values >100). All satisfy the identity. No hidden domain restriction (e.g. non-negativity, integrality, boundedness by 100) is needed.",
+    "worked_example_arithmetic": "6 * 76 = 456; 456 / 100 = 4.56. Matches the stated result exactly (using sympy.Rational, no floating-point drift).",
+    "operand_provenance": "Payload contains no sampling metadata (no seed, no draw-range, no presentation filter). Because the claim is genuinely universal over the reals, cherry-picking is not a defect here — every pair works — but for the record, operand-draw fairness cannot be checked from this payload in isolation.",
+    "steps_in_order": "s1 poses 6% of 76; s2 states a% of b = b% of a; s3 applies the swap to get 76% of 6; s4 computes 76 × 6 = 456 and shifts two decimal places for the %, yielding 4.56. The steps do produce the stated result, modulo the terseness noted in findings."
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Verbatim sentence present on page: 'born Nanjing, China in the 1960s) is a Chinese-born Canadian quantitative analyst and actuary who pioneered the use of Gaussian copula models for the pricing of collateralized debt obligations (CDOs) in the early 2000s.' Fully supports birthplace and pioneering-CDO-Gaussian-copula claim."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence 'Li's paper \"On Default Correlation: A Copula Function Approach\" was the first appearance of the Gaussian copula applied to CDOs published in 2000...' matches the claim exactly."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "'The Financial Times has called him \"the world's most influential actuary\"' is on the page and directly supports the claim."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "The 'recipe for disaster' phrase appears on the page in the post-2008 context. The 'in the hands of those who misapplied it' framing likewise appears in the article's lede."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "'Very few people understand the essence of the model' is quoted on the page and attributed to Li in 2005."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "The Wikipedia article renders the section 5.4 formula as C_ρ(u,v) = Φ(Φ⁻¹(u), Φ⁻¹(v); ρ). The script's formula_latex uses Φ_2 for the bivariate CDF, which is the same object under a more explicit name; the mechanism text correctly identifies it as the standard bivariate normal with correlation ρ. Formula and explanation are consistent with each other and with the source."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/Collateralized_debt_obligation",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "'sales of CDOs grew—from $69 billion in 2000 to around $500 billion in 2006' is present verbatim."
+    },
+    {
+      "claim_id": "f8",
+      "url": "https://en.wikipedia.org/wiki/Collateralized_debt_obligation",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "'Collateralized debt obligations also made up over half ($542 billion) of the nearly trillion dollars in losses suffered by financial institutions from 2007 to early 2009' matches the claim exactly. The payoff's 'Five hundred and forty two billion in losses' figure comes from this sentence."
+    },
+    {
+      "claim_id": "f9",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "'Widespread application of simplified Gaussian copula models to financial products such as securities may have contributed to the 2008 financial crisis' is present verbatim."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "overreach",
+      "claim_id": "payoff",
+      "detail": "The payoff line 'The formula still runs on Wall Street' is not tied to any source in facts[]. It is plausible and widely believed, but no cited quote establishes present-day industry use.",
+      "evidence": "Beat 'payoff': 'The formula still runs on Wall Street.'"
+    },
+    {
+      "severity": "minor",
+      "kind": "unsupported-causation",
+      "claim_id": "mechanism",
+      "detail": "The mechanism asserts that in a housing collapse the real dependence 'rushes toward one' (the narration says 'In a crash it snaps to one'). This is the standard tail-dependence critique of Gaussian copulas, but nothing in facts[] cites it directly. The claim is empirical, not merely definitional.",
+      "evidence": "Mechanism: 'In a housing collapse every mortgage defaults for the same reason at once, and the real dependence in the tail rushes toward one — a state the fitted rho never priced.' Narration: 'In a crash it snaps to one.'"
+    },
+    {
+      "severity": "minor",
+      "kind": "overreach",
+      "claim_id": "payoff",
+      "detail": "The narration frames the 2005 remark as Li 'warning them.' The cited source treats the 2005 line as Li privately acknowledging the fallacy ('Li himself apparently understood the fallacy of his model'), not as a public warning to the market. The quotation itself is accurate; the framing around it is a rhetorical stretch.",
+      "evidence": "Payoff narration: 'Li himself warned them. In 2005 he said very few understood.' vs. source: 'Li himself apparently understood the fallacy of his model, in 2005 saying \"Very few people understand the essence of the model.\"'"
+    }
+  ],
+  "unverifiable": []
+}

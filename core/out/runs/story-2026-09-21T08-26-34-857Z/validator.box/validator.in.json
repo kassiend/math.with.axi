@@ -1,0 +1,68 @@
+{
+  "story_id": "wald-armor-where-bullets-arent",
+  "area": "probability-and-statistics",
+  "subject_slug": "abraham-wald",
+  "angle_slug": "survivorship-bias-bomber-armor",
+  "title": "The planes that didn't come back.",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "They armored the wrong parts of the plane.",
+      "display": "Wrong parts armored."
+    },
+    {
+      "beat": "turn",
+      "narration": "Nineteen forty-three. Bombers came back full of holes. Wings, tails, fuselage. Almost nothing on the engines. The Air Force wanted armor where the holes were. One statistician said no.",
+      "display": "Look who came home."
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Every returning plane took its hits and lived. The planes hit in the engines never came home. So the count you see is filtered by survival. Wald flipped the question. What you see is a hit, given survival. What you want is survival, given a hit. Bayes swaps them. Where no holes come home, no plane comes home. Armor there.",
+      "display": "Bayes flips the count."
+    },
+    {
+      "beat": "payoff",
+      "narration": "He tried to save the pilots he could not see. Today we call it survivorship bias. It hides in every five-star review, every winning stock chart, every list of who made it.",
+      "display": "It hides everywhere."
+    }
+  ],
+  "formula_latex": "P(S \\mid H_R) = \\dfrac{P(H_R \\mid S)\\, P(S)}{P(H_R)}",
+  "formula_steps": [
+    "P(H_R \\mid S)",
+    "P(S \\mid H_R)",
+    "P(S \\mid H_R) = \\dfrac{P(H_R \\mid S)\\, P(S)}{P(H_R)}"
+  ],
+  "mechanism": "Wald noticed that the count of bullet holes on returning planes is not the count of bullet holes on all planes — it is the count conditional on survival. He wanted the reverse: given a plane was hit at region R, what is the chance it survives? Bayes' theorem exchanges the two conditionals. When the observed hit rate at R among survivors is near zero, the posterior survival probability given a hit at R is near zero — so armor belongs there, not where the holes cluster.",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "Wald's method estimated the damage distribution across all combat aircraft from the damage seen only on those that returned.",
+      "url": "https://en.wikipedia.org/wiki/Abraham_Wald",
+      "quote": "Wald derived a useful means of estimating the damage distribution for all aircraft that flew from the data on the damage distribution of all aircraft that returned."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Wald's logic held that damage on returning planes marked places a plane could be hit and still survive, and the unhit places on returners were the fatal ones.",
+      "url": "https://en.wikipedia.org/wiki/Abraham_Wald",
+      "quote": "The damaged portions of returning planes show locations where they can sustain damage and still return home; those hit in other places presumedly do not survive."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "During the Second World War Wald worked in the Statistical Research Group at Columbia University on wartime problems.",
+      "url": "https://en.wikipedia.org/wiki/Abraham_Wald",
+      "quote": "During World War II, Wald was a member of the Statistical Research Group (SRG) at Columbia University, where he applied his statistical skills to various wartime problems."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "The Statistical Research Group at Columbia produced eight memoranda on how to analyse data from damaged combat aircraft.",
+      "url": "https://en.wikipedia.org/wiki/Survivorship_bias",
+      "quote": "The Statistical Research Group (SRG) at Columbia University, of which Wald was a member, issued eight memoranda on methods of analyzing data obtained from damaged combat aircraft."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "Wald proposed his analysis be used to guide where armor was placed on aircraft.",
+      "url": "https://en.wikipedia.org/wiki/Survivorship_bias",
+      "quote": "Wald proposed that his conclusions could be used as guide for locating the placement of protective armor."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "lesson_id": "percent-swap-commutative",
+  "counter": 10,
+  "concept_slug": "percent-swap-commutative",
+  "area": "percentage-and-discount",
+  "tags": ["mental-arithmetic", "percentage", "shortcut"],
+  "method_name": "Flip the percent",
+  "applicability": "Any two positive real numbers a and b: a% of b equals b% of a. Pick whichever side is easier to compute.",
+  "carry_case": null,
+  "steps": [
+    {
+      "step_id": "s1",
+      "purpose": "pose",
+      "instruction": "Find 7% of 20",
+      "working": "7% × 20 = ?"
+    },
+    {
+      "step_id": "s2",
+      "purpose": "rule",
+      "instruction": "Flip: a% of b = b% of a",
+      "working": "7% × 20 = 20% × 7"
+    },
+    {
+      "step_id": "s3",
+      "purpose": "result",
+      "instruction": "20% is one fifth, so 7 ÷ 5",
+      "working": "7% of 20 = 1.4"
+    }
+  ],
+  "worked_example": {
+    "operands": [7, 20],
+    "result": "1.4",
+    "expression": "7% of 20 = 20% of 7 = 1.4"
+  },
+  "operand_draw": {
+    "seed": 1129827578,
+    "spec": {
+      "min": 2,
+      "max": 50,
+      "filter": {
+        "min_digits": 1,
+        "max_digits": 2,
+        "nonzero": true
+      }
+    },
+    "n": 2,
+    "draws": [20, 7],
+    "assignment": {
+      "b": 20,
+      "a": 7,
+      "note": "The two draws are used as the percent (a=7) and the base (b=20). The pose 'a% of b' is the awkward direction; the swap 'b% of a' turns 20% into one fifth, which is trivial to divide 7 by."
+    },
+    "attempts": 2,
+    "rejections": [],
+    "rejection_rate": 0,
+    "rejection_rate_alarm": false
+  },
+  "universality_evidence": {
+    "kind": "exhaustive_sympy",
+    "domain": "integers a, b in [1, 200]",
+    "claim": "For all a, b in this domain, (a/100) * b == (b/100) * a as exact rationals.",
+    "note": "The identity is commutativity of multiplication on rationals; no whitelisted theorem in core/verify/theorems.json covers it directly, so §3.2 is satisfied by exhaustive symbolic check over the stated finite domain."
+  },
+  "nulls": [
+    {
+      "field": "carry_case",
+      "reason": "The rule a% of b = b% of a is (a/100)*b = (b/100)*a, i.e. commutativity of multiplication on the reals. There is no input in the stated applicability where the equality fails; the generator check performs an exhaustive symbolic sweep to confirm."
+    }
+  ]
+}

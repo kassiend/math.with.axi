@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "findings": [],
+  "checks": [
+    {
+      "claim_id": "gaussian-copula-broke-wall-street",
+      "script": "verifier.checks/gaussian-copula-broke-wall-street.py",
+      "computed": "step1_uv_in_01=True; step2_phi_roundtrip=True; analytic_identity_ok=True (max_err=3.31e-11); monte_carlo_ok=True (max_err=1.09e-03)",
+      "agrees": true
+    }
+  ],
+  "unverifiable": []
+}

@@ -53,3 +53,23 @@
 {"t":"2026-09-21T08:02:06.930Z","event":"caption.ready","kind":"story"}
 {"t":"2026-09-21T08:02:17.971Z","event":"post.delivered","kind":"story","id":"reuleaux-drill-square-holes","file":"output/posts/stories/reuleaux-drill-square-holes.mp4"}
 {"t":"2026-09-21T08:02:17.973Z","event":"batch.done","ok":1,"failed":0}
+{"t":"2026-09-21T08:15:11.412Z","event":"post.start","kind":"story","attempt":1}
+{"t":"2026-09-21T08:26:34.852Z","event":"post.gate-closed","kind":"story","attempt":1,"stage":"orchestrator"}
+{"t":"2026-09-21T08:26:34.856Z","event":"post.start","kind":"story","attempt":2}
+{"t":"2026-09-21T08:53:50.074Z","event":"caption.ready","kind":"story"}
+{"t":"2026-09-21T08:54:10.587Z","event":"post.delivered","kind":"story","id":"wald-armor-where-bullets-arent","file":"output/posts/stories/wald-armor-where-bullets-arent.mp4"}
+{"t":"2026-09-21T08:54:10.588Z","event":"post.start","kind":"story","attempt":1}
+{"t":"2026-09-21T09:24:33.187Z","event":"caption.ready","kind":"story"}
+{"t":"2026-09-21T09:24:39.726Z","event":"post.delivered","kind":"story","id":"gaussian-copula-broke-wall-street","file":"output/posts/stories/gaussian-copula-broke-wall-street.mp4"}
+{"t":"2026-09-21T09:24:39.727Z","event":"post.start","kind":"task20","attempt":1}
+{"t":"2026-09-21T09:31:10.277Z","event":"caption.ready","kind":"task20"}
+{"t":"2026-09-21T09:31:13.184Z","event":"post.delivered","kind":"task20","id":"weekday-100-days-after-wednesday","file":"output/posts/tasks/20s/weekday-100-days-after-wednesday.mp4"}
+{"t":"2026-09-21T09:31:13.185Z","event":"post.start","kind":"task40","attempt":1}
+{"t":"2026-09-21T09:41:42.259Z","event":"caption.ready","kind":"task40"}
+{"t":"2026-09-21T09:41:45.526Z","event":"post.delivered","kind":"task40","id":"telescope-sum-1-over-k-k-plus-1-9","file":"output/posts/tasks/40s/telescope-sum-1-over-k-k-plus-1-9.mp4"}
+{"t":"2026-09-21T09:41:45.526Z","event":"post.start","kind":"lesson","attempt":1}
+{"t":"2026-09-21T10:13:24.162Z","event":"post.error","kind":"lesson","attempt":1,"error":"axi-verifier timed out after 25 minutes"}
+{"t":"2026-09-21T10:13:24.163Z","event":"post.start","kind":"lesson","attempt":2}
+{"t":"2026-09-21T10:30:07.518Z","event":"caption.ready","kind":"lesson"}
+{"t":"2026-09-21T10:30:10.729Z","event":"post.delivered","kind":"lesson","id":"percentage-swap-commutativity","file":"output/posts/lessons/percentage-swap-commutativity.mp4"}
+{"t":"2026-09-21T10:30:10.731Z","event":"batch.done","ok":5,"failed":0}

@@ -1,0 +1,5 @@
+{"t":"2026-09-21T09:34:11.602Z","event":"run.start","task_id":"telescope-sum-1-over-k-k-plus-1-9","duration_s":40,"seed":-1501063682}
+{"t":"2026-09-21T09:34:12.594Z","event":"crosscheck","agreed":true,"generator":"9/10","verifier":"9/10"}
+{"t":"2026-09-21T09:34:12.679Z","event":"picks","background":"bg3.jpeg","start_audio":"axi_grettings4.mp3","mid_audio":"hurry1.mp3","hurry_clip":"hurry-hurry.webm","hurry_audio_s":0.91425,"total_frames":1253,"hurry_enter":748}
+{"t":"2026-09-21T09:38:33.976Z","event":"capture.done","frames":1253,"font_size":96}
+{"t":"2026-09-21T09:40:29.468Z","event":"done","video":"output/posts/tasks/40s/telescope-sum-1-over-k-k-plus-1-9.mp4"}

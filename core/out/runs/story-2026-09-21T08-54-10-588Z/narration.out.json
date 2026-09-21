@@ -1,0 +1,38 @@
+{
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "[excited] One number priced every mortgage. Then houses fell together. Five hundred billion, gone.",
+      "audio": "audio/hook.mp3",
+      "seconds": 5.896
+    },
+    {
+      "beat": "turn",
+      "narration": "[thoughtful] This is David Li. An actuary from Nanjing. In the year two thousand he published one paper. It let banks price bundles of mortgages.",
+      "audio": "audio/turn.mp3",
+      "seconds": 7.914
+    },
+    {
+      "beat": "mechanism",
+      "narration": "[confident] Each mortgage has a default chance. Call those chances u and v. Turn each into a bell-curve quantile. Read the joint probability under one bell. One number holds the whole thing up. The correlation, rho. Fit it on calm years, it looks tiny. In a crash it snaps to one.",
+      "audio": "audio/mechanism.mp3",
+      "seconds": 17.431
+    },
+    {
+      "beat": "payoff",
+      "narration": "[warm] Li himself warned them. In two thousand and five he said very few understood. The market kept growing. Five hundred and forty two billion in losses. The formula still runs on Wall Street.",
+      "audio": "audio/payoff.mp3",
+      "seconds": 12.457
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Never trust one number.",
+    "audio": "audio/outro.mp3",
+    "seconds": 1.77
+  },
+  "total_seconds": 45.468,
+  "over_12s_beats": [
+    { "beat": "mechanism", "seconds": 17.431, "note": "Expected — mechanism beat is scoped 12–40 s in the template. Not slowed to fit; read at natural pace." },
+    { "beat": "payoff", "seconds": 12.457, "note": "Marginal — 0.46 s over 12 s. Read at natural pace; Editor may trim if the whole post overruns, but total is well under the 90 s ceiling." }
+  ]
+}

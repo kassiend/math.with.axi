@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "stage": "validation",
+  "problems": [
+    {
+      "validator_status": "failed"
+    },
+    {
+      "claim": "f7",
+      "url": "https://en.wikipedia.org/wiki/Roulette",
+      "reachable": true,
+      "quote_found": true,
+      "supports": false
+    }
+  ]
+}

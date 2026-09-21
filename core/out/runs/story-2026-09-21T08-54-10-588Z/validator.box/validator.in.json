@@ -1,0 +1,92 @@
+{
+  "story_id": "gaussian-copula-broke-wall-street",
+  "area": "financial-mathematics",
+  "subject_slug": "david-x-li",
+  "angle_slug": "gaussian-copula-broke-wall-street",
+  "title": "The formula that broke Wall Street",
+  "beats": [
+    {
+      "beat": "hook",
+      "narration": "One number priced every mortgage. Then houses fell together. Five hundred billion, gone.",
+      "display": "Priced by one number."
+    },
+    {
+      "beat": "turn",
+      "narration": "This is David Li. An actuary from Nanjing. In 2000 he published one paper. It let banks price bundles of mortgages.",
+      "display": "The most influential actuary."
+    },
+    {
+      "beat": "mechanism",
+      "narration": "Each mortgage has a default chance. Call those chances u and v. Turn each into a bell-curve quantile. Read the joint probability under one bell. One number holds the whole thing up. The correlation, rho. Fit it on calm years, it looks tiny. In a crash it snaps to one.",
+      "display": "One number, one bell."
+    },
+    {
+      "beat": "payoff",
+      "narration": "Li himself warned them. In 2005 he said very few understood. The market kept growing. Five hundred and forty two billion in losses. The formula still runs on Wall Street.",
+      "display": "The formula still runs."
+    }
+  ],
+  "formula_latex": "C_{\\rho}(u,v) = \\Phi_2\\!\\left(\\Phi^{-1}(u),\\, \\Phi^{-1}(v);\\, \\rho\\right)",
+  "formula_steps": [
+    "u = F_A(t_A),\\ \\ v = F_B(t_B)",
+    "x = \\Phi^{-1}(u),\\ \\ y = \\Phi^{-1}(v)",
+    "C_{\\rho}(u,v) = \\Phi_2\\!\\left(\\Phi^{-1}(u),\\, \\Phi^{-1}(v);\\, \\rho\\right)"
+  ],
+  "mechanism": "Two mortgages, A and B. Each defaults with some probability, so u = F_A(t) and v = F_B(t) are just numbers on (0, 1). Feed each through the inverse normal Phi^{-1} to map them onto the real line: x and y are the bell-curve coordinates of those default probabilities. The Gaussian copula reads the joint probability off the standard bivariate normal with correlation rho — one number that decides how tied the two defaults are. Fit rho on calm years and it looks small: independence-ish, safe to bundle. But rho is fragile. In a housing collapse every mortgage defaults for the same reason at once, and the real dependence in the tail rushes toward one — a state the fitted rho never priced.",
+  "facts": [
+    {
+      "claim_id": "f1",
+      "claim": "David X. Li was born in Nanjing, China, and pioneered the use of Gaussian copula models for pricing collateralized debt obligations in the early 2000s.",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "quote": "David X. Li (Chinese: 李祥林; pinyin: Lǐ Xiánglín born Nanjing, China in the 1960s) is a Chinese-born Canadian quantitative analyst and actuary who pioneered the use of Gaussian copula models for the pricing of collateralized debt obligations (CDOs) in the early 2000s."
+    },
+    {
+      "claim_id": "f2",
+      "claim": "Li's paper 'On Default Correlation: A Copula Function Approach' was published in 2000 and was the first appearance of the Gaussian copula applied to CDOs.",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "quote": "Li's paper \"On Default Correlation: A Copula Function Approach\" was the first appearance of the Gaussian copula applied to CDOs published in 2000, which quickly became a tool for financial institutions to correlate associations between multiple financial securities."
+    },
+    {
+      "claim_id": "f3",
+      "claim": "The Financial Times called David X. Li 'the world's most influential actuary'.",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "quote": "The Financial Times has called him \"the world's most influential actuary\", while after the 2008 financial crisis, to which Li's model has been partly credited to blame, his model has been called a \"recipe for disaster\" in the hands of those who did not fully understand his research and misapplied it."
+    },
+    {
+      "claim_id": "f4",
+      "claim": "After the 2008 crisis, Li's model was called a 'recipe for disaster' in the hands of those who misapplied it.",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "quote": "However, after the 2008 financial crisis, the model has been seen as a \"recipe for disaster\"."
+    },
+    {
+      "claim_id": "f5",
+      "claim": "In 2005 Li himself said very few people understood the essence of his model.",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "quote": "Li himself apparently understood the fallacy of his model, in 2005 saying \"Very few people understand the essence of the model.\""
+    },
+    {
+      "claim_id": "f6",
+      "claim": "The Gaussian copula Li used has the form C_rho(u,v) = Phi(Phi^-1(u), Phi^-1(v); rho).",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "quote": "In section 5.4, he uses Gaussian copula to measure event relationships, or mathematically, correlations, between random economic events, expressed as:"
+    },
+    {
+      "claim_id": "f7",
+      "claim": "CDO sales grew from about $69 billion in 2000 to about $500 billion in 2006.",
+      "url": "https://en.wikipedia.org/wiki/Collateralized_debt_obligation",
+      "quote": "In 2002 and 2003 CDOs had a setback when rating agencies \"were forced to downgrade hundreds\" of the securities, but sales of CDOs grew—from $69 billion in 2000 to around $500 billion in 2006."
+    },
+    {
+      "claim_id": "f8",
+      "claim": "CDOs made up $542 billion of the nearly one trillion dollars in losses suffered by financial institutions from 2007 to early 2009.",
+      "url": "https://en.wikipedia.org/wiki/Collateralized_debt_obligation",
+      "quote": "Collateralized debt obligations also made up over half ($542 billion) of the nearly trillion dollars in losses suffered by financial institutions from 2007 to early 2009."
+    },
+    {
+      "claim_id": "f9",
+      "claim": "Widespread application of simplified Gaussian copula models to financial products may have contributed to the 2008 financial crisis.",
+      "url": "https://en.wikipedia.org/wiki/David_X._Li",
+      "quote": "Widespread application of simplified Gaussian copula models to financial products such as securities may have contributed to the 2008 financial crisis."
+    }
+  ]
+}

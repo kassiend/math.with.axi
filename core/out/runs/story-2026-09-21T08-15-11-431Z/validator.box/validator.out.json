@@ -1,0 +1,71 @@
+{
+  "status": "failed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote is present verbatim in the Monte Carlo Casino section and states the date (August 18, 1913) and the 26-in-a-row black streak, matching the claim exactly."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote is present verbatim immediately after the f1 quote and directly asserts that gamblers lost millions of francs betting against black in the belief a red streak was owed."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote appears verbatim in the Monte Carlo Casino section as part of the probability computation for a 26-spin single-colour streak on a single-zero wheel; the 1-in-68.4-million figure matches the claim."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote is the article's opening definition and matches the claim's paraphrase of the fallacy."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote is present verbatim in the Coin toss section and directly asserts independence of successive fair trials, which is what the claim uses."
+    },
+    {
+      "claim_id": "f6",
+      "url": "https://en.wikipedia.org/wiki/Roulette",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Quote is present verbatim and confirms the 37 numbered pockets (0-36) of a single-zero wheel. The 'eighteen of them coloured black' half of the compound claim is not in this quoted sentence itself, though the same article states it elsewhere and it is separately cited as f7."
+    },
+    {
+      "claim_id": "f7",
+      "url": "https://en.wikipedia.org/wiki/Roulette",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": false,
+      "note": "Quote is present verbatim, but it describes the colouring rule over two number ranges (1-10 and 19-28: odd=red, even=black). It never states the aggregate 'eighteen pockets are black' that the claim asserts. The count only follows if the reader also applies the complementary rule for the 11-18 and 29-36 ranges (which is on the page but not in this quote) and does the arithmetic. This is adjacent evidence, not a direct statement of the claim."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "source-does-not-support",
+      "claim_id": "f7",
+      "detail": "The quoted sentence gives a colouring rule for the number ranges 1-10 and 19-28 only. It does not state that eighteen of the wheel's numbered pockets are black. The aggregate count is present on the same Wikipedia page in the betting-odds table, but the writer picked a quote that is adjacent to, not identical with, the claim. The underlying fact is correct; the citation is weak.",
+      "evidence": "Claim: 'On a European roulette wheel eighteen of the numbered pockets are black.' Quote: 'In number ranges from 1 to 10 and 19 to 28, odd numbers are red and even are black.'"
+    }
+  ],
+  "unverifiable": []
+}

@@ -1,0 +1,44 @@
+{
+  "runId": "task-weekday-100-days-after-wednesday",
+  "capture": {
+    "publicPath": "captures/task-weekday-100-days-after-wednesday",
+    "frames": 653,
+    "fps": 30,
+    "width": 1080,
+    "height": 1920
+  },
+  "hurry": {
+    "src": "mascot/hurry-hurry.webm",
+    "enter": 451,
+    "exit": 478,
+    "clipSeconds": 4.033333333333333
+  },
+  "audio": {
+    "start": "audio/task-weekday-100-days-after-wednesday/start.mp3",
+    "tick": "audio/task-weekday-100-days-after-wednesday/tick.wav",
+    "tickFrames": [
+      8,
+      38,
+      68,
+      98,
+      128,
+      158,
+      188,
+      218,
+      248,
+      278,
+      308,
+      338,
+      368,
+      398,
+      428,
+      458,
+      488,
+      518,
+      548,
+      578
+    ],
+    "mid": "audio/task-weekday-100-days-after-wednesday/mid.mp3",
+    "midFrame": 451
+  }
+}

@@ -82,6 +82,23 @@
       "seconds": 31.6,
       "video": "output/posts/lessons/difference-of-squares-factoring.mp4",
       "run_dir": "out/runs/lesson-2026-09-18T10-51-05-526Z"
+    },
+    {
+      "id": "lesson-percentage-swap-commutativity",
+      "concept_slug": "percentage-swap-commutativity",
+      "title": "Swap the percent",
+      "area": "percentage-and-discount",
+      "tags": [
+        "mental-arithmetic",
+        "percentage",
+        "shortcut"
+      ],
+      "counter": 10,
+      "status": "shipped",
+      "created_at": "2026-09-21T10:22:59.099Z",
+      "seconds": 30.8,
+      "video": "output/posts/lessons/percentage-swap-commutativity.mp4",
+      "run_dir": "out/runs/lesson-2026-09-21T10-13-24-164Z"
     }
   ]
 }

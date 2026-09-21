@@ -1,0 +1,42 @@
+{
+  "intro": {
+    "narration": "[excited] Heey, want the fastest way to do percents in your head?",
+    "display": "Percents, made mental.",
+    "audio": "audio/intro.mp3",
+    "seconds": 3.102
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Seven percent of twenty. Feels awkward, right?",
+      "instruction": "Find 7% of 20",
+      "working": "7% × 20 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 3.557
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Here's the flip. Seven percent of twenty is the same as twenty percent of seven.",
+      "instruction": "Flip: a% of b = b% of a",
+      "working": "7% × 20 = 20% × 7",
+      "audio": "audio/s2.mp3",
+      "seconds": 4.943
+    },
+    {
+      "step_id": "s3",
+      "narration": "[excited] And twenty percent is just one fifth. So seven divided by five, one point four.",
+      "instruction": "20% is one fifth, so 7 ÷ 5",
+      "working": "7% of 20 = 1.4",
+      "audio": "audio/s3.mp3",
+      "seconds": 5.97
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Try it on your own numbers, and tell me what you got.",
+    "display": "Try it. Tell me yours.",
+    "audio": "audio/outro.mp3",
+    "seconds": 2.572
+  },
+  "total_seconds": 20.144,
+  "nulls": []
+}

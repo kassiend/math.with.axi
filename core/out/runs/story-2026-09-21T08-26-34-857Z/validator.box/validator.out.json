@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "checked": [
+    {
+      "claim_id": "f1",
+      "url": "https://en.wikipedia.org/wiki/Abraham_Wald",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence appears verbatim on the Abraham Wald Wikipedia page and directly supports the claim that Wald's method estimated damage across all combat aircraft from data on those that returned."
+    },
+    {
+      "claim_id": "f2",
+      "url": "https://en.wikipedia.org/wiki/Abraham_Wald",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence appears verbatim on the page and supports the claim that damage on returners marks survivable locations while unhit places on returners were presumed fatal."
+    },
+    {
+      "claim_id": "f3",
+      "url": "https://en.wikipedia.org/wiki/Abraham_Wald",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence appears verbatim; supports Wald's WWII membership in the Statistical Research Group at Columbia University."
+    },
+    {
+      "claim_id": "f4",
+      "url": "https://en.wikipedia.org/wiki/Survivorship_bias",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "Sentence appears verbatim on the Survivorship bias Wikipedia page; supports the '8 memoranda' claim."
+    },
+    {
+      "claim_id": "f5",
+      "url": "https://en.wikipedia.org/wiki/Survivorship_bias",
+      "reachable": true,
+      "quote_found": true,
+      "supports_claim": true,
+      "note": "The quoted text is a verbatim substring of the sentence on the page, which actually reads 'In his comments on his memos, Wald proposed that his conclusions could be used as guide for locating the placement of protective armor.' The prefix 'In his comments on his memos,' was dropped, but the quoted portion is verbatim and the claim (that Wald proposed his analysis guide armor placement) is directly supported."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "kind": "source-does-not-support",
+      "claim_id": "beat:turn",
+      "detail": "The turn beat opens with 'Nineteen forty-three.' None of the five cited sources establishes 1943 specifically; the Wald Wikipedia article only places his SRG work in 'World War II'. The precise year is asserted without a citation to back it.",
+      "evidence": "facts[] contains no source stating the year 1943 for the aircraft-armor work."
+    },
+    {
+      "severity": "minor",
+      "kind": "source-does-not-support",
+      "claim_id": "beat:turn",
+      "detail": "The turn beat describes returning bombers as riddled in 'Wings, tails, fuselage. Almost nothing on the engines.' This specific damage-pattern detail (a common retelling of the Wald anecdote) is not present in any of the five supplied Wikipedia quotes; the quoted sources speak in general terms of 'damage distribution' and 'damaged portions' without naming wings/tails/fuselage vs engines.",
+      "evidence": "None of quotes f1–f5 name wings, tails, fuselage, or engines. The narrative element is presented as fact but is not backed by the supplied citations."
+    },
+    {
+      "severity": "minor",
+      "kind": "overreach",
+      "kind_note": "mechanism-vs-formula",
+      "claim_id": "mechanism",
+      "detail": "The mechanism claims 'When the observed hit rate at R among survivors is near zero, the posterior survival probability given a hit at R is near zero.' Reading Bayes literally, P(S|H_R) = P(H_R|S) P(S) / P(H_R); a small P(H_R|S) only forces P(S|H_R) small if P(H_R) is not itself vanishingly small. The step relies on an unstated near-uniform prior on hit locations across all planes. The formula_latex and formula_steps correctly show Bayes' theorem — the shortfall is in the prose, not in the LaTeX.",
+      "evidence": "formula_latex: P(S|H_R) = P(H_R|S) P(S) / P(H_R). Mechanism prose skips the P(H_R) term when arguing the posterior is small."
+    },
+    {
+      "severity": "minor",
+      "kind": "overreach",
+      "claim_id": "beat:payoff",
+      "detail": "The payoff generalises survivorship bias to five-star reviews, winning stock charts and lists of who made it. These are standard textbook examples of the concept and consistent with the Survivorship bias article, but they are presented as a payoff claim without a citation in facts[]. Not a fabrication; a rhetorical extension that carries the weight of an unstated appeal.",
+      "evidence": "No fact in facts[] cites reviews, stock charts, or 'lists of who made it' as survivorship-bias examples."
+    }
+  ],
+  "unverifiable": []
+}

@@ -1,0 +1,51 @@
+{
+  "lesson_id": "percentage-swap-commutativity",
+  "intro": {
+    "narration": "[excited] Six percent of seventy-six. Quick, before your calculator opens. Watch this.",
+    "display": "In your head. No calculator.",
+    "audio": "audio/intro.mp3",
+    "seconds": 6.000
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "narration": "[curious] Looks messy, right?",
+      "instruction": "Swap the percent",
+      "working": "6% of 76 = ?",
+      "audio": "audio/s1.mp3",
+      "seconds": 1.269
+    },
+    {
+      "step_id": "s2",
+      "narration": "[confident] Here's the trick. A percent of B equals B percent of A. Flip the numbers around the percent sign.",
+      "instruction": "Flip the numbers around the %",
+      "working": "a% of b = b% of a",
+      "audio": "audio/s2.mp3",
+      "seconds": 7.119
+    },
+    {
+      "step_id": "s3",
+      "narration": "[excited] So six percent of seventy-six is the same as seventy-six percent of six. Much easier.",
+      "instruction": "Do the easier side",
+      "working": "6% of 76 = 76% of 6",
+      "audio": "audio/s3.mp3",
+      "seconds": 6.903
+    },
+    {
+      "step_id": "s4",
+      "narration": "[confident] Seventy-six times six is four hundred fifty-six. Shift the decimal, four point five six.",
+      "instruction": "76 × 6, shift decimal",
+      "working": "= 4.56",
+      "audio": "audio/s4.mp3",
+      "seconds": 6.619
+    }
+  ],
+  "outro": {
+    "narration": "[warm] Save this, and try it on your next bill.",
+    "display": "Save this. Try it tonight.",
+    "audio": "audio/outro.mp3",
+    "seconds": 2.478
+  },
+  "total_seconds": 30.388,
+  "nulls": []
+}

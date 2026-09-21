@@ -1,0 +1,35 @@
+{
+  "kind": "task",
+  "hook": "This sum looks messy. It isn't.",
+  "instagram": {
+    "caption": "This sum looks messy. It isn't.\n\n1/(1·2) + 1/(2·3) + … + 1/(9·10) = ?\n\nYou have 40 seconds. Drop your answer below.",
+    "first_comment": "Answer: 9/10\n\nThe trick: write each term as 1/k − 1/(k+1). The middle terms all cancel and you're left with 1 − 1/10.\n\nWhat did you get?\n\n#math #mathematics #maths #learnmath #mathproblem #mathchallenge #mathreels #mathshorts #mathtricks #fractions #partialfractions #telescoping #mathwithAxi #algebrahelp #mathisfun"
+  },
+  "tiktok": {
+    "caption": "This sum looks messy. It isn't. Drop your answer below. #math #mathproblem #mathtricks #fractions",
+    "first_comment": "Answer: 9/10. Write each term as 1/k − 1/(k+1) — the middle terms all cancel and you're left with 1 − 1/10. What did you get?"
+  },
+  "youtube": {
+    "title": "Nine Fractions. One Trick. Can You Find It in 40s?",
+    "description": "This sum looks messy. It isn't.\n\n1/(1·2) + 1/(2·3) + … + 1/(9·10) = ?\n\nOne small rewrite and the answer falls straight out. Drop your answer in the comments.\n\n#math #mathproblem #fractions\n\n#Shorts",
+    "tags": [
+      "math",
+      "mathematics",
+      "math problem",
+      "mental math",
+      "math trick",
+      "fractions",
+      "partial fractions",
+      "telescoping sum",
+      "math challenge",
+      "learn math",
+      "math shorts",
+      "algebra",
+      "problem solving",
+      "math with Axi"
+    ],
+    "first_comment": "Answer: 9/10. Write each term as 1/k − 1/(k+1) — the middle terms all cancel and you're left with 1 − 1/10. What did you get?"
+  },
+  "alt_text": "The sum S = 1/(1·2) + 1/(2·3) + … + 1/(9·10) displayed inside a countdown ring on a white card. Axi stands in the footer. Around two-thirds of the way through, a white rabbit holding a stopwatch appears as a hurry sticker.",
+  "nulls": []
+}

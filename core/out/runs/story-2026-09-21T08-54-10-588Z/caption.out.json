@@ -1,0 +1,40 @@
+{
+  "kind": "story",
+  "hook": "One actuary's warning went unheard. Then $542 billion vanished.",
+
+  "instagram": {
+    "caption": "One actuary's warning went unheard. Then $542 billion vanished.\n\nDavid Li published one paper in 2000. It let banks price bundles of mortgages with a single number — the correlation rho.\n\nFit it on calm years and it looks safe. In a crash, it snaps to one.\n\nIn 2005 Li himself said very few people understood the model. The market kept growing. The formula still runs on Wall Street.\n\nSave this for the next time someone trusts one number.",
+    "first_comment": "#math #finance #investing #wallstreet #financialmath #quantfinance #2008financialcrisis #financialcrisis #gaussiancopula #cdos #correlationrisk #davidli #mathhistory #financialmodeling\n\nWhat did you think caused 2008 before you watched this?"
+  },
+
+  "tiktok": {
+    "caption": "One actuary's warning went unheard. Then $542 billion vanished. The maths behind 2008 fits one line. #math #finance #wallstreet #2008 #quantfinance",
+    "first_comment": null
+  },
+
+  "youtube": {
+    "title": "The Formula That Broke Wall Street — David Li",
+    "description": "One actuary's warning went unheard. Then $542 billion vanished.\n\nDavid Li published one paper in 2000 — a formula that priced mortgage bundles with a single correlation number, rho. Fit it on calm years and it looks safe. In a crash, it snaps to one.\n\nIn 2005 Li said very few people understood the model. The market kept growing. The formula still runs on Wall Street.\n\nSave this if you want to know the maths behind 2008.\n\n#finance #math #wallstreet\n\n#Shorts",
+    "tags": [
+      "gaussian copula",
+      "david li",
+      "2008 financial crisis",
+      "wall street",
+      "quantitative finance",
+      "financial mathematics",
+      "CDO collateralized debt obligation",
+      "correlation risk",
+      "math history",
+      "financial modeling",
+      "mortgage crisis",
+      "derivatives pricing",
+      "actuarial science",
+      "risk management"
+    ],
+    "first_comment": "What did you think caused 2008 before you watched this?"
+  },
+
+  "alt_text": "White card titled 'The formula that broke Wall Street', Axi reading at the top. Three scene images: a foreclosed house at dusk with a bank notice on the door; anonymous hands writing Greek letters phi and rho in chalk on a green chalkboard; a wet Wall Street at 3 a.m. Between the scene cards, a formula card showing C-sub-rho equals Phi-2 of Phi-inverse-u and Phi-inverse-v with correlation rho.",
+
+  "nulls": []
+}
